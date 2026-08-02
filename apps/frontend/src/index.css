@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 32 100% 60%; /* Saffron / Amber #FF9933 */
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 240 100% 25%; /* Navy #000080 */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 22.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 22.5%;
+    --input: 217.2 32.6% 22.5%;
+    --ring: 32 100% 60%;
+
+    --radius: 0.5rem;
+
+    /* Base Typography Scaling Tokens */
+    --font-scale-xs: 0.75rem;
+    --font-scale-sm: 0.875rem;
+    --font-scale-base: 1rem;
+    --font-scale-lg: 1.125rem;
+    --font-scale-xl: 1.25rem;
+    --font-scale-2xl: 1.5rem;
+    --font-scale-3xl: 1.875rem;
+    --font-scale-4xl: 2.25rem;
+  }
+
+  /* Large-Text Accessibility Mode (PRD §12) - Scaled Design Tokens */
+  .large-text,
+  [data-mode="large-text"] {
+    --font-scale-xs: 0.9375rem;
+    --font-scale-sm: 1.0625rem;
+    --font-scale-base: 1.25rem;
+    --font-scale-lg: 1.375rem;
+    --font-scale-xl: 1.5rem;
+    --font-scale-2xl: 1.75rem;
+    --font-scale-3xl: 2.125rem;
+    --font-scale-4xl: 2.625rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: var(--font-scale-base);
+  }
+
+  h1 { font-size: var(--font-scale-4xl); }
+  h2 { font-size: var(--font-scale-3xl); }
+  h3 { font-size: var(--font-scale-2xl); }
+  h4 { font-size: var(--font-scale-xl); }
+}

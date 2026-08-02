@@ -1,0 +1,21 @@
+{
+  "common": {
+    "appName": "BharatAssist AI",
+    "search": "Search schemes...",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "checkEligibility": "Check Eligibility",
+    "viewDetails": "View Details",
+    "loading": "Loading...",
+    "noResults": "No schemes found",
+    "language": "Language",
+    "applyNow": "Apply Now",
+    "savedSchemes": "Saved Schemes"
+  },
+  "landing": {
+    "title": "Discover Government Schemes Made for You",
+    "subtitle": "Find scholarships, pensions, agricultural subsidies, and business loans in your language.",
+    "exploreButton": "Explore Schemes"
+  }
+}
