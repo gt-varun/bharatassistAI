@@ -1,10 +1,16 @@
 import { Response } from 'express';
 import { ApiResponse } from '@bharatassist/shared-types';
 
-export const sendSuccess = <T>(res: Response, data: T, statusCode: number = 200): Response => {
+export const sendSuccess = <T>(
+  res: Response,
+  data: T,
+  statusCode: number = 200,
+  meta?: { pagination?: any; [key: string]: any }
+): Response => {
   const responseEnvelope: ApiResponse<T> = {
     success: true,
-    data
+    data,
+    ...(meta?.pagination && { pagination: meta.pagination })
   };
   return res.status(statusCode).json(responseEnvelope);
 };
