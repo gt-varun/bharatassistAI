@@ -3,6 +3,15 @@ import { initReactI18next } from 'react-i18next';
 
 import en from './locales/en.json';
 import hi from './locales/hi.json';
+import kn from './locales/kn.json';
+import ta from './locales/ta.json';
+import te from './locales/te.json';
+import ml from './locales/ml.json';
+import mr from './locales/mr.json';
+import gu from './locales/gu.json';
+import bn from './locales/bn.json';
+import pa from './locales/pa.json';
+import ur from './locales/ur.json';
 
 export interface LanguageMeta {
   code: string;
@@ -27,7 +36,16 @@ export const ALL_LANGUAGES: LanguageMeta[] = [
 
 const resources = {
   en: { translation: en },
-  hi: { translation: hi }
+  hi: { translation: hi },
+  kn: { translation: kn },
+  ta: { translation: ta },
+  te: { translation: te },
+  ml: { translation: ml },
+  mr: { translation: mr },
+  gu: { translation: gu },
+  bn: { translation: bn },
+  pa: { translation: pa },
+  ur: { translation: ur }
 };
 
 const REQUIRED_KEYS = ['common.appName', 'common.search', 'common.login', 'common.checkEligibility'];

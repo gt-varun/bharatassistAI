@@ -1,0 +1,37 @@
+{
+  "common": {
+    "appName": "ਭਾਰਤਅਸਿਸਟ AI",
+    "tagline": "ਸਰਕਾਰੀ ਸਕੀਮਾਂ ਪੋਰਟਲ",
+    "search": "ਖੋਜੋ",
+    "login": "ਸਾਈਨ ਇਨ",
+    "home": "ਮੁੱਖ ਪੰਨਾ",
+    "categories": "ਸ਼੍ਰੇਣੀਆਂ",
+    "checkEligibility": "ਯੋਗਤਾ ਦੀ ਜਾਂਚ ਕਰੋ",
+    "saveScheme": "ਸਕੀਮ ਸੰਭਾਲੋ",
+    "saved": "ਸੰਭਾਲੀਆਂ ਸਕੀਮਾਂ",
+    "aiAssistant": "AI ਸਹਾਇਕ",
+    "profile": "ਮੇਰੀ ਪ੍ਰੋਫਾਈਲ",
+    "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
+    "error": "ਇੱਕ ਗਲਤੀ ਹੋਈ",
+    "back": "ਵਾਪਸ"
+  },
+  "landing": {
+    "title": "ਕੇਂਦਰ ਅਤੇ ਰਾਜ ਸਰਕਾਰ ਦੀਆਂ ਸਕੀਮਾਂ ਤੁਰੰਤ ਖੋਜੋ",
+    "subtitle": "ਆਪਣੀ ਉਮਰ, ਆਮਦਨ ਅਤੇ ਰਾਜ ਦੇ ਅਨੁਸਾਰ ਵਿੱਤੀ ਸਹਾਇਤਾ, ਵਜ਼ੀਫੇ ਅਤੇ ਸਬਸਿਡੀਆਂ ਪ੍ਰਾਪਤ ਕਰੋ।",
+    "exploreButton": "ਮੇਰੇ ਲਈ ਸਕੀਮਾਂ ਖੋਜੋ",
+    "browseCategories": "ਸ਼੍ਰੇਣੀਆਂ ਦੇਖੋ",
+    "answerQuestions": "3 ਸਵਾਲਾਂ ਦੇ ਜਵਾਬ ਦਿਓ",
+    "aiAssistantCta": "AI ਤੋਂ ਪੁੱਛੋ"
+  },
+  "search": {
+    "placeholder": "ਖੋਜੋ...",
+    "filters": "ਫਿਲਟਰ",
+    "level": "ਸਰਕਾਰੀ ਪੱਧਰ",
+    "state": "ਰਾਜ",
+    "segment": "ਟਾਰਗੇਟ ਵਰਗ",
+    "benefitType": "ਲਾਭ ਦੀ ਕਿਸਮ",
+    "status": "ਆਖਰੀ ਮਿਤੀ ਸਥਿਤੀ",
+    "clearAll": "ਸਭ ਸਾਫ਼ ਕਰੋ",
+    "showing": "ਸਕੀਮਾਂ ਦਿਖਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
+  }
+}

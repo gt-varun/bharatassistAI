@@ -1,0 +1,37 @@
+{
+  "common": {
+    "appName": "ભારતઅસિસ્ટ AI",
+    "tagline": "સરકારી યોજના પોર્ટલ",
+    "search": "શોધો",
+    "login": "સાઇન ઇન",
+    "home": "મુખ્ય પૃષ્ઠ",
+    "categories": "શ્રેણીઓ",
+    "checkEligibility": "પાત્રતા ચકાસો",
+    "saveScheme": "યોજના સાચવો",
+    "saved": "સાચવેલ યોજનાઓ",
+    "aiAssistant": "AI સહાયક",
+    "profile": "મારી પ્રોફાઇલ",
+    "loading": "લોડ થઈ રહ્યું છે...",
+    "error": "ભૂલ આવી",
+    "back": "પાછા જાઓ"
+  },
+  "landing": {
+    "title": "કેન્દ્ર અને રાજ્ય સરકારની યોજનાઓ ત્વરિત શોધો",
+    "subtitle": "તમારી ઉંમર, આવક અને રાજ્ય અનુસાર નાણાકીય સહાય, શિષ્યવૃત્તિ અને સબસિડી મેળવો.",
+    "exploreButton": "મારા માટે યોજનાઓ શોધો",
+    "browseCategories": "શ્રેણીઓ જુઓ",
+    "answerQuestions": "3 પ્રશ્નોના જવાબ આપો",
+    "aiAssistantCta": "AI ને પૂછો"
+  },
+  "search": {
+    "placeholder": "શોધો...",
+    "filters": "ફિલ્ટર્સ",
+    "level": "સરકારી સ્તર",
+    "state": "રાજ્ય",
+    "segment": "લક્ષિત વર્ગ",
+    "benefitType": "લાભનો પ્રકાર",
+    "status": "અંતિમ તારીખ સ્થિતિ",
+    "clearAll": "બધું સાફ કરો",
+    "showing": "યોજનાઓ બતાવી રહી છે"
+  }
+}

@@ -22,7 +22,7 @@ import { LoadingState } from '../../components/ui/LoadingState';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { LanguageSelector } from '../../components/ui/LanguageSelector';
 import { Label } from '../../components/ui/label';
-import { Type, Sparkles } from 'lucide-react';
+import { Type, Sparkles, ShieldCheck, FileText, Globe } from 'lucide-react';
 
 export const UIPreviewPage: React.FC = () => {
   const [largeTextMode, setLargeTextMode] = useState(false);
@@ -40,7 +40,7 @@ export const UIPreviewPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-8 max-w-6xl mx-auto space-y-10">
+    <div className="min-h-screen bg-slate-950 text-white p-8 max-w-6xl mx-auto space-y-10 font-sans">
       <Toaster />
 
       {/* Header & Accessibility Toggle */}
@@ -57,14 +57,14 @@ export const UIPreviewPage: React.FC = () => {
         <Button
           variant={largeTextMode ? 'default' : 'outline'}
           onClick={toggleLargeText}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 border-slate-700"
         >
           <Type className="w-4 h-4" />
           {largeTextMode ? 'Large-Text Mode: ACTIVE' : 'Toggle Large-Text Mode'}
         </Button>
       </header>
 
-      {/* 1. Buttons */}
+      {/* 1. Buttons & Badges */}
       <section className="space-y-3">
         <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">1. Buttons & Badges</h2>
         <div className="flex flex-wrap items-center gap-3">
@@ -73,26 +73,26 @@ export const UIPreviewPage: React.FC = () => {
           <Button variant="outline">Outline</Button>
           <Button variant="destructive">Destructive</Button>
           <Button variant="ghost">Ghost</Button>
-          <Badge variant="default">Central Scheme</Badge>
-          <Badge variant="secondary">State Scheme</Badge>
+          <Badge variant="default" className="bg-amber-500/20 text-amber-300">Central Scheme</Badge>
+          <Badge variant="secondary" className="bg-blue-500/20 text-blue-300">State Scheme</Badge>
           <Badge variant="destructive">Closing Soon</Badge>
           <Badge variant="outline">Draft</Badge>
         </div>
       </section>
 
-      {/* 2. Form Controls */}
+      {/* 2. Form Controls & Multilingual */}
       <section className="space-y-4">
-        <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">2. Inputs, Select & Form Controls</h2>
+        <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">2. Inputs, Select & 11-Language Selector</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Input label="Citizen Name" placeholder="e.g. Ramesh Kumar" />
           <Input label="Annual Income (₹)" placeholder="250000" error="Must be a valid positive number" />
           <div className="space-y-2">
             <Label>Select Occupation Category</Label>
             <Select>
-              <SelectTrigger className="bg-slate-800">
+              <SelectTrigger className="bg-slate-900 border-slate-800">
                 <SelectValue placeholder="Choose occupation" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-slate-900 border-slate-800 text-white">
                 <SelectItem value="student">Student / Undergraduate</SelectItem>
                 <SelectItem value="farmer">Farmer / Landowner</SelectItem>
                 <SelectItem value="msme">MSME / Business Owner</SelectItem>
@@ -101,7 +101,7 @@ export const UIPreviewPage: React.FC = () => {
             </Select>
           </div>
           <div className="space-y-2">
-            <Label>Multilingual Support (Filtered Completeness)</Label>
+            <Label>11 PRD Multilingual Selector (RTL Supported)</Label>
             <LanguageSelector />
           </div>
         </div>
@@ -131,33 +131,33 @@ export const UIPreviewPage: React.FC = () => {
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">3. Card & Dialog (Modal)</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Karnataka Vidyasiri Scholarship</CardTitle>
-              <CardDescription>Department of Backward Classes Welfare</CardDescription>
+          <Card className="bg-slate-900 border-slate-800 p-6">
+            <CardHeader className="p-0 mb-3">
+              <CardTitle className="text-xl text-white">Karnataka Vidyasiri Scholarship</CardTitle>
+              <CardDescription className="text-xs text-slate-400">Department of Backward Classes Welfare</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0 mb-4">
               <p className="text-sm text-slate-300">
                 Full tuition fee reimbursement for post-matric undergraduate students.
               </p>
             </CardContent>
-            <CardFooter className="justify-between">
+            <CardFooter className="p-0 justify-between items-center border-t border-slate-800 pt-3">
               <span className="text-xs text-amber-400 font-bold">₹15,000 / year</span>
               <Button size="sm" onClick={() => setIsModalOpen(true)}>Open Modal Dialog</Button>
             </CardFooter>
           </Card>
 
-          <Card className="flex flex-col justify-between">
-            <CardHeader>
-              <CardTitle>Toast Notification Test</CardTitle>
-              <CardDescription>Shadcn Toast System</CardDescription>
+          <Card className="bg-slate-900 border-slate-800 p-6 flex flex-col justify-between">
+            <CardHeader className="p-0 mb-3">
+              <CardTitle className="text-xl text-white">Toast Notification Test</CardTitle>
+              <CardDescription className="text-xs text-slate-400">Shadcn Toast System</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0 mb-4">
               <p className="text-sm text-slate-300">
                 Test triggering system notifications for eligibility outcomes and saved schemes.
               </p>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="p-0 border-t border-slate-800 pt-3">
               <Button
                 variant="outline"
                 onClick={() =>
@@ -186,47 +186,47 @@ export const UIPreviewPage: React.FC = () => {
         <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">4. Tabs & Dropdown Menu</h2>
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <Tabs defaultValue="overview" className="w-full max-w-md">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-3 bg-slate-900 border border-slate-800">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="documents">Documents</TabsTrigger>
               <TabsTrigger value="guidance">Guidance</TabsTrigger>
             </TabsList>
-            <TabsContent value="overview" className="p-4 bg-slate-800 rounded-lg border border-slate-700">
+            <TabsContent value="overview" className="p-4 bg-slate-900 rounded-2xl border border-slate-800">
               <p className="text-sm text-slate-300">Detailed scheme overview content powered by shadcn Tabs.</p>
             </TabsContent>
-            <TabsContent value="documents" className="p-4 bg-slate-800 rounded-lg border border-slate-700">
+            <TabsContent value="documents" className="p-4 bg-slate-900 rounded-2xl border border-slate-800">
               <p className="text-sm text-slate-300">Required document list checklist view.</p>
             </TabsContent>
-            <TabsContent value="guidance" className="p-4 bg-slate-800 rounded-lg border border-slate-700">
+            <TabsContent value="guidance" className="p-4 bg-slate-900 rounded-2xl border border-slate-800">
               <p className="text-sm text-slate-300">Step-by-step application guidance walkthrough.</p>
             </TabsContent>
           </Tabs>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline">Actions Dropdown Menu</Button>
+              <Button variant="outline" className="border-slate-800">Actions Dropdown Menu</Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
+            <DropdownMenuContent className="w-56 bg-slate-900 border-slate-800 text-white">
               <DropdownMenuLabel>Scheme Options</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Save to My Schemes</DropdownMenuItem>
-              <DropdownMenuItem>Check Eligibility</DropdownMenuItem>
-              <DropdownMenuItem>Share Official Link</DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-slate-800" />
+              <DropdownMenuItem className="focus:bg-slate-800 cursor-pointer">Save to My Schemes</DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 cursor-pointer">Check Eligibility</DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-slate-800 cursor-pointer">Share Official Link</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </section>
 
-      {/* 5. Loading & Empty State Wrappers */}
+      {/* 5. Loading & Empty State Custom Wrappers */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-amber-400 border-b border-slate-800 pb-2">5. Loading & Empty State Custom Wrappers</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-            <h3 className="text-sm font-semibold mb-2">Skeleton LoadingState Wrapper</h3>
+          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800">
+            <h3 className="text-sm font-semibold mb-2 text-white">Skeleton LoadingState Wrapper</h3>
             <LoadingState message="Fetching scheme requirements from database..." />
           </div>
-          <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-            <h3 className="text-sm font-semibold mb-2">Custom EmptyState Component</h3>
+          <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800">
+            <h3 className="text-sm font-semibold mb-2 text-white">Custom EmptyState Component</h3>
             <EmptyState title="No saved schemes found" description="Explore schemes and click save to view them here later." />
           </div>
         </div>

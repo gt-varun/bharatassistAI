@@ -1,21 +1,37 @@
 {
   "common": {
     "appName": "BharatAssist AI",
-    "search": "Search schemes...",
-    "login": "Login",
-    "logout": "Logout",
-    "profile": "Profile",
+    "tagline": "AI-Powered Citizen Scheme Portal",
+    "search": "Search",
+    "login": "Sign In",
+    "home": "Home",
+    "categories": "Categories",
     "checkEligibility": "Check Eligibility",
-    "viewDetails": "View Details",
+    "saveScheme": "Save Scheme",
+    "saved": "Saved Schemes",
+    "aiAssistant": "AI Assistant",
+    "profile": "My Profile",
     "loading": "Loading...",
-    "noResults": "No schemes found",
-    "language": "Language",
-    "applyNow": "Apply Now",
-    "savedSchemes": "Saved Schemes"
+    "error": "An error occurred",
+    "back": "Back"
   },
   "landing": {
-    "title": "Discover Government Schemes Made for You",
-    "subtitle": "Find scholarships, pensions, agricultural subsidies, and business loans in your language.",
-    "exploreButton": "Explore Schemes"
+    "title": "Discover Central & State Government Schemes Instantly",
+    "subtitle": "Find financial aid, scholarships, pensions, and subsidies matched to your age, income, and state in simple language.",
+    "exploreButton": "Find Schemes For Me",
+    "browseCategories": "Browse Categories",
+    "answerQuestions": "Answer 3 Questions",
+    "aiAssistantCta": "Ask AI Assistant"
+  },
+  "search": {
+    "placeholder": "Search by keyword or natural text (e.g. undergraduate scholarship in Karnataka)...",
+    "filters": "Filters",
+    "level": "Governance Level",
+    "state": "State / Territory",
+    "segment": "Target Segment",
+    "benefitType": "Benefit Type",
+    "status": "Deadline Status",
+    "clearAll": "Clear All",
+    "showing": "Showing schemes"
   }
 }
