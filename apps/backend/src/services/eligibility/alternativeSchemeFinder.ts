@@ -1,5 +1,5 @@
 import type { Scheme, CitizenProfile } from '@bharatassist/shared-types';
-import { evaluateEligibility, RuleEngineOutput } from './ruleEngine.js';
+import { evaluateEligibility, RuleEngineOutput, EvaluationInput } from './ruleEngine.js';
 import { searchSchemes } from '../ai/retrievalService.js';
 
 export interface AlternativeSchemeRecommendation {
@@ -26,7 +26,7 @@ interface StructuredFailureReasons {
  */
 function analyzeStructuredFailures(
   failedScheme: Scheme,
-  profile: Partial<CitizenProfile> & { income?: number | null; [key: string]: any }
+  profile: EvaluationInput
 ): StructuredFailureReasons {
   const rules = failedScheme.eligibilityRules ?? {};
 
@@ -101,7 +101,7 @@ function analyzeStructuredFailures(
  */
 export async function findAlternativeSchemes(
   failedScheme: Scheme,
-  profile: Partial<CitizenProfile> & { income?: number | null; [key: string]: any } = {},
+  profile: EvaluationInput = {},
   _evaluationResult?: RuleEngineOutput,
   customCandidatePool?: Scheme[]
 ): Promise<AlternativeSchemeRecommendation[]> {
@@ -148,6 +148,17 @@ export async function findAlternativeSchemes(
       continue;
     }
 
+    // Rule 6: an "alternative" has to serve the same need. A citizen refused
+    // a scholarship wants another scholarship, not a pension that happens to
+    // have no income ceiling. When both records declare who they are for,
+    // require at least one segment in common.
+    const failedSegments = failedScheme.targetSegments ?? [];
+    const candidateSegments = candidate.targetSegments ?? [];
+    const sharedSegments = failedSegments.filter((seg) => candidateSegments.includes(seg));
+    if (failedSegments.length > 0 && candidateSegments.length > 0 && sharedSegments.length === 0) {
+      continue;
+    }
+
     // Evaluate candidate deterministically using ruleEngine
     const evalResult = evaluateEligibility(candidate.eligibilityRules, profile);
 
@@ -162,6 +173,11 @@ export async function findAlternativeSchemes(
     // Calculate deterministic relevance score and tailored recommendation reason
     let score = evalResult.status === 'eligible' ? 10 : 5;
     let reasonRecommended = 'Matches your citizen profile criteria';
+
+    // Serving the same audience is the strongest signal of a real alternative.
+    if (sharedSegments.length > 0) {
+      score += 8 * sharedSegments.length;
+    }
 
     const candRules = candidate.eligibilityRules ?? {};
 

@@ -140,25 +140,25 @@ export const EligibilityCheckerPage: React.FC = () => {
     return (
       <PageBody>
         <PageHeader
-          eyebrow="Eligibility Checker"
-          title="Check Your Scheme Eligibility"
-          description="Select a government scheme to answer scheme-specific eligibility questions and verify your qualification."
+          eyebrow={t('eligibility.ui.eyebrow')}
+          title={t('eligibility.ui.title')}
+          description={t('eligibility.ui.desc')}
         />
         <div className="mt-8">
           {savedSchemes.length === 0 ? (
             <EmptyState
               icon={Sparkles}
-              title="Choose a scheme to check eligibility"
+              title={t('eligibility.ui.noScheme')}
               description="Browse the register or open any scheme detail page and click 'Check my eligibility'."
               action={
                 <Button asChild>
-                  <Link to="/search">Find schemes</Link>
+                  <Link to="/search">{t('common.findSchemes')}</Link>
                 </Button>
               }
             />
           ) : (
             <div className="space-y-4">
-              <h2 className="register text-ink-2">Select from your saved schemes</h2>
+              <h2 className="register text-ink-2">{t('eligibility.ui.selectScheme')}</h2>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {savedSchemes.map((s) => (
                   <li key={s.slug}>
@@ -202,7 +202,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           description="Unable to retrieve eligibility questions for this scheme. It may have been updated or removed."
           action={
             <Button variant="outline" asChild>
-              <Link to="/search">Return to Search</Link>
+              <Link to="/search">{t('schemeDetails.backToSearch')}</Link>
             </Button>
           }
         />
@@ -335,7 +335,7 @@ export const EligibilityCheckerPage: React.FC = () => {
                   </div>
                   <div className="mt-4 flex gap-2 pt-2 border-t border-rule">
                     <Button variant="outline" size="sm" className="w-full" asChild>
-                      <Link to={`/eligibility?scheme=${alt.schemeId}`}>Check Eligibility</Link>
+                      <Link to={`/eligibility?scheme=${alt.schemeId}`}>{t('schemeDetails.checkEligibility')}</Link>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
                       <Link to={`/schemes/${alt.schemeId}`}>View</Link>
@@ -362,7 +362,7 @@ export const EligibilityCheckerPage: React.FC = () => {
               </Link>
             </Button>
             <Button asChild>
-              <Link to={`/schemes/${slug}`}>Go to Scheme Details</Link>
+              <Link to={`/schemes/${slug}`}>{t('eligibility.ui.viewScheme')}</Link>
             </Button>
           </div>
         </div>
@@ -386,7 +386,7 @@ export const EligibilityCheckerPage: React.FC = () => {
       </Link>
 
       <PageHeader
-        eyebrow="Eligibility Checker"
+        eyebrow={t('eligibility.ui.eyebrow')}
         title={questionsData.schemeName}
         description={`Answer ${questions.length} scheme questions to verify your eligibility.`}
       />
@@ -425,7 +425,7 @@ export const EligibilityCheckerPage: React.FC = () => {
         </div>
 
         <h2 className="mt-3 font-display text-xl font-semibold text-ink">
-          {currentQ.question}
+          {t(currentQ.questionKey, { defaultValue: currentQ.question })}
         </h2>
 
         {/* Input Rendering */}
@@ -436,7 +436,7 @@ export const EligibilityCheckerPage: React.FC = () => {
               onValueChange={(val) => handleAnswerChange(currentQ.field, val)}
             >
               <SelectTrigger className="h-11">
-                <SelectValue placeholder="Select an option" />
+                <SelectValue placeholder={t('eligibility.ui.selectOption')} />
               </SelectTrigger>
               <SelectContent>
                 {currentQ.options.map((opt) => (
@@ -456,7 +456,7 @@ export const EligibilityCheckerPage: React.FC = () => {
                   e.target.value ? Number(e.target.value) : ''
                 )
               }
-              placeholder="Enter number"
+              placeholder={t('eligibility.ui.enterNumber')}
               className="h-11"
             />
           ) : (
@@ -464,7 +464,7 @@ export const EligibilityCheckerPage: React.FC = () => {
               type="text"
               value={currentAnswer}
               onChange={(e) => handleAnswerChange(currentQ.field, e.target.value)}
-              placeholder="Enter details"
+              placeholder={t('eligibility.ui.enterDetails')}
               className="h-11"
             />
           )}

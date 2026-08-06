@@ -84,11 +84,7 @@ router.get(
       }
 
       // Generate base personalized checklist
-      const generatedItems = generatePersonalizedChecklist(
-        scheme,
-        profile,
-        eligibilityResult as any
-      );
+      const generatedItems = generatePersonalizedChecklist(scheme, profile, eligibilityResult);
 
       // Preserve existing user-modified item statuses if existing checklist exists
       const existingStatusMap = new Map<string, string>();
@@ -212,7 +208,7 @@ router.patch(
           CitizenProfileModel.findOne({ userId }).lean(),
           EligibilityResultModel.findOne({ userId, schemeId: scheme._id }).lean()
         ]);
-        const generated = generatePersonalizedChecklist(scheme, profile, eligibilityResult as any);
+        const generated = generatePersonalizedChecklist(scheme, profile, eligibilityResult);
         currentItems = generated.map((g) => ({
           label: g.label,
           status: g.status,

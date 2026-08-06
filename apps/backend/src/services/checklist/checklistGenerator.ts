@@ -35,10 +35,21 @@ export interface PersonalizedChecklistItem {
  * and eligibility evaluation result. Never omits documents from the list—instead assigns
  * explicit statuses like 'not_required' or 'not_applicable'.
  */
+/**
+ * A profile as it arrives from Mongoose `.lean()`: structurally a
+ * CitizenProfile, but `_id` is an ObjectId rather than a string. The
+ * generator only ever reads domain fields, so accept either shape instead of
+ * forcing every call site to cast.
+ */
+export type ProfileLike = Partial<Omit<CitizenProfile, '_id'>> & { _id?: unknown };
+
+/** Same story for an eligibility result read back with `.lean()`. */
+export type EligibilityResultLike = Partial<Omit<EligibilityResult, '_id'>> & { _id?: unknown };
+
 export function generatePersonalizedChecklist(
   scheme: Scheme | null | undefined,
-  profile?: Partial<CitizenProfile> | null,
-  eligibilityResult?: EligibilityResult | null
+  profile?: ProfileLike | null,
+  eligibilityResult?: EligibilityResultLike | null
 ): PersonalizedChecklistItem[] {
   if (!scheme || !scheme.requiredDocuments || scheme.requiredDocuments.length === 0) {
     return [];

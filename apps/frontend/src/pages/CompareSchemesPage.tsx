@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -37,6 +38,7 @@ export interface ComparisonResponse {
 }
 
 export const CompareSchemesPage: React.FC = () => {
+  const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const rawParams = searchParams.get('schemes') ?? '';
   const initialIds = rawParams ? rawParams.split(',').map((s) => s.trim()).filter(Boolean) : [];
@@ -85,20 +87,20 @@ export const CompareSchemesPage: React.FC = () => {
     return (
       <PageBody>
         <PageHeader
-          eyebrow="Compare Schemes"
-          title="Compare Schemes Side-by-Side"
-          description="Select 2 to 4 schemes from your saved list to compare benefits, eligibility rules, document requirements, and deadlines."
+          eyebrow={t('compare.eyebrow')}
+          title={t('compare.title')}
+          description={t('compare.desc')}
         />
 
         <div className="mt-8">
           {savedSchemes.length < 2 ? (
             <EmptyState
               icon={GitCompare}
-              title="Save at least 2 schemes to compare"
-              description="Browse the register and save schemes to unlock side-by-side comparison."
+              title={t('compare.needTwo')}
+              description={t('compare.needTwoDesc')}
               action={
                 <Button asChild>
-                  <Link to="/search">Find schemes to save</Link>
+                  <Link to="/search">{t('compare.findToSave')}</Link>
                 </Button>
               }
             />
@@ -167,7 +169,7 @@ export const CompareSchemesPage: React.FC = () => {
     return (
       <PageBody>
         <EmptyState
-          title="Unable to compare schemes"
+          title={t('compare.failed')}
           description={error?.message || 'Verification failed for requested scheme IDs.'}
           action={
             <Button variant="outline" onClick={() => setSelectedIds([])}>
@@ -197,8 +199,8 @@ export const CompareSchemesPage: React.FC = () => {
       </div>
 
       <PageHeader
-        eyebrow="Compare Schemes"
-        title="Side-by-Side Scheme Comparison"
+        eyebrow={t('compare.eyebrow')}
+        title={t('compare.title')}
         description={`Comparing ${schemes.length} schemes. Differing criteria are automatically highlighted.`}
       />
 
@@ -245,7 +247,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Benefit Type */}
             <tr className={cn(differences['benefitType'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Benefit Type</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.benefitType')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink capitalize">
                   {col.benefitType}
@@ -255,7 +257,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Benefit Summary */}
             <tr>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Benefit Summary</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.benefitSummary')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink font-medium text-sanction-deep">
                   {col.benefits}
@@ -265,7 +267,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Eligibility Summary */}
             <tr className={cn(differences['eligibilitySummary'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Eligibility Rules</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.eligibility')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink-2 leading-relaxed">
                   {col.eligibilitySummary}
@@ -275,7 +277,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Required Documents Count */}
             <tr className={cn(differences['requiredDocumentsCount'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Required Documents</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.documents')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink">
                   <span className="font-semibold">{col.requiredDocumentsCount}</span> documents
@@ -285,7 +287,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Application Mode */}
             <tr className={cn(differences['applicationMode'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Application Mode</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.applicationMode')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink capitalize">
                   {col.applicationMode}
@@ -295,7 +297,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Application Deadline */}
             <tr className={cn(differences['applicationDeadline'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Deadline</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.deadline')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink">
                   {col.applicationDeadline}
@@ -305,7 +307,7 @@ export const CompareSchemesPage: React.FC = () => {
 
             {/* Actions & Official Portal Link */}
             <tr>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Official Portal</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.portal')}</td>
               {schemes.map((col) => {
                 const valid = isValidGovDomain(col.officialPortalUrl);
                 return (
@@ -321,7 +323,7 @@ export const CompareSchemesPage: React.FC = () => {
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     ) : (
-                      <span className="text-ink-4 text-micro">Unverified portal</span>
+                      <span className="text-ink-4 text-micro">{t('compare.unverifiedPortal')}</span>
                     )}
                   </td>
                 );

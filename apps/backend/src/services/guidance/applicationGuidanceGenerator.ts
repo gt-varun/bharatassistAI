@@ -1,4 +1,5 @@
 import type { Scheme, CitizenProfile, ApplicationField } from '@bharatassist/shared-types';
+import type { ProfileLike } from '../checklist/checklistGenerator.js';
 
 export interface GuidanceField {
   fieldName: string;
@@ -80,7 +81,7 @@ function validateUrl(urlStr?: string | null): boolean {
  */
 export function generateApplicationGuidance(
   scheme: Scheme | null | undefined,
-  profile?: Partial<CitizenProfile> | null
+  profile?: ProfileLike | null
 ): ApplicationGuidanceResult {
   if (!scheme) {
     return {

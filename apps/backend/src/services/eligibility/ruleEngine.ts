@@ -4,13 +4,25 @@ import type {
   CitizenProfile,
   EligibilityResult
 } from '@bharatassist/shared-types';
+import {
+  parseIncomeBand,
+  judgeAgainstCeiling,
+  describeRange,
+  type IncomeRange
+} from './incomeBands.js';
 
 /**
  * Flexible input schema for evaluating eligibility.
  * Accepts full/partial CitizenProfile values or custom questionnaire responses.
  */
-export type EvaluationInput = Partial<CitizenProfile> & {
+export type EvaluationInput = Partial<Omit<CitizenProfile, '_id'>> & {
   income?: number | null;
+  /**
+   * Profiles arriving from Mongoose `.lean()` carry an ObjectId `_id`. The
+   * engine reads only domain fields, so the identifier is accepted in
+   * whatever shape it comes and never inspected.
+   */
+  _id?: unknown;
   [key: string]: any;
 };
 
@@ -20,41 +32,17 @@ export type EvaluationInput = Partial<CitizenProfile> & {
 export type RuleEngineOutput = Pick<EligibilityResult, 'status' | 'reasons' | 'missingRequirements'>;
 
 /**
- * Helper to extract a numeric income value from either explicit numeric `income` or `incomeBand` string.
+ * Resolves the citizen's income to a range.
+ *
+ * An exact figure becomes a zero-width range; a band keeps its real width so
+ * that a band straddling the scheme's ceiling can be reported as unknown
+ * rather than silently rounded in either direction.
  */
-function parseIncome(input: EvaluationInput): number | null {
-  if (typeof input.income === 'number' && !isNaN(input.income)) {
-    return input.income;
+function resolveIncome(input: EvaluationInput): IncomeRange | null {
+  if (typeof input.income === 'number' && !Number.isNaN(input.income)) {
+    return { min: input.income, max: input.income };
   }
-
-  if (!input.incomeBand) {
-    return null;
-  }
-
-  const band = input.incomeBand.trim().toLowerCase();
-  
-  // Try parsing plain numbers like "250000"
-  const rawNum = Number(band);
-  if (!isNaN(rawNum)) return rawNum;
-
-  // Handle common Indian income band notations
-  if (band.includes('<2.5l') || band.includes('< 2.5l') || band.includes('below 2.5') || band === '<2.5l') {
-    return 249999;
-  }
-  if (band.includes('2.5l-5l') || band.includes('2.5l - 5l')) {
-    return 375000;
-  }
-  if (band.includes('>5l') || band.includes('> 5l') || band.includes('above 5l')) {
-    return 500001;
-  }
-
-  // Regex fallback for lakh values e.g. "2.5L" -> 250000
-  const lakhMatch = band.match(/([\d.]+)\s*l/);
-  if (lakhMatch) {
-    return parseFloat(lakhMatch[1]) * 100000;
-  }
-
-  return null;
+  return parseIncomeBand(input.incomeBand);
 }
 
 /**
@@ -250,21 +238,29 @@ export function evaluateEligibility(
 
   // 3. Income Rule
   if (rules.incomeMax !== undefined && rules.incomeMax !== null) {
-    const userIncome = parseIncome(input);
-    if (userIncome === null) {
-      hasMissingFields = true;
-      missingRequirements.push(
-        `Household income details required (maximum limit: ₹${rules.incomeMax.toLocaleString('en-IN')})`
-      );
-    } else if (userIncome > rules.incomeMax) {
-      hasExplicitFailure = true;
-      missingRequirements.push(
-        `Annual household income must not exceed ₹${rules.incomeMax.toLocaleString('en-IN')} (your income: ₹${userIncome.toLocaleString('en-IN')})`
-      );
-    } else {
-      reasons.push(
-        `Household income is within the maximum limit of ₹${rules.incomeMax.toLocaleString('en-IN')}`
-      );
+    const ceiling = rules.incomeMax;
+    const ceilingText = `₹${ceiling.toLocaleString('en-IN')}`;
+    const range = resolveIncome(input);
+
+    switch (judgeAgainstCeiling(range, ceiling)) {
+      case 'within':
+        reasons.push(`Household income is within the maximum limit of ${ceilingText}`);
+        break;
+      case 'exceeds':
+        hasExplicitFailure = true;
+        missingRequirements.push(
+          `Annual household income must not exceed ${ceilingText} (your income: ${describeRange(range!)})`
+        );
+        break;
+      default:
+        // Either nothing was supplied, or the band spans the ceiling. Both
+        // are "we cannot say yet", never a refusal.
+        hasMissingFields = true;
+        missingRequirements.push(
+          range
+            ? `Exact household income required — the band you gave (${describeRange(range)}) spans the ${ceilingText} limit`
+            : `Household income details required (maximum limit: ${ceilingText})`
+        );
     }
   }
 

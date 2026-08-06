@@ -3,6 +3,7 @@ import type {
   CitizenProfile,
   AdditionalCondition
 } from '@bharatassist/shared-types';
+import type { EvaluationInput } from './ruleEngine.js';
 
 /**
  * Question interface representing a scheme-specific eligibility question.
@@ -87,7 +88,7 @@ function formatFieldLabel(field: string): string {
  */
 export function generateEligibilityQuestions(
   rules: EligibilityRules | null | undefined,
-  profile?: Partial<CitizenProfile> & { income?: number | null; [key: string]: any }
+  profile?: EvaluationInput
 ): EligibilityQuestion[] {
   if (!rules || Object.keys(rules).length === 0) {
     return [];
@@ -228,5 +229,27 @@ export function generateEligibilityQuestions(
     }
   }
 
-  return questions;
+  return questions.map(withReachableCurrentValue);
+}
+
+/**
+ * A select must be able to show the answer it is prefilled with.
+ *
+ * Options come from what the scheme allows, while the prefilled value comes
+ * from the citizen's profile — so a student meeting a farmers-only scheme
+ * would get a dropdown listing "farmer" while holding the value "student",
+ * which renders as blank or as an unselectable value depending on the
+ * control. Carrying their existing answer into the list keeps the question
+ * honest: they can see what we think they are, and change it.
+ */
+function withReachableCurrentValue(question: EligibilityQuestion): EligibilityQuestion {
+  const { options, currentValue } = question;
+  if (!options || currentValue === null || currentValue === undefined || currentValue === '') {
+    return question;
+  }
+
+  const current = String(currentValue);
+  if (options.some((option) => String(option) === current)) return question;
+
+  return { ...question, options: [...options, current] };
 }

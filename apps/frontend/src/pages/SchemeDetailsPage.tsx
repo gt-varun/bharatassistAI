@@ -27,6 +27,7 @@ import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { isValidGovDomain } from '../lib/govAllowlist';
 import { benefitLabel, segmentLabel } from '../lib/taxonomy';
 import { formatDate, daysUntil } from '../lib/format';
+import { cn } from '../lib/utils';
 
 /** A labelled row in the record sheet. */
 const Field: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (

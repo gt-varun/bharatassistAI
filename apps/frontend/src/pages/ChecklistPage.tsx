@@ -85,23 +85,23 @@ export const ChecklistPage: React.FC = () => {
         <PageHeader
           eyebrow={t('checklist.eyebrow')}
           title={t('checklist.title')}
-          description="Pick a scheme and we'll list exactly what its application asks for, and where to get anything you're missing."
+          description={t('checklist.desc')}
         />
         <div className="mt-8">
           {savedSchemes.length === 0 ? (
             <EmptyState
               icon={ListChecks}
-              title="Choose a scheme first"
-              description="Open any scheme detail page or search the register to start its document checklist."
+              title={t('checklist.pickScheme')}
+              description={t('checklist.pickSchemeDesc')}
               action={
                 <Button asChild>
-                  <Link to="/search">Find schemes</Link>
+                  <Link to="/search">{t('common.findSchemes')}</Link>
                 </Button>
               }
             />
           ) : (
             <div className="space-y-4">
-              <h2 className="register text-ink-2">From your saved schemes</h2>
+              <h2 className="register text-ink-2">{t('checklist.fromSaved')}</h2>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {savedSchemes.map((s) => (
                   <li key={s.slug}>
@@ -144,11 +144,11 @@ export const ChecklistPage: React.FC = () => {
     return (
       <PageBody>
         <EmptyState
-          title="Checklist unavailable"
-          description="Could not load the document checklist for this scheme. Please verify the scheme URL."
+          title={t('checklist.failed')}
+          description={t('checklist.failedDesc')}
           action={
             <Button variant="outline" asChild>
-              <Link to="/search">Search schemes</Link>
+              <Link to="/search">{t('nav.search')}</Link>
             </Button>
           }
         />
@@ -171,7 +171,7 @@ export const ChecklistPage: React.FC = () => {
       </Link>
 
       <PageHeader
-        eyebrow="Personalized Document Checklist"
+        eyebrow={t('checklist.eyebrow')}
         title={checklistData.schemeName}
         description={
           items.length
@@ -192,11 +192,11 @@ export const ChecklistPage: React.FC = () => {
         <div className="mt-8">
           <EmptyState
             icon={ListChecks}
-            title="Documents not recorded for this scheme yet"
-            description="The official notification has not recorded specific document requirements."
+            title={t('checklist.noneRecorded')}
+            description={t('checklist.noneRecordedDesc')}
             action={
               <Button variant="outline" asChild>
-                <Link to={`/schemes/${slug}`}>Back to scheme details</Link>
+                <Link to={`/schemes/${slug}`}>{t('checklist.backToScheme')}</Link>
               </Button>
             }
           />
@@ -285,7 +285,7 @@ export const ChecklistPage: React.FC = () => {
                 You can now proceed to apply on the official government portal.
               </p>
               <Button className="mt-4" asChild>
-                <Link to={`/schemes/${slug}`}>Go to Scheme Details</Link>
+                <Link to={`/schemes/${slug}`}>{t('checklist.backToScheme')}</Link>
               </Button>
             </div>
           ) : (
