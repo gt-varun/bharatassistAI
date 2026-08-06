@@ -1,6 +1,6 @@
 import { SchemeModel } from '../../models/Scheme.js';
 import { CitizenProfileModel } from '../../models/CitizenProfile.js';
-import { generateEmbedding } from './geminiClient.js';
+import { semanticSearch, reciprocalRankFusion } from './vectorSearch.js';
 import { Scheme } from '@bharatassist/shared-types';
 
 export interface SearchParams {
@@ -15,6 +15,8 @@ export interface SearchParams {
   page?: number;
   limit?: number;
   userId?: string;
+  /** ISO code of the language the citizen is reading in, e.g. 'hi'. */
+  lang?: string;
 }
 
 export interface SearchResult {
@@ -35,6 +37,34 @@ export interface CategorySummary {
 }
 
 /**
+ * Overlays a verified translation onto the reader's language.
+ *
+ * Scheme records store their source (English) text at the top level and any
+ * translated copy under `translations.<lang>`. Only a translation marked
+ * `verified` is shown — an unreviewed machine translation of an eligibility
+ * rule is worse than English, because a citizen will act on it. Untranslated
+ * fields fall back to the source text rather than blanking out.
+ */
+export function localiseScheme(scheme: Scheme, lang?: string): Scheme {
+  if (!lang || lang === 'en') return scheme;
+
+  const raw = (scheme as any).translations;
+  if (!raw) return scheme;
+
+  // `translations` is a Mongoose Map; .lean() gives a plain object, but a
+  // hydrated document gives a real Map. Handle both.
+  const t = raw instanceof Map ? raw.get(lang) : raw[lang];
+  if (!t || t.verified !== true) return scheme;
+
+  return {
+    ...scheme,
+    name: t.name || scheme.name,
+    shortDescription: t.shortDescription || scheme.shortDescription,
+    eligibilitySummaryPlain: t.eligibilitySummaryPlain || scheme.eligibilitySummaryPlain
+  };
+}
+
+/**
  * Extracts structured filter hints from free text query
  */
 function extractFiltersFromQuery(queryStr: string): Partial<SearchParams> {
@@ -42,16 +72,33 @@ function extractFiltersFromQuery(queryStr: string): Partial<SearchParams> {
   const lower = queryStr.toLowerCase();
 
   // Segments
-  if (lower.includes('student') || lower.includes('scholarship')) hints.segment = 'student';
-  else if (lower.includes('farmer') || lower.includes('agriculture') || lower.includes('kisan')) hints.segment = 'farmer';
-  else if (lower.includes('women') || lower.includes('female') || lower.includes('girl')) hints.segment = 'women';
-  else if (lower.includes('senior') || lower.includes('pension') || lower.includes('old age')) hints.segment = 'senior';
-  else if (lower.includes('msme') || lower.includes('business') || lower.includes('loan')) hints.segment = 'msme';
+  // Slugs must match `targetSegments` values exactly, or the filter silently
+  // matches nothing.
+  const SEGMENT_HINTS: Array<[string, string[]]> = [
+    ['student', ['student', 'scholarship', 'college', 'school', 'study', 'tuition', 'छात्र', 'छात्रवृत्ति']],
+    ['farmer', ['farmer', 'farming', 'agriculture', 'kisan', 'crop', 'irrigation', 'किसान', 'फसल']],
+    ['pwd', ['disability', 'disabled', 'divyang', 'wheelchair', 'blind', 'deaf', 'दिव्यांग']],
+    ['senior_citizen', ['senior', 'old age', 'elderly', 'pensioner', 'वृद्ध', 'बुजुर्ग']],
+    ['women', ['women', 'woman', 'female', 'girl', 'mother', 'maternity', 'widow', 'महिला', 'बालिका']],
+    ['jobseeker', ['job', 'unemploy', 'employment', 'skill training', 'placement', 'रोजगार', 'बेरोजगार']],
+    ['msme', ['msme', 'business', 'enterprise', 'startup', 'shop', 'artisan', 'व्यवसाय', 'उद्यम']]
+  ];
+  for (const [slug, words] of SEGMENT_HINTS) {
+    if (words.some((w) => lower.includes(w))) {
+      hints.segment = slug;
+      break;
+    }
+  }
 
-  // Level & States
-  if (lower.includes('karnataka')) hints.state = 'Karnataka';
-  else if (lower.includes('delhi')) hints.state = 'Delhi';
-  else if (lower.includes('maharashtra')) hints.state = 'Maharashtra';
+  // States — matched against the same names the records are stored under.
+  const STATES = [
+    'Andhra Pradesh', 'Assam', 'Bihar', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat',
+    'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka', 'Kerala',
+    'Madhya Pradesh', 'Maharashtra', 'Odisha', 'Punjab', 'Rajasthan',
+    'Tamil Nadu', 'Telangana', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+  ];
+  const matchedState = STATES.find((st) => lower.includes(st.toLowerCase()));
+  if (matchedState) hints.state = matchedState;
   else if (lower.includes('central') || lower.includes('pm ')) hints.level = 'central';
 
   return hints;
@@ -97,22 +144,63 @@ export async function searchSchemes(params: SearchParams): Promise<SearchResult>
     }
   }
 
-  // Text search ranking vs default sort
-  let sortOption: Record<string, any> = { createdAt: -1 };
-  if (params.query && params.query.trim()) {
-    mongoQuery.$text = { $search: params.query.trim() };
-    sortOption = { score: { $meta: 'textScore' } };
-  }
+  const freeText = params.query?.trim();
 
-  // Fetch count & items
-  const [items, total] = await Promise.all([
-    SchemeModel.find(mongoQuery, params.query ? { score: { $meta: 'textScore' } } : {})
-      .sort(sortOption)
-      .skip(skip)
-      .limit(limit)
-      .lean(),
-    SchemeModel.countDocuments(mongoQuery)
-  ]);
+  let items: any[];
+  let total: number;
+
+  if (freeText) {
+    // ---- Hybrid retrieval -------------------------------------------
+    // Two arms over the same filtered candidate set: the MongoDB text
+    // index for keyword precision, and vector similarity for phrasing the
+    // keywords miss. Their ranks are fused with RRF.
+    const [keywordHits, semanticHits] = await Promise.all([
+      SchemeModel.find(
+        { ...mongoQuery, $text: { $search: freeText } },
+        { score: { $meta: 'textScore' } }
+      )
+        .sort({ score: { $meta: 'textScore' } })
+        .limit(100)
+        .lean(),
+      semanticSearch(freeText, 100)
+    ]);
+
+    const keywordRanking = keywordHits.map((d: any) => String(d._id));
+    const semanticRanking = semanticHits.map((h) => h.schemeId);
+
+    // Keyword is weighted a little higher: when a citizen types a scheme's
+    // actual name, an exact match should not be out-voted by a neighbour.
+    const fused = reciprocalRankFusion([keywordRanking, semanticRanking], [1.0, 0.8]);
+
+    // The semantic arm searches the whole register, so anything it surfaced
+    // must still be re-checked against the active filters before it counts.
+    const semanticOnlyIds = semanticRanking.filter((id) => !keywordRanking.includes(id));
+    const admissible = semanticOnlyIds.length
+      ? await SchemeModel.find({ ...mongoQuery, _id: { $in: semanticOnlyIds } })
+          .select('_id')
+          .lean()
+      : [];
+    const admissibleIds = new Set(admissible.map((d: any) => String(d._id)));
+    keywordRanking.forEach((id) => admissibleIds.add(id));
+
+    const orderedIds = [...fused.entries()]
+      .filter(([id]) => admissibleIds.has(id))
+      .sort((a, b) => b[1] - a[1])
+      .map(([id]) => id);
+
+    total = orderedIds.length;
+
+    const pageIds = orderedIds.slice(skip, skip + limit);
+    const docs = await SchemeModel.find({ _id: { $in: pageIds } }).lean();
+    const byId = new Map(docs.map((d: any) => [String(d._id), d]));
+    items = pageIds.map((id) => byId.get(id)).filter(Boolean);
+  } else {
+    // ---- Browse: filters only, newest first --------------------------
+    [items, total] = await Promise.all([
+      SchemeModel.find(mongoQuery).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+      SchemeModel.countDocuments(mongoQuery)
+    ]);
+  }
 
   // Profile relevance boosting if logged-in user context available
   let rankedItems = items as unknown as Scheme[];
@@ -132,7 +220,7 @@ export async function searchSchemes(params: SearchParams): Promise<SearchResult>
   }
 
   return {
-    schemes: rankedItems,
+    schemes: rankedItems.map((s) => localiseScheme(s, params.lang)),
     pagination: {
       total,
       page,
@@ -182,10 +270,14 @@ export async function getCategoryCounts(): Promise<CategorySummary> {
 /**
  * Fetch scheme by slug or ObjectId
  */
-export async function getSchemeBySlugOrId(idOrSlug: string): Promise<Scheme | null> {
+export async function getSchemeBySlugOrId(
+  idOrSlug: string,
+  lang?: string
+): Promise<Scheme | null> {
   let scheme = await SchemeModel.findOne({ slug: idOrSlug }).lean();
   if (!scheme && idOrSlug.match(/^[0-9a-fA-F]{24}$/)) {
     scheme = await SchemeModel.findById(idOrSlug).lean();
   }
-  return scheme as unknown as Scheme | null;
+  if (!scheme) return null;
+  return localiseScheme(scheme as unknown as Scheme, lang);
 }

@@ -9,6 +9,15 @@ import { sendSuccess, sendError } from '../../utils/response.js';
 
 const router = Router();
 
+/** The reader's language: explicit ?lang wins, else Accept-Language. */
+function readLang(req: Request): string | undefined {
+  const q = req.query.lang as string | undefined;
+  if (q) return q.split('-')[0].toLowerCase();
+  const header = req.headers['accept-language'];
+  if (!header) return undefined;
+  return header.split(',')[0]?.split('-')[0]?.toLowerCase();
+}
+
 /**
  * GET /api/schemes/search
  * Keyword + natural-language + structured filter search
@@ -26,7 +35,8 @@ router.get('/search', async (req: Request, res: Response, next: NextFunction) =>
       status: req.query.status as any,
       page: req.query.page ? parseInt(req.query.page as string, 10) : 1,
       limit: req.query.limit ? parseInt(req.query.limit as string, 10) : 10,
-      userId: (req as any).user?.id
+      userId: (req as any).user?.id,
+      lang: readLang(req)
     };
 
     const result = await searchSchemes(params);
@@ -62,7 +72,8 @@ router.get('/categories/:slug', async (req: Request, res: Response, next: NextFu
     const result = await searchSchemes({
       segment: slug,
       page,
-      limit
+      limit,
+      lang: readLang(req)
     });
 
     return sendSuccess(res, result.schemes, 200, { pagination: result.pagination });
@@ -78,7 +89,7 @@ router.get('/categories/:slug', async (req: Request, res: Response, next: NextFu
 router.get('/:slug', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { slug } = req.params;
-    const scheme = await getSchemeBySlugOrId(slug);
+    const scheme = await getSchemeBySlugOrId(slug, readLang(req));
 
     if (!scheme) {
       return sendError(res, `Scheme not found for key: ${slug}`, 404, 'SCHEME_NOT_FOUND');
@@ -106,7 +117,8 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
       department: req.query.department as string,
       status: req.query.status as any,
       page: req.query.page ? parseInt(req.query.page as string, 10) : 1,
-      limit: req.query.limit ? parseInt(req.query.limit as string, 10) : 10
+      limit: req.query.limit ? parseInt(req.query.limit as string, 10) : 10,
+      lang: readLang(req)
     };
 
     const result = await searchSchemes(params);

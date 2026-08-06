@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/**/*.ts",
     "test": "vitest run",
-    "seed": "tsx src/scripts/seed.ts"
+    "seed": "tsx src/scripts/seed.ts",
+    "embed": "tsx src/scripts/embed.ts"
   },
   "dependencies": {
     "@bharatassist/shared-types": "workspace:*",

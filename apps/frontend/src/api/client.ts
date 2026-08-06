@@ -12,6 +12,8 @@ export const apiClient = axios.create({
 let accessToken: string | null = localStorage.getItem('access_token');
 let refreshToken: string | null = localStorage.getItem('refresh_token');
 
+export const hasAccessToken = () => Boolean(accessToken);
+
 export const setAuthTokens = (access: string, refresh: string) => {
   accessToken = access;
   refreshToken = refresh;
@@ -26,11 +28,19 @@ export const clearAuthTokens = () => {
   localStorage.removeItem('refresh_token');
 };
 
-// Automatic Bearer Token Attachment
+// Automatic Bearer Token Attachment, plus the reader's language on every
+// request — scheme records carry verified translations, and the API returns
+// them in whichever language the interface is currently in.
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (accessToken && config.headers) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
+
+  const lang = localStorage.getItem('bharatassist_language');
+  if (lang && config.headers) {
+    config.headers['Accept-Language'] = lang;
+  }
+
   return config;
 });
 
@@ -50,8 +60,11 @@ apiClient.interceptors.response.use(
           return apiClient(originalRequest);
         }
       } catch (refreshErr) {
+        // The application is behind sign-in, so a dead session has to end at
+        // the door. RequireAuth picks this up and redirects.
         clearAuthTokens();
-        window.location.href = '/auth';
+        localStorage.removeItem('bharatassist_user');
+        window.dispatchEvent(new Event('bharatassist:signed-out'));
       }
     }
     return Promise.reject(error);

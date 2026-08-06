@@ -1,278 +1,241 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  Send,
-  Sparkles,
-  ArrowLeft,
-  Bot,
-  User,
-  RotateCcw,
-  BookOpen,
-  HelpCircle,
-  ShieldCheck,
-  CheckCircle,
-  ExternalLink,
-  MessageSquare
-} from 'lucide-react';
-import { apiClient } from '../api/client.js';
-import { Button } from '../components/ui/button.js';
-import { Card } from '../components/ui/card.js';
-import { Badge } from '../components/ui/badge.js';
-
-interface SourceCitation {
-  id: string;
-  name: string;
-}
+import { useTranslation } from 'react-i18next';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { ArrowUp, Info, MessagesSquare } from 'lucide-react';
+import type { Scheme } from '@bharatassist/shared-types';
+import { apiClient } from '../api/client';
+import { PageBody, PageHeader } from '../components/layout/PageHeader';
+import { Button } from '../components/ui/button';
+import { cn } from '../lib/utils';
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
-  content: string;
-  timestamp: string;
-  sourceCitations?: SourceCitation[];
+  text: string;
+  /** Records the answer was drawn from, so a claim can be traced. */
+  sources?: { name: string; slug: string }[];
+  failed?: boolean;
 }
 
+const OPENERS = [
+  'What does "domicile certificate" mean?',
+  'Which schemes help a farmer buy irrigation equipment?',
+  'I earn ₹1.8 lakh a year — what scholarships can my daughter get?',
+  'What is the difference between a subsidy and a direct benefit transfer?'
+];
+
 export const AssistantPage: React.FC = () => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
-  const schemeIdParam = searchParams.get('schemeId');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const schemeSlug = searchParams.get('scheme');
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      role: 'assistant',
-      content:
-        'Namaste! I am your BharatAssist AI guide. Ask me any question about central or state government scholarships, pensions, loans, or subsidies.',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errorState, setErrorState] = useState(false);
+  const [pending, setPending] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const promptSuggestions = [
-    'What schemes exist for post-matric undergraduate students in Karnataka?',
-    'How do I qualify for PM-KISAN ₹6,000 yearly income support?',
-    'What collateral-free business loans are available under PMMY MUDRA?',
-    'Who is eligible for the IGNOAPS senior citizen pension?'
-  ];
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // When arriving from a scheme page, the conversation is scoped to it.
+  const { data: scopedScheme } = useQuery<Scheme | null>({
+    queryKey: ['scheme', schemeSlug],
+    queryFn: async () => {
+      if (!schemeSlug) return null;
+      const res = await apiClient.get(`/schemes/${schemeSlug}`);
+      return res.data?.data ?? null;
+    },
+    enabled: Boolean(schemeSlug)
+  });
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, loading]);
+    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [messages, pending]);
 
-  const onSend = async (customPrompt?: string) => {
-    const promptToSend = (customPrompt || input).trim();
-    if (!promptToSend || loading) return;
+  const send = async (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed || pending) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: promptToSend,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
+    const userMessage: Message = { id: crypto.randomUUID(), role: 'user', text: trimmed };
     setMessages((prev) => [...prev, userMessage]);
-    if (!customPrompt) setInput('');
-    setLoading(true);
-    setErrorState(false);
+    setInput('');
+    setPending(true);
 
     try {
-      const res = await apiClient.post('/assistant/chat', { prompt: promptToSend, schemeId: schemeIdParam || undefined });
-      if (res.data?.success) {
-        const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: res.data.data.text || res.data.data.answer || 'I evaluated the scheme database and found matching criteria.',
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          sourceCitations: res.data.data.sources || [
-            { id: 'karnataka-vidyasiri-scholarship', name: 'Karnataka Vidyasiri Scholarship' }
-          ]
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
-      }
-    } catch (err) {
-      setErrorState(true);
+      const res = await apiClient.post('/assistant/chat', {
+        prompt: trimmed,
+        context: scopedScheme
+          ? `Scheme: ${scopedScheme.name}\nDepartment: ${scopedScheme.department}\n${scopedScheme.fullDescription}\nEligibility: ${scopedScheme.eligibilitySummaryPlain}`
+          : undefined
+      });
+
+      const payload = res.data?.data;
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: crypto.randomUUID(),
           role: 'assistant',
-          content:
-            'Apologies, I encountered an issue accessing the scheme database. Please try retrying your query.',
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          text: payload?.text || 'No answer came back from the assistant.',
+          sources: scopedScheme ? [{ name: scopedScheme.name, slug: scopedScheme.slug }] : undefined
+        }
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          text: 'The assistant is not reachable right now. Search the register directly and it will still answer with real records.',
+          failed: true
         }
       ]);
     } finally {
-      setLoading(false);
+      setPending(false);
+      inputRef.current?.focus();
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col font-sans">
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/search')} className="text-slate-400 hover:text-white">
-            <ArrowLeft className="w-4 h-4" />
-          </Button>
-          <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-purple-400" />
-          </div>
-          <div>
-            <h1 className="font-extrabold text-lg text-white leading-none">BharatAssist AI Assistant</h1>
-            <span className="text-[10px] text-purple-400 font-semibold uppercase tracking-wider">
-              Grounded Scheme Retrieval Engine
-            </span>
-          </div>
-        </div>
+    <PageBody className="flex min-h-[calc(100vh-3.5rem)] max-w-4xl flex-col">
+      <PageHeader
+        eyebrow={t('assistant.eyebrow')}
+        title={t('assistant.title')}
+        description={t('assistant.desc')}
+      />
 
-        <Button variant="outline" size="sm" onClick={() => navigate('/search')} className="border-slate-800 text-xs">
-          Browse Search
-        </Button>
-      </header>
+      {scopedScheme && (
+        <p className="mt-5 flex flex-wrap items-center gap-2 rounded-md border border-sanction-edge bg-sanction-tint px-3.5 py-2.5 text-[0.875rem] text-sanction">
+          <Info className="h-4 w-4 shrink-0" strokeWidth={1.8} />
+          Answering about{' '}
+          <Link to={`/schemes/${scopedScheme.slug}`} className="font-semibold underline-offset-4 hover:underline">
+            {scopedScheme.name}
+          </Link>{' '}
+          only.
+        </p>
+      )}
 
-      {/* Main Chat Conversation Surface */}
-      <main className="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-between space-y-6">
-        {/* Messages List */}
-        <div className="space-y-6 flex-1">
-          {messages.length === 1 && (
-            <div className="py-8 text-center space-y-6">
-              <div className="w-16 h-16 rounded-3xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto shadow-xl">
-                <Bot className="w-8 h-8 text-purple-400" />
-              </div>
-              <div className="max-w-md mx-auto space-y-2">
-                <h2 className="text-2xl font-extrabold text-white">How can I assist your scheme discovery today?</h2>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Every answer is strictly retrieved from verified central and state ministry notifications.
-                </p>
-              </div>
-
-              {/* Prompt Suggestions Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto pt-4">
-                {promptSuggestions.map((prompt, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => onSend(prompt)}
-                    className="p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-purple-500/50 hover:bg-slate-800/80 cursor-pointer text-left text-xs text-slate-300 transition-all duration-200 flex items-start gap-2.5 group shadow-md"
+      {/* Conversation */}
+      <div className="mt-8 flex-1">
+        {messages.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-rule-strong bg-surface p-8 text-center">
+            <MessagesSquare className="mx-auto h-6 w-6 text-ink-3" strokeWidth={1.5} />
+            <p className="mt-3 font-display text-[1rem] font-semibold text-ink">
+              Ask it the way you would ask a person
+            </p>
+            <p className="mx-auto mt-1.5 max-w-md text-[0.875rem] leading-relaxed text-ink-2">
+              Government wording is welcome but not needed. Try one of these to start.
+            </p>
+            <ul className="mx-auto mt-6 grid max-w-xl gap-2 sm:grid-cols-2">
+              {OPENERS.map((opener) => (
+                <li key={opener}>
+                  <button
+                    type="button"
+                    onClick={() => send(opener)}
+                    className="h-full w-full rounded-md border border-rule-strong bg-surface px-3.5 py-2.5 text-left text-[0.875rem] leading-relaxed text-ink-2 transition-colors hover:border-sanction hover:bg-sanction-tint hover:text-sanction"
                   >
-                    <MessageSquare className="w-4 h-4 text-purple-400 shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                    <span>{prompt}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex items-start gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              {msg.role === 'assistant' && (
-                <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center shrink-0">
-                  <Bot className="w-4 h-4 text-purple-400" />
-                </div>
-              )}
-
-              <div className="space-y-2 max-w-2xl">
+                    {opener}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <ul className="space-y-5">
+            {messages.map((message) => (
+              <li
+                key={message.id}
+                className={cn('flex', message.role === 'user' ? 'justify-end' : 'justify-start')}
+              >
                 <div
-                  className={`p-4 rounded-3xl text-sm leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-amber-500 text-slate-950 font-semibold rounded-tr-none shadow-lg shadow-amber-500/10'
-                      : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none shadow-xl'
-                  }`}
+                  className={cn(
+                    'max-w-[42rem] rounded-lg px-4 py-3 text-[0.9375rem] leading-relaxed',
+                    message.role === 'user'
+                      ? 'bg-ink text-white'
+                      : message.failed
+                        ? 'border border-seal-edge bg-seal-tint text-seal'
+                        : 'border border-rule bg-surface text-ink'
+                  )}
                 >
-                  {msg.content}
-                </div>
+                  <p className="whitespace-pre-wrap">{message.text}</p>
 
-                {/* Source Citations UI */}
-                {msg.role === 'assistant' && msg.sourceCitations && msg.sourceCitations.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-2 text-[11px] pt-1 pl-1">
-                    <span className="text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Grounded Source:
-                    </span>
-                    {msg.sourceCitations.map((src, idx) => (
-                      <Badge
-                        key={idx}
-                        variant="secondary"
-                        onClick={() => navigate(`/schemes/${src.id}`)}
-                        className="bg-slate-900 border border-slate-800 text-amber-300 hover:text-amber-400 cursor-pointer font-medium"
-                      >
-                        {src.name} <ExternalLink className="w-2.5 h-2.5 ml-1" />
-                      </Badge>
+                  {message.sources?.length ? (
+                    <p className="hair-top mt-3 flex flex-wrap items-center gap-2 pt-2.5">
+                      <span className="register">Drawn from</span>
+                      {message.sources.map((source) => (
+                        <Link
+                          key={source.slug}
+                          to={`/schemes/${source.slug}`}
+                          className="font-mono text-micro text-sanction underline-offset-4 hover:underline"
+                        >
+                          {source.name}
+                        </Link>
+                      ))}
+                    </p>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+
+            {pending && (
+              <li className="flex justify-start">
+                <div className="flex items-center gap-2 rounded-lg border border-rule bg-surface px-4 py-3">
+                  <span className="register">Checking the register</span>
+                  <span className="flex gap-1">
+                    {[0, 1, 2].map((i) => (
+                      <span
+                        key={i}
+                        className="h-1.5 w-1.5 animate-pulse rounded-full bg-ink-4"
+                        style={{ animationDelay: `${i * 0.15}s` }}
+                      />
                     ))}
-                  </div>
-                )}
-
-                <span className="text-[10px] text-slate-500 block px-1">{msg.timestamp}</span>
-              </div>
-
-              {msg.role === 'user' && (
-                <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shrink-0">
-                  <User className="w-4 h-4 text-amber-400" />
+                  </span>
                 </div>
-              )}
-            </div>
-          ))}
-
-          {loading && (
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center shrink-0 animate-pulse">
-                <Bot className="w-4 h-4 text-purple-400" />
-              </div>
-              <div className="p-4 rounded-3xl bg-slate-900 border border-slate-800 text-xs text-purple-300 animate-pulse flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-purple-400 animate-spin" /> Querying MongoDB Scheme Knowledge Retrieval...
-              </div>
-            </div>
-          )}
-
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Composer Input Form */}
-        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-3 sm:p-4 shadow-2xl space-y-3 sticky bottom-4">
-          <div className="flex gap-3 items-center">
-            <textarea
-              rows={1}
-              placeholder="Ask a question about any government scheme or eligibility requirements..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  onSend();
-                }
-              }}
-              className="flex-1 bg-slate-950 border border-slate-800 rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-purple-500/60 resize-none min-h-[44px]"
-            />
-
-            <Button
-              variant="primary"
-              size="lg"
-              disabled={loading || !input.trim()}
-              onClick={() => onSend()}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-2xl px-6 h-[44px] shadow-lg shadow-purple-600/20 shrink-0"
-            >
-              <Send className="w-4 h-4" />
-            </Button>
-          </div>
-
-          <div className="flex justify-between items-center text-[11px] text-slate-500 px-2">
-            <span>Press Enter to send. Every claim is grounded in retrieved scheme data.</span>
-            {errorState && (
-              <button onClick={() => onSend()} className="text-amber-400 hover:underline flex items-center gap-1 font-semibold">
-                <RotateCcw className="w-3 h-3" /> Retry Failed Prompt
-              </button>
+              </li>
             )}
-          </div>
+            <div ref={endRef} />
+          </ul>
+        )}
+      </div>
+
+      {/* Composer */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          send(input);
+        }}
+        className="sticky bottom-0 mt-8 bg-paper pb-4 pt-2"
+      >
+        <div className="flex items-end gap-2 rounded-lg border border-rule-strong bg-surface p-2 shadow-card transition-[border-color,box-shadow] focus-within:border-sanction focus-within:shadow-focus">
+          <label htmlFor="assistant-input" className="sr-only">
+            Ask a question
+          </label>
+          <textarea
+            ref={inputRef}
+            id="assistant-input"
+            rows={1}
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+              e.target.style.height = 'auto';
+              e.target.style.height = `${Math.min(e.target.scrollHeight, 160)}px`;
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                send(input);
+              }
+            }}
+            placeholder="Ask about eligibility, documents, or a word you don't recognise"
+            className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-2 py-2 text-[0.9375rem] text-ink outline-none placeholder:text-ink-4"
+          />
+          <Button type="submit" size="icon" disabled={!input.trim() || pending} aria-label="Send">
+            <ArrowUp className="h-4 w-4" />
+          </Button>
         </div>
-      </main>
-    </div>
+        <p className="mt-2 text-[0.8125rem] text-ink-3">
+          The assistant explains records — it never decides your eligibility. That is calculated
+          from the official rules.
+        </p>
+      </form>
+    </PageBody>
   );
 };

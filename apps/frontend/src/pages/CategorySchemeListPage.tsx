@@ -1,75 +1,128 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft } from 'lucide-react';
-import { apiClient } from '../api/client.js';
-import { Card } from '../components/ui/card.js';
-import { Button } from '../components/ui/button.js';
-import { LoadingState } from '../components/ui/LoadingState.js';
-import { EmptyState } from '../components/ui/EmptyState.js';
-import { Scheme } from '@bharatassist/shared-types';
+import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import type { Scheme } from '@bharatassist/shared-types';
+import { apiClient } from '../api/client';
+import { PageBody, PageHeader } from '../components/layout/PageHeader';
+import { SchemeRecord } from '../components/scheme/SchemeRecord';
+import { Button } from '../components/ui/button';
+import { EmptyState } from '../components/ui/EmptyState';
+import { LoadingState } from '../components/ui/LoadingState';
+import { useSavedSchemes } from '../hooks/useSavedSchemes';
+import { segmentBySlug } from '../lib/taxonomy';
+
+const PAGE_SIZE = 10;
 
 export const CategorySchemeListPage: React.FC = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
+  const { slug = '' } = useParams();
+  const { isSaved, toggle } = useSavedSchemes();
+  const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useQuery<{ schemes: Scheme[]; total: number }>({
-    queryKey: ['categorySchemes', slug],
+  const segment = segmentBySlug(slug);
+
+  const { data, isLoading, isError } = useQuery<{
+    schemes: Scheme[];
+    pagination: { total: number; totalPages: number };
+  }>({
+    queryKey: ['category-schemes', slug, page],
     queryFn: async () => {
-      const res = await apiClient.get(`/schemes/categories/${slug}`);
+      const res = await apiClient.get(`/schemes/categories/${slug}`, {
+        params: { page, limit: PAGE_SIZE }
+      });
       return {
-        schemes: res.data.data,
-        total: res.data.pagination?.total || res.data.data.length
+        schemes: res.data?.data ?? [],
+        pagination: res.data?.pagination ?? { total: 0, totalPages: 1 }
       };
-    },
-    enabled: !!slug
+    }
   });
 
-  const categoryTitle = slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : 'Category';
+  const total = data?.pagination.total ?? 0;
+  const totalPages = data?.pagination.totalPages ?? 1;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-6 max-w-6xl mx-auto">
-      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-slate-800">
-        <div>
-          <Button variant="ghost" size="sm" onClick={() => navigate('/categories')} className="mb-2 text-slate-400 flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" /> Back to Categories
-          </Button>
-          <h1 className="text-3xl font-extrabold text-white">{categoryTitle} Schemes</h1>
-          <p className="text-sm text-slate-400 mt-1">Found {data?.total || 0} active government schemes for {categoryTitle}</p>
-        </div>
-        <Button variant="outline" onClick={() => navigate('/search')}>Open Search Filters</Button>
-      </header>
+    <PageBody>
+      <Link
+        to="/categories"
+        className="mb-6 inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        All categories
+      </Link>
 
-      {isLoading ? (
-        <LoadingState message={`Fetching ${categoryTitle} schemes...`} />
-      ) : !data?.schemes || data.schemes.length === 0 ? (
-        <EmptyState title={`No schemes found for ${categoryTitle}`} description="Try exploring other categories or running a search query." />
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {data.schemes.map((scheme: Scheme) => (
-            <Card
-              key={scheme._id || scheme.slug}
-              title={scheme.name}
-              subtitle={scheme.department}
-              footer={
-                <div className="flex justify-between items-center w-full">
-                  <span className="text-xs px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-semibold uppercase">
-                    {scheme.level} {scheme.state ? `• ${scheme.state}` : ''}
-                  </span>
-                  <Button variant="default" size="sm" onClick={() => navigate(`/schemes/${scheme.slug}`)}>
-                    View Details
-                  </Button>
-                </div>
-              }
+      <PageHeader
+        eyebrow={`${total} ${total === 1 ? 'scheme' : 'schemes'} in this category`}
+        title={segment?.label ?? slug}
+        description={segment?.blurb}
+        actions={
+          <Button variant="outline" size="sm" asChild>
+            <Link to={`/search?segment=${slug}`}>Search within this category</Link>
+          </Button>
+        }
+      />
+
+      <div className="mt-8">
+        {isLoading && <LoadingState message="Loading this category" />}
+
+        {!isLoading && isError && (
+          <EmptyState
+            title="The register did not respond"
+            description="The connection to the scheme service failed. Try again in a moment."
+            action={
+              <Button variant="outline" onClick={() => window.location.reload()}>
+                Try again
+              </Button>
+            }
+          />
+        )}
+
+        {!isLoading && !isError && data?.schemes.length === 0 && (
+          <EmptyState
+            title="No schemes filed under this category yet"
+            description="The register is updated as new notifications are published. Search across all categories in the meantime."
+            action={
+              <Button variant="outline" asChild>
+                <Link to="/search">Search all schemes</Link>
+              </Button>
+            }
+          />
+        )}
+
+        {!isLoading && data && data.schemes.length > 0 && (
+          <ul className="space-y-3">
+            {data.schemes.map((scheme) => (
+              <li key={scheme.slug || scheme._id}>
+                <SchemeRecord
+                  scheme={scheme}
+                  saved={isSaved(scheme.slug)}
+                  onToggleSave={(s) => toggle(s.slug)}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {!isLoading && totalPages > 1 && (
+          <nav className="hair-top mt-6 flex items-center justify-between pt-4" aria-label="Pages">
+            <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
+              <ChevronLeft className="h-4 w-4" />
+              Previous
+            </Button>
+            <span className="register">
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
             >
-              <p className="text-sm text-slate-300 mb-3">{scheme.shortDescription}</p>
-              <div className="text-xs text-amber-400 font-semibold bg-amber-500/10 p-2.5 rounded border border-amber-500/20">
-                {scheme.benefitSummary}
-              </div>
-            </Card>
-          ))}
-        </div>
-      )}
-    </div>
+              Next
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </nav>
+        )}
+      </div>
+    </PageBody>
   );
 };
