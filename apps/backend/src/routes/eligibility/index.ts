@@ -1,6 +1,7 @@
 import { Router, Response, NextFunction } from 'express';
 import { sendSuccess, sendError } from '../../utils/response.js';
-import { authenticate, AuthRequest } from '../../middlewares/auth.js';
+import { AuthRequest, verifyAccessToken } from '../../middlewares/auth.js';
+import { UserModel } from '../../models/User.js';
 import { getSchemeBySlugOrId } from '../../services/ai/retrievalService.js';
 import { CitizenProfileModel } from '../../models/CitizenProfile.js';
 import { EligibilityResultModel } from '../../models/EligibilityResult.js';
@@ -15,12 +16,28 @@ const router = Router();
 
 /**
  * Optional authentication middleware:
- * If a Bearer token is provided, uses the project's standard `authenticate` middleware
- * to populate `req.user`. If no token is provided, proceeds cleanly as a guest session.
+ * Populates `req.user` if a valid Bearer token is provided.
+ * If token is missing, expired, or invalid, gracefully falls back to guest session.
  */
-const optionalAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-    return authenticate(req, res, next);
+const optionalAuth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const payload = verifyAccessToken(token);
+      const user = await UserModel.findById(payload.userId);
+      if (user) {
+        req.user = {
+          userId: user._id.toString(),
+          phone: user.phone,
+          email: user.email,
+          preferredLanguage: user.preferredLanguage
+        };
+      }
+    } catch {
+      // Invalid or expired token falls back to guest mode without throwing 401
+      req.user = undefined;
+    }
   }
   return next();
 };
@@ -155,9 +172,5 @@ router.post(
     }
   }
 );
-
-router.post('/check', authenticate, async (_req, res) => {
-  return sendSuccess(res, { status: 'eligible', reasons: ['Matches target state and occupation'] });
-});
 
 export default router;

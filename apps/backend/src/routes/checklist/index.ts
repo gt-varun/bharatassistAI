@@ -1,6 +1,7 @@
 import { Router, Response, NextFunction } from 'express';
 import { sendSuccess, sendError } from '../../utils/response.js';
-import { authenticate, AuthRequest } from '../../middlewares/auth.js';
+import { authenticate, AuthRequest, verifyAccessToken } from '../../middlewares/auth.js';
+import { UserModel } from '../../models/User.js';
 import { getSchemeBySlugOrId } from '../../services/ai/retrievalService.js';
 import { CitizenProfileModel } from '../../models/CitizenProfile.js';
 import { EligibilityResultModel } from '../../models/EligibilityResult.js';
@@ -13,11 +14,27 @@ const ALLOWED_STATUSES = new Set(['have', 'missing', 'required', 'pending', 'com
 
 /**
  * Optional authentication middleware:
- * Populates `req.user` if a valid Bearer token is provided; proceeds as guest otherwise.
+ * Populates `req.user` if a valid Bearer token is provided.
+ * Gracefully falls back to guest session if token is missing, expired, or invalid.
  */
-const optionalAuth = (req: AuthRequest, res: Response, next: NextFunction) => {
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-    return authenticate(req, res, next);
+const optionalAuth = async (req: AuthRequest, _res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const payload = verifyAccessToken(token);
+      const user = await UserModel.findById(payload.userId);
+      if (user) {
+        req.user = {
+          userId: user._id.toString(),
+          phone: user.phone,
+          email: user.email,
+          preferredLanguage: user.preferredLanguage
+        };
+      }
+    } catch {
+      req.user = undefined;
+    }
   }
   return next();
 };
@@ -87,7 +104,7 @@ router.get(
         const userStatus = existingStatusMap.get(item.label.toLowerCase());
         return {
           ...item,
-          status: userStatus || item.status
+          status: (userStatus as any) || item.status
         };
       });
 
@@ -251,9 +268,5 @@ router.patch(
     }
   }
 );
-
-router.get('/', async (_req, res) => {
-  return sendSuccess(res, { items: [] });
-});
 
 export default router;

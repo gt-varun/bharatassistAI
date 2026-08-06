@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   ArrowLeft,
@@ -13,7 +13,6 @@ import {
   RotateCcw,
   Check
 } from 'lucide-react';
-import type { Scheme } from '@bharatassist/shared-types';
 import { apiClient } from '../api/client';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/ui/button';
@@ -61,7 +60,6 @@ export interface EvaluateResponse {
 
 export const EligibilityCheckerPage: React.FC = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const slug = searchParams.get('scheme') ?? '';
 
@@ -406,8 +404,14 @@ export const EligibilityCheckerPage: React.FC = () => {
         </span>
       </div>
 
-      {/* Question Card */}
-      <div className="mt-8 rounded-xl border border-rule bg-surface p-6 sm:p-8">
+      {/* Question Card wrapped in <form> for keyboard accessibility */}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleNext();
+        }}
+        className="mt-8 rounded-xl border border-rule bg-surface p-6 sm:p-8"
+      >
         <div className="flex items-center justify-between gap-2">
           <span className="register uppercase tracking-wider text-xs text-ink-3">
             Field: {currentQ.field}
@@ -469,7 +473,7 @@ export const EligibilityCheckerPage: React.FC = () => {
         {/* Card Actions */}
         <div className="mt-8 flex items-center justify-between border-t border-rule pt-6">
           {currentStep > 0 ? (
-            <Button variant="outline" onClick={handleBack}>
+            <Button type="button" variant="outline" onClick={handleBack}>
               <ArrowLeft className="h-4 w-4" />
               Previous
             </Button>
@@ -478,7 +482,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           )}
 
           <Button
-            onClick={handleNext}
+            type="submit"
             disabled={evaluateMutation.isPending}
           >
             {evaluateMutation.isPending
@@ -489,7 +493,7 @@ export const EligibilityCheckerPage: React.FC = () => {
             {!evaluateMutation.isPending && <ArrowRight className="h-4 w-4" />}
           </Button>
         </div>
-      </div>
+      </form>
     </PageBody>
   );
 };
