@@ -10,6 +10,7 @@ import { CategorySchemeListPage } from './pages/CategorySchemeListPage';
 import { SchemeDetailsPage } from './pages/SchemeDetailsPage';
 import { SavedSchemesPage } from './pages/SavedSchemesPage';
 import { ChecklistPage } from './pages/ChecklistPage';
+import { EligibilityCheckerPage } from './pages/EligibilityCheckerPage';
 import { AssistantPage } from './pages/AssistantPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
       { path: '/categories/:slug', element: <CategorySchemeListPage /> },
       { path: '/schemes/:idOrSlug', element: <SchemeDetailsPage /> },
       { path: '/saved', element: <SavedSchemesPage /> },
+      { path: '/eligibility', element: <EligibilityCheckerPage /> },
       { path: '/checklist', element: <ChecklistPage /> },
       { path: '/assistant', element: <AssistantPage /> },
       { path: '/profile', element: <ProfilePage /> },
