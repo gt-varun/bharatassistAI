@@ -48,7 +48,15 @@ const resources = {
   ur: { translation: ur }
 };
 
-const REQUIRED_KEYS = ['common.appName', 'common.search', 'common.login', 'common.checkEligibility'];
+/**
+ * Sentinel keys that stand in for "this locale is usable at all".
+ *
+ * They are spread across namespaces on purpose, so a file that was truncated
+ * or only half-translated is caught. Keep them pointing at keys that really
+ * exist — if every sentinel goes missing, every language is judged
+ * incomplete and the selector below has nothing to offer.
+ */
+const REQUIRED_KEYS = ['common.appName', 'nav.home', 'search.title', 'login.title'];
 
 export const isLanguageComplete = (langCode: string): boolean => {
   const resource = resources[langCode as keyof typeof resources]?.translation;
@@ -64,19 +72,56 @@ export const isLanguageComplete = (langCode: string): boolean => {
 };
 
 export const getAvailableLanguages = (): LanguageMeta[] => {
-  return ALL_LANGUAGES.filter((lang) => isLanguageComplete(lang.code));
+  const complete = ALL_LANGUAGES.filter((lang) => isLanguageComplete(lang.code));
+
+  // A language selector that offers nothing is worse than one that offers
+  // too much: whoever is already reading in Punjabi would have no way back
+  // to English. If the completeness check ever disqualifies everything,
+  // it is the check that is wrong, so fall back to the full list.
+  if (complete.length === 0) {
+    console.warn(
+      '[i18n] No locale satisfied the completeness check — offering all languages. ' +
+        'REQUIRED_KEYS is probably pointing at keys that no longer exist.'
+    );
+    return ALL_LANGUAGES;
+  }
+
+  return complete;
 };
 
 const LANGUAGE_KEY = 'bharatassist_language';
 
+/**
+ * Storage is not guaranteed: it is absent when rendering outside a browser,
+ * and reading it throws outright in Safari private browsing and wherever a
+ * user has blocked site data. Losing the saved language is a small thing;
+ * taking the whole module down at import time is not.
+ */
+function readStored(key: string): string | null {
+  try {
+    return typeof localStorage === 'undefined' ? null : localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeStored(key: string, value: string): void {
+  try {
+    if (typeof localStorage !== 'undefined') localStorage.setItem(key, value);
+  } catch {
+    /* A language that does not persist still applies for this session. */
+  }
+}
+
 /** A chosen language has to survive a reload, or it isn't really chosen. */
 function initialLanguage(): string {
-  const stored = localStorage.getItem(LANGUAGE_KEY);
+  const stored = readStored(LANGUAGE_KEY);
   if (stored && ALL_LANGUAGES.some((l) => l.code === stored)) return stored;
 
   // Fall back to the browser's preference when it is one we actually speak.
-  const browser = navigator.language?.split('-')[0];
-  return ALL_LANGUAGES.some((l) => l.code === browser) ? browser : 'en';
+  const browser =
+    typeof navigator === 'undefined' ? undefined : navigator.language?.split('-')[0];
+  return browser && ALL_LANGUAGES.some((l) => l.code === browser) ? browser : 'en';
 }
 
 i18n.use(initReactI18next).init({
@@ -92,6 +137,7 @@ i18n.use(initReactI18next).init({
 const NON_LATIN = new Set(['hi', 'kn', 'ta', 'te', 'ml', 'mr', 'gu', 'bn', 'pa', 'ur']);
 
 function applyLanguage(lng: string) {
+  if (typeof document === 'undefined') return;
   const meta = ALL_LANGUAGES.find((l) => l.code === lng);
   document.dir = meta?.rtl ? 'rtl' : 'ltr';
   document.documentElement.lang = lng;
@@ -100,7 +146,7 @@ function applyLanguage(lng: string) {
 }
 
 i18n.on('languageChanged', (lng) => {
-  localStorage.setItem(LANGUAGE_KEY, lng);
+  writeStored(LANGUAGE_KEY, lng);
   applyLanguage(lng);
 });
 
