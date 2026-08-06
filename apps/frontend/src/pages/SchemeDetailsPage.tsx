@@ -1,95 +1,404 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle, ExternalLink, FileText } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Bookmark,
+  BookmarkCheck,
+  Building2,
+  CalendarClock,
+  ExternalLink,
+  GitCompare,
+  ListChecks,
+  ShieldAlert,
+  Sparkles
+} from 'lucide-react';
+import type { Scheme } from '@bharatassist/shared-types';
 import { apiClient } from '../api/client';
+import { PageBody } from '../components/layout/PageHeader';
+import { LevelMark, StatusMark, VerificationStamp } from '../components/scheme/RecordMarks';
 import { Button } from '../components/ui/button';
-import { LoadingState } from '../components/ui/LoadingState';
-import { Scheme, RequiredDocument } from '@bharatassist/shared-types';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { EmptyState } from '../components/ui/EmptyState';
+import { Skeleton } from '../components/ui/skeleton';
+import { useSavedSchemes } from '../hooks/useSavedSchemes';
+import { isValidGovDomain } from '../lib/govAllowlist';
+import { benefitLabel, segmentLabel } from '../lib/taxonomy';
+import { formatDate, daysUntil } from '../lib/format';
+
+/** A labelled row in the record sheet. */
+const Field: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+  <div className="grid gap-1 py-3.5 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-6">
+    <dt className="register pt-0.5">{label}</dt>
+    <dd className="text-[0.9375rem] leading-relaxed text-ink">{children}</dd>
+  </div>
+);
+
+/** Sections Person 2 fills in. Say what is coming, not "no data". */
+const PendingSection: React.FC<{ title: string; body: string }> = ({ title, body }) => (
+  <div className="rounded-lg border border-dashed border-rule-strong bg-surface p-6">
+    <h3 className="font-display text-[0.9375rem] font-semibold text-ink">{title}</h3>
+    <p className="mt-1.5 max-w-xl text-[0.875rem] leading-relaxed text-ink-2">{body}</p>
+  </div>
+);
 
 export const SchemeDetailsPage: React.FC = () => {
-  const { idOrSlug } = useParams<{ idOrSlug: string }>();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { idOrSlug = '' } = useParams();
+  const { isSaved, toggle } = useSavedSchemes();
 
-  const { data: scheme, isLoading, error } = useQuery<Scheme>({
+  const { data: scheme, isLoading, isError } = useQuery<Scheme>({
     queryKey: ['scheme', idOrSlug],
     queryFn: async () => {
       const res = await apiClient.get(`/schemes/${idOrSlug}`);
-      return res.data.data;
-    },
-    enabled: !!idOrSlug
+      return res.data?.data;
+    }
   });
 
-  if (isLoading) return <LoadingState message="Loading scheme details..." />;
-  if (error || !scheme) {
+  if (isLoading) {
     return (
-      <div className="p-8 text-center text-white">
-        <p className="text-red-400 mb-4">Scheme details could not be loaded.</p>
-        <Button onClick={() => navigate('/search')}>Back to Search</Button>
-      </div>
+      <PageBody>
+        <Skeleton className="h-4 w-32" />
+        <Skeleton className="mt-6 h-5 w-48" />
+        <Skeleton className="mt-4 h-10 w-3/4" />
+        <Skeleton className="mt-3 h-4 w-full max-w-xl" />
+        <Skeleton className="mt-10 h-64 w-full" />
+      </PageBody>
     );
   }
 
+  if (isError || !scheme) {
+    return (
+      <PageBody>
+        <EmptyState
+          title="That scheme is not on the register"
+          description="The link may be out of date, or the record may have been withdrawn. Search for it by name."
+          action={
+            <Button variant="outline" asChild>
+              <Link to="/search">Search the register</Link>
+            </Button>
+          }
+        />
+      </PageBody>
+    );
+  }
+
+  const saved = isSaved(scheme.slug);
+  const portalIsOfficial = isValidGovDomain(scheme.officialPortalUrl);
+  const left = daysUntil(scheme.deadline);
+  const rules = scheme.eligibilityRules ?? {};
+
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6 max-w-4xl mx-auto">
-      <Button variant="ghost" onClick={() => navigate('/search')} className="mb-6 flex items-center gap-2">
-        <ArrowLeft className="w-4 h-4" /> Back to Schemes
-      </Button>
+    <PageBody>
+      <Link
+        to="/search"
+        className="mb-6 inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        {t('schemeDetails.backToSearch')}
+      </Link>
 
-      <div className="bg-slate-800 border border-slate-700 rounded-xl p-6 mb-6">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <span className="text-xs px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-semibold uppercase mb-2 inline-block">
-              {scheme.level} {scheme.state ? `• ${scheme.state}` : ''}
-            </span>
-            <h1 className="text-3xl font-extrabold">{scheme.name}</h1>
-            <p className="text-sm text-gray-400">{scheme.department}</p>
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,19rem)]">
+        {/* ------------------------- The record ------------------------- */}
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <LevelMark level={scheme.level} state={scheme.state} />
+            <StatusMark scheme={scheme} />
           </div>
-          <a
-            href={scheme.officialPortalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-amber-400 hover:underline text-sm font-semibold"
-          >
-            Official Portal <ExternalLink className="w-4 h-4" />
-          </a>
-        </div>
 
-        <div className="p-4 bg-slate-900/60 border border-slate-700/60 rounded-lg mb-6">
-          <h3 className="text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">Benefit Summary</h3>
-          <p className="text-lg font-bold text-white">{scheme.benefitSummary}</p>
-        </div>
+          <h1 className="mt-4 text-balance font-display text-[2rem] font-semibold leading-[1.12] tracking-[-0.025em] text-ink">
+            {scheme.name}
+          </h1>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-bold mb-2">Description</h2>
-          <p className="text-slate-300 leading-relaxed">{scheme.fullDescription}</p>
-        </section>
-
-        <section className="mb-6">
-          <h2 className="text-xl font-bold mb-2">Eligibility Summary</h2>
-          <p className="text-slate-300 bg-slate-900/40 p-4 rounded-lg border border-slate-700/40">
-            {scheme.eligibilitySummaryPlain}
+          <p className="mt-3 flex items-center gap-2 text-[0.9375rem] text-ink-2">
+            <Building2 className="h-4 w-4 shrink-0 text-ink-3" strokeWidth={1.7} />
+            {scheme.department}
           </p>
-        </section>
 
-        <section className="mb-6">
-          <h2 className="text-xl font-bold mb-3 flex items-center gap-2">
-            <FileText className="w-5 h-5 text-amber-500" /> Required Documents
-          </h2>
-          <ul className="space-y-2">
-            {scheme.requiredDocuments.map((doc: RequiredDocument, idx: number) => (
-              <li key={idx} className="flex items-start gap-2 text-sm text-slate-300 bg-slate-900/30 p-3 rounded border border-slate-700/30">
-                <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-white">{doc.label}</span>
-                  {doc.mandatory && <span className="text-xs text-red-400 ml-2 font-bold">(Mandatory)</span>}
-                  <p className="text-xs text-gray-400 mt-0.5">{doc.howToObtain}</p>
+          {/* The answer most people came for */}
+          <div className="mt-6 rounded-lg border border-sanction-edge bg-sanction-tint p-5">
+            <p className="register text-sanction">What you receive</p>
+            <p className="mt-1.5 font-display text-xl font-semibold leading-snug text-sanction-deep">
+              {scheme.benefitSummary || benefitLabel(scheme.benefitType)}
+            </p>
+            {scheme.deadline && (
+              <p className="mt-3 flex items-center gap-2 text-[0.875rem] text-sanction-deep/80">
+                <CalendarClock className="h-4 w-4 shrink-0" strokeWidth={1.7} />
+                {left !== null && left >= 0
+                  ? `Applications close ${formatDate(scheme.deadline)} — ${left} day${left === 1 ? '' : 's'} left`
+                  : `Closed on ${formatDate(scheme.deadline)}`}
+              </p>
+            )}
+          </div>
+
+          <Tabs defaultValue="overview" className="mt-10">
+            <TabsList>
+              <TabsTrigger value="overview">{t('schemeDetails.overview')}</TabsTrigger>
+              <TabsTrigger value="eligibility">{t('schemeDetails.eligibility')}</TabsTrigger>
+              <TabsTrigger value="documents">{t('schemeDetails.documents')}</TabsTrigger>
+              <TabsTrigger value="apply">{t('schemeDetails.howToApply')}</TabsTrigger>
+            </TabsList>
+
+            {/* ---- Overview ---- */}
+            <TabsContent value="overview">
+              <p className="text-[1rem] leading-[1.7] text-ink-2 text-pretty">
+                {scheme.fullDescription || scheme.shortDescription}
+              </p>
+
+              <dl className="mt-8 divide-y divide-rule border-y border-rule">
+                <Field label="Issued by">{scheme.department}</Field>
+                <Field label="Government">
+                  {scheme.level === 'central' ? 'Central' : `State — ${scheme.state}`}
+                </Field>
+                <Field label="Who it is for">
+                  {scheme.targetSegments?.length
+                    ? scheme.targetSegments.map(segmentLabel).join(', ')
+                    : 'Open to all citizens'}
+                </Field>
+                <Field label="Benefit type">{benefitLabel(scheme.benefitType)}</Field>
+                <Field label={t('schemeDetails.howToApply')}>
+                  {scheme.applicationMode === 'both'
+                    ? 'Online or in person'
+                    : scheme.applicationMode === 'online'
+                      ? 'Online only'
+                      : 'In person only'}
+                </Field>
+                <Field label="Deadline">
+                  {scheme.deadline ? formatDate(scheme.deadline) : 'No closing date — open all year'}
+                </Field>
+                <Field label="Source notification">
+                  <span className="font-mono text-[0.875rem]">{scheme.sourceRef || '—'}</span>
+                </Field>
+              </dl>
+            </TabsContent>
+
+            {/* ---- Eligibility ---- */}
+            <TabsContent value="eligibility">
+              {scheme.eligibilitySummaryPlain ? (
+                <p className="text-[1rem] leading-[1.7] text-ink-2 text-pretty">
+                  {scheme.eligibilitySummaryPlain}
+                </p>
+              ) : (
+                <p className="text-[1rem] leading-[1.7] text-ink-2">
+                  The plain-language summary for this scheme has not been written yet. The
+                  conditions recorded on the official notification are listed below.
+                </p>
+              )}
+
+              <dl className="mt-8 divide-y divide-rule border-y border-rule">
+                {rules.state?.length ? (
+                  <Field label="You must live in">{rules.state.join(', ')}</Field>
+                ) : null}
+                {(rules.ageMin || rules.ageMax) && (
+                  <Field label="Age">
+                    {rules.ageMin && rules.ageMax
+                      ? `Between ${rules.ageMin} and ${rules.ageMax} years`
+                      : rules.ageMin
+                        ? `${rules.ageMin} years or older`
+                        : `Up to ${rules.ageMax} years`}
+                  </Field>
+                )}
+                {rules.incomeMax ? (
+                  <Field label="Household income">
+                    Up to ₹{Number(rules.incomeMax).toLocaleString('en-IN')} a year
+                  </Field>
+                ) : null}
+                {rules.genderRestriction ? (
+                  <Field label="Gender">{rules.genderRestriction}</Field>
+                ) : null}
+                {rules.occupationCategory?.length ? (
+                  <Field label="Occupation">{rules.occupationCategory.join(', ')}</Field>
+                ) : null}
+                {rules.categoryRestriction?.length ? (
+                  <Field label="Category">{rules.categoryRestriction.join(', ')}</Field>
+                ) : null}
+              </dl>
+
+              <div className="mt-8">
+                <PendingSection
+                  title="Check this against your own details"
+                  body="The step-by-step eligibility questions for this scheme are being built. Until then, compare the conditions above against your situation — every one of them is taken from the official notification."
+                />
+              </div>
+            </TabsContent>
+
+            {/* ---- Documents ---- */}
+            <TabsContent value="documents">
+              {scheme.requiredDocuments?.length ? (
+                <>
+                  <p className="text-[0.9375rem] leading-relaxed text-ink-2">
+                    Everything the official application asks for. Anything you do not have yet
+                    carries a note on where to obtain it.
+                  </p>
+                  <ul className="mt-6 divide-y divide-rule border-y border-rule">
+                    {scheme.requiredDocuments.map((doc) => (
+                      <li key={doc.label} className="py-4">
+                        <div className="flex flex-wrap items-baseline gap-2">
+                          <span className="font-display text-[0.9375rem] font-semibold text-ink">
+                            {doc.label}
+                          </span>
+                          <span
+                            className={
+                              doc.mandatory
+                                ? 'register-strong text-seal'
+                                : 'register text-ink-3'
+                            }
+                          >
+                            {doc.mandatory ? 'Required' : 'If applicable'}
+                          </span>
+                        </div>
+                        {doc.howToObtain && (
+                          <p className="mt-1.5 text-[0.875rem] leading-relaxed text-ink-2">
+                            {doc.howToObtain}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <PendingSection
+                  title="Document list not recorded yet"
+                  body="This scheme's notification has not been parsed for its document requirements. The official portal lists them in the meantime."
+                />
+              )}
+            </TabsContent>
+
+            {/* ---- How to apply ---- */}
+            <TabsContent value="apply">
+              {scheme.applicationFields?.length ? (
+                <>
+                  <p className="text-[0.9375rem] leading-relaxed text-ink-2">
+                    What the official form will ask, field by field, so nothing is a surprise when
+                    you open it.
+                  </p>
+                  <ol className="mt-6 divide-y divide-rule border-y border-rule">
+                    {scheme.applicationFields.map((field, i) => (
+                      <li key={field.fieldName} className="flex gap-4 py-4">
+                        <span className="font-mono text-[0.8125rem] text-ink-4">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                            {field.fieldName}
+                            {!field.mandatory && (
+                              <span className="register ml-2 text-ink-3">Optional</span>
+                            )}
+                          </p>
+                          <p className="mt-1 text-[0.875rem] leading-relaxed text-ink-2">
+                            {field.instructions}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              ) : (
+                <PendingSection
+                  title="Field-by-field walkthrough not ready"
+                  body="The application guidance for this scheme is still being written. The official portal below is the place to apply."
+                />
+              )}
+
+              {scheme.commonMistakes?.length > 0 && (
+                <div className="mt-8 rounded-lg border border-ochre-edge bg-ochre-tint p-5">
+                  <p className="flex items-center gap-2 register-strong text-ochre">
+                    <ShieldAlert className="h-3.5 w-3.5" />
+                    What gets applications rejected
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {scheme.commonMistakes.map((mistake) => (
+                      <li key={mistake} className="flex gap-2.5 text-[0.875rem] leading-relaxed text-ink">
+                        <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ochre" />
+                        {mistake}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </section>
+              )}
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* ------------------------- Actions rail ------------------------ */}
+        <aside className="lg:sticky lg:top-[4.5rem] lg:h-fit">
+          <div className="space-y-3 rounded-lg border border-rule bg-surface p-5">
+            <Button className="w-full" asChild>
+              <Link to={`/checklist?scheme=${scheme.slug}`}>
+                <ListChecks className="h-4 w-4" />
+                {t('schemeDetails.checkEligibility')}
+              </Link>
+            </Button>
+
+            <Button
+              variant={saved ? 'soft' : 'outline'}
+              className="w-full"
+              onClick={() => toggle(scheme.slug)}
+            >
+              {saved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
+              {saved ? 'Saved' : 'Save this scheme'}
+            </Button>
+
+            <div className="grid grid-cols-2 gap-2">
+              <Button variant="outline" size="sm" asChild>
+                <Link to={`/search?segment=${scheme.targetSegments?.[0] ?? ''}`}>
+                  <GitCompare className="h-4 w-4 text-ink-3" />
+                  Similar
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" asChild>
+                <Link to={`/assistant?scheme=${scheme.slug}`}>
+                  <Sparkles className="h-4 w-4 text-ink-3" />
+                  Explain
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Provenance — the trust claim, stated once, in full. */}
+          <div className="mt-4 rounded-lg border border-rule bg-surface p-5">
+            <p className="register mb-3">Where this record comes from</p>
+            <VerificationStamp scheme={scheme} />
+
+            {scheme.officialPortalUrl && (
+              <div className="mt-4">
+                {portalIsOfficial ? (
+                  <a
+                    href={scheme.officialPortalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-2 rounded-md border border-rule-strong p-3 text-[0.875rem] transition-colors hover:border-sanction hover:bg-sanction-tint"
+                  >
+                    <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-ink-3" strokeWidth={1.7} />
+                    <span className="min-w-0">
+                      <span className="block font-medium text-ink">{t('schemeDetails.officialPortal')}</span>
+                      <span className="block truncate font-mono text-micro text-ink-3">
+                        {scheme.officialPortalUrl.replace(/^https?:\/\//, '')}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-ink-4" />
+                  </a>
+                ) : (
+                  <p className="rounded-md border border-ochre-edge bg-ochre-tint p-3 text-[0.8125rem] leading-relaxed text-ochre">
+                    The portal link on this record is not on a recognised government domain, so we
+                    are not linking to it. Search for the scheme on india.gov.in instead.
+                  </p>
+                )}
+              </div>
+            )}
+
+            <p className="mt-4 text-[0.8125rem] leading-relaxed text-ink-3">
+              Spotted something that does not match the official notification?{' '}
+              <Link to="/assistant" className="text-sanction underline-offset-4 hover:underline">
+                Tell the assistant
+              </Link>{' '}
+              and it gets queued for re-checking.
+            </p>
+          </div>
+        </aside>
       </div>
-    </div>
+    </PageBody>
   );
 };
