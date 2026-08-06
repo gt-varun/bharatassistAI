@@ -27,6 +27,7 @@ import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { isValidGovDomain } from '../lib/govAllowlist';
 import { benefitLabel, segmentLabel } from '../lib/taxonomy';
 import { formatDate, daysUntil } from '../lib/format';
+import { cn } from '../lib/utils';
 
 /** A labelled row in the record sheet. */
 const Field: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
@@ -55,6 +56,15 @@ export const SchemeDetailsPage: React.FC = () => {
       const res = await apiClient.get(`/schemes/${idOrSlug}`);
       return res.data?.data;
     }
+  });
+
+  const { data: guidanceData } = useQuery({
+    queryKey: ['guidance', idOrSlug],
+    queryFn: async () => {
+      const res = await apiClient.get(`/guidance/${idOrSlug}`);
+      return res.data?.data;
+    },
+    enabled: Boolean(scheme)
   });
 
   if (isLoading) {
@@ -216,11 +226,17 @@ export const SchemeDetailsPage: React.FC = () => {
                 ) : null}
               </dl>
 
-              <div className="mt-8">
-                <PendingSection
-                  title="Check this against your own details"
-                  body="The step-by-step eligibility questions for this scheme are being built. Until then, compare the conditions above against your situation — every one of them is taken from the official notification."
-                />
+              <div className="mt-8 rounded-lg border border-sanction-edge bg-sanction-tint p-6">
+                <h3 className="font-display text-[0.9375rem] font-semibold text-sanction-deep">Check your qualification</h3>
+                <p className="mt-1.5 max-w-xl text-[0.875rem] leading-relaxed text-sanction-deep/80">
+                  Answer a few scheme-specific questions to get an instant deterministic eligibility check against official rules.
+                </p>
+                <Button className="mt-4" asChild>
+                  <Link to={`/eligibility?scheme=${scheme.slug}`}>
+                    <Sparkles className="h-4 w-4" />
+                    Start Eligibility Check
+                  </Link>
+                </Button>
               </div>
             </TabsContent>
 
@@ -266,27 +282,52 @@ export const SchemeDetailsPage: React.FC = () => {
               )}
             </TabsContent>
 
-            {/* ---- How to apply ---- */}
             <TabsContent value="apply">
-              {scheme.applicationFields?.length ? (
+              {/* Ready to Apply Status Banner */}
+              {guidanceData && (
+                <div
+                  className={cn(
+                    'mb-6 rounded-lg border p-5',
+                    guidanceData.readyToApply
+                      ? 'border-sanction-edge bg-sanction-tint text-sanction-deep'
+                      : 'border-ochre-edge bg-ochre-tint text-ochre'
+                  )}
+                >
+                  <p className="register uppercase text-xs font-bold">Application Readiness Status</p>
+                  <h4 className="font-display text-[1rem] font-bold mt-1">
+                    {guidanceData.readyToApply
+                      ? 'Ready to Apply — Form guidance and official portal verified'
+                      : guidanceData.notes || 'Application portal unverified or guidance incomplete'}
+                  </h4>
+                </div>
+              )}
+
+              {/* Field Guidance */}
+              {(guidanceData?.fieldByFieldGuidance?.length || scheme.applicationFields?.length) ? (
                 <>
                   <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-                    What the official form will ask, field by field, so nothing is a surprise when
-                    you open it.
+                    What the official form will ask, field by field, so nothing is a surprise when you open it.
                   </p>
                   <ol className="mt-6 divide-y divide-rule border-y border-rule">
-                    {scheme.applicationFields.map((field, i) => (
+                    {(guidanceData?.fieldByFieldGuidance || scheme.applicationFields || []).map((field: any, i: number) => (
                       <li key={field.fieldName} className="flex gap-4 py-4">
                         <span className="font-mono text-[0.8125rem] text-ink-4">
                           {String(i + 1).padStart(2, '0')}
                         </span>
-                        <div className="min-w-0">
-                          <p className="font-display text-[0.9375rem] font-semibold text-ink">
-                            {field.fieldName}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                              {field.fieldName}
+                            </p>
                             {!field.mandatory && (
-                              <span className="register ml-2 text-ink-3">Optional</span>
+                              <span className="register text-ink-3">Optional</span>
                             )}
-                          </p>
+                            {field.prefilledValue && (
+                              <span className="register-strong text-micro bg-sanction-tint text-sanction px-2 py-0.5 rounded">
+                                Known from profile ({String(field.prefilledValue)})
+                              </span>
+                            )}
+                          </div>
                           <p className="mt-1 text-[0.875rem] leading-relaxed text-ink-2">
                             {field.instructions}
                           </p>
@@ -302,20 +343,38 @@ export const SchemeDetailsPage: React.FC = () => {
                 />
               )}
 
-              {scheme.commonMistakes?.length > 0 && (
+              {/* Common Mistakes */}
+              {(guidanceData?.commonMistakes?.length || scheme.commonMistakes?.length) > 0 && (
                 <div className="mt-8 rounded-lg border border-ochre-edge bg-ochre-tint p-5">
                   <p className="flex items-center gap-2 register-strong text-ochre">
                     <ShieldAlert className="h-3.5 w-3.5" />
                     What gets applications rejected
                   </p>
                   <ul className="mt-3 space-y-2">
-                    {scheme.commonMistakes.map((mistake) => (
+                    {(guidanceData?.commonMistakes || scheme.commonMistakes || []).map((mistake: string) => (
                       <li key={mistake} className="flex gap-2.5 text-[0.875rem] leading-relaxed text-ink">
                         <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ochre" />
                         {mistake}
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Dynamic Terminology Glossary */}
+              {guidanceData?.glossary && guidanceData.glossary.length > 0 && (
+                <div className="mt-8 rounded-lg border border-rule bg-surface p-5">
+                  <h4 className="font-display text-[0.9375rem] font-semibold text-ink">
+                    Application Glossary & Key Terms
+                  </h4>
+                  <dl className="mt-3 space-y-3 divide-y divide-rule">
+                    {guidanceData.glossary.map((item: any) => (
+                      <div key={item.term} className="pt-3 first:pt-0">
+                        <dt className="font-semibold text-[0.875rem] text-ink">{item.term}</dt>
+                        <dd className="text-[0.8125rem] text-ink-2 mt-0.5">{item.definition}</dd>
+                      </div>
+                    ))}
+                  </dl>
                 </div>
               )}
             </TabsContent>
@@ -326,8 +385,8 @@ export const SchemeDetailsPage: React.FC = () => {
         <aside className="lg:sticky lg:top-[4.5rem] lg:h-fit">
           <div className="space-y-3 rounded-lg border border-rule bg-surface p-5">
             <Button className="w-full" asChild>
-              <Link to={`/checklist?scheme=${scheme.slug}`}>
-                <ListChecks className="h-4 w-4" />
+              <Link to={`/eligibility?scheme=${scheme.slug}`}>
+                <Sparkles className="h-4 w-4" />
                 {t('schemeDetails.checkEligibility')}
               </Link>
             </Button>
