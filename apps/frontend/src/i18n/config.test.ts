@@ -28,12 +28,15 @@ function flatten(obj: Record<string, any>, prefix = ''): string[] {
 const ENGLISH_KEYS = flatten(en);
 
 /**
- * Locales still awaiting a translation run — `pnpm translate` fills these once
- * a provider is configured (see docs/translation.md). They stay listed here
- * rather than being quietly excused: the selector hides them, and removing a
- * code from this list is what puts a language under the parity guard below.
+ * Locales still awaiting a translation run — `pnpm translate:ui` fills these
+ * once a provider is configured (see docs/translation.md). A code stays
+ * listed here until its coverage actually reaches parity; removing it early
+ * would just move the "is this really complete" question from this file to
+ * a citizen's screen. Empty right now — `gu`, `bn`, `pa` and `ur` were the
+ * last four still on English-only chrome and have since been translated to
+ * full coverage.
  */
-const PENDING_TRANSLATION = ['gu', 'bn', 'pa', 'ur'];
+const PENDING_TRANSLATION: string[] = [];
 
 describe('locale coverage', () => {
   it('has a non-trivial English source to measure against', () => {

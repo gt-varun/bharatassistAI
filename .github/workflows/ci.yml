@@ -26,6 +26,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # apps/backend and apps/frontend both import @bharatassist/shared-types
+      # by its built dist/ output (see its package.json "main"/"types"), not
+      # by source. shared-types' own "typecheck" script is `tsc --noEmit`,
+      # which checks types but emits nothing — so without this step, the
+      # very first typecheck of backend/frontend below fails with "Cannot
+      # find module '@bharatassist/shared-types'" on a clean checkout, since
+      # dist/ has never been generated.
+      - name: Build shared-types
+        run: pnpm --filter @bharatassist/shared-types build
+
       - name: Run ESLint
         run: pnpm lint
 
