@@ -1,0 +1,45 @@
+name: Knowledge Update System
+
+# The "Monitor" step's scheduler (docs/prd.md §17.6 step 1 — "scheduled jobs
+# poll official government sources"). Runs the pipeline daily against the
+# real database; every write it makes still goes through the same
+# confidence-gated publish/review-queue logic as a manual run.
+#
+# Requires these repository secrets to be set (same values as the backend's
+# real environment, never committed): MONGODB_URI, GEMINI_API_KEY,
+# GROQ_API_KEY (optional — falls back to Gemini, then an offline no-op run
+# if neither is set).
+on:
+  schedule:
+    - cron: '0 3 * * *' # 03:00 UTC daily — outside India business hours
+  workflow_dispatch: {} # manual trigger from the Actions tab
+
+jobs:
+  run-knowledge-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shared-types
+        run: pnpm --filter @bharatassist/shared-types build
+
+      - name: Run the Knowledge Update pipeline
+        run: pnpm --filter @bharatassist/backend knowledge-update
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}

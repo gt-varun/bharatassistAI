@@ -1,0 +1,5832 @@
+{
+  "ta": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:32.770Z"
+    }
+  },
+  "hi": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:50.733Z"
+    }
+  },
+  "kn": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:52.913Z"
+    }
+  },
+  "ml": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:54.941Z"
+    }
+  },
+  "mr": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:57.072Z"
+    }
+  },
+  "te": {
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:14:59.061Z"
+    }
+  },
+  "bn": {
+    "common.close": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:20.509Z"
+    },
+    "common.previous": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:20.511Z"
+    },
+    "nav.primary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:20.975Z"
+    },
+    "nav.openMySchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:20.976Z"
+    },
+    "dashboard.closingSoon": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:21.302Z"
+    },
+    "record.open": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.closedShort": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.daysLeft_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.daysLeft_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.needsRecheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.staleTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.recheckDue": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedAgainstSource": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.notVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedYesterday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedDaysAgo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedLastMonth": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedMonthsAgo_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "record.verifiedMonthsAgo_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:22.836Z"
+    },
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.levelCentral": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.levelState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.reset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.clearSearch": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.clearAllFilters": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.searching": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.sortAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.sortBest": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.sortVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.sortClosing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "search.pagesAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:23.865Z"
+    },
+    "categories.byWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:24.659Z"
+    },
+    "categories.byBenefit": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:24.659Z"
+    },
+    "categories.byGovernment": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:24.659Z"
+    },
+    "categories.centralBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:24.659Z"
+    },
+    "categories.stateBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:24.659Z"
+    },
+    "savedPage.countEyebrow_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.countEyebrow_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.removeAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.deviceOnlyHead": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.deviceOnlyTail": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusTabs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusChecked": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusInProgress": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.statusApplied": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.stage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.stageAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.emptyTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.emptyStageTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.emptyStageDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closedOn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closesTomorrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closesInDays": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closingSoon_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "savedPage.closingSoon_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.140Z"
+    },
+    "checklist.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.852Z"
+    },
+    "checklist.print": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.852Z"
+    },
+    "checklist.allCollected": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.852Z"
+    },
+    "checklist.allCollectedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:27.852Z"
+    },
+    "assistant.openersTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.openersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.opener1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.opener2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.opener3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.opener4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.drawnFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.checking": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "assistant.askQuestion": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:29.298Z"
+    },
+    "profile.signInTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.signInDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.formDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.filled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.state": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.chooseState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.district": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.age": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.gender": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.occupation": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.income": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.education": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.category": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.maritalStatus": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.disability": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.disabilityYes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.disabilityNo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.land": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.businessType": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.businessPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.optional": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.sensitiveSummary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.sensitiveNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.saveDetails": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.saving": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "profile.saveFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:32.916Z"
+    },
+    "settings.languageCount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.reminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.remindersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deadlineReminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.on": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.off": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.exportTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.exportDescAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.exportDescDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.downloadData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.preparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.exportFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteAccountTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteDeviceTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteAccountDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteDeviceDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteDataBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.confirmAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.confirmDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.confirmDelete": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleting": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.keepData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.deleteFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "settings.dpdpNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:37.777Z"
+    },
+    "login.forgotPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.resetRequestDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.resetConfirmDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.resetCode": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.resetCodePlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.newPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.passwordMin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.sendResetLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.setNewPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.sendAnotherLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.backToSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.resetSent": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.errReset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.createAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.haveAccountSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "login.noAccountCreate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:42.877Z"
+    },
+    "schemeDetails.notFoundDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.337Z"
+    },
+    "schemeDetails.searchRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.issuedBy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.government": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.mustLiveIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.checkQualification": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.checkQualificationDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.startCheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.readiness": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.walkthroughDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.optionalField": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.commonMistakes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.glossary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.noDocs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.noWalkthrough": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.similar": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.whereFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "schemeDetails.tellAssistant": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:50.338Z"
+    },
+    "eligibility.ui.loadingQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "eligibility.ui.questionsFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "eligibility.ui.questionsFailedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "eligibility.ui.alternativesDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "eligibility.ui.viewChecklist": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "eligibility.ui.prefilled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:55.442Z"
+    },
+    "compare.comparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "compare.clearSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "compare.changeSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "compare.backToSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "compare.criteria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "compare.governmentState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:17:58.151Z"
+    },
+    "footer.blurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.onThisPage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.yourAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.whatThisIsNot": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.notPortal": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "footer.sourceNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:02.856Z"
+    },
+    "landing.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.titleLine1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.titleLine2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.searchLabel": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.searchPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.orStartHere": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.answer3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.indexTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.centralOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.stateOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.statesCovered": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.lastVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.awaitingConnection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.allCategories": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.benefitsEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.benefitsTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.benefitsDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.liveEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.liveTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.liveDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.openFullRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.registerUnreachable": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.howEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.howTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step4Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.step4Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.limit3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.langEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.langTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.langDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faqEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faqTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq1Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq1A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq2Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq2A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq3Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq3A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq4Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq4A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq5Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq5A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq6Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.faq6A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.closingTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.closingDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.signInToBegin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.navWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.navBenefits": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.navHow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.navLanguages": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.navQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.example1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.example2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.example3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.example4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "landing.example5": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:40.614Z"
+    },
+    "notFound.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:46.445Z"
+    },
+    "notFound.title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:46.445Z"
+    },
+    "notFound.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:46.445Z"
+    },
+    "notFound.searchSchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:46.445Z"
+    },
+    "categoryList.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:47.350Z"
+    },
+    "categoryList.empty": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:47.350Z"
+    },
+    "categoryList.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:47.350Z"
+    },
+    "categoryList.searchWithin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:47.350Z"
+    },
+    "categoryList.searchAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:47.350Z"
+    },
+    "tax.segment.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segment.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.segmentBlurb.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefit.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefit.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefit.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefit.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefit.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefitBlurb.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefitBlurb.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefitBlurb.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefitBlurb.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.benefitBlurb.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.income.below_1l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.income.1l_2_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.income.2_5l_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.income.5l_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    },
+    "tax.income.above_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:18:59.454Z"
+    }
+  },
+  "gu": {
+    "common.close": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:39.932Z"
+    },
+    "common.previous": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:39.934Z"
+    },
+    "nav.primary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:40.304Z"
+    },
+    "nav.openMySchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:40.304Z"
+    },
+    "dashboard.closingSoon": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:40.729Z"
+    },
+    "record.open": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.closedShort": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.daysLeft_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.daysLeft_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.needsRecheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.staleTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.recheckDue": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedAgainstSource": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.notVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedYesterday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedDaysAgo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedLastMonth": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedMonthsAgo_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "record.verifiedMonthsAgo_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:42.676Z"
+    },
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.levelCentral": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.levelState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.reset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.clearSearch": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.clearAllFilters": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.searching": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.sortAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.sortBest": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.sortVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.sortClosing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "search.pagesAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:44.018Z"
+    },
+    "categories.byWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:45.074Z"
+    },
+    "categories.byBenefit": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:45.074Z"
+    },
+    "categories.byGovernment": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:45.074Z"
+    },
+    "categories.centralBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:45.074Z"
+    },
+    "categories.stateBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:45.074Z"
+    },
+    "savedPage.countEyebrow_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.421Z"
+    },
+    "savedPage.countEyebrow_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.421Z"
+    },
+    "savedPage.removeAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.421Z"
+    },
+    "savedPage.deviceOnlyHead": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.deviceOnlyTail": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusTabs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusChecked": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusInProgress": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.statusApplied": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.stage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.stageAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.emptyTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.emptyStageTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.emptyStageDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closedOn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closesTomorrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closesInDays": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closingSoon_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "savedPage.closingSoon_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:48.422Z"
+    },
+    "checklist.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:49.382Z"
+    },
+    "checklist.print": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:49.382Z"
+    },
+    "checklist.allCollected": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:49.382Z"
+    },
+    "checklist.allCollectedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:49.382Z"
+    },
+    "assistant.openersTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.openersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.opener1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.opener2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.opener3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.opener4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.drawnFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.checking": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "assistant.askQuestion": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:51.200Z"
+    },
+    "profile.signInTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.signInDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.formDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.filled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.state": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.chooseState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.district": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.age": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.gender": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.occupation": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.income": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.education": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.category": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.maritalStatus": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.disability": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.disabilityYes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.disabilityNo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.land": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.businessType": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.businessPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.optional": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.sensitiveSummary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.sensitiveNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.saveDetails": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.saving": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "profile.saveFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:32:55.505Z"
+    },
+    "settings.languageCount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.reminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.remindersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deadlineReminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.on": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.off": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.exportTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.exportDescAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.exportDescDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.downloadData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.preparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.exportFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteAccountTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteDeviceTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteAccountDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteDeviceDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteDataBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.confirmAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.confirmDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.confirmDelete": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleting": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.keepData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.deleteFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "settings.dpdpNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:01.240Z"
+    },
+    "login.forgotPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.resetRequestDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.resetConfirmDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.resetCode": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.resetCodePlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.newPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.passwordMin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.sendResetLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.setNewPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.sendAnotherLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.backToSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.resetSent": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.errReset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.createAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.haveAccountSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "login.noAccountCreate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:03.732Z"
+    },
+    "schemeDetails.notFoundDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.searchRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.issuedBy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.government": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.mustLiveIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.checkQualification": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.checkQualificationDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.startCheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.readiness": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.walkthroughDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.optionalField": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.commonMistakes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.glossary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.noDocs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.noWalkthrough": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.similar": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.whereFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "schemeDetails.tellAssistant": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:12.271Z"
+    },
+    "eligibility.ui.loadingQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "eligibility.ui.questionsFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "eligibility.ui.questionsFailedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "eligibility.ui.alternativesDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "eligibility.ui.viewChecklist": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "eligibility.ui.prefilled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:17.990Z"
+    },
+    "compare.comparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "compare.clearSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "compare.changeSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "compare.backToSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "compare.criteria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "compare.governmentState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:18.895Z"
+    },
+    "footer.blurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.346Z"
+    },
+    "footer.onThisPage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.346Z"
+    },
+    "footer.yourAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.346Z"
+    },
+    "footer.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.346Z"
+    },
+    "footer.whatThisIsNot": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.346Z"
+    },
+    "footer.notPortal": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.347Z"
+    },
+    "footer.sourceNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:21.347Z"
+    },
+    "landing.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.titleLine1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.titleLine2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.searchLabel": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.searchPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.orStartHere": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.answer3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.indexTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.centralOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.stateOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.statesCovered": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.lastVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.awaitingConnection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.allCategories": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.benefitsEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.benefitsTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.benefitsDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.liveEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.liveTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.liveDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.openFullRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.registerUnreachable": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.howEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.howTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step4Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.step4Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.limit1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.limit1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.limit2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.907Z"
+    },
+    "landing.limit2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.limit3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.langEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.langTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.langDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faqEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faqTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq1Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq1A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq2Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq2A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq3Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq3A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq4Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq4A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq5Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq5A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq6Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.faq6A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.closingTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.closingDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.signInToBegin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.navWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.navBenefits": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.navHow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.navLanguages": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.navQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.example1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.example2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.example3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.example4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "landing.example5": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:33:55.908Z"
+    },
+    "notFound.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:11.162Z"
+    },
+    "notFound.title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:11.162Z"
+    },
+    "notFound.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:11.162Z"
+    },
+    "notFound.searchSchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:11.162Z"
+    },
+    "categoryList.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:14.289Z"
+    },
+    "categoryList.empty": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:14.289Z"
+    },
+    "categoryList.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:14.289Z"
+    },
+    "categoryList.searchWithin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:14.289Z"
+    },
+    "categoryList.searchAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:14.289Z"
+    },
+    "tax.segment.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segment.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.segmentBlurb.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefit.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefit.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefit.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefit.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefit.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefitBlurb.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefitBlurb.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefitBlurb.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefitBlurb.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.benefitBlurb.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.income.below_1l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.income.1l_2_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.income.2_5l_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.income.5l_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "tax.income.above_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:27.119Z"
+    },
+    "landing.limit3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:20.106Z"
+    }
+  },
+  "pa": {
+    "common.close": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:44.581Z"
+    },
+    "common.previous": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:44.582Z"
+    },
+    "nav.primary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:45.023Z"
+    },
+    "nav.openMySchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:45.023Z"
+    },
+    "dashboard.closingSoon": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:45.452Z"
+    },
+    "record.open": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.530Z"
+    },
+    "record.closedShort": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.530Z"
+    },
+    "record.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.530Z"
+    },
+    "record.daysLeft_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.530Z"
+    },
+    "record.daysLeft_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.needsRecheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.staleTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.recheckDue": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedAgainstSource": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.notVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedYesterday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedDaysAgo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedLastMonth": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedMonthsAgo_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "record.verifiedMonthsAgo_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:47.531Z"
+    },
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.levelCentral": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.levelState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.reset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.clearSearch": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.clearAllFilters": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.searching": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.sortAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.sortBest": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.sortVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.sortClosing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "search.pagesAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:48.799Z"
+    },
+    "categories.byWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:49.749Z"
+    },
+    "categories.byBenefit": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:49.749Z"
+    },
+    "categories.byGovernment": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:49.749Z"
+    },
+    "categories.centralBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:49.749Z"
+    },
+    "categories.stateBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:49.749Z"
+    },
+    "savedPage.countEyebrow_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.countEyebrow_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.removeAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.deviceOnlyHead": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.deviceOnlyTail": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusTabs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusChecked": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusInProgress": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.statusApplied": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.stage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.stageAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.emptyTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.emptyStageTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.emptyStageDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closedOn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closesTomorrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closesInDays": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closingSoon_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "savedPage.closingSoon_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:58.481Z"
+    },
+    "checklist.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:59.411Z"
+    },
+    "checklist.print": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:59.411Z"
+    },
+    "checklist.allCollected": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:59.411Z"
+    },
+    "checklist.allCollectedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:34:59.411Z"
+    },
+    "assistant.openersTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.openersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.opener1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.opener2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.opener3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.opener4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.drawnFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.checking": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "assistant.askQuestion": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:05.462Z"
+    },
+    "profile.signInTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.signInDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.formDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.filled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.state": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.chooseState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.district": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.age": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.gender": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.occupation": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.income": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.education": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.category": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.maritalStatus": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.disability": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.disabilityYes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.disabilityNo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.land": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.businessType": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.businessPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.optional": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.sensitiveSummary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.sensitiveNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.saveDetails": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.saving": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "profile.saveFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:18.363Z"
+    },
+    "settings.languageCount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.reminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.remindersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.deadlineReminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.on": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.off": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.exportTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.exportDescAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.exportDescDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.downloadData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.preparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.exportFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.deleteAccountTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.deleteDeviceTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.746Z"
+    },
+    "settings.deleteAccountDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.deleteDeviceDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.deleteAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.deleteDataBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.confirmAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.confirmDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.confirmDelete": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.deleting": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.keepData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.deleteFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "settings.dpdpNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:27.747Z"
+    },
+    "login.forgotPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.resetRequestDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.resetConfirmDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.resetCode": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.resetCodePlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.newPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.passwordMin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.sendResetLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.setNewPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.sendAnotherLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.backToSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.resetSent": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.errReset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.createAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.haveAccountSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "login.noAccountCreate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:48.093Z"
+    },
+    "schemeDetails.notFoundDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.searchRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.issuedBy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.government": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.mustLiveIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.checkQualification": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.checkQualificationDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.startCheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.readiness": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.walkthroughDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.optionalField": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.commonMistakes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.glossary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.noDocs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.noWalkthrough": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.similar": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.whereFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "schemeDetails.tellAssistant": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:56.408Z"
+    },
+    "eligibility.ui.loadingQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "eligibility.ui.questionsFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "eligibility.ui.questionsFailedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "eligibility.ui.alternativesDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "eligibility.ui.viewChecklist": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "eligibility.ui.prefilled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:35:57.963Z"
+    },
+    "compare.comparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "compare.clearSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "compare.changeSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "compare.backToSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "compare.criteria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "compare.governmentState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:00.861Z"
+    },
+    "footer.blurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.onThisPage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.yourAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.whatThisIsNot": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.notPortal": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "footer.sourceNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:06.302Z"
+    },
+    "landing.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.titleLine1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.titleLine2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.searchLabel": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.searchPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.orStartHere": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.answer3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.indexTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.centralOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.stateOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.statesCovered": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.lastVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.awaitingConnection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.allCategories": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.benefitsEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.benefitsTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.benefitsDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.liveEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.liveTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.liveDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.openFullRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.registerUnreachable": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.howEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.howTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step4Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.step4Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.limit3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.langEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.langTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.langDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faqEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faqTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq1Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq1A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq2Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq2A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq3Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq3A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq4Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq4A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq5Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq5A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq6Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.faq6A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.closingTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.closingDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.signInToBegin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.navWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.navBenefits": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.navHow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.navLanguages": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.navQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.example1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.example2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.example3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.example4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "landing.example5": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:48.866Z"
+    },
+    "notFound.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:56.068Z"
+    },
+    "notFound.title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:56.068Z"
+    },
+    "notFound.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:56.068Z"
+    },
+    "notFound.searchSchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:36:56.068Z"
+    },
+    "categoryList.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:01.513Z"
+    },
+    "categoryList.empty": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:01.513Z"
+    },
+    "categoryList.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:01.513Z"
+    },
+    "categoryList.searchWithin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:01.513Z"
+    },
+    "categoryList.searchAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:01.513Z"
+    },
+    "tax.segment.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segment.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.segmentBlurb.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefit.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefit.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefit.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefit.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefit.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefitBlurb.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefitBlurb.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefitBlurb.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefitBlurb.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.benefitBlurb.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.income.below_1l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.income.1l_2_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.income.2_5l_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.income.5l_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    },
+    "tax.income.above_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:37:13.719Z"
+    }
+  },
+  "ur": {
+    "common.close": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:08.663Z"
+    },
+    "common.previous": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:08.674Z"
+    },
+    "nav.primary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:08.896Z"
+    },
+    "nav.openMySchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:08.896Z"
+    },
+    "dashboard.closingSoon": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:09.145Z"
+    },
+    "record.open": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.closedShort": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.daysLeft_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.daysLeft_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.needsRecheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.staleTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.recheckDue": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedAgainstSource": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.notVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedYesterday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedDaysAgo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedLastMonth": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedMonthsAgo_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "record.verifiedMonthsAgo_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.244Z"
+    },
+    "search.statusAny": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.levelCentral": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.levelState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.reset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.clearSearch": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.clearAllFilters": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.searching": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.sortAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.sortBest": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.sortVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.sortClosing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "search.pagesAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:10.998Z"
+    },
+    "categories.byWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:11.832Z"
+    },
+    "categories.byBenefit": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:11.832Z"
+    },
+    "categories.byGovernment": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:11.832Z"
+    },
+    "categories.centralBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:11.832Z"
+    },
+    "categories.stateBlurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:11.832Z"
+    },
+    "savedPage.countEyebrow_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.countEyebrow_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.removeAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.deviceOnlyHead": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.deviceOnlyTail": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusTabs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusChecked": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusInProgress": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.statusApplied": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.stage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.stageAria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.emptyTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.emptyStageTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.emptyStageDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closedOn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closesToday": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closesTomorrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closesInDays": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closingSoon_one": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "savedPage.closingSoon_other": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.066Z"
+    },
+    "checklist.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.713Z"
+    },
+    "checklist.print": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.713Z"
+    },
+    "checklist.allCollected": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.713Z"
+    },
+    "checklist.allCollectedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:14.713Z"
+    },
+    "assistant.openersTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.openersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.opener1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.opener2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.opener3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.opener4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.drawnFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.checking": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "assistant.askQuestion": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:15.714Z"
+    },
+    "profile.signInTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.signInDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.formDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.filled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.state": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.chooseState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.district": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.age": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.gender": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.occupation": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.income": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.education": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.category": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.maritalStatus": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.disability": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.disabilityYes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.disabilityNo": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.land": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.businessType": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.businessPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.optional": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.sensitiveSummary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.sensitiveNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.saveDetails": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.saving": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "profile.saveFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:18.640Z"
+    },
+    "settings.languageCount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.reminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.remindersDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deadlineReminders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.on": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.off": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.exportTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.exportDescAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.exportDescDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.downloadData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.preparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.exportFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteAccountTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteDeviceTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteAccountDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteDeviceDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteDataBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.confirmAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.confirmDevice": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.confirmDelete": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleting": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.keepData": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.deleteFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "settings.dpdpNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:21.863Z"
+    },
+    "login.forgotPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.resetRequestDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.resetConfirmDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.resetCode": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.resetCodePlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.newPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.passwordMin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.sendResetLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.setNewPassword": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.sendAnotherLink": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.backToSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.resetSent": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.errReset": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.createAccountBtn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.haveAccountSignIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "login.noAccountCreate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:23.305Z"
+    },
+    "schemeDetails.notFoundDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.searchRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.issuedBy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.government": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.mustLiveIn": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.checkQualification": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.checkQualificationDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.startCheck": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.readiness": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.walkthroughDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.optionalField": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.commonMistakes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.glossary": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.noDocs": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.noWalkthrough": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.118Z"
+    },
+    "schemeDetails.similar": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.119Z"
+    },
+    "schemeDetails.whereFrom": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.119Z"
+    },
+    "schemeDetails.tellAssistant": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:25.119Z"
+    },
+    "eligibility.ui.loadingQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "eligibility.ui.questionsFailed": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "eligibility.ui.questionsFailedDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "eligibility.ui.alternativesDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "eligibility.ui.viewChecklist": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "eligibility.ui.prefilled": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.243Z"
+    },
+    "compare.comparing": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "compare.clearSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "compare.changeSelection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "compare.backToSaved": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "compare.criteria": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "compare.governmentState": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:26.800Z"
+    },
+    "footer.blurb": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.onThisPage": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.yourAccount": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.whatThisIsNot": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.notPortal": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "footer.sourceNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:27.960Z"
+    },
+    "landing.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.titleLine1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.titleLine2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.searchLabel": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.searchPlaceholder": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.freeNote": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.orStartHere": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.answer3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.indexTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.centralOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.stateOrders": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.statesCovered": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.lastVerified": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.awaitingConnection": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.allCategories": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.benefitsEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.benefitsTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.benefitsDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.liveEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.liveTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.liveDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.openFullRegister": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.registerUnreachable": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.howEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.howTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step4Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.step4Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit1Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit1Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit2Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit2Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit3Title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.limit3Body": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.langEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.langTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.langDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faqEyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faqTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq1Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq1A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq2Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq2A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq3Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq3A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq4Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq4A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.228Z"
+    },
+    "landing.faq5Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.faq5A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.faq6Q": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.faq6A": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.closingTitle": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.closingDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.signInToBegin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.navWho": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.navBenefits": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.navHow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.navLanguages": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.navQuestions": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.example1": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.example2": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.example3": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.example4": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "landing.example5": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:47.229Z"
+    },
+    "notFound.eyebrow": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:51.834Z"
+    },
+    "notFound.title": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:51.834Z"
+    },
+    "notFound.desc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:51.834Z"
+    },
+    "notFound.searchSchemes": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:51.834Z"
+    },
+    "categoryList.loading": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:55.590Z"
+    },
+    "categoryList.empty": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:55.590Z"
+    },
+    "categoryList.emptyDesc": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:55.590Z"
+    },
+    "categoryList.searchWithin": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:55.590Z"
+    },
+    "categoryList.searchAll": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:38:55.590Z"
+    },
+    "tax.segment.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segment.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.student": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.farmer": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.women": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.senior_citizen": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.msme": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.pwd": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.jobseeker": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.segmentBlurb.general": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefit.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefit.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefit.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefit.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefit.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefitBlurb.cash": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefitBlurb.loan": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefitBlurb.subsidy": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefitBlurb.certificate": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.benefitBlurb.service": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.income.below_1l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.income.1l_2_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.income.2_5l_5l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.income.5l_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    },
+    "tax.income.above_8l": {
+      "provider": "groq",
+      "verified": false,
+      "at": "2026-08-07T20:39:03.444Z"
+    }
+  }
+}
