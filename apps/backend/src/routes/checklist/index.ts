@@ -190,7 +190,7 @@ router.patch(
       }
 
       // Load existing DocumentChecklist or generate base checklist if non-existent
-      let existingChecklist = await DocumentChecklistModel.findOne({
+      const existingChecklist = await DocumentChecklistModel.findOne({
         userId,
         schemeId: scheme._id
       });
