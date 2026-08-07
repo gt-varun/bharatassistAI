@@ -47,8 +47,35 @@ export const createApp = () => {
     }
   });
 
+  /**
+   * OTP and password-reset are the brute-forceable surfaces: a six-digit code
+   * falls in a million tries, and 100 attempts per window is enough to make
+   * that worth attempting. These get their own, much tighter budget.
+   */
+  const otpRateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 8,
+    standardHeaders: true,
+    legacyHeaders: false,
+    // Per phone number where we have one, so a shared NAT or office IP does
+    // not lock out everyone behind it.
+    keyGenerator: (req) => `${req.ip}:${(req.body?.phone as string) ?? ''}`,
+    message: {
+      success: false,
+      error: {
+        code: 'TOO_MANY_REQUESTS',
+        message: 'Too many attempts. Please wait 15 minutes before trying again.'
+      }
+    }
+  });
+
   // Mount Routers
   app.use('/api/health', healthRouter);
+  app.use(
+    ['/api/auth/send-otp', '/api/auth/otp/request', '/api/auth/verify-otp', '/api/auth/otp/verify'],
+    otpRateLimiter
+  );
+  app.use('/api/auth/password/reset', otpRateLimiter);
   app.use('/api/auth', authRateLimiter, authRouter);
   app.use('/api/schemes', schemesRouter);
   app.use('/api/eligibility', eligibilityRouter);

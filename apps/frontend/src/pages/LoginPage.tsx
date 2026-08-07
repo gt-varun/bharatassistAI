@@ -27,7 +27,14 @@ export const LoginPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { requestOtp, signInWithOtp, signInWithPassword, registerWithPassword } = useAuth();
+  const {
+    requestOtp,
+    signInWithOtp,
+    signInWithPassword,
+    registerWithPassword,
+    requestPasswordReset,
+    confirmPasswordReset
+  } = useAuth();
 
   // Where the guest was headed before the door. Set by RequireAuth, and by
   // every call to action on the landing page.
@@ -47,6 +54,14 @@ export const LoginPage: React.FC = () => {
   const otpRef = useRef<HTMLInputElement>(null);
   const [showPassword, setShowPassword] = useState(false);
   const passwordTimeoutRef = useRef<number | null>(null);
+
+  // A reset link lands here as /login?token=… — arriving with one means the
+  // citizen is mid-reset, so open straight at the new-password step.
+  const tokenFromLink = new URLSearchParams(location.search).get('token') ?? '';
+  const [resetStage, setResetStage] = useState<'off' | 'request' | 'confirm'>(
+    tokenFromLink ? 'confirm' : 'off'
+  );
+  const [resetToken, setResetToken] = useState(tokenFromLink);
 
   useEffect(() => {
     return () => {
@@ -106,6 +121,21 @@ export const LoginPage: React.FC = () => {
     setError('');
     setBusy(true);
     try {
+      if (resetStage === 'request') {
+        await requestPasswordReset(email);
+        // Deliberately the same message whether or not the address exists —
+        // this form must not become a way to test who has an account.
+        setNotice('If that email is registered, a reset link is on its way.');
+        setResetStage('confirm');
+        return;
+      }
+
+      if (resetStage === 'confirm') {
+        await confirmPasswordReset(resetToken.trim(), password);
+        navigate(from, { replace: true });
+        return;
+      }
+
       if (method === 'otp') {
         if (!otpSent) {
           await sendOtp();
@@ -124,7 +154,11 @@ export const LoginPage: React.FC = () => {
       setError(
         readableError(
           err,
-          method === 'otp' ? t('login.errOtp') : t('login.errPassword')
+          resetStage !== 'off'
+            ? 'That reset could not be completed. Check the link and try again.'
+            : method === 'otp'
+              ? t('login.errOtp')
+              : t('login.errPassword')
         )
       );
     } finally {
@@ -159,8 +193,13 @@ export const LoginPage: React.FC = () => {
             </h1>
             <p className="mt-2 text-[0.9375rem] leading-relaxed text-ink-2">{t('login.desc')}</p>
 
-            {/* Method switch */}
-            <div className="mt-7 flex gap-1 rounded-md border border-rule bg-surface p-1">
+            {/* Method switch — irrelevant while resetting a password */}
+            <div
+              className={cn(
+                'mt-7 flex gap-1 rounded-md border border-rule bg-surface p-1',
+                resetStage !== 'off' && 'hidden'
+              )}
+            >
               {(
                 [
                   { id: 'otp', label: t('login.tabMobile') },
@@ -188,7 +227,70 @@ export const LoginPage: React.FC = () => {
             </div>
 
             <form onSubmit={submit} className="mt-5 space-y-4">
-              {method === 'otp' ? (
+              {resetStage !== 'off' ? (
+                <>
+                  <p className="text-[0.875rem] leading-relaxed text-ink-2">
+                    {resetStage === 'request'
+                      ? 'Enter the email on your account and we will send a link to set a new password.'
+                      : 'Paste the code from the reset link, then choose a new password. Signing in this way signs you out everywhere else.'}
+                  </p>
+
+                  {resetStage === 'request' ? (
+                    <Input
+                      label={t('login.emailLabel')}
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                    />
+                  ) : (
+                    <>
+                      <Input
+                        label="Reset code"
+                        value={resetToken}
+                        onChange={(e) => setResetToken(e.target.value)}
+                        placeholder="From the link we sent you"
+                      />
+                      <Input
+                        label="New password"
+                        type="password"
+                        autoComplete="new-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="At least 6 characters"
+                      />
+                    </>
+                  )}
+
+                  <div className="flex justify-between">
+                    {resetStage === 'confirm' && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResetStage('request');
+                          setError('');
+                        }}
+                        className="text-[0.8125rem] text-sanction underline-offset-4 hover:underline"
+                      >
+                        Send another link
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setResetStage('off');
+                        setError('');
+                        setNotice('');
+                        setPassword('');
+                      }}
+                      className="ml-auto text-[0.8125rem] text-ink-2 underline-offset-4 hover:underline"
+                    >
+                      Back to sign in
+                    </button>
+                  </div>
+                </>
+              ) : method === 'otp' ? (
                 <>
                   <Input
                     label={t('login.mobileLabel')}
@@ -270,7 +372,19 @@ export const LoginPage: React.FC = () => {
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
-                  <div className="flex justify-end">
+                  <div className="flex justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setResetStage('request');
+                        setError('');
+                        setNotice('');
+                        setPassword('');
+                      }}
+                      className="text-[0.8125rem] text-ink-2 underline-offset-4 hover:underline"
+                    >
+                      Forgot your password?
+                    </button>
                     <button
                       type="button"
                       onClick={() => setIsRegister(!isRegister)}
@@ -300,6 +414,10 @@ export const LoginPage: React.FC = () => {
               <Button type="submit" size="lg" className="w-full" disabled={busy}>
                 {busy
                   ? t('common.working')
+                  : resetStage === 'request'
+                  ? 'Send reset link'
+                  : resetStage === 'confirm'
+                  ? 'Set new password'
                   : method === 'password'
                     ? (isRegister ? t('login.createAccountBtn') : t('common.signIn'))
                     : (otpSent ? t('common.signIn') : t('login.sendCode'))}

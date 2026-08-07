@@ -24,8 +24,20 @@ const OPTIONAL_FIELDS: (keyof CitizenProfile)[] = [
   'occupationCategory',
   'incomeBand',
   'educationLevel',
-  'category'
+  'category',
+  'disabilityStatus',
+  'maritalStatus',
+  'landOwnershipAcres',
+  'businessType'
 ];
+
+const GENDERS = ['female', 'male', 'other'];
+const CATEGORIES = ['general', 'obc', 'sc', 'st', 'ews'];
+const MARITAL_STATUSES = ['single', 'married', 'widowed', 'divorced'];
+
+/** Sentence case for a stored slug: `obc` → `OBC`, `single` → `Single`. */
+const pretty = (value: string) =>
+  value.length <= 3 ? value.toUpperCase() : value[0].toUpperCase() + value.slice(1);
 
 export const ProfilePage: React.FC = () => {
   const { t } = useTranslation();
@@ -196,12 +208,109 @@ export const ProfilePage: React.FC = () => {
             onChange={(e) => set('educationLevel', e.target.value)}
             placeholder="Optional"
           />
+
+          <div className="space-y-1.5">
+            <Label htmlFor="profile-gender">Gender</Label>
+            <Select value={draft.gender ?? ''} onValueChange={(v) => set('gender', v)}>
+              <SelectTrigger id="profile-gender" className="h-11">
+                <SelectValue placeholder="Optional" />
+              </SelectTrigger>
+              <SelectContent>
+                {GENDERS.map((g) => (
+                  <SelectItem key={g} value={g}>
+                    {pretty(g)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        <p className="rounded-md border border-rule-strong bg-surface px-4 py-3 text-[0.8125rem] leading-relaxed text-ink-2">
-          Category, disability status and land ownership decide eligibility for some schemes. They
-          are sensitive, so we ask for them only on the schemes that need them — never up front.
-        </p>
+        {/*
+          Category, disability, marital status and land holding decide
+          eligibility for a large part of the register, so they belong on the
+          profile — but they are the most sensitive things we ask for, so they
+          sit behind a disclosure with the reason stated, never open by default.
+        */}
+        <details className="rounded-md border border-rule-strong bg-surface px-4 py-3">
+          <summary className="cursor-pointer text-[0.875rem] font-medium text-ink">
+            Sensitive details — optional, and only if you want them saved
+          </summary>
+          <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink-2">
+            Category, disability status, marital status and land holding decide eligibility for
+            many schemes. Filling them here means you are not asked again on every scheme. Leave
+            them blank and we will ask only where a scheme genuinely needs one.
+          </p>
+
+          <div className="mt-4 grid gap-5 sm:grid-cols-2">
+            <div className="space-y-1.5">
+              <Label htmlFor="profile-category">Category</Label>
+              <Select value={draft.category ?? ''} onValueChange={(v) => set('category', v)}>
+                <SelectTrigger id="profile-category" className="h-11">
+                  <SelectValue placeholder="Optional" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CATEGORIES.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {pretty(c)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="profile-marital">Marital status</Label>
+              <Select value={draft.maritalStatus ?? ''} onValueChange={(v) => set('maritalStatus', v)}>
+                <SelectTrigger id="profile-marital" className="h-11">
+                  <SelectValue placeholder="Optional" />
+                </SelectTrigger>
+                <SelectContent>
+                  {MARITAL_STATUSES.map((m) => (
+                    <SelectItem key={m} value={m}>
+                      {pretty(m)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="profile-disability">Disability status</Label>
+              <Select
+                value={draft.disabilityStatus === null || draft.disabilityStatus === undefined ? '' : String(draft.disabilityStatus)}
+                onValueChange={(v) => set('disabilityStatus', v === 'true')}
+              >
+                <SelectTrigger id="profile-disability" className="h-11">
+                  <SelectValue placeholder="Optional" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="true">I have a disability</SelectItem>
+                  <SelectItem value="false">I do not</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Input
+              label="Land owned (acres)"
+              type="number"
+              min={0}
+              step="0.1"
+              value={draft.landOwnershipAcres ?? ''}
+              onChange={(e) =>
+                set('landOwnershipAcres', e.target.value ? Number(e.target.value) : null)
+              }
+              placeholder="Optional"
+            />
+
+            <Input
+              label="Type of business"
+              value={draft.businessType ?? ''}
+              onChange={(e) => set('businessType', e.target.value)}
+              placeholder="Optional — e.g. tailoring, kirana shop"
+            />
+          </div>
+        </details>
 
         <div className="flex items-center gap-3">
           <Button type="submit" disabled={save.isPending || !draft.state}>

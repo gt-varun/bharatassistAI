@@ -15,6 +15,7 @@ const CitizenProfileSchema = new Schema<CitizenProfileDocument>(
     educationLevel: { type: String, default: null },
     category: { type: String, default: null },
     disabilityStatus: { type: Boolean, default: null },
+    maritalStatus: { type: String, default: null },
     landOwnershipAcres: { type: Number, default: null },
     businessType: { type: String, default: null }
   },
