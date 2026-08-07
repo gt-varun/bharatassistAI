@@ -11,7 +11,9 @@
     "lint": "eslint src/**/*.ts",
     "test": "vitest run",
     "seed": "tsx src/scripts/seed.ts",
-    "embed": "tsx src/scripts/embed.ts"
+    "embed": "tsx src/scripts/embed.ts",
+    "translate:ui": "tsx src/scripts/translateLocales.ts",
+    "translate:schemes": "tsx src/scripts/translateSchemes.ts"
   },
   "dependencies": {
     "@bharatassist/shared-types": "workspace:*",

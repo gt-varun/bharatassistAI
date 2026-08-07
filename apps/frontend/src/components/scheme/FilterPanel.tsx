@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
 import { BENEFIT_TYPES, INCOME_BANDS, SEGMENTS, STATES } from '../../lib/taxonomy';
@@ -30,6 +31,7 @@ interface FilterPanelProps {
 
 /** One control per column the register is indexed on. */
 export const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onChange }) => {
+  const { t } = useTranslation();
   const field = (
     key: keyof Filters,
     label: string,
@@ -75,21 +77,21 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onChange }) =
         'segment',
         'Who it is for',
         'Anyone',
-        SEGMENTS.map((s) => ({ value: s.slug, label: s.label }))
+        SEGMENTS.map((s) => ({ value: s.slug, label: t(s.labelKey) }))
       )}
 
       {field(
         'benefitType',
         'What you receive',
         'Any benefit',
-        BENEFIT_TYPES.map((b) => ({ value: b.slug, label: b.label }))
+        BENEFIT_TYPES.map((b) => ({ value: b.slug, label: t(b.labelKey) }))
       )}
 
       {field(
         'incomeBand',
         'Household income',
         'Any income',
-        INCOME_BANDS.map((b) => ({ value: b.slug, label: b.label }))
+        INCOME_BANDS.map((b) => ({ value: b.slug, label: t(b.labelKey) }))
       )}
 
       {field('status', 'Applications', 'Open or closed', [

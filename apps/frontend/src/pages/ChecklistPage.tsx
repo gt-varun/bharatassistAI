@@ -134,7 +134,7 @@ export const ChecklistPage: React.FC = () => {
   if (isLoading) {
     return (
       <PageBody>
-        <LoadingState message="Loading document checklist from server..." rows={3} />
+        <LoadingState message={t('checklist.loading')} rows={3} />
       </PageBody>
     );
   }
@@ -182,7 +182,7 @@ export const ChecklistPage: React.FC = () => {
           items.length > 0 && (
             <Button variant="outline" size="sm" onClick={() => window.print()} className="no-print">
               <Printer className="h-4 w-4 text-ink-3" />
-              Print this list
+              {t('checklist.print')}
             </Button>
           )
         }
@@ -279,10 +279,10 @@ export const ChecklistPage: React.FC = () => {
             <div className="mt-8 rounded-lg border border-sanction-edge bg-sanction-tint p-5">
               <p className="flex items-center gap-2 font-display text-[1rem] font-semibold text-sanction-deep">
                 <CheckCircle2 className="h-5 w-5 text-sanction" />
-                You have collected all required documents
+                {t('checklist.allCollected')}
               </p>
               <p className="mt-1 text-[0.875rem] text-sanction-deep/80">
-                You can now proceed to apply on the official government portal.
+                {t('checklist.allCollectedDesc')}
               </p>
               <Button className="mt-4" asChild>
                 <Link to={`/schemes/${slug}`}>{t('checklist.backToScheme')}</Link>

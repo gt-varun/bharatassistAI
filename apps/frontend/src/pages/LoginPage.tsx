@@ -125,7 +125,7 @@ export const LoginPage: React.FC = () => {
         await requestPasswordReset(email);
         // Deliberately the same message whether or not the address exists —
         // this form must not become a way to test who has an account.
-        setNotice('If that email is registered, a reset link is on its way.');
+        setNotice(t('login.resetSent'));
         setResetStage('confirm');
         return;
       }
@@ -155,7 +155,7 @@ export const LoginPage: React.FC = () => {
         readableError(
           err,
           resetStage !== 'off'
-            ? 'That reset could not be completed. Check the link and try again.'
+            ? t('login.errReset')
             : method === 'otp'
               ? t('login.errOtp')
               : t('login.errPassword')
@@ -230,9 +230,7 @@ export const LoginPage: React.FC = () => {
               {resetStage !== 'off' ? (
                 <>
                   <p className="text-[0.875rem] leading-relaxed text-ink-2">
-                    {resetStage === 'request'
-                      ? 'Enter the email on your account and we will send a link to set a new password.'
-                      : 'Paste the code from the reset link, then choose a new password. Signing in this way signs you out everywhere else.'}
+                    {resetStage === 'request' ? t('login.resetRequestDesc') : t('login.resetConfirmDesc')}
                   </p>
 
                   {resetStage === 'request' ? (
@@ -247,18 +245,18 @@ export const LoginPage: React.FC = () => {
                   ) : (
                     <>
                       <Input
-                        label="Reset code"
+                        label={t('login.resetCode')}
                         value={resetToken}
                         onChange={(e) => setResetToken(e.target.value)}
-                        placeholder="From the link we sent you"
+                        placeholder={t('login.resetCodePlaceholder')}
                       />
                       <Input
-                        label="New password"
+                        label={t('login.newPassword')}
                         type="password"
                         autoComplete="new-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="At least 6 characters"
+                        placeholder={t('login.passwordMin')}
                       />
                     </>
                   )}
@@ -273,7 +271,7 @@ export const LoginPage: React.FC = () => {
                         }}
                         className="text-[0.8125rem] text-sanction underline-offset-4 hover:underline"
                       >
-                        Send another link
+                        {t('login.sendAnotherLink')}
                       </button>
                     )}
                     <button
@@ -286,7 +284,7 @@ export const LoginPage: React.FC = () => {
                       }}
                       className="ml-auto text-[0.8125rem] text-ink-2 underline-offset-4 hover:underline"
                     >
-                      Back to sign in
+                      {t('login.backToSignIn')}
                     </button>
                   </div>
                 </>
@@ -383,7 +381,7 @@ export const LoginPage: React.FC = () => {
                       }}
                       className="text-[0.8125rem] text-ink-2 underline-offset-4 hover:underline"
                     >
-                      Forgot your password?
+                      {t('login.forgotPassword')}
                     </button>
                     <button
                       type="button"
@@ -415,9 +413,9 @@ export const LoginPage: React.FC = () => {
                 {busy
                   ? t('common.working')
                   : resetStage === 'request'
-                  ? 'Send reset link'
+                  ? t('login.sendResetLink')
                   : resetStage === 'confirm'
-                  ? 'Set new password'
+                  ? t('login.setNewPassword')
                   : method === 'password'
                     ? (isRegister ? t('login.createAccountBtn') : t('common.signIn'))
                     : (otpSent ? t('common.signIn') : t('login.sendCode'))}

@@ -18,11 +18,11 @@ interface Message {
   failed?: boolean;
 }
 
-const OPENERS = [
-  'What does "domicile certificate" mean?',
-  'Which schemes help a farmer buy irrigation equipment?',
-  'I earn ₹1.8 lakh a year — what scholarships can my daughter get?',
-  'What is the difference between a subsidy and a direct benefit transfer?'
+const OPENER_KEYS = [
+  'assistant.opener1',
+  'assistant.opener2',
+  'assistant.opener3',
+  'assistant.opener4'
 ];
 
 export const AssistantPage: React.FC = () => {
@@ -119,20 +119,20 @@ export const AssistantPage: React.FC = () => {
           <div className="rounded-lg border border-dashed border-rule-strong bg-surface p-8 text-center">
             <MessagesSquare className="mx-auto h-6 w-6 text-ink-3" strokeWidth={1.5} />
             <p className="mt-3 font-display text-[1rem] font-semibold text-ink">
-              Ask it the way you would ask a person
+              {t('assistant.openersTitle')}
             </p>
             <p className="mx-auto mt-1.5 max-w-md text-[0.875rem] leading-relaxed text-ink-2">
-              Government wording is welcome but not needed. Try one of these to start.
+              {t('assistant.openersDesc')}
             </p>
             <ul className="mx-auto mt-6 grid max-w-xl gap-2 sm:grid-cols-2">
-              {OPENERS.map((opener) => (
-                <li key={opener}>
+              {OPENER_KEYS.map((openerKey) => (
+                <li key={openerKey}>
                   <button
                     type="button"
-                    onClick={() => send(opener)}
+                    onClick={() => send(t(openerKey))}
                     className="h-full w-full rounded-md border border-rule-strong bg-surface px-3.5 py-2.5 text-left text-[0.875rem] leading-relaxed text-ink-2 transition-colors hover:border-sanction hover:bg-sanction-tint hover:text-sanction"
                   >
-                    {opener}
+                    {t(openerKey)}
                   </button>
                 </li>
               ))}
@@ -159,7 +159,7 @@ export const AssistantPage: React.FC = () => {
 
                   {message.sources?.length ? (
                     <p className="hair-top mt-3 flex flex-wrap items-center gap-2 pt-2.5">
-                      <span className="register">Drawn from</span>
+                      <span className="register">{t('assistant.drawnFrom')}</span>
                       {message.sources.map((source) => (
                         <Link
                           key={source.slug}
@@ -178,7 +178,7 @@ export const AssistantPage: React.FC = () => {
             {pending && (
               <li className="flex justify-start">
                 <div className="flex items-center gap-2 rounded-lg border border-rule bg-surface px-4 py-3">
-                  <span className="register">Checking the register</span>
+                  <span className="register">{t('assistant.checking')}</span>
                   <span className="flex gap-1">
                     {[0, 1, 2].map((i) => (
                       <span
@@ -206,7 +206,7 @@ export const AssistantPage: React.FC = () => {
       >
         <div className="flex items-end gap-2 rounded-lg border border-rule-strong bg-surface p-2 shadow-card transition-[border-color,box-shadow] focus-within:border-sanction focus-within:shadow-focus">
           <label htmlFor="assistant-input" className="sr-only">
-            Ask a question
+            {t('assistant.askQuestion')}
           </label>
           <textarea
             ref={inputRef}
@@ -224,10 +224,10 @@ export const AssistantPage: React.FC = () => {
                 send(input);
               }
             }}
-            placeholder="Ask about eligibility, documents, or a word you don't recognise"
+            placeholder={t('assistant.placeholder')}
             className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-2 py-2 text-[0.9375rem] text-ink outline-none placeholder:text-ink-4"
           />
-          <Button type="submit" size="icon" disabled={!input.trim() || pending} aria-label="Send">
+          <Button type="submit" size="icon" disabled={!input.trim() || pending} aria-label={t('assistant.send')}>
             <ArrowUp className="h-4 w-4" />
           </Button>
         </div>

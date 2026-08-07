@@ -90,15 +90,15 @@ export const ProfilePage: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <PageBody>
-        <PageHeader eyebrow="Account" title="Your details" />
+        <PageHeader eyebrow={t('profile.eyebrow')} title={t('profile.title')} />
         <div className="mt-8">
           <EmptyState
             icon={UserRound}
-            title="Sign in to keep your details"
-            description="Your state, age and income decide which schemes you qualify for. Saving them means you are not asked the same questions on every scheme."
+            title={t('profile.signInTitle')}
+            description={t('profile.signInDesc')}
             action={
               <Button asChild>
-                <Link to="/login">Sign in</Link>
+                <Link to="/login">{t('common.signIn')}</Link>
               </Button>
             }
           />
@@ -112,7 +112,7 @@ export const ProfilePage: React.FC = () => {
       <PageHeader
         eyebrow={t('profile.eyebrow')}
         title={t('profile.title')}
-        description="Only your state is needed. Every extra field sharpens what we can tell you, and you can leave any of them blank."
+        description={t('profile.formDesc')}
       />
 
       {/* Completeness — a nudge, never a gate */}
@@ -123,7 +123,7 @@ export const ProfilePage: React.FC = () => {
             style={{ width: `${completeness}%` }}
           />
         </div>
-        <span className="register-strong shrink-0">{completeness}% filled</span>
+        <span className="register-strong shrink-0">{t('profile.filled', { percent: completeness })}</span>
       </div>
 
       <form
@@ -135,10 +135,10 @@ export const ProfilePage: React.FC = () => {
       >
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <Label htmlFor="profile-state">State you live in</Label>
+            <Label htmlFor="profile-state">{t('profile.state')}</Label>
             <Select value={draft.state ?? ''} onValueChange={(v) => set('state', v)}>
               <SelectTrigger id="profile-state" className="h-11">
-                <SelectValue placeholder="Choose your state" />
+                <SelectValue placeholder={t('profile.chooseState')} />
               </SelectTrigger>
               <SelectContent>
                 {STATES.map((s) => (
@@ -151,35 +151,35 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           <Input
-            label="District"
+            label={t('profile.district')}
             value={draft.district ?? ''}
             onChange={(e) => set('district', e.target.value)}
-            placeholder="Optional"
+            placeholder={t('profile.optional')}
           />
 
           <Input
-            label="Age"
+            label={t('profile.age')}
             type="number"
             min={0}
             max={120}
             value={draft.age ?? ''}
             onChange={(e) => set('age', e.target.value ? Number(e.target.value) : null)}
-            placeholder="Optional"
+            placeholder={t('profile.optional')}
           />
 
           <div className="space-y-1.5">
-            <Label htmlFor="profile-occupation">What you do</Label>
+            <Label htmlFor="profile-occupation">{t('profile.occupation')}</Label>
             <Select
               value={draft.occupationCategory ?? ''}
               onValueChange={(v) => set('occupationCategory', v)}
             >
               <SelectTrigger id="profile-occupation" className="h-11">
-                <SelectValue placeholder="Optional" />
+                <SelectValue placeholder={t('profile.optional')} />
               </SelectTrigger>
               <SelectContent>
                 {SEGMENTS.map((s) => (
                   <SelectItem key={s.slug} value={s.slug}>
-                    {s.label}
+                    {t(s.labelKey)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -187,15 +187,15 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="profile-income">Household income a year</Label>
+            <Label htmlFor="profile-income">{t('profile.income')}</Label>
             <Select value={draft.incomeBand ?? ''} onValueChange={(v) => set('incomeBand', v)}>
               <SelectTrigger id="profile-income" className="h-11">
-                <SelectValue placeholder="Optional" />
+                <SelectValue placeholder={t('profile.optional')} />
               </SelectTrigger>
               <SelectContent>
                 {INCOME_BANDS.map((b) => (
                   <SelectItem key={b.slug} value={b.slug}>
-                    {b.label}
+                    {t(b.labelKey)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -203,17 +203,17 @@ export const ProfilePage: React.FC = () => {
           </div>
 
           <Input
-            label="Highest education"
+            label={t('profile.education')}
             value={draft.educationLevel ?? ''}
             onChange={(e) => set('educationLevel', e.target.value)}
-            placeholder="Optional"
+            placeholder={t('profile.optional')}
           />
 
           <div className="space-y-1.5">
-            <Label htmlFor="profile-gender">Gender</Label>
+            <Label htmlFor="profile-gender">{t('profile.gender')}</Label>
             <Select value={draft.gender ?? ''} onValueChange={(v) => set('gender', v)}>
               <SelectTrigger id="profile-gender" className="h-11">
-                <SelectValue placeholder="Optional" />
+                <SelectValue placeholder={t('profile.optional')} />
               </SelectTrigger>
               <SelectContent>
                 {GENDERS.map((g) => (
@@ -234,20 +234,18 @@ export const ProfilePage: React.FC = () => {
         */}
         <details className="rounded-md border border-rule-strong bg-surface px-4 py-3">
           <summary className="cursor-pointer text-[0.875rem] font-medium text-ink">
-            Sensitive details — optional, and only if you want them saved
+            {t('profile.sensitiveSummary')}
           </summary>
           <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink-2">
-            Category, disability status, marital status and land holding decide eligibility for
-            many schemes. Filling them here means you are not asked again on every scheme. Leave
-            them blank and we will ask only where a scheme genuinely needs one.
+            {t('profile.sensitiveNote')}
           </p>
 
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             <div className="space-y-1.5">
-              <Label htmlFor="profile-category">Category</Label>
+              <Label htmlFor="profile-category">{t('profile.category')}</Label>
               <Select value={draft.category ?? ''} onValueChange={(v) => set('category', v)}>
                 <SelectTrigger id="profile-category" className="h-11">
-                  <SelectValue placeholder="Optional" />
+                  <SelectValue placeholder={t('profile.optional')} />
                 </SelectTrigger>
                 <SelectContent>
                   {CATEGORIES.map((c) => (
@@ -260,10 +258,10 @@ export const ProfilePage: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="profile-marital">Marital status</Label>
+              <Label htmlFor="profile-marital">{t('profile.maritalStatus')}</Label>
               <Select value={draft.maritalStatus ?? ''} onValueChange={(v) => set('maritalStatus', v)}>
                 <SelectTrigger id="profile-marital" className="h-11">
-                  <SelectValue placeholder="Optional" />
+                  <SelectValue placeholder={t('profile.optional')} />
                 </SelectTrigger>
                 <SelectContent>
                   {MARITAL_STATUSES.map((m) => (
@@ -276,23 +274,23 @@ export const ProfilePage: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="profile-disability">Disability status</Label>
+              <Label htmlFor="profile-disability">{t('profile.disability')}</Label>
               <Select
                 value={draft.disabilityStatus === null || draft.disabilityStatus === undefined ? '' : String(draft.disabilityStatus)}
                 onValueChange={(v) => set('disabilityStatus', v === 'true')}
               >
                 <SelectTrigger id="profile-disability" className="h-11">
-                  <SelectValue placeholder="Optional" />
+                  <SelectValue placeholder={t('profile.optional')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="true">I have a disability</SelectItem>
-                  <SelectItem value="false">I do not</SelectItem>
+                  <SelectItem value="true">{t('profile.disabilityYes')}</SelectItem>
+                  <SelectItem value="false">{t('profile.disabilityNo')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <Input
-              label="Land owned (acres)"
+              label={t('profile.land')}
               type="number"
               min={0}
               step="0.1"
@@ -300,26 +298,26 @@ export const ProfilePage: React.FC = () => {
               onChange={(e) =>
                 set('landOwnershipAcres', e.target.value ? Number(e.target.value) : null)
               }
-              placeholder="Optional"
+              placeholder={t('profile.optional')}
             />
 
             <Input
-              label="Type of business"
+              label={t('profile.businessType')}
               value={draft.businessType ?? ''}
               onChange={(e) => set('businessType', e.target.value)}
-              placeholder="Optional — e.g. tailoring, kirana shop"
+              placeholder={t('profile.businessPlaceholder')}
             />
           </div>
         </details>
 
         <div className="flex items-center gap-3">
           <Button type="submit" disabled={save.isPending || !draft.state}>
-            {save.isPending ? 'Saving…' : 'Save details'}
+            {save.isPending ? t('profile.saving') : t('profile.saveDetails')}
           </Button>
-          {saved && <span className="text-[0.875rem] text-sanction">Saved</span>}
+          {saved && <span className="text-[0.875rem] text-sanction">{t('common.saved')}</span>}
           {save.isError && (
             <span className="text-[0.875rem] text-seal">
-              That did not save. Check your connection and try again.
+              {t('profile.saveFailed')}
             </span>
           )}
         </div>

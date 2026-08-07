@@ -11,7 +11,9 @@
     "typecheck": "pnpm --recursive run typecheck",
     "test": "pnpm --recursive run test",
     "seed": "pnpm --filter @bharatassist/backend run seed",
-    "prepare": "husky install || true"
+    "prepare": "husky install || true",
+    "translate": "pnpm --filter @bharatassist/backend run translate:ui",
+    "translate:schemes": "pnpm --filter @bharatassist/backend run translate:schemes"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.18.0",

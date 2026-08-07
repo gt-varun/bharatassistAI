@@ -173,7 +173,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
       )}
 
       {/* Navigation */}
-      <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 pb-4">
+      <nav aria-label={t('nav.primary')} className="flex-1 overflow-y-auto px-3 pb-4">
         <ul className="space-y-0.5">{ROOT_ITEMS.map(renderItem)}</ul>
 
         {GROUPS.map((group) => (

@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../ui/button';
 import { LanguageSelector } from '../ui/LanguageSelector';
 import { useAuth } from '../../auth/AuthContext';
 
 /** Sections of the landing page itself — see LandingPage's section ids. */
 const SECTIONS = [
-  { href: '#who', label: 'Who it is for' },
-  { href: '#benefits', label: 'What you get' },
-  { href: '#how', label: 'How it works' },
-  { href: '#languages', label: 'Languages' },
-  { href: '#questions', label: 'Questions' }
+  { href: '#who', key: 'landing.navWho' },
+  { href: '#benefits', key: 'landing.navBenefits' },
+  { href: '#how', key: 'landing.navHow' },
+  { href: '#languages', key: 'landing.navLanguages' },
+  { href: '#questions', key: 'landing.navQuestions' }
 ];
 
 export const PublicHeader: React.FC = () => {
+  const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -26,22 +28,22 @@ export const PublicHeader: React.FC = () => {
           </span>
           <span className="hidden sm:block">
             <span className="block font-display text-[0.9375rem] font-semibold leading-tight text-ink">
-              BharatAssist AI
+              {t('common.appName')}
             </span>
-            <span className="register block">Scheme register</span>
+            <span className="register block">{t('common.registerSub')}</span>
           </span>
         </Link>
 
         {/* The landing page is the only surface this header serves, so the
             nav moves down the page rather than into the application. */}
-        <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label={t('nav.primary')}>
           {SECTIONS.map((section) => (
             <a
               key={section.href}
               href={section.href}
               className="rounded px-3 py-1.5 text-[0.875rem] font-medium text-ink-2 transition-colors hover:bg-rule-soft hover:text-ink"
             >
-              {section.label}
+              {t(section.key)}
             </a>
           ))}
         </nav>
@@ -50,11 +52,11 @@ export const PublicHeader: React.FC = () => {
           <LanguageSelector className="w-[8.5rem] sm:w-[10rem]" />
           {isAuthenticated ? (
             <Button size="sm" onClick={() => navigate('/dashboard')}>
-              Open my schemes
+              {t('nav.openMySchemes')}
             </Button>
           ) : (
             <Button size="sm" onClick={() => navigate('/login')}>
-              Sign in
+              {t('common.signIn')}
             </Button>
           )}
         </div>

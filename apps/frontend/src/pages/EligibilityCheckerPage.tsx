@@ -149,7 +149,7 @@ export const EligibilityCheckerPage: React.FC = () => {
             <EmptyState
               icon={Sparkles}
               title={t('eligibility.ui.noScheme')}
-              description="Browse the register or open any scheme detail page and click 'Check my eligibility'."
+              description={t('eligibility.ui.noScheme')}
               action={
                 <Button asChild>
                   <Link to="/search">{t('common.findSchemes')}</Link>
@@ -188,7 +188,7 @@ export const EligibilityCheckerPage: React.FC = () => {
   if (loadingQuestions) {
     return (
       <PageBody>
-        <LoadingState message="Loading scheme eligibility questions..." rows={3} />
+        <LoadingState message={t('eligibility.ui.loadingQuestions')} rows={3} />
       </PageBody>
     );
   }
@@ -198,8 +198,8 @@ export const EligibilityCheckerPage: React.FC = () => {
     return (
       <PageBody>
         <EmptyState
-          title="Scheme questions unavailable"
-          description="Unable to retrieve eligibility questions for this scheme. It may have been updated or removed."
+          title={t('eligibility.ui.questionsFailed')}
+          description={t('eligibility.ui.questionsFailedDesc')}
           action={
             <Button variant="outline" asChild>
               <Link to="/search">{t('schemeDetails.backToSearch')}</Link>
@@ -304,10 +304,10 @@ export const EligibilityCheckerPage: React.FC = () => {
         {evalResult.alternativeSchemes && evalResult.alternativeSchemes.length > 0 && (
           <div className="mt-10">
             <h2 className="font-display text-xl font-bold text-ink">
-              Recommended Alternative Schemes
+              {t('eligibility.ui.alternatives')}
             </h2>
             <p className="mt-1 text-[0.875rem] text-ink-2">
-              Based on your specific answers, you may qualify for these alternative government programs:
+              {t('eligibility.ui.alternativesDesc')}
             </p>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -338,7 +338,7 @@ export const EligibilityCheckerPage: React.FC = () => {
                       <Link to={`/eligibility?scheme=${alt.schemeId}`}>{t('schemeDetails.checkEligibility')}</Link>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
-                      <Link to={`/schemes/${alt.schemeId}`}>View</Link>
+                      <Link to={`/schemes/${alt.schemeId}`}>{t('eligibility.ui.viewScheme')}</Link>
                     </Button>
                   </div>
                 </div>
@@ -351,14 +351,14 @@ export const EligibilityCheckerPage: React.FC = () => {
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6">
           <Button variant="outline" onClick={resetWizard}>
             <RotateCcw className="h-4 w-4" />
-            Re-check Answers
+            {t('eligibility.ui.startOver')}
           </Button>
 
           <div className="flex gap-3">
             <Button variant="outline" asChild>
               <Link to={`/checklist?scheme=${slug}`}>
                 <ListChecks className="h-4 w-4" />
-                View Document Checklist
+                {t('eligibility.ui.viewChecklist')}
               </Link>
             </Button>
             <Button asChild>
@@ -419,7 +419,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           {currentQ.prefilled && (
             <span className="register-strong inline-flex items-center gap-1 rounded-md bg-sanction-tint px-2.5 py-1 text-micro text-sanction">
               <Check className="h-3 w-3" />
-              Pre-filled from profile
+              {t('eligibility.ui.prefilled')}
             </span>
           )}
         </div>
@@ -475,7 +475,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           {currentStep > 0 ? (
             <Button type="button" variant="outline" onClick={handleBack}>
               <ArrowLeft className="h-4 w-4" />
-              Previous
+              {t('eligibility.ui.previous')}
             </Button>
           ) : (
             <span />

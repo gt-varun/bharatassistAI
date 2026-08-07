@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
@@ -14,7 +15,7 @@ import { LoadingState } from '../components/ui/LoadingState';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
-import { benefitLabel, INCOME_BANDS, segmentLabel } from '../lib/taxonomy';
+import { benefitLabelKey, incomeLabelKey, segmentLabelKey } from '../lib/taxonomy';
 import { cn } from '../lib/utils';
 
 const PAGE_SIZE = 10;
@@ -24,19 +25,26 @@ interface SearchResponse {
   pagination: { total: number; page: number; totalPages: number };
 }
 
-/** Human wording for an active filter chip. */
-function chipLabel(key: keyof Filters, value: string): string {
+/**
+ * Human wording for an active filter chip. The translator is passed in rather
+ * than reached for: this runs outside a component, where no hook is available.
+ */
+function chipLabel(t: TFunction, key: keyof Filters, value: string): string {
   switch (key) {
     case 'level':
-      return value === 'central' ? 'Central government' : 'State government';
+      return value === 'central' ? t('search.levelCentral') : t('search.levelState');
     case 'segment':
-      return segmentLabel(value);
+      return t(segmentLabelKey(value));
     case 'benefitType':
-      return benefitLabel(value);
+      return t(benefitLabelKey(value));
     case 'incomeBand':
-      return INCOME_BANDS.find((b) => b.slug === value)?.label ?? value;
+      return t(incomeLabelKey(value));
     case 'status':
-      return value === 'open' ? 'Accepting applications' : value === 'rolling' ? 'Open all year' : 'Closed';
+      return value === 'open'
+        ? t('record.accepting')
+        : value === 'rolling'
+          ? t('record.openAllYear')
+          : t('record.closedShort');
     default:
       return value;
   }
@@ -124,7 +132,7 @@ export const SearchPage: React.FC = () => {
     () =>
       (Object.keys(filters) as (keyof Filters)[])
         .filter((key) => filters[key])
-        .map((key) => ({ key, value: filters[key], label: chipLabel(key, filters[key]) })),
+        .map((key) => ({ key, value: filters[key], label: chipLabel(t, key, filters[key]) })),
     [filters]
   );
 
@@ -158,13 +166,13 @@ export const SearchPage: React.FC = () => {
       <div className="mt-6 flex items-center gap-2 rounded-lg border border-rule-strong bg-surface p-2 shadow-card transition-[border-color,box-shadow] focus-within:border-sanction focus-within:shadow-focus">
         <Search className="ml-1.5 h-[1.15rem] w-[1.15rem] shrink-0 text-ink-4" />
         <label htmlFor="scheme-search" className="sr-only">
-          Search schemes
+          {t('topbar.searchPlaceholder')}
         </label>
         <input
           id="scheme-search"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="e.g. loan for a woman starting a small business in Karnataka"
+          placeholder={t('search.placeholder')}
           className="h-10 min-w-0 flex-1 bg-transparent text-[0.9375rem] text-ink outline-none placeholder:text-ink-4"
           autoComplete="off"
         />
@@ -172,7 +180,7 @@ export const SearchPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setInput('')}
-            aria-label="Clear search"
+            aria-label={t('search.clearSearch')}
             className="rounded p-1.5 text-ink-4 transition-colors hover:bg-rule-soft hover:text-ink-2"
           >
             <X className="h-4 w-4" />
@@ -185,14 +193,14 @@ export const SearchPage: React.FC = () => {
         <aside className="hidden lg:block">
           <div className="sticky top-[4.5rem]">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="register">Narrow it down</h2>
+              <h2 className="register">{t('search.filters')}</h2>
               {activeChips.length > 0 && (
                 <button
                   type="button"
                   onClick={() => setFilters(EMPTY_FILTERS)}
                   className="text-[0.8125rem] font-medium text-sanction underline-offset-4 hover:underline"
                 >
-                  Reset
+                  {t('search.reset')}
                 </button>
               )}
             </div>
@@ -244,13 +252,13 @@ export const SearchPage: React.FC = () => {
                   setPage(1);
                 }}
               >
-                <SelectTrigger className="h-8 w-[11.5rem] text-[0.8125rem]" aria-label="Sort results">
+                <SelectTrigger className="h-8 w-[11.5rem] text-[0.8125rem]" aria-label={t('search.sortAria')}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="relevance">Best match</SelectItem>
-                  <SelectItem value="newest">Recently verified</SelectItem>
-                  <SelectItem value="deadline">Closing soonest</SelectItem>
+                  <SelectItem value="relevance">{t('search.sortBest')}</SelectItem>
+                  <SelectItem value="newest">{t('search.sortVerified')}</SelectItem>
+                  <SelectItem value="deadline">{t('search.sortClosing')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -277,7 +285,7 @@ export const SearchPage: React.FC = () => {
                   onClick={clearAll}
                   className="px-2 py-1 text-[0.8125rem] font-medium text-ink-3 underline-offset-4 hover:text-ink hover:underline"
                 >
-                  Clear all
+                  {t('common.clearAll')}
                 </button>
               </li>
             </ul>
@@ -285,15 +293,15 @@ export const SearchPage: React.FC = () => {
 
           {/* Results */}
           <div className={cn('mt-5', isLoading && 'min-h-[20rem]')}>
-            {isLoading && <LoadingState message="Searching the scheme register" />}
+            {isLoading && <LoadingState message={t('search.searching')} />}
 
             {!isLoading && isError && (
               <EmptyState
-                title="The register did not respond"
-                description="The connection to the scheme service failed. Try the search again in a moment."
+                title={t('search.failed')}
+                description={t('search.failedDesc')}
                 action={
                   <Button variant="outline" onClick={() => window.location.reload()}>
-                    Try again
+                    {t('common.tryAgain')}
                   </Button>
                 }
               />
@@ -301,12 +309,12 @@ export const SearchPage: React.FC = () => {
 
             {!isLoading && !isError && data?.schemes.length === 0 && (
               <EmptyState
-                title="Nothing matches all of these at once"
-                description="Remove a filter, or describe your situation in a sentence instead — plain language finds more than a scheme name does."
+                title={t('search.noResults')}
+                description={t('search.noResultsDesc')}
                 action={
                   hasCriteria && (
                     <Button variant="outline" onClick={clearAll}>
-                      Clear search and filters
+                      {t('search.clearAllFilters')}
                     </Button>
                   )
                 }
@@ -331,7 +339,7 @@ export const SearchPage: React.FC = () => {
             {!isLoading && totalPages > 1 && (
               <nav
                 className="hair-top mt-6 flex items-center justify-between pt-4"
-                aria-label="Search results pages"
+                aria-label={t('search.pagesAria')}
               >
                 <Button
                   variant="outline"
@@ -343,7 +351,7 @@ export const SearchPage: React.FC = () => {
                   }}
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  Previous
+                  {t('common.previous')}
                 </Button>
                 <span className="register">
                   Page {page} of {totalPages}
@@ -357,7 +365,7 @@ export const SearchPage: React.FC = () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 >
-                  Next
+                  {t('common.next')}
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </nav>
@@ -370,12 +378,12 @@ export const SearchPage: React.FC = () => {
       <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
         <DialogContent className="max-h-[85vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Narrow it down</DialogTitle>
+            <DialogTitle>{t('search.filters')}</DialogTitle>
           </DialogHeader>
           <FilterPanel filters={filters} onChange={updateFilter} />
           <div className="hair-top flex gap-2 pt-4">
             <Button variant="outline" className="flex-1" onClick={() => setFilters(EMPTY_FILTERS)}>
-              Reset
+              {t('search.reset')}
             </Button>
             <Button className="flex-1" onClick={() => setFiltersOpen(false)}>
               Show {total} {total === 1 ? 'scheme' : 'schemes'}

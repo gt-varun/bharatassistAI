@@ -14,11 +14,12 @@ export type SavedStatus =
   | 'application_in_progress'
   | 'applied';
 
-export const SAVED_STATUSES: { id: SavedStatus; label: string }[] = [
-  { id: 'saved', label: 'Saved' },
-  { id: 'eligibility_checked', label: 'Eligibility checked' },
-  { id: 'application_in_progress', label: 'Application in progress' },
-  { id: 'applied', label: 'Applied' }
+/** Keys rather than labels: the stage names are read by the citizen. */
+export const SAVED_STATUSES: { id: SavedStatus; labelKey: string }[] = [
+  { id: 'saved', labelKey: 'savedPage.statusSaved' },
+  { id: 'eligibility_checked', labelKey: 'savedPage.statusChecked' },
+  { id: 'application_in_progress', labelKey: 'savedPage.statusInProgress' },
+  { id: 'applied', labelKey: 'savedPage.statusApplied' }
 ];
 
 /** A saved entry as the server returns it, with the scheme record populated. */

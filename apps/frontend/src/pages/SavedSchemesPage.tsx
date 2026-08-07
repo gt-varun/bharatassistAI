@@ -19,15 +19,16 @@ import { cn } from '../lib/utils';
 
 type Tab = 'all' | SavedStatus;
 
-const TABS: { id: Tab; label: string }[] = [
-  { id: 'all', label: 'All' },
-  ...SAVED_STATUSES.map((s) => ({ id: s.id as Tab, label: s.label }))
+const TABS: { id: Tab; labelKey: string }[] = [
+  { id: 'all', labelKey: 'savedPage.statusAll' },
+  ...SAVED_STATUSES.map((s) => ({ id: s.id as Tab, labelKey: s.labelKey }))
 ];
 
 /** Inside this many days a deadline stops being information and becomes a warning. */
 const REMINDER_WINDOW_DAYS = 30;
 
 const DeadlineMark: React.FC<{ deadline: string | Date | null }> = ({ deadline }) => {
+  const { t } = useTranslation();
   const days = daysUntil(deadline);
   if (days === null) return null;
 
@@ -35,7 +36,7 @@ const DeadlineMark: React.FC<{ deadline: string | Date | null }> = ({ deadline }
     return (
       <span className="inline-flex items-center gap-1.5 text-[0.8125rem] text-ink-3">
         <AlarmClock className="h-3.5 w-3.5" />
-        Closed on {formatDate(deadline)}
+        {t('savedPage.closedOn', { date: formatDate(deadline) })}
       </span>
     );
   }
@@ -50,10 +51,10 @@ const DeadlineMark: React.FC<{ deadline: string | Date | null }> = ({ deadline }
     >
       <AlarmClock className="h-3.5 w-3.5" />
       {days === 0
-        ? `Closes today — ${formatDate(deadline)}`
+        ? t('savedPage.closesToday', { date: formatDate(deadline) })
         : days === 1
-          ? `Closes tomorrow — ${formatDate(deadline)}`
-          : `${days} days left — closes ${formatDate(deadline)}`}
+          ? t('savedPage.closesTomorrow', { date: formatDate(deadline) })
+          : t('savedPage.closesInDays', { count: days, date: formatDate(deadline) })}
     </span>
   );
 };
@@ -98,13 +99,13 @@ export const SavedSchemesPage: React.FC = () => {
   return (
     <PageBody>
       <PageHeader
-        eyebrow={`${slugs.length} ${slugs.length === 1 ? 'scheme' : 'schemes'}`}
+        eyebrow={t('savedPage.countEyebrow', { count: slugs.length })}
         title={t('savedPage.title')}
         description={t('savedPage.desc')}
         actions={
           slugs.length > 0 && (
             <Button variant="ghost" size="sm" onClick={clear}>
-              Remove all
+              {t('savedPage.removeAll')}
             </Button>
           )
         }
@@ -112,20 +113,18 @@ export const SavedSchemesPage: React.FC = () => {
 
       {!isAuthenticated && slugs.length > 0 && (
         <p className="mt-6 rounded-md border border-rule-strong bg-surface px-4 py-3 text-[0.875rem] text-ink-2">
-          This list lives on this device only.{' '}
+          {t('savedPage.deviceOnlyHead')}{' '}
           <Link to="/login" className="font-medium text-sanction underline-offset-4 hover:underline">
-            Sign in
+            {t('common.signIn')}
           </Link>{' '}
-          to keep it when you switch phone or browser.
+          {t('savedPage.deviceOnlyTail')}
         </p>
       )}
 
       {closingSoon.length > 0 && (
         <div className="mt-6 rounded-md border border-seal/30 bg-seal/5 px-4 py-3">
           <p className="text-[0.875rem] font-medium text-ink">
-            {closingSoon.length === 1
-              ? 'One of your saved schemes closes soon'
-              : `${closingSoon.length} of your saved schemes close soon`}
+            {t('savedPage.closingSoon', { count: closingSoon.length })}
           </p>
           <ul className="mt-2 space-y-1">
             {closingSoon.map((scheme) => (
@@ -146,7 +145,7 @@ export const SavedSchemesPage: React.FC = () => {
       {slugs.length > 0 && (
         <div
           role="tablist"
-          aria-label="Saved scheme status"
+          aria-label={t('savedPage.statusTabs')}
           className="mt-7 flex flex-wrap gap-2 border-b border-rule pb-3"
         >
           {TABS.map((option) => (
@@ -163,7 +162,7 @@ export const SavedSchemesPage: React.FC = () => {
                   : 'border-rule-strong text-ink-2 hover:border-ink-4 hover:text-ink'
               )}
             >
-              {option.label}
+              {t(option.labelKey)}
               <span className="ml-1.5 text-ink-3">{counts[option.id]}</span>
             </button>
           ))}
@@ -172,17 +171,17 @@ export const SavedSchemesPage: React.FC = () => {
 
       <div className="mt-8">
         {(isSyncing || (isLoading && slugs.length > 0)) && (
-          <LoadingState message="Loading your saved schemes" rows={2} />
+          <LoadingState message={t('savedPage.loading')} rows={2} />
         )}
 
         {slugs.length === 0 && !isSyncing && (
           <EmptyState
             icon={Bookmark}
-            title="Nothing saved yet"
-            description="Bookmark a scheme while you gather its documents and it will wait for you here."
+            title={t('savedPage.emptyTitle')}
+            description={t('savedPage.emptyDesc')}
             action={
               <Button asChild>
-                <Link to="/search">Find schemes</Link>
+                <Link to="/search">{t('common.findSchemes')}</Link>
               </Button>
             }
           />
@@ -191,8 +190,8 @@ export const SavedSchemesPage: React.FC = () => {
         {!isLoading && slugs.length > 0 && visible.length === 0 && (
           <EmptyState
             icon={Bookmark}
-            title="Nothing at this stage"
-            description="Move a saved scheme along as you go, and it will show up under this tab."
+            title={t('savedPage.emptyStageTitle')}
+            description={t('savedPage.emptyStageDesc')}
           />
         )}
 
@@ -208,16 +207,16 @@ export const SavedSchemesPage: React.FC = () => {
                 <div className="mt-1.5 flex flex-wrap items-center justify-between gap-3 pl-6">
                   <DeadlineMark deadline={scheme.deadline} />
                   <label className="flex items-center gap-2 text-[0.8125rem] text-ink-2">
-                    <span>Stage</span>
+                    <span>{t('savedPage.stage')}</span>
                     <select
                       value={statusOf(scheme.slug)}
                       onChange={(e) => setStatus(scheme.slug, e.target.value as SavedStatus)}
-                      aria-label={`Application stage for ${scheme.name}`}
+                      aria-label={t('savedPage.stageAria', { name: scheme.name })}
                       className="rounded-md border border-rule-strong bg-surface px-2 py-1 text-[0.8125rem] text-ink"
                     >
                       {SAVED_STATUSES.map((s) => (
                         <option key={s.id} value={s.id}>
-                          {s.label}
+                          {t(s.labelKey)}
                         </option>
                       ))}
                     </select>

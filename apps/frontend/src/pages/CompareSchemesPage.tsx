@@ -159,7 +159,7 @@ export const CompareSchemesPage: React.FC = () => {
   if (isLoading) {
     return (
       <PageBody>
-        <LoadingState message="Comparing selected schemes side-by-side..." rows={4} />
+        <LoadingState message={t('compare.comparing')} rows={4} />
       </PageBody>
     );
   }
@@ -173,7 +173,7 @@ export const CompareSchemesPage: React.FC = () => {
           description={error?.message || 'Verification failed for requested scheme IDs.'}
           action={
             <Button variant="outline" onClick={() => setSelectedIds([])}>
-              Clear selection
+              {t('compare.clearSelection')}
             </Button>
           }
         />
@@ -191,10 +191,10 @@ export const CompareSchemesPage: React.FC = () => {
           className="inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to saved schemes
+          {t('compare.backToSaved')}
         </Link>
         <Button variant="outline" size="sm" onClick={() => setSelectedIds([])}>
-          Change selection
+          {t('compare.changeSelection')}
         </Button>
       </div>
 
@@ -220,7 +220,7 @@ export const CompareSchemesPage: React.FC = () => {
           <thead>
             <tr className="border-b border-rule bg-surface-2">
               <th className="p-4 register uppercase text-xs text-ink-3 w-44 sticky left-0 bg-surface-2">
-                Criteria
+                {t('compare.criteria')}
               </th>
               {schemes.map((col) => (
                 <th key={col.schemeId} className="p-4 font-display font-semibold text-ink min-w-[14rem]">
@@ -237,7 +237,7 @@ export const CompareSchemesPage: React.FC = () => {
           <tbody className="divide-y divide-rule text-[0.875rem]">
             {/* Level & State */}
             <tr className={cn(differences['state'] || differences['level'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">Government / State</td>
+              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.governmentState')}</td>
               {schemes.map((col) => (
                 <td key={col.schemeId} className="p-4 text-ink">
                   {col.level === 'central' ? 'Central Scheme' : `State (${col.state})`}
@@ -319,7 +319,7 @@ export const CompareSchemesPage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 text-sanction font-medium hover:underline"
                       >
-                        Official Portal
+                        {t('compare.portal')}
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                     ) : (

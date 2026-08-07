@@ -14,9 +14,9 @@ import { getAvailableLanguages } from '../i18n/config';
 import { cn } from '../lib/utils';
 
 const TEXT_SCALES = [
-  { id: 'normal', label: 'Normal', sample: '1×' },
-  { id: 'large', label: 'Large', sample: '1.15×' },
-  { id: 'xlarge', label: 'Largest', sample: '1.3×' }
+  { id: 'normal', labelKey: 'settings.normal', sample: '1×' },
+  { id: 'large', labelKey: 'settings.large', sample: '1.15×' },
+  { id: 'xlarge', labelKey: 'settings.xlarge', sample: '1.3×' }
 ] as const;
 
 const SCALE_KEY = 'bharatassist_text_scale';
@@ -109,7 +109,7 @@ export const SettingsPage: React.FC = () => {
       const res = await apiClient.get('/profile/export');
       download({ ...res.data?.data, device: local });
     } catch {
-      setError('Could not reach the server for your account data. Nothing was downloaded.');
+      setError(t('settings.exportFailed'));
     } finally {
       setBusy(null);
     }
@@ -134,7 +134,7 @@ export const SettingsPage: React.FC = () => {
       clearDevice();
       navigate('/', { replace: true });
     } catch {
-      setError('Your account could not be deleted just now. Nothing was removed — please retry.');
+      setError(t('settings.deleteFailed'));
       setConfirmDelete(false);
     } finally {
       setBusy(null);
@@ -151,15 +151,15 @@ export const SettingsPage: React.FC = () => {
 
       <div className="mt-8 divide-y divide-rule border-y border-rule">
         <Row
-          title="Language"
-          description={`The whole interface changes, not just scheme text. ${getAvailableLanguages().length} languages are complete enough to offer.`}
+          title={t('settings.language')}
+          description={t('settings.languageCount', { count: getAvailableLanguages().length })}
         >
           <LanguageSelector variant="full" />
         </Row>
 
         <Row
-          title="Text size"
-          description="Make everything larger without zooming the page. Useful if you read government forms at arm's length."
+          title={t('settings.textSize')}
+          description={t('settings.textSizeDesc')}
         >
           <div className="flex gap-2">
             {TEXT_SCALES.map((option) => (
@@ -175,7 +175,7 @@ export const SettingsPage: React.FC = () => {
                     : 'border-rule-strong text-ink-2 hover:border-ink-4 hover:text-ink'
                 )}
               >
-                <span className="block text-[0.875rem] font-medium">{option.label}</span>
+                <span className="block text-[0.875rem] font-medium">{t(option.labelKey)}</span>
                 <span className="register block">{option.sample}</span>
               </button>
             ))}
@@ -184,8 +184,8 @@ export const SettingsPage: React.FC = () => {
 
         {isAuthenticated && (
           <Row
-            title="Reminders"
-            description="A note when a scheme you saved is about to close, and when a record you rely on changes. Nothing else."
+            title={t('settings.reminders')}
+            description={t('settings.remindersDesc')}
           >
             <button
               type="button"
@@ -201,55 +201,49 @@ export const SettingsPage: React.FC = () => {
             >
               <span className="flex items-center gap-2 text-[0.875rem] font-medium">
                 <BellRing className="h-4 w-4" />
-                Deadline reminders
+                {t('settings.deadlineReminders')}
               </span>
-              <span className="register-strong">{notifications ? 'On' : 'Off'}</span>
+              <span className="register-strong">{notifications ? t('settings.on') : t('settings.off')}</span>
             </button>
           </Row>
         )}
 
         <Row
-          title="Take your data with you"
+          title={t('settings.exportTitle')}
           description={
-            isAuthenticated
-              ? 'Downloads everything held against your account — profile, saved schemes, eligibility answers, checklists and conversations — as a file you can keep.'
-              : 'Downloads everything held on this device — saved schemes, checklist progress and preferences — as a file you can keep.'
+            isAuthenticated ? t('settings.exportDescAccount') : t('settings.exportDescDevice')
           }
         >
           <Button variant="outline" onClick={exportData} disabled={busy === 'export'}>
             <Download className="h-4 w-4 text-ink-3" />
-            {busy === 'export' ? 'Preparing…' : 'Download my data'}
+            {busy === 'export' ? t('settings.preparing') : t('settings.downloadData')}
           </Button>
         </Row>
 
         <Row
-          title={isAuthenticated ? 'Delete your account' : 'Delete everything'}
+          title={isAuthenticated ? t('settings.deleteAccountTitle') : t('settings.deleteDeviceTitle')}
           description={
-            isAuthenticated
-              ? 'Erases your account and everything attached to it from our servers, as well as this device. This cannot be undone.'
-              : 'Clears your saved schemes and checklist progress from this device. This cannot be undone.'
+            isAuthenticated ? t('settings.deleteAccountDesc') : t('settings.deleteDeviceDesc')
           }
         >
           {confirmDelete ? (
             <div className="space-y-2">
               <p className="text-[0.875rem] text-ink-2">
-                {isAuthenticated
-                  ? 'This permanently deletes your account. There is no way back.'
-                  : 'This clears everything saved in this browser.'}
+                {isAuthenticated ? t('settings.confirmAccount') : t('settings.confirmDevice')}
               </p>
               <div className="flex gap-2">
                 <Button variant="destructive" onClick={deleteEverything} disabled={busy === 'delete'}>
-                  {busy === 'delete' ? 'Deleting…' : 'Yes, delete'}
+                  {busy === 'delete' ? t('settings.deleting') : t('settings.confirmDelete')}
                 </Button>
                 <Button variant="ghost" onClick={() => setConfirmDelete(false)}>
-                  Keep my data
+                  {t('settings.keepData')}
                 </Button>
               </div>
             </div>
           ) : (
             <Button variant="destructive" onClick={() => setConfirmDelete(true)}>
               <Trash2 className="h-4 w-4" />
-              {isAuthenticated ? 'Delete my account' : 'Delete my data'}
+              {isAuthenticated ? t('settings.deleteAccountBtn') : t('settings.deleteDataBtn')}
             </Button>
           )}
         </Row>
@@ -258,8 +252,7 @@ export const SettingsPage: React.FC = () => {
       {error && <p className="mt-4 text-[0.875rem] text-seal">{error}</p>}
 
       <p className="mt-8 text-[0.8125rem] leading-relaxed text-ink-3">
-        Under the Digital Personal Data Protection Act you can ask for an export or deletion of
-        anything held about you at any time. The controls above do it directly.
+        {t('settings.dpdpNote')}
       </p>
     </PageBody>
   );

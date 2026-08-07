@@ -91,7 +91,7 @@ export const DashboardPage: React.FC = () => {
         <section className="mt-12">
           <h2 className="register mb-4 flex items-center gap-2 text-seal">
             <CalendarClock className="h-3.5 w-3.5" />
-            Closing soon
+            {t('dashboard.closingSoon')}
           </h2>
           <ul className="grid gap-3 sm:grid-cols-3">
             {closingSoon.map((scheme) => {

@@ -44,14 +44,22 @@ export function isStale(lastVerifiedAt: string | Date | null | undefined): boole
   return age !== null && age > 90;
 }
 
-export function relativeVerified(value: string | Date | null | undefined): string {
+/**
+ * How long ago a record was verified, returned as a translation key and its
+ * count rather than a finished English sentence. The caller spreads the pair
+ * into `t(...)`, so this phrase follows the chosen language like every other
+ * piece of the interface.
+ */
+export function relativeVerified(
+  value: string | Date | null | undefined
+): [string, { count: number }] {
   const age = daysSince(value);
-  if (age === null) return 'Not verified';
-  if (age <= 0) return 'Verified today';
-  if (age === 1) return 'Verified yesterday';
-  if (age < 30) return `Verified ${age} days ago`;
-  if (age < 60) return 'Verified last month';
-  return `Verified ${Math.floor(age / 30)} months ago`;
+  if (age === null) return ['record.notVerified', { count: 0 }];
+  if (age <= 0) return ['record.verifiedToday', { count: 0 }];
+  if (age === 1) return ['record.verifiedYesterday', { count: 1 }];
+  if (age < 30) return ['record.verifiedDaysAgo', { count: age }];
+  if (age < 60) return ['record.verifiedLastMonth', { count: 1 }];
+  return ['record.verifiedMonthsAgo', { count: Math.floor(age / 30) }];
 }
 
 /** Two-letter monogram for avatars: "Varun Y R" → "VR", "9845…" → "91". */

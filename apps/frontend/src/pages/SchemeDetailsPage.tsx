@@ -25,7 +25,7 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { Skeleton } from '../components/ui/skeleton';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { isValidGovDomain } from '../lib/govAllowlist';
-import { benefitLabel, segmentLabel } from '../lib/taxonomy';
+import { benefitLabelKey, segmentLabelKey } from '../lib/taxonomy';
 import { formatDate, daysUntil } from '../lib/format';
 import { cn } from '../lib/utils';
 
@@ -83,11 +83,11 @@ export const SchemeDetailsPage: React.FC = () => {
     return (
       <PageBody>
         <EmptyState
-          title="That scheme is not on the register"
-          description="The link may be out of date, or the record may have been withdrawn. Search for it by name."
+          title={t('schemeDetails.notFound')}
+          description={t('schemeDetails.notFoundDesc')}
           action={
             <Button variant="outline" asChild>
-              <Link to="/search">Search the register</Link>
+              <Link to="/search">{t('schemeDetails.searchRegister')}</Link>
             </Button>
           }
         />
@@ -129,9 +129,9 @@ export const SchemeDetailsPage: React.FC = () => {
 
           {/* The answer most people came for */}
           <div className="mt-6 rounded-lg border border-sanction-edge bg-sanction-tint p-5">
-            <p className="register text-sanction">What you receive</p>
+            <p className="register text-sanction">{t('record.youReceive')}</p>
             <p className="mt-1.5 font-display text-xl font-semibold leading-snug text-sanction-deep">
-              {scheme.benefitSummary || benefitLabel(scheme.benefitType)}
+              {scheme.benefitSummary || t(benefitLabelKey(scheme.benefitType))}
             </p>
             {scheme.deadline && (
               <p className="mt-3 flex items-center gap-2 text-[0.875rem] text-sanction-deep/80">
@@ -158,16 +158,16 @@ export const SchemeDetailsPage: React.FC = () => {
               </p>
 
               <dl className="mt-8 divide-y divide-rule border-y border-rule">
-                <Field label="Issued by">{scheme.department}</Field>
-                <Field label="Government">
+                <Field label={t('schemeDetails.issuedBy')}>{scheme.department}</Field>
+                <Field label={t('schemeDetails.government')}>
                   {scheme.level === 'central' ? 'Central' : `State — ${scheme.state}`}
                 </Field>
-                <Field label="Who it is for">
+                <Field label={t('search.segment')}>
                   {scheme.targetSegments?.length
-                    ? scheme.targetSegments.map(segmentLabel).join(', ')
+                    ? scheme.targetSegments.map((s) => t(segmentLabelKey(s))).join(', ')
                     : 'Open to all citizens'}
                 </Field>
-                <Field label="Benefit type">{benefitLabel(scheme.benefitType)}</Field>
+                <Field label={t('compare.benefitType')}>{t(benefitLabelKey(scheme.benefitType))}</Field>
                 <Field label={t('schemeDetails.howToApply')}>
                   {scheme.applicationMode === 'both'
                     ? 'Online or in person'
@@ -175,10 +175,10 @@ export const SchemeDetailsPage: React.FC = () => {
                       ? 'Online only'
                       : 'In person only'}
                 </Field>
-                <Field label="Deadline">
+                <Field label={t('compare.deadline')}>
                   {scheme.deadline ? formatDate(scheme.deadline) : 'No closing date — open all year'}
                 </Field>
-                <Field label="Source notification">
+                <Field label={t('schemeDetails.source')}>
                   <span className="font-mono text-[0.875rem]">{scheme.sourceRef || '—'}</span>
                 </Field>
               </dl>
@@ -199,10 +199,10 @@ export const SchemeDetailsPage: React.FC = () => {
 
               <dl className="mt-8 divide-y divide-rule border-y border-rule">
                 {rules.state?.length ? (
-                  <Field label="You must live in">{rules.state.join(', ')}</Field>
+                  <Field label={t('schemeDetails.mustLiveIn')}>{rules.state.join(', ')}</Field>
                 ) : null}
                 {(rules.ageMin || rules.ageMax) && (
-                  <Field label="Age">
+                  <Field label={t('profile.age')}>
                     {rules.ageMin && rules.ageMax
                       ? `Between ${rules.ageMin} and ${rules.ageMax} years`
                       : rules.ageMin
@@ -211,30 +211,30 @@ export const SchemeDetailsPage: React.FC = () => {
                   </Field>
                 )}
                 {rules.incomeMax ? (
-                  <Field label="Household income">
+                  <Field label={t('search.income')}>
                     Up to ₹{Number(rules.incomeMax).toLocaleString('en-IN')} a year
                   </Field>
                 ) : null}
                 {rules.genderRestriction ? (
-                  <Field label="Gender">{rules.genderRestriction}</Field>
+                  <Field label={t('profile.gender')}>{rules.genderRestriction}</Field>
                 ) : null}
                 {rules.occupationCategory?.length ? (
-                  <Field label="Occupation">{rules.occupationCategory.join(', ')}</Field>
+                  <Field label={t('profile.occupation')}>{rules.occupationCategory.join(', ')}</Field>
                 ) : null}
                 {rules.categoryRestriction?.length ? (
-                  <Field label="Category">{rules.categoryRestriction.join(', ')}</Field>
+                  <Field label={t('profile.category')}>{rules.categoryRestriction.join(', ')}</Field>
                 ) : null}
               </dl>
 
               <div className="mt-8 rounded-lg border border-sanction-edge bg-sanction-tint p-6">
-                <h3 className="font-display text-[0.9375rem] font-semibold text-sanction-deep">Check your qualification</h3>
+                <h3 className="font-display text-[0.9375rem] font-semibold text-sanction-deep">{t('schemeDetails.checkQualification')}</h3>
                 <p className="mt-1.5 max-w-xl text-[0.875rem] leading-relaxed text-sanction-deep/80">
-                  Answer a few scheme-specific questions to get an instant deterministic eligibility check against official rules.
+                  {t('schemeDetails.checkQualificationDesc')}
                 </p>
                 <Button className="mt-4" asChild>
                   <Link to={`/eligibility?scheme=${scheme.slug}`}>
                     <Sparkles className="h-4 w-4" />
-                    Start Eligibility Check
+                    {t('schemeDetails.startCheck')}
                   </Link>
                 </Button>
               </div>
@@ -276,7 +276,7 @@ export const SchemeDetailsPage: React.FC = () => {
                 </>
               ) : (
                 <PendingSection
-                  title="Document list not recorded yet"
+                  title={t('schemeDetails.noDocs')}
                   body="This scheme's notification has not been parsed for its document requirements. The official portal lists them in the meantime."
                 />
               )}
@@ -293,7 +293,7 @@ export const SchemeDetailsPage: React.FC = () => {
                       : 'border-ochre-edge bg-ochre-tint text-ochre'
                   )}
                 >
-                  <p className="register uppercase text-xs font-bold">Application Readiness Status</p>
+                  <p className="register uppercase text-xs font-bold">{t('schemeDetails.readiness')}</p>
                   <h4 className="font-display text-[1rem] font-bold mt-1">
                     {guidanceData.readyToApply
                       ? 'Ready to Apply — Form guidance and official portal verified'
@@ -306,7 +306,7 @@ export const SchemeDetailsPage: React.FC = () => {
               {(guidanceData?.fieldByFieldGuidance?.length || scheme.applicationFields?.length) ? (
                 <>
                   <p className="text-[0.9375rem] leading-relaxed text-ink-2">
-                    What the official form will ask, field by field, so nothing is a surprise when you open it.
+                    {t('schemeDetails.walkthroughDesc')}
                   </p>
                   <ol className="mt-6 divide-y divide-rule border-y border-rule">
                     {(guidanceData?.fieldByFieldGuidance || scheme.applicationFields || []).map((field: any, i: number) => (
@@ -320,7 +320,7 @@ export const SchemeDetailsPage: React.FC = () => {
                               {field.fieldName}
                             </p>
                             {!field.mandatory && (
-                              <span className="register text-ink-3">Optional</span>
+                              <span className="register text-ink-3">{t('schemeDetails.optionalField')}</span>
                             )}
                             {field.prefilledValue && (
                               <span className="register-strong text-micro bg-sanction-tint text-sanction px-2 py-0.5 rounded">
@@ -338,7 +338,7 @@ export const SchemeDetailsPage: React.FC = () => {
                 </>
               ) : (
                 <PendingSection
-                  title="Field-by-field walkthrough not ready"
+                  title={t('schemeDetails.noWalkthrough')}
                   body="The application guidance for this scheme is still being written. The official portal below is the place to apply."
                 />
               )}
@@ -348,7 +348,7 @@ export const SchemeDetailsPage: React.FC = () => {
                 <div className="mt-8 rounded-lg border border-ochre-edge bg-ochre-tint p-5">
                   <p className="flex items-center gap-2 register-strong text-ochre">
                     <ShieldAlert className="h-3.5 w-3.5" />
-                    What gets applications rejected
+                    {t('schemeDetails.commonMistakes')}
                   </p>
                   <ul className="mt-3 space-y-2">
                     {(guidanceData?.commonMistakes || scheme.commonMistakes || []).map((mistake: string) => (
@@ -365,7 +365,7 @@ export const SchemeDetailsPage: React.FC = () => {
               {guidanceData?.glossary && guidanceData.glossary.length > 0 && (
                 <div className="mt-8 rounded-lg border border-rule bg-surface p-5">
                   <h4 className="font-display text-[0.9375rem] font-semibold text-ink">
-                    Application Glossary & Key Terms
+                    {t('schemeDetails.glossary')}
                   </h4>
                   <dl className="mt-3 space-y-3 divide-y divide-rule">
                     {guidanceData.glossary.map((item: any) => (
@@ -404,13 +404,13 @@ export const SchemeDetailsPage: React.FC = () => {
               <Button variant="outline" size="sm" asChild>
                 <Link to={`/search?segment=${scheme.targetSegments?.[0] ?? ''}`}>
                   <GitCompare className="h-4 w-4 text-ink-3" />
-                  Similar
+                  {t('schemeDetails.similar')}
                 </Link>
               </Button>
               <Button variant="outline" size="sm" asChild>
                 <Link to={`/assistant?scheme=${scheme.slug}`}>
                   <Sparkles className="h-4 w-4 text-ink-3" />
-                  Explain
+                  {t('schemeDetails.explainSimpler')}
                 </Link>
               </Button>
             </div>
@@ -418,7 +418,7 @@ export const SchemeDetailsPage: React.FC = () => {
 
           {/* Provenance — the trust claim, stated once, in full. */}
           <div className="mt-4 rounded-lg border border-rule bg-surface p-5">
-            <p className="register mb-3">Where this record comes from</p>
+            <p className="register mb-3">{t('schemeDetails.whereFrom')}</p>
             <VerificationStamp scheme={scheme} />
 
             {scheme.officialPortalUrl && (
@@ -451,7 +451,7 @@ export const SchemeDetailsPage: React.FC = () => {
             <p className="mt-4 text-[0.8125rem] leading-relaxed text-ink-3">
               Spotted something that does not match the official notification?{' '}
               <Link to="/assistant" className="text-sanction underline-offset-4 hover:underline">
-                Tell the assistant
+                {t('schemeDetails.tellAssistant')}
               </Link>{' '}
               and it gets queued for re-checking.
             </p>
