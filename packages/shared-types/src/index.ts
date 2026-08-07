@@ -70,6 +70,8 @@ export interface User {
   passwordHash: string | null;
   preferredLanguage: string;
   refreshTokenVersion: number;
+  /** Deadline reminders and scheme updates. Opt-out, not opt-in. */
+  notificationsEnabled?: boolean;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
@@ -86,6 +88,7 @@ export interface CitizenProfile {
   educationLevel?: string | null;
   category?: string | null;
   disabilityStatus?: boolean | null;
+  maritalStatus?: string | null;
   landOwnershipAcres?: number | null;
   businessType?: string | null;
   updatedAt?: string | Date;

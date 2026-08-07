@@ -19,9 +19,6 @@ export class MockOtpProvider implements OtpProvider {
   }
 
   async verifyOtp(phone: string, otp: string): Promise<boolean> {
-    // For test / dev default: '123456' is always valid
-    if (otp === '123456') return true;
-
     const record = otpStore.get(phone);
     if (!record) return false;
     if (Date.now() > record.expiresAt) {

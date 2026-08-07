@@ -1,21 +1,99 @@
 import { useTranslation } from 'react-i18next';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bookmark } from 'lucide-react';
+import { AlarmClock, Bookmark } from 'lucide-react';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { SchemeRecord } from '../components/scheme/SchemeRecord';
 import { Button } from '../components/ui/button';
 import { EmptyState } from '../components/ui/EmptyState';
 import { LoadingState } from '../components/ui/LoadingState';
-import { useSavedSchemes } from '../hooks/useSavedSchemes';
+import {
+  SAVED_STATUSES,
+  useSavedSchemes,
+  type SavedStatus
+} from '../hooks/useSavedSchemes';
 import { useSchemeRecords } from '../hooks/useSchemeRecords';
 import { useAuth } from '../auth/AuthContext';
+import { daysUntil, formatDate } from '../lib/format';
+import { cn } from '../lib/utils';
+
+type Tab = 'all' | SavedStatus;
+
+const TABS: { id: Tab; label: string }[] = [
+  { id: 'all', label: 'All' },
+  ...SAVED_STATUSES.map((s) => ({ id: s.id as Tab, label: s.label }))
+];
+
+/** Inside this many days a deadline stops being information and becomes a warning. */
+const REMINDER_WINDOW_DAYS = 30;
+
+const DeadlineMark: React.FC<{ deadline: string | Date | null }> = ({ deadline }) => {
+  const days = daysUntil(deadline);
+  if (days === null) return null;
+
+  if (days < 0) {
+    return (
+      <span className="inline-flex items-center gap-1.5 text-[0.8125rem] text-ink-3">
+        <AlarmClock className="h-3.5 w-3.5" />
+        Closed on {formatDate(deadline)}
+      </span>
+    );
+  }
+
+  const urgent = days <= REMINDER_WINDOW_DAYS;
+  return (
+    <span
+      className={cn(
+        'inline-flex items-center gap-1.5 text-[0.8125rem]',
+        urgent ? 'font-medium text-seal' : 'text-ink-3'
+      )}
+    >
+      <AlarmClock className="h-3.5 w-3.5" />
+      {days === 0
+        ? `Closes today — ${formatDate(deadline)}`
+        : days === 1
+          ? `Closes tomorrow — ${formatDate(deadline)}`
+          : `${days} days left — closes ${formatDate(deadline)}`}
+    </span>
+  );
+};
 
 export const SavedSchemesPage: React.FC = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
-  const { slugs, isSaved, toggle, clear } = useSavedSchemes();
+  const { slugs, isSaved, statusOf, toggle, setStatus, clear, isLoading: isSyncing } =
+    useSavedSchemes();
   const { schemes, isLoading } = useSchemeRecords(slugs);
+  const [tab, setTab] = useState<Tab>('all');
+
+  const counts = useMemo(() => {
+    const map: Record<Tab, number> = {
+      all: slugs.length,
+      saved: 0,
+      eligibility_checked: 0,
+      application_in_progress: 0,
+      applied: 0
+    };
+    for (const slug of slugs) map[statusOf(slug)] += 1;
+    return map;
+  }, [slugs, statusOf]);
+
+  const visible = useMemo(
+    () => (tab === 'all' ? schemes : schemes.filter((s) => statusOf(s.slug) === tab)),
+    [schemes, tab, statusOf]
+  );
+
+  // Anything with a real deadline inside the reminder window, soonest first.
+  const closingSoon = useMemo(
+    () =>
+      schemes
+        .filter((s) => {
+          const days = daysUntil(s.deadline);
+          return days !== null && days >= 0 && days <= REMINDER_WINDOW_DAYS;
+        })
+        .sort((a, b) => (daysUntil(a.deadline) ?? 0) - (daysUntil(b.deadline) ?? 0)),
+    [schemes]
+  );
 
   return (
     <PageBody>
@@ -42,10 +120,62 @@ export const SavedSchemesPage: React.FC = () => {
         </p>
       )}
 
-      <div className="mt-8">
-        {isLoading && slugs.length > 0 && <LoadingState message="Loading your saved schemes" rows={2} />}
+      {closingSoon.length > 0 && (
+        <div className="mt-6 rounded-md border border-seal/30 bg-seal/5 px-4 py-3">
+          <p className="text-[0.875rem] font-medium text-ink">
+            {closingSoon.length === 1
+              ? 'One of your saved schemes closes soon'
+              : `${closingSoon.length} of your saved schemes close soon`}
+          </p>
+          <ul className="mt-2 space-y-1">
+            {closingSoon.map((scheme) => (
+              <li key={scheme.slug} className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <Link
+                  to={`/schemes/${scheme.slug}`}
+                  className="text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
+                >
+                  {scheme.name}
+                </Link>
+                <DeadlineMark deadline={scheme.deadline} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-        {slugs.length === 0 && (
+      {slugs.length > 0 && (
+        <div
+          role="tablist"
+          aria-label="Saved scheme status"
+          className="mt-7 flex flex-wrap gap-2 border-b border-rule pb-3"
+        >
+          {TABS.map((option) => (
+            <button
+              key={option.id}
+              role="tab"
+              type="button"
+              aria-selected={tab === option.id}
+              onClick={() => setTab(option.id)}
+              className={cn(
+                'rounded-md border px-3 py-1.5 text-[0.8125rem] transition-colors',
+                tab === option.id
+                  ? 'border-sanction bg-sanction-tint font-medium text-sanction'
+                  : 'border-rule-strong text-ink-2 hover:border-ink-4 hover:text-ink'
+              )}
+            >
+              {option.label}
+              <span className="ml-1.5 text-ink-3">{counts[option.id]}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-8">
+        {(isSyncing || (isLoading && slugs.length > 0)) && (
+          <LoadingState message="Loading your saved schemes" rows={2} />
+        )}
+
+        {slugs.length === 0 && !isSyncing && (
           <EmptyState
             icon={Bookmark}
             title="Nothing saved yet"
@@ -58,15 +188,41 @@ export const SavedSchemesPage: React.FC = () => {
           />
         )}
 
-        {!isLoading && schemes.length > 0 && (
+        {!isLoading && slugs.length > 0 && visible.length === 0 && (
+          <EmptyState
+            icon={Bookmark}
+            title="Nothing at this stage"
+            description="Move a saved scheme along as you go, and it will show up under this tab."
+          />
+        )}
+
+        {!isLoading && visible.length > 0 && (
           <ul className="space-y-3">
-            {schemes.map((scheme) => (
+            {visible.map((scheme) => (
               <li key={scheme.slug}>
                 <SchemeRecord
                   scheme={scheme}
                   saved={isSaved(scheme.slug)}
                   onToggleSave={(s) => toggle(s.slug)}
                 />
+                <div className="mt-1.5 flex flex-wrap items-center justify-between gap-3 pl-6">
+                  <DeadlineMark deadline={scheme.deadline} />
+                  <label className="flex items-center gap-2 text-[0.8125rem] text-ink-2">
+                    <span>Stage</span>
+                    <select
+                      value={statusOf(scheme.slug)}
+                      onChange={(e) => setStatus(scheme.slug, e.target.value as SavedStatus)}
+                      aria-label={`Application stage for ${scheme.name}`}
+                      className="rounded-md border border-rule-strong bg-surface px-2 py-1 text-[0.8125rem] text-ink"
+                    >
+                      {SAVED_STATUSES.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
               </li>
             ))}
           </ul>
