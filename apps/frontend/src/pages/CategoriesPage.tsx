@@ -156,7 +156,7 @@ export const CategoriesPage: React.FC = () => {
               <li key={state}>
                 <Link
                   to={`/search?state=${encodeURIComponent(state)}`}
-                  className="flex items-center gap-1.5 rounded border border-rule-strong bg-surface px-2.5 py-1 text-[0.8125rem] text-ink-2 transition-colors hover:border-indigo-edge hover:bg-indigo-tint hover:text-indigo"
+                  className="tap-target flex items-center gap-1.5 rounded border border-rule-strong bg-surface px-2.5 py-1 text-[0.8125rem] text-ink-2 transition-colors hover:border-indigo-edge hover:bg-indigo-tint hover:text-indigo"
                 >
                   {state}
                   <span className="font-mono text-micro text-ink-4">{count}</span>

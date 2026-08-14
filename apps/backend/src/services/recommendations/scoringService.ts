@@ -60,11 +60,25 @@ export function passesHardFilters(scheme: Scheme, profile: CitizenProfile): bool
   return true;
 }
 
-/** Matches the income bands used across the Citizen Profile / Eligibility Checker. */
+/**
+ * Upper bound of each income band, in rupees per year.
+ *
+ * The keys are the band slugs the app actually stores on a profile — the
+ * same list as `INCOME_BANDS` in apps/frontend/src/lib/taxonomy.ts and the
+ * `tax.income.*` label keys in the locale files. They were previously
+ * written as display strings (`'<2.5L'`, `'2.5L-5L'`, `'>5L'`), which no
+ * caller ever produces, so the lookup below always missed and a citizen's
+ * income made no difference to what was recommended to them.
+ *
+ * A band's ceiling is compared against a scheme's `incomeMax`: if the whole
+ * band sits under the scheme's limit, everyone in it qualifies on income.
+ */
 const INCOME_BAND_CEILING: Record<string, number> = {
-  '<2.5L': 250000,
-  '2.5L-5L': 500000,
-  '>5L': Infinity
+  below_1l: 100000,
+  '1l_2_5l': 250000,
+  '2_5l_5l': 500000,
+  '5l_8l': 800000,
+  above_8l: Infinity
 };
 
 /**

@@ -42,7 +42,9 @@
     "changeLanguage": "ભાષા બદલો",
     "skipToContent": "સામગ્રી પર જાઓ",
     "primary": "[nav] પ્રાથમિક",
-    "openMySchemes": "[nav] મારી યોજનાઓ ખોલો"
+    "openMySchemes": "[nav] મારી યોજનાઓ ખોલો",
+    "more": "વધુ",
+    "tabAssistant": "સહાયક"
   },
   "topbar": {
     "searchPlaceholder": "યોજનાઓ શોધો",
@@ -184,7 +186,8 @@
     "loading": "[checklist] દસ્તાવેજોની યાદી લોડ થઈ રહી છે…",
     "print": "[checklist] આ યાદી છાપો",
     "allCollected": "[checklist] તમે બધા જરૂરી દસ્તાવેજો એકત્રિત કરી લીધા છો",
-    "allCollectedDesc": "[checklist] હવે તમે સત્તાવાર સરકારી પોર્ટલ પર અરજી કરવા માટે આગળ વધી શકો છો"
+    "allCollectedDesc": "[checklist] હવે તમે સત્તાવાર સરકારી પોર્ટલ પર અરજી કરવા માટે આગળ વધી શકો છો",
+    "shareList": "યાદી શેર કરો"
   },
   "assistant": {
     "eyebrow": "તમારી ભાષામાં પૂછો",
@@ -422,7 +425,8 @@
     "changeSelection": "[compare] પસંદગી બદલો",
     "backToSaved": "[compare] બચાવેલી યોજનાઓ પરત જાઓ",
     "criteria": "[compare] માપદંડ",
-    "governmentState": "[compare] સરકાર / રાજ્ય"
+    "governmentState": "[compare] સરકાર / રાજ્ય",
+    "differs": "અલગ"
   },
   "footer": {
     "blurb": "[footer] કેન્દ્ર અને રાજ્ય સરકારની યોજનાઓના શોધપાત્ર નોંધણી, સત્તાવાર જાહેરાતો સાથે અપડેટ રાખવામાં આવે છે.",
@@ -560,5 +564,51 @@
       "5l_8l": "[tax] વાર્ષિક ₹5 – 8 લાખ",
       "above_8l": "[tax] વાર્ષિક ₹8 લાખથી વધુ"
     }
+  },
+  "network": {
+    "offlineTitle": "તમે ઑફલાઇન છો",
+    "offlineBody": "નવી શોધ માટે કનેક્શન જોઈએ. પહેલેથી ખૂલેલું કામ કરતું રહેશે."
+  },
+  "onboarding": {
+    "title": "ચાલો તમારી યોજનાઓ શોધીએ",
+    "intro": "થોડા નાના પ્રશ્નો. ન ગમે તે છોડી શકો છો.",
+    "stepOf": "પગલું {{current}} / {{total}}",
+    "languageQuestion": "તમે કઈ ભાષા વાંચો છો?",
+    "nameQuestion": "તમને શું કહીને બોલાવીએ?",
+    "namePlaceholder": "તમારું નામ",
+    "stateQuestion": "તમે કયા રાજ્યમાં રહો છો?",
+    "stateWhy": "યોજનાઓ દરેક રાજ્યમાં અલગ હોય છે, તેથી આ જરૂરી છે.",
+    "ageQuestion": "તમારી ઉંમર કેટલી છે?",
+    "agePlaceholder": "વર્ષ",
+    "genderQuestion": "તમે",
+    "occupationQuestion": "તમને શું લાગુ પડે છે?",
+    "incomeQuestion": "તમારા પરિવારની વાર્ષિક આવક",
+    "categoryQuestion": "તમારી શ્રેણી",
+    "categoryWhy": "ઘણી યોજનાઓ શ્રેણી પ્રમાણે અનામત છે. આ છોડી શકો છો.",
+    "finish": "મારી યોજનાઓ બતાવો",
+    "skipAll": "પછી ભરો",
+    "greeting": "નમસ્તે, {{name}}"
+  },
+  "gender": {
+    "female": "મહિલા",
+    "male": "પુરુષ",
+    "other": "અન્ય"
+  },
+  "cat": {
+    "general": "સામાન્ય",
+    "obc": "ઓબીસી",
+    "sc": "અનુસૂચિત જાતિ",
+    "st": "અનુસૂચિત જનજાતિ",
+    "ews": "ઈડબ્લ્યુએસ"
+  },
+  "voice": {
+    "tapToSpeak": "દબાવીને બોલો",
+    "listening": "સાંભળી રહ્યું છે…",
+    "understanding": "સમજી રહ્યું છે…",
+    "readAloud": "વાંચી સંભળાવો",
+    "stopReading": "બંધ કરો",
+    "notHeard": "સંભળાયું નહીં. ફરી પ્રયાસ કરો.",
+    "micDenied": "બોલવા માટે માઇક પરવાનગી આપો.",
+    "unavailable": "આ ઉપકરણ પર અવાજ ઉપલબ્ધ નથી."
   }
 }

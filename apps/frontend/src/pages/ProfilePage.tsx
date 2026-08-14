@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserRound } from 'lucide-react';
 import type { CitizenProfile } from '@bharatassist/shared-types';
 import { apiClient } from '../api/client';
@@ -12,6 +12,7 @@ import { Label } from '../components/ui/label';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { useAuth } from '../auth/AuthContext';
+import { useCitizenProfile } from '../hooks/useCitizenProfile';
 import { INCOME_BANDS, SEGMENTS, STATES } from '../lib/taxonomy';
 
 type Draft = Partial<CitizenProfile>;
@@ -35,7 +36,13 @@ const GENDERS = ['female', 'male', 'other'];
 const CATEGORIES = ['general', 'obc', 'sc', 'st', 'ews'];
 const MARITAL_STATUSES = ['single', 'married', 'widowed', 'divorced'];
 
-/** Sentence case for a stored slug: `obc` → `OBC`, `single` → `Single`. */
+/**
+ * Sentence case for a stored slug: `single` → `Single`.
+ *
+ * Only marital status still goes through this. Gender and category are
+ * read off `gender.*` / `cat.*` in the locale files instead — this screen
+ * exists in eleven languages, and those two lists reach every one of them.
+ */
 const pretty = (value: string) =>
   value.length <= 3 ? value.toUpperCase() : value[0].toUpperCase() + value.slice(1);
 
@@ -46,19 +53,9 @@ export const ProfilePage: React.FC = () => {
   const [draft, setDraft] = useState<Draft>({});
   const [saved, setSaved] = useState(false);
 
-  const { data: profile } = useQuery<CitizenProfile | null>({
-    queryKey: ['profile'],
-    queryFn: async () => {
-      try {
-        const res = await apiClient.get('/profile');
-        return res.data?.data ?? null;
-      } catch {
-        // A citizen with no profile yet is the normal first case, not an error.
-        return null;
-      }
-    },
-    enabled: isAuthenticated
-  });
+  // Shared with the onboarding gate, so both read one query rather than two
+  // that disagree about what a 404 means.
+  const { data: profile } = useCitizenProfile();
 
   useEffect(() => {
     if (profile) setDraft(profile);
@@ -134,6 +131,14 @@ export const ProfilePage: React.FC = () => {
         className="mt-8 space-y-6"
       >
         <div className="grid gap-5 sm:grid-cols-2">
+          {/* Collected during onboarding; editable here like everything else. */}
+          <Input
+            label={t('onboarding.nameQuestion')}
+            value={draft.fullName ?? ''}
+            onChange={(e) => set('fullName', e.target.value)}
+            placeholder={t('onboarding.namePlaceholder')}
+          />
+
           <div className="space-y-1.5">
             <Label htmlFor="profile-state">{t('profile.state')}</Label>
             <Select value={draft.state ?? ''} onValueChange={(v) => set('state', v)}>
@@ -218,7 +223,7 @@ export const ProfilePage: React.FC = () => {
               <SelectContent>
                 {GENDERS.map((g) => (
                   <SelectItem key={g} value={g}>
-                    {pretty(g)}
+                    {t(`gender.${g}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -250,7 +255,7 @@ export const ProfilePage: React.FC = () => {
                 <SelectContent>
                   {CATEGORIES.map((c) => (
                     <SelectItem key={c} value={c}>
-                      {pretty(c)}
+                      {t(`cat.${c}`)}
                     </SelectItem>
                   ))}
                 </SelectContent>

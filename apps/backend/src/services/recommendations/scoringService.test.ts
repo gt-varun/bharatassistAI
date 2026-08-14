@@ -150,3 +150,41 @@ describe('rankSchemes', () => {
     expect(ranked[0].scheme.name).toBe('Alpha Scheme');
   });
 });
+
+describe('income band scoring', () => {
+  /*
+   * These bands are the slugs the app genuinely stores on a profile
+   * (`INCOME_BANDS` in the frontend taxonomy). The table they are looked up
+   * in previously held display strings instead, so every lookup missed and
+   * income silently contributed nothing to any recommendation. Asserting on
+   * the real slugs is what keeps the two lists from drifting apart again.
+   */
+  it('credits a scheme whose income ceiling covers the whole band', () => {
+    const scheme = makeScheme({ eligibilityRules: { incomeMax: 250000 } });
+    const { score, matchedCriteria } = scoreScheme(scheme, makeProfile({ incomeBand: '1l_2_5l' }));
+
+    expect(score).toBeGreaterThan(0);
+    expect(matchedCriteria.join(' ')).toMatch(/income/i);
+  });
+
+  it('does not credit a scheme whose ceiling is below the band', () => {
+    const scheme = makeScheme({ eligibilityRules: { incomeMax: 100000 } });
+    const { matchedCriteria } = scoreScheme(scheme, makeProfile({ incomeBand: '5l_8l' }));
+
+    expect(matchedCriteria.join(' ')).not.toMatch(/income limit/i);
+  });
+
+  it('treats the top band as unbounded, so no ceiling can cover it', () => {
+    const scheme = makeScheme({ eligibilityRules: { incomeMax: 10000000 } });
+    const { matchedCriteria } = scoreScheme(scheme, makeProfile({ incomeBand: 'above_8l' }));
+
+    expect(matchedCriteria.join(' ')).not.toMatch(/income limit/i);
+  });
+
+  it('ignores income entirely when the citizen has not given a band', () => {
+    const scheme = makeScheme({ eligibilityRules: { incomeMax: 250000 } });
+    const { matchedCriteria } = scoreScheme(scheme, makeProfile());
+
+    expect(matchedCriteria.join(' ')).not.toMatch(/income limit/i);
+  });
+});

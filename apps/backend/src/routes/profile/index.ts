@@ -14,6 +14,7 @@ const router = Router();
 
 /** Fields a citizen may set on themselves. Anything else in the body is dropped. */
 const PROFILE_FIELDS = [
+  'fullName',
   'state',
   'district',
   'age',

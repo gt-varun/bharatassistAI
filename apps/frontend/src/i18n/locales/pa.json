@@ -42,7 +42,9 @@
     "changeLanguage": "ਭਾਸ਼ਾ ਬਦਲੋ",
     "skipToContent": "ਸਮੱਗਰੀ ਤੇ ਜਾਓ",
     "primary": "[nav] ਮੁੱਖ",
-    "openMySchemes": "[nav] ਮੇਰੀਆਂ ਯੋਜਨਾਵਾਂ ਖੋਲ੍ਹੋ"
+    "openMySchemes": "[nav] ਮੇਰੀਆਂ ਯੋਜਨਾਵਾਂ ਖੋਲ੍ਹੋ",
+    "more": "ਹੋਰ",
+    "tabAssistant": "ਸਹਾਇਕ"
   },
   "topbar": {
     "searchPlaceholder": "ਯੋਜਨਾਵਾਂ ਖੋਜੋ",
@@ -184,7 +186,8 @@
     "loading": "[checklist] ਦਸਤਾਵੇਜ਼ ਸੂਚੀ ਲੋਡ ਹੋ ਰਹੀ ਹੈ…",
     "print": "[checklist] ਇਸ ਸੂਚੀ ਨੂੰ ਪ੍ਰਿੰਟ ਕਰੋ",
     "allCollected": "[checklist] ਤੁਸੀਂ ਸਾਰੇ ਲੋੜੀਂਦੇ ਦਸਤਾਵੇਜ਼ ਇਕੱਠੇ ਕਰ ਲਏ ਹਨ",
-    "allCollectedDesc": "[checklist] ਹੁਣ ਤੁਸੀਂ ਅਧਿਕਾਰਤ ਸਰਕਾਰੀ ਪੋਰਟਲ 'ਤੇ ਅਰਜ਼ੀ ਦੇਣ ਲਈ ਅਗਾਂਹ ਵਧ ਸਕਦੇ ਹੋ"
+    "allCollectedDesc": "[checklist] ਹੁਣ ਤੁਸੀਂ ਅਧਿਕਾਰਤ ਸਰਕਾਰੀ ਪੋਰਟਲ 'ਤੇ ਅਰਜ਼ੀ ਦੇਣ ਲਈ ਅਗਾਂਹ ਵਧ ਸਕਦੇ ਹੋ",
+    "shareList": "ਸੂਚੀ ਸਾਂਝੀ ਕਰੋ"
   },
   "assistant": {
     "eyebrow": "ਆਪਣੀ ਭਾਸ਼ਾ ਵਿੱਚ ਪੁੱਛੋ",
@@ -422,7 +425,8 @@
     "changeSelection": "ਚੋਣ ਬਦਲੋ",
     "backToSaved": "ਬਚਾਏ ਹੋਏ ਸਕੀਮਾਂ ਵਾਪਸ",
     "criteria": "ਮਾਪਦੰਡ",
-    "governmentState": "ਸਰਕਾਰ / ਰਾਜ"
+    "governmentState": "ਸਰਕਾਰ / ਰਾਜ",
+    "differs": "ਵੱਖਰਾ"
   },
   "footer": {
     "blurb": "[footer] ਕੇਂਦਰ ਅਤੇ ਰਾਜ ਸਰਕਾਰ ਦੀਆਂ ਯੋਜਨਾਵਾਂ ਦਾ ਇੱਕ ਖੋਜਯੋਗ ਰਜਿਸਟਰ, ਅਧਿਕਾਰਤ ਸੂਚਨਾਵਾਂ ਦੇ ਵਿਰੁੱਧ ਮੌਜੂਦਾ ਰੱਖਿਆ ਗਿਆ।",
@@ -560,5 +564,51 @@
       "5l_8l": "₹5 – 8 ਲੱਖ ਪ੍ਰਤੀ ਸਾਲ",
       "above_8l": "₹8 ਲੱਖ ਤੋਂ ਵੱਧ ਪ੍ਰਤੀ ਸਾਲ"
     }
+  },
+  "network": {
+    "offlineTitle": "ਤੁਸੀਂ ਆਫ਼ਲਾਈਨ ਹੋ",
+    "offlineBody": "ਨਵੀਂ ਖੋਜ ਲਈ ਕਨੈਕਸ਼ਨ ਚਾਹੀਦਾ ਹੈ। ਪਹਿਲਾਂ ਖੁੱਲ੍ਹਿਆ ਸਭ ਕੁਝ ਕੰਮ ਕਰੇਗਾ।"
+  },
+  "onboarding": {
+    "title": "ਆਓ ਤੁਹਾਡੀਆਂ ਯੋਜਨਾਵਾਂ ਲੱਭੀਏ",
+    "intro": "ਕੁਝ ਛੋਟੇ ਸਵਾਲ। ਜੋ ਨਾ ਚਾਹੋ ਛੱਡ ਸਕਦੇ ਹੋ।",
+    "stepOf": "ਕਦਮ {{current}} / {{total}}",
+    "languageQuestion": "ਤੁਸੀਂ ਕਿਹੜੀ ਭਾਸ਼ਾ ਪੜ੍ਹਦੇ ਹੋ?",
+    "nameQuestion": "ਤੁਹਾਨੂੰ ਕੀ ਕਹਿ ਕੇ ਬੁਲਾਈਏ?",
+    "namePlaceholder": "ਤੁਹਾਡਾ ਨਾਂ",
+    "stateQuestion": "ਤੁਸੀਂ ਕਿਹੜੇ ਰਾਜ ਵਿੱਚ ਰਹਿੰਦੇ ਹੋ?",
+    "stateWhy": "ਯੋਜਨਾਵਾਂ ਹਰ ਰਾਜ ਵਿੱਚ ਵੱਖਰੀਆਂ ਹੁੰਦੀਆਂ ਹਨ, ਇਸ ਲਈ ਇਹ ਜ਼ਰੂਰੀ ਹੈ।",
+    "ageQuestion": "ਤੁਹਾਡੀ ਉਮਰ ਕਿੰਨੀ ਹੈ?",
+    "agePlaceholder": "ਸਾਲ",
+    "genderQuestion": "ਤੁਸੀਂ",
+    "occupationQuestion": "ਤੁਹਾਡੇ ਉੱਤੇ ਕੀ ਲਾਗੂ ਹੁੰਦਾ ਹੈ?",
+    "incomeQuestion": "ਤੁਹਾਡੇ ਪਰਿਵਾਰ ਦੀ ਸਾਲਾਨਾ ਆਮਦਨ",
+    "categoryQuestion": "ਤੁਹਾਡੀ ਸ਼੍ਰੇਣੀ",
+    "categoryWhy": "ਕਈ ਯੋਜਨਾਵਾਂ ਸ਼੍ਰੇਣੀ ਅਨੁਸਾਰ ਰਾਖਵੀਆਂ ਹਨ। ਇਹ ਛੱਡ ਸਕਦੇ ਹੋ।",
+    "finish": "ਮੇਰੀਆਂ ਯੋਜਨਾਵਾਂ ਦਿਖਾਓ",
+    "skipAll": "ਬਾਅਦ ਵਿੱਚ ਭਰੋ",
+    "greeting": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, {{name}}"
+  },
+  "gender": {
+    "female": "ਔਰਤ",
+    "male": "ਮਰਦ",
+    "other": "ਹੋਰ"
+  },
+  "cat": {
+    "general": "ਜਨਰਲ",
+    "obc": "ਓਬੀਸੀ",
+    "sc": "ਅਨੁਸੂਚਿਤ ਜਾਤੀ",
+    "st": "ਅਨੁਸੂਚਿਤ ਜਨਜਾਤੀ",
+    "ews": "ਈਡਬਲਯੂਐਸ"
+  },
+  "voice": {
+    "tapToSpeak": "ਦਬਾ ਕੇ ਬੋਲੋ",
+    "listening": "ਸੁਣ ਰਿਹਾ ਹੈ…",
+    "understanding": "ਸਮਝ ਰਿਹਾ ਹੈ…",
+    "readAloud": "ਪੜ੍ਹ ਕੇ ਸੁਣਾਓ",
+    "stopReading": "ਰੋਕੋ",
+    "notHeard": "ਸੁਣਾਈ ਨਹੀਂ ਦਿੱਤਾ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "micDenied": "ਬੋਲਣ ਲਈ ਮਾਈਕ ਦੀ ਇਜਾਜ਼ਤ ਦਿਓ।",
+    "unavailable": "ਇਸ ਡਿਵਾਈਸ ਉੱਤੇ ਆਵਾਜ਼ ਉਪਲਬਧ ਨਹੀਂ।"
   }
 }

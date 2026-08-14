@@ -11,6 +11,7 @@
     "lint": "eslint src/**/*.ts",
     "test": "vitest run",
     "seed": "tsx src/scripts/seed.ts",
+    "sync-indexes": "tsx src/scripts/syncIndexes.ts",
     "embed": "tsx src/scripts/embed.ts",
     "knowledge-update": "tsx src/scripts/knowledgeUpdate.ts",
     "rollback-scheme": "tsx src/scripts/rollbackScheme.ts",

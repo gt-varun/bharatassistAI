@@ -15,18 +15,36 @@ import { AssistantPage } from './pages/AssistantPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { OnboardingGate, OnboardingPage } from './onboarding';
 
 export const router = createBrowserRouter([
   // Public surfaces carry their own header and footer.
   { path: '/', element: <LandingPage /> },
   { path: '/login', element: <LoginPage /> },
 
+  /*
+   * The questions asked on first arrival. Signed in, but deliberately
+   * outside both the shell and the onboarding gate: it needs the whole
+   * screen for one large question at a time, and a gate that guarded its
+   * own destination would redirect for ever.
+   */
+  {
+    path: '/welcome',
+    element: (
+      <RequireAuth>
+        <OnboardingPage />
+      </RequireAuth>
+    )
+  },
+
   // Everything else is the application proper: rail, search bar, records.
   // It sits behind sign-in, so the only public surfaces are the two above.
   {
     element: (
       <RequireAuth>
-        <AppShell />
+        <OnboardingGate>
+          <AppShell />
+        </OnboardingGate>
       </RequireAuth>
     ),
     children: [

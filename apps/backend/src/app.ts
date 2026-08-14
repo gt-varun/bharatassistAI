@@ -16,15 +16,37 @@ import assistantRouter from './routes/assistant/index.js';
 import recommendationsRouter from './routes/recommendations/index.js';
 import profileRouter from './routes/profile/index.js';
 import savedRouter from './routes/saved/index.js';
+import translateRouter from './routes/translate/index.js';
+import voiceRouter from './routes/voice/index.js';
 
 export const createApp = () => {
   const app = express();
 
   // CORS locked to FRONTEND_URL from env
   const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+  /**
+   * The same web app also ships as a Capacitor mobile app, and a WebView
+   * does not send the site's own origin: Android sends `https://localhost`
+   * (the `androidScheme` in capacitor.config.ts) and iOS sends
+   * `capacitor://localhost`. Neither is a wildcard — they are two fixed
+   * origins that only the packaged app can present — so the allowlist stays
+   * an allowlist. Without them every request from the phone is a CORS
+   * failure, and the app looks broken rather than unauthorised.
+   *
+   * Set MOBILE_APP_ORIGINS (comma-separated) to override, e.g. to drop
+   * mobile support entirely on a web-only deployment.
+   */
+  const mobileOrigins = (
+    process.env.MOBILE_APP_ORIGINS ?? 'https://localhost,capacitor://localhost'
+  )
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
   app.use(
     cors({
-      origin: [frontendUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+      origin: [frontendUrl, 'http://localhost:5173', 'http://127.0.0.1:5173', ...mobileOrigins],
       credentials: true
     })
   );
@@ -86,6 +108,11 @@ export const createApp = () => {
   app.use('/api/recommendations', recommendationsRouter);
   app.use('/api/profile', profileRouter);
   app.use('/api/saved', savedRouter);
+  app.use('/api/translate', translateRouter);
+  // Mounted last of the feature routes: it parses a raw audio body rather
+  // than JSON, and does so inside its own router so the global express.json
+  // above is never applied to a recording.
+  app.use('/api/voice', voiceRouter);
 
   // Centralized Error Handling Middleware
   app.use(errorHandler);

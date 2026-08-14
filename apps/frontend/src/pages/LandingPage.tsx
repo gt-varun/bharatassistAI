@@ -153,7 +153,7 @@ export const LandingPage: React.FC = () => {
         <section className="relative overflow-hidden">
           <div aria-hidden className="paper-grid paper-fade absolute inset-0 -z-10" />
 
-          <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 pb-16 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-end lg:px-8">
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)] gap-12 px-4 pb-16 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-end lg:px-8">
             <div className="stagger max-w-3xl">
               <p className="register-strong flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-sanction" />
@@ -357,7 +357,17 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- The register, live ---------------------------- */}
         <section className="hair-top bg-surface">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
+            {/*
+                An explicit `minmax(0, 1fr)` even for the single-column phone
+                layout. Without a template the implicit track is `auto`,
+                whose minimum is its content's min-content — and a scheme
+                record contains a department name set in nowrap for
+                truncation. That one string then sets a ~530px floor for the
+                whole section, and the page bleeds off the side of a phone.
+                `minmax(0, …)` lets the track shrink so the truncation can
+                do its job.
+              */}
+              <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
               <div>
                 <p className="register mb-1.5">{t('landing.liveEyebrow')}</p>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
@@ -455,7 +465,7 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- Languages ------------------------------------- */}
         <section id="languages" className="hair-top scroll-mt-16 bg-surface">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-center">
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-center">
               <div>
                 <p className="register mb-1.5">{t('landing.langEyebrow')}</p>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
@@ -510,7 +520,7 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- Closing prompt -------------------------------- */}
         <section className="hair-top">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-6 rounded-lg border border-sanction-edge bg-sanction-tint p-8">
+            <div className="flex flex-wrap items-center justify-between gap-6 rounded-lg border border-sanction-edge bg-sanction-tint p-6 sm:p-8">
               <div className="max-w-lg">
                 <h2 className="font-display text-xl font-semibold text-sanction-deep">
                   {t('landing.closingTitle')}

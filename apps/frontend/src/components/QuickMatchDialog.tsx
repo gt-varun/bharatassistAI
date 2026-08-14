@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import {
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -76,7 +77,10 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
         if (!next) reset();
       }}
     >
-      <DialogContent className="max-w-xl">
+      {/* `sm:` so tailwind-merge replaces the base `sm:max-w-lg` rather than
+          leaving both — an unprefixed `max-w-xl` would lose to the
+          responsive variant at every width above 640px. */}
+      <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <p className="register">
             Question {step + 1} of {QUESTIONS.length}
@@ -98,7 +102,7 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
           ))}
         </div>
 
-        <div className="min-h-[11rem] py-1">
+        <DialogBody className="min-h-[11rem] py-1">
           {step === 0 && (
             <Select value={state} onValueChange={setState}>
               <SelectTrigger className="h-11">
@@ -165,7 +169,7 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
               })}
             </ul>
           )}
-        </div>
+        </DialogBody>
 
         <div className="hair-top flex items-center justify-between gap-3 pt-4">
           {step > 0 ? (

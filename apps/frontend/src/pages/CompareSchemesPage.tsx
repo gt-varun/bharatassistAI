@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowLeft, GitCompare, ExternalLink, Check, AlertCircle } from 'lucide-react';
+import { ArrowLeft, GitCompare, ExternalLink, AlertCircle } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/ui/button';
@@ -36,6 +36,93 @@ export interface ComparisonResponse {
   differingFields: string[];
   differences: Record<string, boolean>;
 }
+
+/**
+ * The criteria being compared, declared once.
+ *
+ * Both renderings below — the desktop matrix and the phone's stacked
+ * cards — are generated from this list, so a criterion can never appear in
+ * one and be quietly missing from the other, and "which fields differ"
+ * stays a single decision rather than two copies of the same conditional.
+ */
+interface CompareRow {
+  id: string;
+  labelKey: string;
+  /** Fields on the API's `differences` map that make this row a difference. */
+  diffKeys: string[];
+  render: (col: SchemeComparisonColumn) => React.ReactNode;
+  /** Extra emphasis for the row citizens are really scanning for. */
+  emphasis?: boolean;
+}
+
+const COMPARE_ROWS: CompareRow[] = [
+  {
+    id: 'government',
+    labelKey: 'compare.governmentState',
+    diffKeys: ['state', 'level'],
+    render: (col) => (col.level === 'central' ? 'Central Scheme' : `State (${col.state})`)
+  },
+  {
+    id: 'benefitType',
+    labelKey: 'compare.benefitType',
+    diffKeys: ['benefitType'],
+    render: (col) => <span className="capitalize">{col.benefitType}</span>
+  },
+  {
+    id: 'benefits',
+    labelKey: 'compare.benefitSummary',
+    diffKeys: [],
+    render: (col) => col.benefits,
+    emphasis: true
+  },
+  {
+    id: 'eligibility',
+    labelKey: 'compare.eligibility',
+    diffKeys: ['eligibilitySummary'],
+    render: (col) => col.eligibilitySummary
+  },
+  {
+    id: 'documents',
+    labelKey: 'compare.documents',
+    diffKeys: ['requiredDocumentsCount'],
+    render: (col) => (
+      <>
+        <span className="font-semibold">{col.requiredDocumentsCount}</span> documents
+      </>
+    )
+  },
+  {
+    id: 'applicationMode',
+    labelKey: 'compare.applicationMode',
+    diffKeys: ['applicationMode'],
+    render: (col) => <span className="capitalize">{col.applicationMode}</span>
+  },
+  {
+    id: 'deadline',
+    labelKey: 'compare.deadline',
+    diffKeys: ['applicationDeadline'],
+    render: (col) => col.applicationDeadline
+  },
+  {
+    id: 'portal',
+    labelKey: 'compare.portal',
+    diffKeys: [],
+    render: (col) =>
+      col.officialPortalUrl && isValidGovDomain(col.officialPortalUrl) ? (
+        <a
+          href={col.officialPortalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 font-medium text-sanction hover:underline"
+        >
+          Official portal
+          <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+      ) : (
+        <span className="text-micro text-ink-4">Unverified portal</span>
+      )
+  }
+];
 
 export const CompareSchemesPage: React.FC = () => {
   const { t } = useTranslation();
@@ -214,121 +301,124 @@ export const CompareSchemesPage: React.FC = () => {
         </div>
       )}
 
-      {/* Comparison Table */}
-      <div className="mt-8 overflow-x-auto rounded-xl border border-rule bg-surface">
-        <table className="w-full text-left border-collapse min-w-[40rem]">
+      {/*
+        The comparison, in the two shapes a comparison can honestly take.
+
+        Phones get criterion-major cards rather than the usual row-to-card
+        conversion. A comparison exists to put values *beside* each other,
+        and one card per scheme would force the reader to scroll back and
+        forth to answer "which deadline is sooner?". Grouping by criterion
+        keeps the answer inside one card. Nothing is dropped: every column
+        of the desktop matrix appears here, and the same fields are
+        highlighted as differing.
+      */}
+      <div className="mt-8 space-y-3 lg:hidden">
+        {COMPARE_ROWS.map((row) => {
+          const differs = row.diffKeys.some((key) => differences[key]);
+          return (
+            <section
+              key={row.id}
+              className={cn(
+                'rounded-lg border bg-surface p-4',
+                differs ? 'border-ochre-edge bg-ochre-tint/30' : 'border-rule'
+              )}
+            >
+              <h3 className="register flex items-center justify-between gap-2">
+                {t(row.labelKey)}
+                {differs && (
+                  <span className="register-strong text-ochre">{t('compare.differs')}</span>
+                )}
+              </h3>
+
+              <dl className="mt-3 divide-y divide-rule">
+                {schemes.map((col) => (
+                  <div key={col.schemeId} className="grid gap-1 py-2.5 first:pt-0 last:pb-0">
+                    <dt className="min-w-0 text-[0.8125rem] font-medium text-ink-2">
+                      <Link
+                        to={`/schemes/${col.slug}`}
+                        className="underline-offset-4 hover:text-sanction hover:underline"
+                      >
+                        {col.schemeName}
+                      </Link>
+                    </dt>
+                    <dd
+                      className={cn(
+                        'text-[0.875rem] leading-relaxed text-ink',
+                        row.emphasis && 'font-medium text-sanction-deep'
+                      )}
+                    >
+                      {row.render(col)}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          );
+        })}
+      </div>
+
+      {/* Desktop: the matrix, with the criteria column pinned while the
+          scheme columns scroll sideways. */}
+      <div className="mt-8 hidden overflow-x-auto rounded-xl border border-rule bg-surface lg:block">
+        <table className="w-full min-w-[40rem] border-collapse text-left">
           <thead>
-            <tr className="border-b border-rule bg-surface-2">
-              <th className="p-4 register uppercase text-xs text-ink-3 w-44 sticky left-0 bg-surface-2">
+            <tr className="border-b border-rule bg-surface-sunk">
+              <th className="register sticky left-0 z-10 w-44 bg-surface-sunk p-4 text-xs uppercase text-ink-3">
                 {t('compare.criteria')}
               </th>
               {schemes.map((col) => (
-                <th key={col.schemeId} className="p-4 font-display font-semibold text-ink min-w-[14rem]">
-                  <Link to={`/schemes/${col.slug}`} className="hover:text-sanction underline-offset-4 hover:underline">
+                <th
+                  key={col.schemeId}
+                  className="min-w-[14rem] p-4 font-display font-semibold text-ink"
+                >
+                  <Link
+                    to={`/schemes/${col.slug}`}
+                    className="underline-offset-4 hover:text-sanction hover:underline"
+                  >
                     {col.schemeName}
                   </Link>
-                  <span className="block text-micro register font-normal text-ink-3 mt-1">
+                  <span className="register mt-1 block text-micro font-normal text-ink-3">
                     {col.department}
                   </span>
                 </th>
               ))}
             </tr>
           </thead>
+
           <tbody className="divide-y divide-rule text-[0.875rem]">
-            {/* Level & State */}
-            <tr className={cn(differences['state'] || differences['level'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.governmentState')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink">
-                  {col.level === 'central' ? 'Central Scheme' : `State (${col.state})`}
-                </td>
-              ))}
-            </tr>
-
-            {/* Benefit Type */}
-            <tr className={cn(differences['benefitType'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.benefitType')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink capitalize">
-                  {col.benefitType}
-                </td>
-              ))}
-            </tr>
-
-            {/* Benefit Summary */}
-            <tr>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.benefitSummary')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink font-medium text-sanction-deep">
-                  {col.benefits}
-                </td>
-              ))}
-            </tr>
-
-            {/* Eligibility Summary */}
-            <tr className={cn(differences['eligibilitySummary'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.eligibility')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink-2 leading-relaxed">
-                  {col.eligibilitySummary}
-                </td>
-              ))}
-            </tr>
-
-            {/* Required Documents Count */}
-            <tr className={cn(differences['requiredDocumentsCount'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.documents')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink">
-                  <span className="font-semibold">{col.requiredDocumentsCount}</span> documents
-                </td>
-              ))}
-            </tr>
-
-            {/* Application Mode */}
-            <tr className={cn(differences['applicationMode'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.applicationMode')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink capitalize">
-                  {col.applicationMode}
-                </td>
-              ))}
-            </tr>
-
-            {/* Application Deadline */}
-            <tr className={cn(differences['applicationDeadline'] ? 'bg-ochre-tint/20' : '')}>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.deadline')}</td>
-              {schemes.map((col) => (
-                <td key={col.schemeId} className="p-4 text-ink">
-                  {col.applicationDeadline}
-                </td>
-              ))}
-            </tr>
-
-            {/* Actions & Official Portal Link */}
-            <tr>
-              <td className="p-4 font-medium text-ink-2 bg-surface">{t('compare.portal')}</td>
-              {schemes.map((col) => {
-                const valid = isValidGovDomain(col.officialPortalUrl);
-                return (
-                  <td key={col.schemeId} className="p-4">
-                    {col.officialPortalUrl && valid ? (
-                      <a
-                        href={col.officialPortalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sanction font-medium hover:underline"
-                      >
-                        {t('compare.portal')}
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    ) : (
-                      <span className="text-ink-4 text-micro">{t('compare.unverifiedPortal')}</span>
+            {COMPARE_ROWS.map((row) => {
+              const differs = row.diffKeys.some((key) => differences[key]);
+              return (
+                <tr key={row.id} className={cn(differs && 'bg-ochre-tint')}>
+                  {/*
+                    The label cell is sticky, so its background must be
+                    opaque and must match the row exactly — a translucent
+                    sticky cell lets the scrolling scheme columns show
+                    through it as they pass underneath.
+                  */}
+                  <th
+                    scope="row"
+                    className={cn(
+                      'sticky left-0 z-10 p-4 text-left font-medium text-ink-2',
+                      differs ? 'bg-ochre-tint' : 'bg-surface'
                     )}
-                  </td>
-                );
-              })}
-            </tr>
+                  >
+                    {t(row.labelKey)}
+                  </th>
+                  {schemes.map((col) => (
+                    <td
+                      key={col.schemeId}
+                      className={cn(
+                        'p-4 leading-relaxed text-ink',
+                        row.emphasis && 'font-medium text-sanction-deep'
+                      )}
+                    >
+                      {row.render(col)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

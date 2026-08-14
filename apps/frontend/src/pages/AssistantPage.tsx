@@ -8,6 +8,7 @@ import { apiClient } from '../api/client';
 import { useAuth } from '../auth/AuthContext';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/ui/button';
+import { MicButton, SpeakButton } from '../voice';
 import { cn } from '../lib/utils';
 
 interface MessageSource {
@@ -160,7 +161,7 @@ export const AssistantPage: React.FC = () => {
   };
 
   return (
-    <PageBody className="flex min-h-[calc(100vh-3.5rem)] max-w-4xl flex-col">
+    <PageBody className="flex min-h-[calc(100dvh-3.5rem)] max-w-4xl flex-col">
       <PageHeader
         eyebrow={t('assistant.eyebrow')}
         title={t('assistant.title')}
@@ -212,7 +213,10 @@ export const AssistantPage: React.FC = () => {
               >
                 <div
                   className={cn(
-                    'max-w-[42rem] rounded-lg px-4 py-3 text-[0.9375rem] leading-relaxed',
+                    // A bubble that runs the full width of a phone stops
+                    // reading as one side of a conversation, so it is capped
+                    // proportionally on small screens and absolutely on large.
+                    'max-w-[88%] rounded-lg px-4 py-3 text-[0.9375rem] leading-relaxed sm:max-w-[42rem]',
                     message.role === 'user'
                       ? 'bg-ink text-white'
                       : message.failed
@@ -229,6 +233,15 @@ export const AssistantPage: React.FC = () => {
                     </p>
                   )}
                   <p className="whitespace-pre-wrap">{message.text}</p>
+
+                  {/* An answer a citizen can hear instead of read. Only on
+                      the assistant's side — nobody needs their own question
+                      read back to them. */}
+                  {message.role === 'assistant' && !message.failed && (
+                    <div className="mt-2.5 flex justify-start">
+                      <SpeakButton text={message.text} />
+                    </div>
+                  )}
 
                   {message.sources?.length ? (
                     <p className="hair-top mt-3 flex flex-wrap items-center gap-2 pt-2.5">
@@ -269,13 +282,21 @@ export const AssistantPage: React.FC = () => {
         )}
       </div>
 
-      {/* Composer */}
+      {/*
+        Composer.
+
+        `dock-above-tabbar` is what keeps this reachable on a phone: it sits
+        above the bottom navigation, and drops flush to the bottom edge both
+        at `lg` (no tab bar) and while the keyboard is open (tab bar hidden).
+        Without it the send button would be behind the navigation — the one
+        control on this page that must never be.
+      */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
           send(input);
         }}
-        className="sticky bottom-0 mt-8 bg-paper pb-4 pt-2"
+        className="dock-above-tabbar sticky mt-8 bg-paper pb-4 pt-2"
       >
         <div className="flex items-end gap-2 rounded-lg border border-rule-strong bg-surface p-2 shadow-card transition-[border-color,box-shadow] focus-within:border-sanction focus-within:shadow-focus">
           <label htmlFor="assistant-input" className="sr-only">
@@ -298,8 +319,19 @@ export const AssistantPage: React.FC = () => {
               }
             }}
             placeholder="Ask about eligibility, documents, or a word you don't recognise"
-            className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-2 py-2 text-[0.9375rem] text-ink outline-none placeholder:text-ink-4"
+            className="max-h-40 min-h-[2.5rem] flex-1 resize-none bg-transparent px-2 py-2 text-[1rem] text-ink outline-none placeholder:text-ink-4 sm:text-[0.9375rem]"
           />
+          {/*
+            Ask out loud. The transcript lands in the same field typing
+            would fill, so the citizen can correct a misheard word before
+            sending rather than having it fired off behind their back.
+          */}
+          <MicButton
+            onResult={(text) =>
+              setInput((current) => (current ? `${current} ${text}` : text))
+            }
+          />
+
           <Button type="submit" size="icon" disabled={!input.trim() || pending} aria-label="Send">
             <ArrowUp className="h-4 w-4" />
           </Button>

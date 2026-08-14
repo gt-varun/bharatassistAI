@@ -84,8 +84,20 @@ export const Provenance: React.FC<{ scheme: Scheme; className?: string }> = ({
   const [verifiedKey, verifiedCount] = relativeVerified(scheme.lastVerifiedAt);
 
   return (
+    /*
+     * `min-w-0` on the truncating spans is what keeps a scheme record from
+     * setting the width of the page it sits in.
+     *
+     * `truncate` includes `white-space: nowrap`, and a flex item defaults to
+     * `min-width: auto` — so without this each span reports its *entire*
+     * untruncated string as a minimum width. A department like "National
+     * Social Assistance Programme Guidelines" then demands ~456px, which
+     * propagates up through every list and grid holding a record and pushes
+     * the whole layout past the width of a phone. `min-w-0` lets the span
+     * shrink and actually do the truncating it was asked to do.
+     */
     <p className={cn('register flex flex-wrap items-center gap-x-2 gap-y-1', className)}>
-      <span className="truncate text-ink-2">{scheme.department}</span>
+      <span className="min-w-0 truncate text-ink-2">{scheme.department}</span>
       <span aria-hidden className="text-ink-4">
         ·
       </span>
@@ -95,7 +107,7 @@ export const Provenance: React.FC<{ scheme: Scheme; className?: string }> = ({
       <span aria-hidden className="text-ink-4">
         ·
       </span>
-      <span className="truncate">{recordRef(scheme.sourceRef, scheme.slug)}</span>
+      <span className="min-w-0 truncate">{recordRef(scheme.sourceRef, scheme.slug)}</span>
     </p>
   );
 };

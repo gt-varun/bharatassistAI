@@ -42,7 +42,9 @@
     "changeLanguage": "زبان بدلیں",
     "skipToContent": "مواد پر جائیں",
     "primary": "[nav] بنیادی",
-    "openMySchemes": "[nav] میرے اسکیمز کھولیں"
+    "openMySchemes": "[nav] میرے اسکیمز کھولیں",
+    "more": "مزید",
+    "tabAssistant": "معاون"
   },
   "topbar": {
     "searchPlaceholder": "اسکیمیں تلاش کریں",
@@ -184,7 +186,8 @@
     "loading": "[checklist] دستاویزات کی فہرست لوڈ ہو رہی ہے…",
     "print": "[checklist] اس فہرست کو پرنٹ کریں",
     "allCollected": "[checklist] آپ نے تمام ضروری دستاویزات جمع کر لی ہیں",
-    "allCollectedDesc": "[checklist] اب آپ سرکاری پورٹل پر درخواست دینے کے لیے آگے بڑھ سکتے ہیں"
+    "allCollectedDesc": "[checklist] اب آپ سرکاری پورٹل پر درخواست دینے کے لیے آگے بڑھ سکتے ہیں",
+    "shareList": "فہرست شیئر کریں"
   },
   "assistant": {
     "eyebrow": "اپنی زبان میں پوچھیں",
@@ -422,7 +425,8 @@
     "changeSelection": "منتخب کردہ کو بدلنا",
     "backToSaved": "بچائے گئے اسکیمز پر واپس جانا",
     "criteria": "معیار",
-    "governmentState": "حکومت / ریاست"
+    "governmentState": "حکومت / ریاست",
+    "differs": "مختلف"
   },
   "footer": {
     "blurb": "[footer] مرکزی اور ریاستی حکومت کی اسکیمز کا ایک تلاش کرنے والا رجسٹر، جو سرکاری نوٹیفیکیشنز کے خلاف موجودہ ہے۔",
@@ -560,5 +564,51 @@
       "5l_8l": "₹5 – 8 لاکھ سالانہ",
       "above_8l": "₹8 لاکھ سے زائد سالانہ"
     }
+  },
+  "network": {
+    "offlineTitle": "آپ آف لائن ہیں",
+    "offlineBody": "نئی تلاش کے لیے کنکشن درکار ہے۔ جو پہلے سے کھلا ہے وہ کام کرتا رہے گا۔"
+  },
+  "onboarding": {
+    "title": "آئیے آپ کی اسکیمیں تلاش کریں",
+    "intro": "چند مختصر سوالات۔ جو نہ چاہیں چھوڑ سکتے ہیں۔",
+    "stepOf": "مرحلہ {{current}} / {{total}}",
+    "languageQuestion": "آپ کون سی زبان پڑھتے ہیں؟",
+    "nameQuestion": "ہم آپ کو کیا کہہ کر پکاریں؟",
+    "namePlaceholder": "آپ کا نام",
+    "stateQuestion": "آپ کس ریاست میں رہتے ہیں؟",
+    "stateWhy": "اسکیمیں ہر ریاست میں مختلف ہوتی ہیں، اس لیے یہ ضروری ہے۔",
+    "ageQuestion": "آپ کی عمر کتنی ہے؟",
+    "agePlaceholder": "سال",
+    "genderQuestion": "آپ ہیں",
+    "occupationQuestion": "آپ پر کیا لاگو ہوتا ہے؟",
+    "incomeQuestion": "آپ کے خاندان کی سالانہ آمدنی",
+    "categoryQuestion": "آپ کا زمرہ",
+    "categoryWhy": "بہت سی اسکیمیں زمرے کے مطابق مختص ہیں۔ آپ اسے چھوڑ سکتے ہیں۔",
+    "finish": "میری اسکیمیں دکھائیں",
+    "skipAll": "بعد میں بھریں",
+    "greeting": "السلام علیکم، {{name}}"
+  },
+  "gender": {
+    "female": "خاتون",
+    "male": "مرد",
+    "other": "دیگر"
+  },
+  "cat": {
+    "general": "جنرل",
+    "obc": "او بی سی",
+    "sc": "درج فہرست ذات",
+    "st": "درج فہرست قبیلہ",
+    "ews": "ای ڈبلیو ایس"
+  },
+  "voice": {
+    "tapToSpeak": "دبا کر بولیں",
+    "listening": "سن رہا ہے…",
+    "understanding": "سمجھ رہا ہے…",
+    "readAloud": "پڑھ کر سنائیں",
+    "stopReading": "روکیں",
+    "notHeard": "سنائی نہیں دیا۔ دوبارہ کوشش کریں۔",
+    "micDenied": "بولنے کے لیے مائیک کی اجازت دیں۔",
+    "unavailable": "اس ڈیوائس پر آواز دستیاب نہیں۔"
   }
 }

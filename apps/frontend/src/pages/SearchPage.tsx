@@ -13,7 +13,13 @@ import { Button } from '../components/ui/button';
 import { EmptyState } from '../components/ui/EmptyState';
 import { LoadingState } from '../components/ui/LoadingState';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../components/ui/dialog';
+import {
+  Dialog,
+  DialogBody,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from '../components/ui/dialog';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { benefitLabelKey, incomeLabelKey, segmentLabelKey } from '../lib/taxonomy';
 import { cn } from '../lib/utils';
@@ -173,7 +179,7 @@ export const SearchPage: React.FC = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={t('search.placeholder')}
-          className="h-10 min-w-0 flex-1 bg-transparent text-[0.9375rem] text-ink outline-none placeholder:text-ink-4"
+          className="h-10 min-w-0 flex-1 bg-transparent text-[1rem] text-ink outline-none placeholder:text-ink-4 sm:text-[0.9375rem]"
           autoComplete="off"
         />
         {input && (
@@ -229,11 +235,14 @@ export const SearchPage: React.FC = () => {
               )}
             </p>
 
-            <div className="flex items-center gap-2">
+            {/* On a phone these two share the full width rather than
+                crowding the count into a corner; at 320px a fixed 11.5rem
+                sort control plus a Filters button leaves nothing over. */}
+            <div className="flex w-full items-center gap-2 sm:w-auto">
               <Button
                 variant="outline"
                 size="sm"
-                className="lg:hidden"
+                className="flex-1 sm:flex-none lg:hidden"
                 onClick={() => setFiltersOpen(true)}
               >
                 <SlidersHorizontal className="h-4 w-4 text-ink-3" />
@@ -252,7 +261,10 @@ export const SearchPage: React.FC = () => {
                   setPage(1);
                 }}
               >
-                <SelectTrigger className="h-8 w-[11.5rem] text-[0.8125rem]" aria-label={t('search.sortAria')}>
+                <SelectTrigger
+                  className="h-8 w-full min-w-0 flex-1 text-[0.8125rem] sm:w-[11.5rem] sm:flex-none"
+                  aria-label={t('search.sortAria')}
+                >
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -374,13 +386,23 @@ export const SearchPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile filters */}
+      {/*
+        Filters as a bottom sheet on a phone. The six selects scroll inside
+        the sheet while "Reset" and "Show N schemes" stay pinned at the
+        bottom — the result count is the whole point of the panel, so it
+        must not scroll away while you are changing the filters that drive
+        it.
+      */}
       <Dialog open={filtersOpen} onOpenChange={setFiltersOpen}>
-        <DialogContent className="max-h-[85vh] overflow-y-auto">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>{t('search.filters')}</DialogTitle>
           </DialogHeader>
-          <FilterPanel filters={filters} onChange={updateFilter} />
+
+          <DialogBody>
+            <FilterPanel filters={filters} onChange={updateFilter} />
+          </DialogBody>
+
           <div className="hair-top flex gap-2 pt-4">
             <Button variant="outline" className="flex-1" onClick={() => setFilters(EMPTY_FILTERS)}>
               {t('search.reset')}

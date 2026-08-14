@@ -79,6 +79,13 @@ export interface User {
 export interface CitizenProfile {
   _id?: string;
   userId: string;
+  /**
+   * What the citizen would like to be called. It takes no part in
+   * eligibility or scoring — it exists so the app can address someone by
+   * name rather than as an account — and like every field except `state`
+   * it is optional.
+   */
+  fullName?: string | null;
   state: string;
   district?: string | null;
   age?: number | null;

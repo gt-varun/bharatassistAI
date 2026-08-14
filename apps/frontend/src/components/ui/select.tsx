@@ -15,7 +15,8 @@ const SelectTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       'flex h-10 w-full items-center justify-between gap-2 rounded-md border border-rule-strong bg-surface px-3 text-left',
-      'text-[0.875rem] text-ink transition-[border-color,box-shadow] duration-150',
+      // See ui/input.tsx: 16px minimum on phones so focusing never zooms.
+      'text-[1rem] text-ink transition-[border-color,box-shadow] duration-150 sm:text-[0.875rem]',
       'data-[placeholder]:text-ink-4 focus:border-sanction focus:outline-none focus:ring-4 focus:ring-sanction/12',
       'disabled:cursor-not-allowed disabled:bg-surface-sunk disabled:text-ink-3',
       className

@@ -23,7 +23,9 @@ import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { EmptyState } from '../components/ui/EmptyState';
 import { Skeleton } from '../components/ui/skeleton';
+import { SpeakButton } from '../voice';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
+import { useLiveTranslation } from '../translation';
 import { isValidGovDomain } from '../lib/govAllowlist';
 import { benefitLabelKey, segmentLabelKey } from '../lib/taxonomy';
 import { formatDate, daysUntil } from '../lib/format';
@@ -66,6 +68,29 @@ export const SchemeDetailsPage: React.FC = () => {
     },
     enabled: Boolean(scheme)
   });
+
+  /*
+   * The record's prose, in the reader's language.
+   *
+   * The API already returns stored translations where they exist; this
+   * covers the case they cannot — a scheme added or amended since the last
+   * `translate:schemes` run. One batched request per record, cached for the
+   * session, and it hands back the English unchanged when the server has no
+   * translation provider configured.
+   *
+   * Declared here, above the loading and error returns, because it is a
+   * hook: calling it further down would change how many hooks this
+   * component runs between renders.
+   */
+  const { texts: prose } = useLiveTranslation(
+    [
+      scheme?.fullDescription || scheme?.shortDescription || '',
+      scheme?.benefitSummary || '',
+      scheme?.eligibilitySummaryPlain || ''
+    ],
+    { context: 'A government scheme record shown to a citizen', enabled: Boolean(scheme) }
+  );
+  const [description, benefitSummary, eligibilityPlain] = prose;
 
   if (isLoading) {
     return (
@@ -110,9 +135,20 @@ export const SchemeDetailsPage: React.FC = () => {
         {t('schemeDetails.backToSearch')}
       </Link>
 
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,19rem)]">
+      {/*
+        Three grid children, explicitly placed.
+
+        Desktop is unchanged: the record fills the left column across both
+        rows, the actions rail sits sticky on the right. But because the
+        heading and the tabs are separate children, the single-column phone
+        layout can put the rail *between* them — so "Check eligibility" and
+        "Save" appear directly under the benefit summary instead of after
+        four tabs' worth of scrolling. Nothing is duplicated or hidden; the
+        same three blocks are simply ordered for the screen.
+      */}
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,19rem)] lg:gap-10">
         {/* ------------------------- The record ------------------------- */}
-        <div className="min-w-0">
+        <div className="order-1 min-w-0 lg:col-start-1 lg:row-start-1">
           <div className="flex flex-wrap items-center gap-1.5">
             <LevelMark level={scheme.level} state={scheme.state} />
             <StatusMark scheme={scheme} />
@@ -129,9 +165,15 @@ export const SchemeDetailsPage: React.FC = () => {
 
           {/* The answer most people came for */}
           <div className="mt-6 rounded-lg border border-sanction-edge bg-sanction-tint p-5">
-            <p className="register text-sanction">{t('record.youReceive')}</p>
+            <div className="flex items-start justify-between gap-3">
+              <p className="register text-sanction">{t('record.youReceive')}</p>
+              {/* The one line most citizens came for — readable, or hearable. */}
+              <SpeakButton
+                text={`${scheme.name}. ${benefitSummary || t(benefitLabelKey(scheme.benefitType))}`}
+              />
+            </div>
             <p className="mt-1.5 font-display text-xl font-semibold leading-snug text-sanction-deep">
-              {scheme.benefitSummary || t(benefitLabelKey(scheme.benefitType))}
+              {benefitSummary || t(benefitLabelKey(scheme.benefitType))}
             </p>
             {scheme.deadline && (
               <p className="mt-3 flex items-center gap-2 text-[0.875rem] text-sanction-deep/80">
@@ -142,8 +184,11 @@ export const SchemeDetailsPage: React.FC = () => {
               </p>
             )}
           </div>
+        </div>
 
-          <Tabs defaultValue="overview" className="mt-10">
+        {/* ---------------- The record, in detail ---------------- */}
+        <div className="order-3 min-w-0 lg:col-start-1 lg:row-start-2">
+          <Tabs defaultValue="overview">
             <TabsList>
               <TabsTrigger value="overview">{t('schemeDetails.overview')}</TabsTrigger>
               <TabsTrigger value="eligibility">{t('schemeDetails.eligibility')}</TabsTrigger>
@@ -154,7 +199,7 @@ export const SchemeDetailsPage: React.FC = () => {
             {/* ---- Overview ---- */}
             <TabsContent value="overview">
               <p className="text-[1rem] leading-[1.7] text-ink-2 text-pretty">
-                {scheme.fullDescription || scheme.shortDescription}
+                {description}
               </p>
 
               <dl className="mt-8 divide-y divide-rule border-y border-rule">
@@ -186,9 +231,9 @@ export const SchemeDetailsPage: React.FC = () => {
 
             {/* ---- Eligibility ---- */}
             <TabsContent value="eligibility">
-              {scheme.eligibilitySummaryPlain ? (
+              {eligibilityPlain ? (
                 <p className="text-[1rem] leading-[1.7] text-ink-2 text-pretty">
-                  {scheme.eligibilitySummaryPlain}
+                  {eligibilityPlain}
                 </p>
               ) : (
                 <p className="text-[1rem] leading-[1.7] text-ink-2">
@@ -382,7 +427,18 @@ export const SchemeDetailsPage: React.FC = () => {
         </div>
 
         {/* ------------------------- Actions rail ------------------------ */}
-        <aside className="lg:sticky lg:top-[4.5rem] lg:h-fit">
+        {/* Row 1 on a phone (between the heading and the tabs); the full
+            right-hand column, sticky, from lg up. */}
+        {/*
+          `min-w-0` is load-bearing. As a grid item this defaults to
+          `min-width: auto`, meaning the track cannot shrink below the
+          item's min-content — and this column contains the portal host
+          name (`ladakibahin.maharashtra.gov.in`) set in nowrap for
+          truncation. Without it that one unbreakable string sets a ~334px
+          floor for the whole page, and every screen narrower than that
+          scrolls sideways.
+        */}
+        <aside className="order-2 min-w-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-[4.5rem] lg:h-fit lg:self-start">
           <div className="space-y-3 rounded-lg border border-rule bg-surface p-5">
             <Button className="w-full" asChild>
               <Link to={`/eligibility?scheme=${scheme.slug}`}>

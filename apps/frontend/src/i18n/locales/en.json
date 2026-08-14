@@ -42,7 +42,9 @@
     "changeLanguage": "Change language",
     "skipToContent": "Skip to content",
     "primary": "Primary",
-    "openMySchemes": "Open my schemes"
+    "openMySchemes": "Open my schemes",
+    "more": "More",
+    "tabAssistant": "Assistant"
   },
   "topbar": {
     "searchPlaceholder": "Search schemes",
@@ -184,7 +186,8 @@
     "loading": "Loading document checklist…",
     "print": "Print this list",
     "allCollected": "You have collected all required documents",
-    "allCollectedDesc": "You can now proceed to apply on the official government portal."
+    "allCollectedDesc": "You can now proceed to apply on the official government portal.",
+    "shareList": "Share list"
   },
   "assistant": {
     "eyebrow": "Ask in your language",
@@ -422,7 +425,8 @@
     "changeSelection": "Change selection",
     "backToSaved": "Back to saved schemes",
     "criteria": "Criteria",
-    "governmentState": "Government / state"
+    "governmentState": "Government / state",
+    "differs": "Differs"
   },
   "footer": {
     "blurb": "A searchable register of central and state government schemes, kept current against official notifications.",
@@ -560,5 +564,51 @@
       "5l_8l": "₹5 – 8 lakh a year",
       "above_8l": "Over ₹8 lakh a year"
     }
+  },
+  "network": {
+    "offlineTitle": "You are offline",
+    "offlineBody": "New searches need a connection. Anything already open still works."
+  },
+  "onboarding": {
+    "title": "Let's find your schemes",
+    "intro": "A few short questions. Skip any you like.",
+    "stepOf": "Step {{current}} of {{total}}",
+    "languageQuestion": "Which language do you read?",
+    "nameQuestion": "What should we call you?",
+    "namePlaceholder": "Your name",
+    "stateQuestion": "Which state do you live in?",
+    "stateWhy": "Schemes differ by state, so this one is needed.",
+    "ageQuestion": "How old are you?",
+    "agePlaceholder": "Years",
+    "genderQuestion": "You are",
+    "occupationQuestion": "What describes you best?",
+    "incomeQuestion": "Your family's income in a year",
+    "categoryQuestion": "Your category",
+    "categoryWhy": "Many schemes are reserved by category. You may skip this.",
+    "finish": "Show my schemes",
+    "skipAll": "Fill this in later",
+    "greeting": "Namaste, {{name}}"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "cat": {
+    "general": "General",
+    "obc": "OBC",
+    "sc": "Scheduled Caste",
+    "st": "Scheduled Tribe",
+    "ews": "EWS"
+  },
+  "voice": {
+    "tapToSpeak": "Tap and speak",
+    "listening": "Listening…",
+    "understanding": "Understanding…",
+    "readAloud": "Read aloud",
+    "stopReading": "Stop",
+    "notHeard": "I did not catch that. Please try again.",
+    "micDenied": "Allow the microphone to speak your answer.",
+    "unavailable": "Voice is not available on this device."
   }
 }

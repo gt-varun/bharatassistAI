@@ -173,7 +173,7 @@ export const LoginPage: React.FC = () => {
         <div className="flex items-center justify-between gap-3">
           <Link
             to="/"
-            className="flex items-center gap-2.5 rounded outline-none focus-visible:ring-2 focus-visible:ring-sanction/60"
+            className="tap-target flex items-center gap-2.5 rounded outline-none focus-visible:ring-2 focus-visible:ring-sanction/60"
           >
             <span className="grid h-9 w-9 place-items-center rounded-md bg-sanction font-display text-[0.9375rem] font-bold text-white shadow-card">
               BA
@@ -182,7 +182,7 @@ export const LoginPage: React.FC = () => {
               {t('common.appName')}
             </span>
           </Link>
-          <LanguageSelector className="w-[9.5rem]" />
+          <LanguageSelector className="w-auto xs:w-[9.5rem]" />
         </div>
 
         <div className="flex flex-1 items-center justify-center py-10">

@@ -17,6 +17,7 @@ import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { SchemeRecord } from '../components/scheme/SchemeRecord';
 import { Button } from '../components/ui/button';
 import { Skeleton } from '../components/ui/skeleton';
+import { useCitizenProfile } from '../hooks/useCitizenProfile';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { useSchemeRecords } from '../hooks/useSchemeRecords';
 import { daysUntil, formatDate } from '../lib/format';
@@ -37,6 +38,7 @@ export const DashboardPage: React.FC = () => {
   const { t } = useTranslation();
   const { slugs, isSaved, toggle } = useSavedSchemes();
   const { schemes: savedSchemes, isLoading: savedLoading } = useSchemeRecords(slugs.slice(0, 3));
+  const { data: profile } = useCitizenProfile();
 
   const { data: recent, isLoading: recentLoading } = useQuery<Scheme[]>({
     queryKey: ['dashboard-recent'],
@@ -80,28 +82,48 @@ export const DashboardPage: React.FC = () => {
     <PageBody>
       <PageHeader
         eyebrow={t('dashboard.eyebrow')}
-        title={t('dashboard.title')}
+        // Someone who told us their name gets greeted by it. Everyone else
+        // sees exactly what they saw before.
+        title={
+          profile?.fullName
+            ? t('onboarding.greeting', { name: profile.fullName })
+            : t('dashboard.title')
+        }
         description={t('dashboard.desc')}
       />
 
-      {/* Three ways in */}
+      {/*
+        Three ways in.
+
+        Stacked as tall cards these are three full screens-worth of scroll
+        before a citizen reaches anything from the register itself, so on a
+        phone they become compact rows — icon, label, chevron — and only
+        open out into the three-column card set once there is width for it.
+        Same destinations, same copy, a third of the height.
+      */}
       <ul className="mt-8 grid gap-3 sm:grid-cols-3">
         {QUICK_PATHS.map(({ to, icon: Icon, key }) => (
           <li key={to}>
             <Link
               to={to}
-              className="group flex h-full flex-col rounded-lg border border-rule bg-surface p-4 transition-all duration-200 hover:-translate-y-px hover:border-sanction-edge hover:shadow-card"
+              className="group flex h-full items-center gap-3.5 rounded-lg border border-rule bg-surface p-4 transition-all duration-200 hover:border-sanction-edge hover:shadow-card sm:flex-col sm:items-start sm:gap-0 sm:hover:-translate-y-px"
             >
               <Icon
-                className="h-5 w-5 text-ink-3 transition-colors group-hover:text-sanction"
+                className="h-5 w-5 shrink-0 text-ink-3 transition-colors group-hover:text-sanction"
                 strokeWidth={1.6}
               />
-              <span className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                {t(`dashboard.${key}Title`)}
+              <span className="min-w-0 flex-1 sm:flex-none">
+                <span className="block font-display text-[0.9375rem] font-semibold text-ink sm:mt-3">
+                  {t(`dashboard.${key}Title`)}
+                </span>
+                <span className="mt-0.5 block text-[0.8125rem] leading-relaxed text-ink-2 sm:mt-1">
+                  {t(`dashboard.${key}Blurb`)}
+                </span>
               </span>
-              <span className="mt-1 text-[0.8125rem] leading-relaxed text-ink-2">
-                {t(`dashboard.${key}Blurb`)}
-              </span>
+              <ArrowRight
+                aria-hidden
+                className="h-4 w-4 shrink-0 text-ink-4 transition-colors group-hover:text-sanction sm:hidden"
+              />
             </Link>
           </li>
         ))}
@@ -160,7 +182,10 @@ export const DashboardPage: React.FC = () => {
             <CalendarClock className="h-3.5 w-3.5" />
             Closing soon
           </h2>
-          <ul className="grid gap-3 sm:grid-cols-3">
+          {/* Deadline tiles are short, so two fit side by side on all but
+              the narrowest phones — a stack of three would push the saved
+              list off the screen entirely. */}
+          <ul className="grid gap-3 xs:grid-cols-2 sm:grid-cols-3">
             {closingSoon.map((scheme) => {
               const left = daysUntil(scheme.deadline) ?? 0;
               return (
@@ -196,7 +221,7 @@ export const DashboardPage: React.FC = () => {
           {slugs.length > 0 && (
             <Link
               to="/saved"
-              className="text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
+              className="-my-3 inline-flex min-h-[2.75rem] items-center py-3 text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
             >
               {t('common.seeAll')} ({slugs.length})
             </Link>
@@ -236,7 +261,7 @@ export const DashboardPage: React.FC = () => {
           <h2 className="register">{t('dashboard.recentHeading')}</h2>
           <Link
             to="/search?sort=newest"
-            className="text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
+            className="-my-3 inline-flex min-h-[2.75rem] items-center py-3 text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
           >
             {t('common.seeAll')}
           </Link>

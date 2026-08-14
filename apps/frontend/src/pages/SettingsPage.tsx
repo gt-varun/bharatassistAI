@@ -11,6 +11,7 @@ import { apiClient } from '../api/client';
 import { useAuth } from '../auth/AuthContext';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { getAvailableLanguages } from '../i18n/config';
+import { saveTextFile } from '../native/files';
 import { cn } from '../lib/utils';
 
 const TEXT_SCALES = [
@@ -74,14 +75,21 @@ export const SettingsPage: React.FC = () => {
     }
   };
 
-  const download = (payload: unknown) => {
-    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'bharatassist-my-data.json';
-    link.click();
-    URL.revokeObjectURL(url);
+  /**
+   * The DPDP export.
+   *
+   * In a browser this is still a Blob and a download, exactly as before.
+   * In the mobile app that pair does nothing — `download` is not
+   * implemented in an Android WebView — so `saveTextFile` writes the file
+   * to the app's documents directory and offers it to the share sheet.
+   * An export the citizen cannot actually obtain would not be an export.
+   */
+  const download = async (payload: unknown) => {
+    await saveTextFile(
+      'bharatassist-my-data.json',
+      JSON.stringify(payload, null, 2),
+      { mimeType: 'application/json', dialogTitle: t('settings.downloadData') }
+    );
   };
 
   /**
@@ -100,14 +108,14 @@ export const SettingsPage: React.FC = () => {
     };
 
     if (!isAuthenticated) {
-      download({ scope: 'this device only', ...local });
+      await download({ scope: 'this device only', ...local });
       return;
     }
 
     setBusy('export');
     try {
       const res = await apiClient.get('/profile/export');
-      download({ ...res.data?.data, device: local });
+      await download({ ...res.data?.data, device: local });
     } catch {
       setError(t('settings.exportFailed'));
     } finally {

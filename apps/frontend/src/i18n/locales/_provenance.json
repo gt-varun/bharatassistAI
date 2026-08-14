@@ -4,6 +4,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:32.770Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "hi": {
@@ -11,6 +211,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:50.733Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "kn": {
@@ -18,6 +418,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:52.913Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "ml": {
@@ -25,6 +625,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:54.941Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "mr": {
@@ -32,6 +832,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:57.072Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "te": {
@@ -39,6 +1039,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:14:59.061Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "bn": {
@@ -1486,6 +2686,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:18:59.454Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "gu": {
@@ -2933,6 +4333,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:39:20.106Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "pa": {
@@ -4380,6 +5980,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:37:13.719Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   },
   "ur": {
@@ -5827,6 +7627,206 @@
       "provider": "groq",
       "verified": false,
       "at": "2026-08-07T20:39:03.444Z"
+    },
+    "nav.more": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineTitle": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "network.offlineBody": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "checklist.shareList": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T17:53:55.068107Z"
+    },
+    "nav.tabAssistant": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:14:40.719915Z"
+    },
+    "compare.differs": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T18:19:34.010445Z"
+    },
+    "onboarding.title": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.intro": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stepOf": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.languageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.nameQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.namePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.stateWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.ageQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.agePlaceholder": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.genderQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.occupationQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.incomeQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryQuestion": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.categoryWhy": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.finish": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.skipAll": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "onboarding.greeting": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.female": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.male": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "gender.other": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.general": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.obc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.sc": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.st": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "cat.ews": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.tapToSpeak": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.listening": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.understanding": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.readAloud": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.stopReading": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.notHeard": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.micDenied": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
+    },
+    "voice.unavailable": {
+      "provider": "claude-code",
+      "verified": false,
+      "at": "2026-08-14T19:12:48.930926Z"
     }
   }
 }

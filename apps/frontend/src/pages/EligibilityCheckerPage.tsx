@@ -353,8 +353,8 @@ export const EligibilityCheckerPage: React.FC = () => {
                       </ul>
                     )}
                   </div>
-                  <div className="mt-4 flex gap-2 pt-2 border-t border-rule">
-                    <Button variant="outline" size="sm" className="w-full" asChild>
+                  <div className="mt-4 flex gap-2 border-t border-rule pt-2">
+                    <Button variant="outline" size="sm" className="min-w-0 flex-1" asChild>
                       <Link to={`/eligibility?scheme=${alt.schemeId}`}>{t('schemeDetails.checkEligibility')}</Link>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
@@ -410,8 +410,8 @@ export const EligibilityCheckerPage: React.FC = () => {
                       </ul>
                     )}
                   </div>
-                  <div className="mt-4 flex gap-2 pt-2 border-t border-rule">
-                    <Button variant="outline" size="sm" className="w-full" asChild>
+                  <div className="mt-4 flex gap-2 border-t border-rule pt-2">
+                    <Button variant="outline" size="sm" className="min-w-0 flex-1" asChild>
                       <Link to={`/eligibility?scheme=${rec.scheme.slug}`}>{t('schemeDetails.checkEligibility')}</Link>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
