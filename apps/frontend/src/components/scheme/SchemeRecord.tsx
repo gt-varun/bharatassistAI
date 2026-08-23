@@ -1,9 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Bookmark, BookmarkCheck } from 'lucide-react';
 import type { Scheme } from '@bharatassist/shared-types';
 import { LevelMark, Provenance, StaleMark, StatusMark } from './RecordMarks';
-import { benefitLabel, segmentLabel } from '../../lib/taxonomy';
+import { benefitLabelKey, segmentLabelKey } from '../../lib/taxonomy';
 import { cn } from '../../lib/utils';
 
 interface SchemeRecordProps {
@@ -28,6 +29,7 @@ export const SchemeRecord: React.FC<SchemeRecordProps> = ({
   onToggleSave,
   className
 }) => {
+  const { t } = useTranslation();
   const href = `/schemes/${scheme.slug || scheme._id}`;
 
   return (
@@ -81,16 +83,16 @@ export const SchemeRecord: React.FC<SchemeRecordProps> = ({
         {/* What you actually get — the answer most citizens are looking for. */}
         <dl className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-2">
           <div className="min-w-0">
-            <dt className="register">You receive</dt>
+            <dt className="register">{t('record.youReceive')}</dt>
             <dd className="mt-0.5 text-[0.9375rem] font-semibold text-ink">
-              {scheme.benefitSummary || benefitLabel(scheme.benefitType)}
+              {scheme.benefitSummary || t(benefitLabelKey(scheme.benefitType))}
             </dd>
           </div>
           {scheme.targetSegments?.length > 0 && (
             <div className="min-w-0">
               <dt className="register">For</dt>
               <dd className="mt-0.5 text-[0.9375rem] text-ink-2">
-                {scheme.targetSegments.map(segmentLabel).join(', ')}
+                {scheme.targetSegments.map((s) => t(segmentLabelKey(s))).join(', ')}
               </dd>
             </div>
           )}

@@ -33,8 +33,14 @@ export const PublicHeader: React.FC = () => {
         </Link>
 
         {/* The landing page is the only surface this header serves, so the
-            nav moves down the page rather than into the application. */}
-        <nav className="ml-6 hidden items-center gap-1 md:flex" aria-label="Primary">
+            nav moves down the page rather than into the application.
+
+            It appears at `lg`, not `md`: five section links alongside the
+            brand, the language selector and the call to action need roughly
+            900px, so on a 768–820px tablet they were overflowing the bar and
+            pushing the page sideways. The same links stay in the footer at
+            every width, so nothing becomes unreachable. */}
+        <nav className="ml-6 hidden items-center gap-1 lg:flex" aria-label="Primary">
           {SECTIONS.map((section) => (
             <a
               key={section.href}
@@ -47,7 +53,7 @@ export const PublicHeader: React.FC = () => {
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
-          <LanguageSelector className="w-[8.5rem] sm:w-[10rem]" />
+          <LanguageSelector className="w-auto xs:w-[8.5rem] sm:w-[10rem]" />
           {isAuthenticated ? (
             <Button size="sm" onClick={() => navigate('/dashboard')}>
               Open my schemes

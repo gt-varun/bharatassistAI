@@ -3,7 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      viewport-fit=cover lets the page paint into the notch / Dynamic Island /
+      home-indicator regions, which is what makes env(safe-area-inset-*)
+      report real values instead of zero. The layout then pads itself back
+      out of those regions (see index.css). User scaling is deliberately left
+      enabled — pinch-zoom is an accessibility feature, not a defect.
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="theme-color" content="#0E6B4E" />
     <title>BharatAssist AI — Find the government schemes you qualify for</title>
     <meta

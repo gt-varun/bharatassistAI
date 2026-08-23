@@ -64,7 +64,22 @@ Binding rules for everyone working on this repo — foundation, all 4 feature ow
 35. **Logic-heavy code (eligibility rule engine, checklist generation, recommendation scoring) requires unit tests** before merge — not just "it worked when I clicked through it."
 36. **A module isn't "done" until it works in at least English + Hindi** (MVP language bar) and meets WCAG 2.1 AA basics (keyboard nav, screen-reader labels).
 
-## 9. When Something Isn't Covered
+## 9. Capacitor / Mobile Shell Rules
 
-37. **If a requirement is genuinely unclear or missing from the docs, don't guess silently.** Flag it in the PR or a short written note, propose the interpretation you're going with, and proceed — but write it down so the other three aren't blindsided later.
-38. **Never relax a rule in this file to "move faster."** If a rule is actually wrong or outdated, it gets fixed here, in a reviewed PR to `rules.md` itself — not quietly ignored in someone's feature branch.
+The product ships as a Capacitor-wrapped native app (`apps/frontend`, `in.bharatassist.app`) in addition to the web build, from the **same** web source — there is no separate mobile codebase. Every rule below exists to keep that true.
+
+39. **Never add `server.url` to `capacitor.config.ts`.** A packaged build loads the assets bundled with it (`webDir: 'dist'`), never a developer's laptop or a hardcoded environment. If you need a different API target, that's `VITE_API_URL` at build time, not a config edit.
+40. **Never loosen the WebView security posture.** `androidScheme` stays `https`, `allowMixedContent` stays `false`, and no plugin config may introduce cleartext traffic — even "temporarily for testing." A weakened WebView breaks `crypto.randomUUID()` and Web Crypto usage (the AI Assistant depends on both) by dropping out of a secure context.
+41. **Don't call a Capacitor plugin API directly from a component.** Route through a thin platform-abstraction wrapper (mirroring the existing pattern for speech-to-text/text-to-speech, filesystem, network, share) so the same component works unchanged on web (Web Speech API / browser fallback) and native (Capacitor plugin) — check `Capacitor.isNativePlatform()` in the wrapper, not scattered across feature code.
+42. **Any new native capability must degrade gracefully on web.** If a feature needs a Capacitor plugin (camera, filesystem, biometrics, etc.), it must still be usable — or clearly and gracefully unavailable, never crash — when the same code runs in a plain browser tab, since the web build remains a first-class target, not a fallback.
+43. **Layout must use safe-area-aware units, not fixed pixel offsets, for anything docked to a screen edge.** Headers, bottom nav, sticky composers, and modals must respect `env(safe-area-inset-*)` (notch, Dynamic Island, gesture bar) — this is what makes `overlaysWebView: false` and `Keyboard.resize: 'native'` actually work; don't reintroduce fixed offsets that assume a status-bar-less rectangle.
+44. **Never disable or reconfigure `SplashScreen.launchAutoHide` without also keeping the app's own `hide()` call on first paint.** The auto-hide timer is a dead-man's switch for a failed boot — removing it without the explicit hide-on-paint call risks a permanent blank splash screen on native.
+45. **Any change to `capacitor.config.ts` is a shared-contract change** (per rule 11) — flag it explicitly in the PR and get it reviewed by someone outside the module that touched it, same as `packages/shared-types` or the Gemini client wrapper.
+46. **New/updated native plugins must be added to `apps/frontend/package.json` and go through both `npx cap sync ios` and `npx cap sync android`** before the PR is opened — a plugin only wired on one platform (or only in `package.json` without a sync) is not done.
+47. **Voice features (speech-to-text, text-to-speech) must be implemented once, behind the shared platform wrapper, and used by both the AI Assistant and the conversational onboarding flow** (`prd-v2.md` §3–§4) — no separate native-only or web-only voice implementation per feature.
+48. **Test any UI change intended to reach the app on both the web build and an actual Capacitor-run target (iOS Simulator or Android emulator/device)** before calling it done — passing in the browser alone does not verify safe-area handling, keyboard resize behavior, or plugin fallbacks.
+
+## 10. When Something Isn't Covered
+
+49. **If a requirement is genuinely unclear or missing from the docs, don't guess silently.** Flag it in the PR or a short written note, propose the interpretation you're going with, and proceed — but write it down so the other three aren't blindsided later.
+50. **Never relax a rule in this file to "move faster."** If a rule is actually wrong or outdated, it gets fixed here, in a reviewed PR to `rules.md` itself — not quietly ignored in someone's feature branch.

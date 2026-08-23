@@ -16,15 +16,37 @@ import assistantRouter from './routes/assistant/index.js';
 import recommendationsRouter from './routes/recommendations/index.js';
 import profileRouter from './routes/profile/index.js';
 import savedRouter from './routes/saved/index.js';
+import translateRouter from './routes/translate/index.js';
+import voiceRouter from './routes/voice/index.js';
 
 export const createApp = () => {
   const app = express();
 
   // CORS locked to FRONTEND_URL from env
   const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+  /**
+   * The same web app also ships as a Capacitor mobile app, and a WebView
+   * does not send the site's own origin: Android sends `https://localhost`
+   * (the `androidScheme` in capacitor.config.ts) and iOS sends
+   * `capacitor://localhost`. Neither is a wildcard — they are two fixed
+   * origins that only the packaged app can present — so the allowlist stays
+   * an allowlist. Without them every request from the phone is a CORS
+   * failure, and the app looks broken rather than unauthorised.
+   *
+   * Set MOBILE_APP_ORIGINS (comma-separated) to override, e.g. to drop
+   * mobile support entirely on a web-only deployment.
+   */
+  const mobileOrigins = (
+    process.env.MOBILE_APP_ORIGINS ?? 'https://localhost,capacitor://localhost'
+  )
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
   app.use(
     cors({
-      origin: [frontendUrl, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+      origin: [frontendUrl, 'http://localhost:5173', 'http://127.0.0.1:5173', ...mobileOrigins],
       credentials: true
     })
   );
@@ -47,8 +69,35 @@ export const createApp = () => {
     }
   });
 
+  /**
+   * OTP and password-reset are the brute-forceable surfaces: a six-digit code
+   * falls in a million tries, and 100 attempts per window is enough to make
+   * that worth attempting. These get their own, much tighter budget.
+   */
+  const otpRateLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 8,
+    standardHeaders: true,
+    legacyHeaders: false,
+    // Per phone number where we have one, so a shared NAT or office IP does
+    // not lock out everyone behind it.
+    keyGenerator: (req) => `${req.ip}:${(req.body?.phone as string) ?? ''}`,
+    message: {
+      success: false,
+      error: {
+        code: 'TOO_MANY_REQUESTS',
+        message: 'Too many attempts. Please wait 15 minutes before trying again.'
+      }
+    }
+  });
+
   // Mount Routers
   app.use('/api/health', healthRouter);
+  app.use(
+    ['/api/auth/send-otp', '/api/auth/otp/request', '/api/auth/verify-otp', '/api/auth/otp/verify'],
+    otpRateLimiter
+  );
+  app.use('/api/auth/password/reset', otpRateLimiter);
   app.use('/api/auth', authRateLimiter, authRouter);
   app.use('/api/schemes', schemesRouter);
   app.use('/api/eligibility', eligibilityRouter);
@@ -59,6 +108,11 @@ export const createApp = () => {
   app.use('/api/recommendations', recommendationsRouter);
   app.use('/api/profile', profileRouter);
   app.use('/api/saved', savedRouter);
+  app.use('/api/translate', translateRouter);
+  // Mounted last of the feature routes: it parses a raw audio body rather
+  // than JSON, and does so inside its own router so the global express.json
+  // above is never applied to a recording.
+  app.use('/api/voice', voiceRouter);
 
   // Centralized Error Handling Middleware
   app.use(errorHandler);

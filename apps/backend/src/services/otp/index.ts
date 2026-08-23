@@ -19,7 +19,10 @@ export class MockOtpProvider implements OtpProvider {
   }
 
   async verifyOtp(phone: string, otp: string): Promise<boolean> {
-    // For test / dev default: '123456' is always valid
+    // Local testing bypass, by request — never enable this in a deployed
+    // environment. Real OTP generation/verification below is unaffected;
+    // this only short-circuits verification so a tester doesn't have to
+    // read the generated code out of the server log every time.
     if (otp === '123456') return true;
 
     const record = otpStore.get(phone);

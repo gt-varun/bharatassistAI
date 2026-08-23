@@ -50,6 +50,24 @@
 
     /* Large-text mode for low-vision and senior users (PRD §12). */
     --text-scale: 1;
+
+    /* ---------------------------------------------------------------- *
+     * Device safe areas.
+     *
+     * These are 0px in a browser and on any device without cut-outs, so
+     * every rule built on them is inert on the web and only does work
+     * where there is genuinely a notch, a Dynamic Island, an Android
+     * status bar or a home-indicator strip to avoid. Naming them once
+     * here means layout code never repeats the env() incantation.
+     * ---------------------------------------------------------------- */
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+
+    /* Mobile chrome. Content reserves these so nothing hides underneath. */
+    --app-bar-h: 3.5rem;
+    --tab-bar-h: 3.75rem;
   }
 
   html[data-text-scale='large'] {
@@ -75,7 +93,84 @@
     @apply bg-paper text-ink antialiased;
     font-family: theme('fontFamily.sans');
     overflow-x: hidden;
+    /* 100vh is the *largest* viewport on mobile, so a page sized to it sits
+       partly under the browser's own toolbar. dvh tracks the real height. */
     min-height: 100vh;
+    min-height: 100dvh;
+    /* Inside a WebView the page is the app: rubber-banding the whole
+       document past its edges reads as a bug, not as a browser. Inner
+       scrollers keep their own overscroll behaviour. */
+    overscroll-behavior-y: none;
+  }
+
+  /* ------------------------------------------------------------------ *
+   * Touch input
+   * ------------------------------------------------------------------ */
+
+  /* The grey flash Android paints over a tapped element belongs to a web
+     page, not to an application; the components draw their own press state. */
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Removes the ~300ms click delay browsers reserve for double-tap-to-zoom
+     on interactive controls, without disabling pinch-zoom on content. */
+  a,
+  button,
+  [role='button'],
+  [role='tab'],
+  [role='switch'],
+  label,
+  summary,
+  select {
+    touch-action: manipulation;
+  }
+
+  /*
+   * A note on the 16px field rule.
+   *
+   * iOS zooms the whole page in when a focused field's text is under 16px,
+   * leaving the layout scrolled sideways with the submit button off screen.
+   * The obvious fix — an `input { font-size: 1rem }` rule here — does not
+   * work: this is `@layer base`, and every field in the app carries a
+   * Tailwind size utility from `@layer utilities`, which wins on both layer
+   * order and specificity. Forcing it with `!important` would then flatten
+   * the fields that are deliberately *larger*, such as the OTP box.
+   *
+   * So the floor is applied where the sizes are actually declared — as
+   * `text-[1rem] sm:text-…` on the field components themselves. See
+   * ui/input.tsx, ui/select.tsx, SearchPage and AssistantPage.
+   */
+
+  /* Anything driven by a fingertip gets a real target. Applies only where
+     the pointer is coarse, so desktop keeps its compact 32px controls. */
+  @media (pointer: coarse) {
+    button:not(.target-exempt),
+    [role='button']:not(.target-exempt),
+    a[role='button'],
+    [role='switch'],
+    [role='tab'],
+    [role='checkbox'],
+    [role='radio'],
+    /* Buttons rendered through `asChild` are <a>/<label>/<span>, so they are
+       reached by the marker class from ui/button.tsx rather than by tag. */
+    .ba-btn:not(.target-exempt),
+    /* Anything that is a real target but is neither a button nor inside a
+       header: dense link clouds such as the state chips on Categories, and
+       compact brand lockups. 30px is not a fingertip. */
+    .tap-target,
+    /* Header links (brand lockup, section anchors) are laid out inside a
+       56–64px bar, so the extra height costs nothing visually. */
+    header a:not(.skip-link) {
+      min-height: 2.75rem; /* 44px */
+    }
+
+    /* Icon-only controls need width as well as height. */
+    button:not(.target-exempt):empty,
+    button[aria-label]:not(.target-exempt),
+    .ba-btn[aria-label]:not(.target-exempt) {
+      min-width: 2.75rem;
+    }
   }
 
   h1,
@@ -161,8 +256,20 @@
     @apply bg-state;
   }
 
-  .record-interactive:hover {
-    @apply shadow-lift -translate-y-[1px];
+  /* The lift is a pointer affordance. On a touch screen it would fire on tap
+     and stay, so it is scoped to devices that can actually hover. */
+  @media (hover: hover) {
+    .record-interactive:hover {
+      @apply shadow-lift -translate-y-[1px];
+    }
+  }
+
+  /* On touch, the same card answers the press instead. */
+  @media (hover: none) {
+    .record-interactive:active {
+      @apply shadow-card;
+      transform: scale(0.995);
+    }
   }
 
   /* -------- Endorsement stamp ------------------------------------- */
@@ -192,6 +299,14 @@
   .rail-item {
     @apply relative flex items-center gap-3 rounded-md px-2.5 py-2 text-[0.8125rem] font-medium
            text-ink-2 transition-colors duration-150;
+  }
+
+  /* In the mobile drawer these are the primary navigation targets, so they
+     get a fingertip-sized row rather than the rail's compact one. */
+  @media (pointer: coarse) {
+    .rail-item {
+      @apply min-h-[2.75rem] px-3 py-2.5 text-[0.875rem];
+    }
   }
 
   .rail-item:hover {
@@ -227,6 +342,82 @@
 }
 
 @layer utilities {
+  /* ------------------------------------------------------------------ *
+   * Mobile chrome helpers
+   * ------------------------------------------------------------------ */
+
+  /* A horizontal scroller that reads as a deliberate strip of content
+     rather than as a page that failed to fit. Momentum on, bar hidden. */
+  .scroll-strip {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scroll-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+   * Padding out of a cut-out is expressed with the ordinary padding
+   * utilities — `pt-safe-t`, `pb-safe-b`, `pl-safe-l`, `pr-safe-r` — which
+   * exist because the insets are registered as spacing values in
+   * tailwind.config.ts.
+   *
+   * Do not add `.inset-safe-*` helpers here: `inset-` is Tailwind's own
+   * namespace for the `inset` shorthand, so a class of that name resolves
+   * to `inset: <value>` and pins all four edges. A bottom bar written that
+   * way silently becomes a full-screen overlay.
+   */
+
+  /*
+   * The gap a scrolling page leaves for the bottom tab bar. Without it the
+   * last record on every list sits permanently under the navigation.
+   * Collapses to nothing at `lg`, where the tab bar is replaced by the rail.
+   */
+  .pb-mobile-chrome {
+    padding-bottom: calc(var(--tab-bar-h) + var(--sab));
+  }
+
+  @media (min-width: 1024px) {
+    .pb-mobile-chrome {
+      padding-bottom: 0;
+    }
+  }
+
+  /*
+   * While the soft keyboard is up, screen space is scarce and the bottom
+   * navigation is both useless and in the way — the composer or submit
+   * button belongs there instead. `keyboard-open` is set on <html> by the
+   * native keyboard listener (src/native/shell.ts).
+   */
+  html.keyboard-open .hide-on-keyboard {
+    display: none;
+  }
+
+  /*
+   * A sticky footer that has to sit *above* the bottom tab bar rather than
+   * behind it — the assistant's composer, principally.
+   *
+   * Three states, and they have to agree with the tab bar's own three:
+   * docked above it on a phone, flush to the bottom at `lg` where there is
+   * no tab bar, and flush again while the keyboard is open, because the
+   * tab bar has hidden itself by then.
+   */
+  .dock-above-tabbar {
+    bottom: calc(var(--tab-bar-h) + var(--sab));
+  }
+
+  html.keyboard-open .dock-above-tabbar {
+    bottom: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .dock-above-tabbar {
+      bottom: 0;
+    }
+  }
+
   .text-balance {
     text-wrap: balance;
   }

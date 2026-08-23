@@ -27,8 +27,17 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       >
         <span className="flex min-w-0 items-center gap-2">
           <Languages className="h-4 w-4 shrink-0 text-ink-3" />
+          {/*
+            On a 320px screen a header cannot hold a brand mark, a language
+            name and a call to action at once, so the compact selector shows
+            its icon alone there. The trigger keeps its `aria-label`, so the
+            control is still "Change language" to a screen reader; only the
+            redundant visible name goes. `full` (Settings) always shows it.
+          */}
           <SelectValue>
-            <span className="truncate">{current?.nativeName ?? 'English'}</span>
+            <span className={cn('truncate', variant === 'compact' && 'hidden xs:inline')}>
+              {current?.nativeName ?? 'English'}
+            </span>
           </SelectValue>
         </span>
       </SelectTrigger>

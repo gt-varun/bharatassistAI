@@ -58,6 +58,13 @@ export interface EvaluateResponse {
   alternativeSchemes: AlternativeRecommendation[];
 }
 
+/** Person 3's Recommendation Engine: cross-recommendations after a positive result. */
+interface CrossRecommendation {
+  scheme: { slug: string; name: string; department: string; benefitSummary: string };
+  status: 'eligible' | 'partially_eligible';
+  matchedCriteria: string[];
+}
+
 export const EligibilityCheckerPage: React.FC = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -111,6 +118,19 @@ export const EligibilityCheckerPage: React.FC = () => {
     }
   });
 
+  // Person 3's Recommendation Engine: "Because you're eligible for X, you may
+  // also qualify for Y" — only ever queried once a real, stored positive
+  // result exists for this scheme (the backend re-checks this itself too).
+  const { data: crossRecs } = useQuery<CrossRecommendation[]>({
+    queryKey: ['recommendations-cross', slug, evalResult?.status],
+    queryFn: async () => {
+      const res = await apiClient.get(`/recommendations/cross/${slug}`);
+      return res.data?.data?.recommendations ?? [];
+    },
+    enabled: Boolean(evalResult && evalResult.status !== 'not_eligible'),
+    staleTime: 60 * 1000
+  });
+
   const handleAnswerChange = (field: string, value: any) => {
     setAnswers((prev) => ({ ...prev, [field]: value }));
   };
@@ -149,7 +169,7 @@ export const EligibilityCheckerPage: React.FC = () => {
             <EmptyState
               icon={Sparkles}
               title={t('eligibility.ui.noScheme')}
-              description="Browse the register or open any scheme detail page and click 'Check my eligibility'."
+              description={t('eligibility.ui.noScheme')}
               action={
                 <Button asChild>
                   <Link to="/search">{t('common.findSchemes')}</Link>
@@ -188,7 +208,7 @@ export const EligibilityCheckerPage: React.FC = () => {
   if (loadingQuestions) {
     return (
       <PageBody>
-        <LoadingState message="Loading scheme eligibility questions..." rows={3} />
+        <LoadingState message={t('eligibility.ui.loadingQuestions')} rows={3} />
       </PageBody>
     );
   }
@@ -198,8 +218,8 @@ export const EligibilityCheckerPage: React.FC = () => {
     return (
       <PageBody>
         <EmptyState
-          title="Scheme questions unavailable"
-          description="Unable to retrieve eligibility questions for this scheme. It may have been updated or removed."
+          title={t('eligibility.ui.questionsFailed')}
+          description={t('eligibility.ui.questionsFailedDesc')}
           action={
             <Button variant="outline" asChild>
               <Link to="/search">{t('schemeDetails.backToSearch')}</Link>
@@ -304,10 +324,10 @@ export const EligibilityCheckerPage: React.FC = () => {
         {evalResult.alternativeSchemes && evalResult.alternativeSchemes.length > 0 && (
           <div className="mt-10">
             <h2 className="font-display text-xl font-bold text-ink">
-              Recommended Alternative Schemes
+              {t('eligibility.ui.alternatives')}
             </h2>
             <p className="mt-1 text-[0.875rem] text-ink-2">
-              Based on your specific answers, you may qualify for these alternative government programs:
+              {t('eligibility.ui.alternativesDesc')}
             </p>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -333,12 +353,69 @@ export const EligibilityCheckerPage: React.FC = () => {
                       </ul>
                     )}
                   </div>
-                  <div className="mt-4 flex gap-2 pt-2 border-t border-rule">
-                    <Button variant="outline" size="sm" className="w-full" asChild>
+                  <div className="mt-4 flex gap-2 border-t border-rule pt-2">
+                    <Button variant="outline" size="sm" className="min-w-0 flex-1" asChild>
                       <Link to={`/eligibility?scheme=${alt.schemeId}`}>{t('schemeDetails.checkEligibility')}</Link>
                     </Button>
                     <Button variant="ghost" size="sm" asChild>
-                      <Link to={`/schemes/${alt.schemeId}`}>View</Link>
+                      <Link to={`/schemes/${alt.schemeId}`}>{t('eligibility.ui.viewScheme')}</Link>
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Cross-recommendations — Person 3's Recommendation Engine, only
+            surfaced once this result is genuinely positive */}
+        {crossRecs && crossRecs.length > 0 && (
+          <div className="mt-10">
+            <h2 className="font-display text-xl font-bold text-ink">
+              Because you {isEligible ? 'qualify' : 'may qualify'} for {evalResult.schemeName}
+            </h2>
+            <p className="mt-1 text-[0.875rem] text-ink-2">
+              Your profile was checked, deterministically, against these schemes too — you may
+              qualify for them as well.
+            </p>
+
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {crossRecs.map((rec) => (
+                <div
+                  key={rec.scheme.slug}
+                  className="flex flex-col justify-between rounded-lg border border-rule bg-surface p-5 transition-colors hover:border-sanction-edge"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-display text-[1rem] font-semibold text-ink">
+                        {rec.scheme.name}
+                      </h3>
+                      <span
+                        className={cn(
+                          'register-strong shrink-0',
+                          rec.status === 'eligible' ? 'text-sanction' : 'text-ochre'
+                        )}
+                      >
+                        {rec.status === 'eligible' ? 'Eligible' : 'Partially eligible'}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-[0.875rem] text-ink-2">{rec.scheme.benefitSummary}</p>
+                    {rec.matchedCriteria.length > 0 && (
+                      <ul className="mt-3 space-y-1">
+                        {rec.matchedCriteria.slice(0, 2).map((m, i) => (
+                          <li key={i} className="text-micro text-ink-3 truncate">
+                            • {m}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <div className="mt-4 flex gap-2 border-t border-rule pt-2">
+                    <Button variant="outline" size="sm" className="min-w-0 flex-1" asChild>
+                      <Link to={`/eligibility?scheme=${rec.scheme.slug}`}>{t('schemeDetails.checkEligibility')}</Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link to={`/schemes/${rec.scheme.slug}`}>View</Link>
                     </Button>
                   </div>
                 </div>
@@ -351,14 +428,14 @@ export const EligibilityCheckerPage: React.FC = () => {
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-rule pt-6">
           <Button variant="outline" onClick={resetWizard}>
             <RotateCcw className="h-4 w-4" />
-            Re-check Answers
+            {t('eligibility.ui.startOver')}
           </Button>
 
           <div className="flex gap-3">
             <Button variant="outline" asChild>
               <Link to={`/checklist?scheme=${slug}`}>
                 <ListChecks className="h-4 w-4" />
-                View Document Checklist
+                {t('eligibility.ui.viewChecklist')}
               </Link>
             </Button>
             <Button asChild>
@@ -419,7 +496,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           {currentQ.prefilled && (
             <span className="register-strong inline-flex items-center gap-1 rounded-md bg-sanction-tint px-2.5 py-1 text-micro text-sanction">
               <Check className="h-3 w-3" />
-              Pre-filled from profile
+              {t('eligibility.ui.prefilled')}
             </span>
           )}
         </div>
@@ -475,7 +552,7 @@ export const EligibilityCheckerPage: React.FC = () => {
           {currentStep > 0 ? (
             <Button type="button" variant="outline" onClick={handleBack}>
               <ArrowLeft className="h-4 w-4" />
-              Previous
+              {t('eligibility.ui.previous')}
             </Button>
           ) : (
             <span />

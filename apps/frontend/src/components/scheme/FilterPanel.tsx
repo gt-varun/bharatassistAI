@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Label } from '../ui/label';
 import { BENEFIT_TYPES, INCOME_BANDS, SEGMENTS, STATES } from '../../lib/taxonomy';
@@ -30,6 +31,7 @@ interface FilterPanelProps {
 
 /** One control per column the register is indexed on. */
 export const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onChange }) => {
+  const { t } = useTranslation();
   const field = (
     key: keyof Filters,
     label: string,
@@ -59,43 +61,43 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onChange }) =
 
   return (
     <div className="space-y-5">
-      {field('level', 'Issued by', 'Central and state', [
-        { value: 'central', label: 'Central government' },
-        { value: 'state', label: 'State government' }
+      {field('level', t('search.level'), t('search.levelAny'), [
+        { value: 'central', label: t('search.levelCentral') },
+        { value: 'state', label: t('search.levelState') }
       ])}
 
       {field(
         'state',
-        'State',
-        'Any state',
+        t('search.state'),
+        t('search.stateAny'),
         STATES.map((s) => ({ value: s, label: s }))
       )}
 
       {field(
         'segment',
-        'Who it is for',
-        'Anyone',
-        SEGMENTS.map((s) => ({ value: s.slug, label: s.label }))
+        t('search.segment'),
+        t('search.segmentAny'),
+        SEGMENTS.map((s) => ({ value: s.slug, label: t(s.labelKey) }))
       )}
 
       {field(
         'benefitType',
-        'What you receive',
-        'Any benefit',
-        BENEFIT_TYPES.map((b) => ({ value: b.slug, label: b.label }))
+        t('search.benefit'),
+        t('search.benefitAny'),
+        BENEFIT_TYPES.map((b) => ({ value: b.slug, label: t(b.labelKey) }))
       )}
 
       {field(
         'incomeBand',
-        'Household income',
-        'Any income',
-        INCOME_BANDS.map((b) => ({ value: b.slug, label: b.label }))
+        t('search.income'),
+        t('search.incomeAny'),
+        INCOME_BANDS.map((b) => ({ value: b.slug, label: t(b.labelKey) }))
       )}
 
-      {field('status', 'Applications', 'Open or closed', [
-        { value: 'open', label: 'Accepting applications' },
-        { value: 'rolling', label: 'Open all year' },
-        { value: 'closed', label: 'Closed for now' }
+      {field('status', t('search.status'), t('search.statusAny'), [
+        { value: 'open', label: t('record.accepting') },
+        { value: 'rolling', label: t('record.openAllYear') },
+        { value: 'closed', label: t('record.closed') }
       ])}
     </div>
   );

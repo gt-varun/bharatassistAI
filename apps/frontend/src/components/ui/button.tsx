@@ -4,7 +4,11 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-sans font-semibold ' +
+  // `ba-btn` carries no styles of its own — it is the hook index.css uses to
+  // give every button a 44px target on touch screens. A marker class rather
+  // than an element selector because `asChild` renders these as <a>, <label>
+  // and so on, which no element-based rule would ever catch.
+  'ba-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-sans font-semibold ' +
     'transition-[background-color,border-color,box-shadow,transform] duration-150 ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sanction/60 focus-visible:ring-offset-2 ' +
     'focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-45 select-none',

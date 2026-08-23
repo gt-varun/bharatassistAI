@@ -56,8 +56,11 @@ Companion to `prd.md`, `repo-setup.md`, `development.md`, and `scheme-database.m
 
 | Concern | Choice | Notes |
 |---|---|---|
-| LLM | Gemini API | All calls routed through the single `services/ai/geminiClient` wrapper (foundation setup) — no other module calls Gemini directly |
+| LLM (chat) | Groq (`llama-3.3-70b-versatile`), Gemini as fallback | All calls routed through the single `services/ai/geminiClient` wrapper (foundation setup, kept its original filename) — no other module calls a model provider directly. Groq is tried first when `GROQ_API_KEY` is set; falls back to Gemini, then to a labelled offline response, never to an unhandled failure. |
+| Embeddings | Gemini embedding model (`text-embedding-004`) | Groq has no embeddings endpoint, so semantic search stays on Gemini regardless of which provider is answering chat |
 | Grounding pattern | Retrieval-Augmented Generation (RAG) against MongoDB Atlas Vector Search | Per `prd.md` §9 — the AI never answers without retrieved context |
+| Document parsing | `pdf-parse` | Added for the Knowledge Update System's "Extract" step (`prd.md` §17.6) — gazette/circular notifications are frequently published as PDFs, not HTML. HTML sources are parsed with a small in-house tag-stripper rather than a new dependency, since the need is plain-text extraction, not DOM manipulation. |
+| Bulk translation | Pluggable `services/translation/` — Bhashini, Groq, Gemini, or a local IndicTrans2 server, selected via `TRANSLATION_PROVIDER` (auto-detects in that order if unset) | Fills UI locale files (`pnpm translate:ui`) and scheme content (`pnpm translate:schemes`) against the same `TranslationProvider` interface — every provider is interchangeable, and every result is written `verified: false` until a human confirms it (`docs/rules.md` #19). See `docs/translation.md`. |
 
 ## 6. Hosting & Deployment
 

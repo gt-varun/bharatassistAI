@@ -23,59 +23,60 @@ import {
 
 export interface SegmentMeta {
   slug: string;
-  label: string;
+  /** Translation keys, not text: every label here reaches a citizen's screen. */
+  labelKey: string;
   /** Who this is for, in the citizen's own terms — shown on category tiles. */
-  blurb: string;
+  blurbKey: string;
   icon: LucideIcon;
 }
 
 export const SEGMENTS: SegmentMeta[] = [
   {
     slug: 'student',
-    label: 'Students',
-    blurb: 'Scholarships, fee waivers and hostel support from school through post-graduation.',
+    labelKey: 'tax.segment.student',
+    blurbKey: 'tax.segmentBlurb.student',
     icon: GraduationCap
   },
   {
     slug: 'farmer',
-    label: 'Farmers',
-    blurb: 'Income support, crop insurance, equipment subsidy and irrigation schemes.',
+    labelKey: 'tax.segment.farmer',
+    blurbKey: 'tax.segmentBlurb.farmer',
     icon: Sprout
   },
   {
     slug: 'women',
-    label: 'Women',
-    blurb: 'Maternity benefits, self-employment loans and safety and skilling programmes.',
+    labelKey: 'tax.segment.women',
+    blurbKey: 'tax.segmentBlurb.women',
     icon: Flower2
   },
   {
     slug: 'senior_citizen',
-    label: 'Senior citizens',
-    blurb: 'Old-age pension, healthcare cover and travel and utility concessions.',
+    labelKey: 'tax.segment.senior_citizen',
+    blurbKey: 'tax.segmentBlurb.senior_citizen',
     icon: HeartHandshake
   },
   {
     slug: 'msme',
-    label: 'Small business',
-    blurb: 'Collateral-free credit, subsidy on machinery and market linkage support.',
+    labelKey: 'tax.segment.msme',
+    blurbKey: 'tax.segmentBlurb.msme',
     icon: Store
   },
   {
     slug: 'pwd',
-    label: 'Persons with disability',
-    blurb: 'Assistive devices, reserved jobs, pension and accessibility grants.',
+    labelKey: 'tax.segment.pwd',
+    blurbKey: 'tax.segmentBlurb.pwd',
     icon: Accessibility
   },
   {
     slug: 'jobseeker',
-    label: 'Job seekers',
-    blurb: 'Skill training with stipend, apprenticeship and placement-linked schemes.',
+    labelKey: 'tax.segment.jobseeker',
+    blurbKey: 'tax.segmentBlurb.jobseeker',
     icon: Briefcase
   },
   {
     slug: 'general',
-    label: 'Every citizen',
-    blurb: 'Housing, health cover, food security and utility schemes open to all.',
+    labelKey: 'tax.segment.general',
+    blurbKey: 'tax.segmentBlurb.general',
     icon: Users
   }
 ];
@@ -83,27 +84,32 @@ export const SEGMENTS: SegmentMeta[] = [
 export const segmentBySlug = (slug: string): SegmentMeta | undefined =>
   SEGMENTS.find((s) => s.slug === slug);
 
-export const segmentLabel = (slug: string): string =>
-  segmentBySlug(slug)?.label ?? humanise(slug);
+/**
+ * The translation key for a segment. Callers pass it through `t()`, so an
+ * unmapped slug still degrades to something readable rather than blank.
+ */
+export const segmentLabelKey = (slug: string): string =>
+  segmentBySlug(slug)?.labelKey ?? `tax.segment.${slug}`;
 
 export interface BenefitMeta {
   slug: string;
-  label: string;
+  labelKey: string;
   /** What the citizen actually receives. */
-  blurb: string;
+  blurbKey: string;
   icon: LucideIcon;
 }
 
-export const BENEFIT_TYPES: BenefitMeta[] = [
-  { slug: 'cash', label: 'Direct cash', blurb: 'Money paid into your bank account', icon: Banknote },
-  { slug: 'loan', label: 'Loan', blurb: 'Credit at a subsidised rate', icon: PiggyBank },
-  { slug: 'subsidy', label: 'Subsidy', blurb: 'A discount on something you buy', icon: Wrench },
-  { slug: 'certificate', label: 'Fee waiver', blurb: 'Fees reduced or written off', icon: FileBadge },
-  { slug: 'service', label: 'Service', blurb: 'Training, treatment or facilities', icon: Landmark }
-];
+export const BENEFIT_TYPES: BenefitMeta[] = (
+  ['cash', 'loan', 'subsidy', 'certificate', 'service'] as const
+).map((slug, i) => ({
+  slug,
+  labelKey: `tax.benefit.${slug}`,
+  blurbKey: `tax.benefitBlurb.${slug}`,
+  icon: [Banknote, PiggyBank, Wrench, FileBadge, Landmark][i]
+}));
 
-export const benefitLabel = (slug: string): string =>
-  BENEFIT_TYPES.find((b) => b.slug === slug)?.label ?? humanise(slug);
+export const benefitLabelKey = (slug: string): string =>
+  BENEFIT_TYPES.find((b) => b.slug === slug)?.labelKey ?? `tax.benefit.${slug}`;
 
 export const STATES = [
   'Andhra Pradesh',
@@ -133,21 +139,19 @@ export const STATES = [
   'West Bengal'
 ];
 
-export const INCOME_BANDS = [
-  { slug: 'below_1l', label: 'Under ₹1 lakh a year' },
-  { slug: '1l_2_5l', label: '₹1 – 2.5 lakh a year' },
-  { slug: '2_5l_5l', label: '₹2.5 – 5 lakh a year' },
-  { slug: '5l_8l', label: '₹5 – 8 lakh a year' },
-  { slug: 'above_8l', label: 'Over ₹8 lakh a year' }
-];
+export const INCOME_BANDS = ['below_1l', '1l_2_5l', '2_5l_5l', '5l_8l', 'above_8l'].map(
+  (slug) => ({ slug, labelKey: `tax.income.${slug}` })
+);
+
+export const incomeLabelKey = (slug: string): string => `tax.income.${slug}`;
 
 export const APPLICATION_STATUS: Record<
   string,
-  { label: string; tone: 'open' | 'closed' | 'rolling' }
+  { labelKey: string; tone: 'open' | 'closed' | 'rolling' }
 > = {
-  open: { label: 'Accepting applications', tone: 'open' },
-  rolling: { label: 'Open all year', tone: 'rolling' },
-  closed: { label: 'Closed for now', tone: 'closed' }
+  open: { labelKey: 'record.accepting', tone: 'open' },
+  rolling: { labelKey: 'record.openAllYear', tone: 'rolling' },
+  closed: { labelKey: 'record.closed', tone: 'closed' }
 };
 
 /** `senior_citizen` → `Senior citizen`. Last resort for unmapped slugs. */

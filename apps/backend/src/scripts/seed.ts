@@ -1,5 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
+// Side-effect import so this actually runs before the imports below load —
+// see the comment in src/server.ts for why `import dotenv from 'dotenv';
+// dotenv.config();` placed ahead of other imports doesn't guarantee that.
+import 'dotenv/config';
 
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';

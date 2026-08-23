@@ -13,6 +13,17 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 export default {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+
+  future: {
+    /**
+     * `hover:` styles apply only where hovering is actually possible. On a
+     * touch screen a tap otherwise leaves the hover state stuck to whatever
+     * was last pressed, so a scheme card stays highlighted after you have
+     * moved on. Desktop is unaffected.
+     */
+    hoverOnlyWhenSupported: true
+  },
+
   theme: {
     container: {
       center: true,
@@ -20,6 +31,40 @@ export default {
       screens: { '2xl': '1360px' }
     },
     extend: {
+      /**
+       * Device ladder. Tailwind's defaults start at 640px, which leaves every
+       * phone — a 320px iPhone SE and a 430px Pro Max alike — sharing one
+       * layout. `xs` splits the genuinely cramped phones from standard ones.
+       *
+       * 375px is not an arbitrary round number: it is the width at which the
+       * landing header stops overflowing with a brand mark, a language name
+       * and a call to action side by side, and the width at which two
+       * deadline tiles fit next to each other. Below it, those collapse.
+       *
+       *   base … 374   small phones      (320, 360)
+       *   xs   … 639   standard / large  (375, 390, 414, 430)
+       *   sm   … 767   large phones landscape
+       *   md   … 1023  tablets           (768, 820)
+       *   lg   … 1279  small laptops     (1024) — the desktop rail begins here
+       *   xl   … 1535  desktop           (1280, 1440)
+       *   2xl  …       large desktop     (1920+)
+       */
+      screens: {
+        xs: '375px'
+      },
+
+      spacing: {
+        // Safe areas as ordinary spacing tokens: `pt-safe-t`, `pb-safe-b`.
+        'safe-t': 'var(--sat)',
+        'safe-r': 'var(--sar)',
+        'safe-b': 'var(--sab)',
+        'safe-l': 'var(--sal)',
+        // Mobile chrome heights, so content reserves exactly the right gap.
+        appbar: 'var(--app-bar-h)',
+        tabbar: 'var(--tab-bar-h)',
+        'tabbar-safe': 'calc(var(--tab-bar-h) + var(--sab))'
+      },
+
       colors: {
         // shadcn-compatible aliases, driven by the CSS variables in index.css
         border: 'hsl(var(--border))',

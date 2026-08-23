@@ -185,8 +185,11 @@ Index: `{ userId: 1, updatedAt: -1 }`.
 | `schemeId` | ObjectId \| null | Null if this run produced a new scheme not yet assigned |
 | `action` | String | `created` \| `updated` \| `flagged_for_review` |
 | `sourceUrl` | String | Where the notification/PDF was found |
-| `extractionConfidence` | Number | 0–1 |
+| `extractionConfidence` | Number | 0–1 — how completely/consistently the model's extraction read, scored deterministically, never self-reported |
+| `sourceTrustScore` | Number \| null | 0–100 — how much the *source itself* is trusted, independent of extraction quality (`sourceRegistry.ts`) |
+| `combinedScore` | Number \| null | The weighted blend of the two above that the publish decision actually gated on |
 | `diffSummary` | String | What changed vs. previous version |
+| `changeReason` | String \| null | Why — cites the source's own stated reason when there is one, otherwise says plainly none was given |
 | `reviewedBy` | String \| null | Null until reviewed (if below confidence threshold) |
 | `runAt` | Date | |
 
@@ -272,3 +275,63 @@ schemes ──1:N── knowledgeUpdateLog (audit trail per scheme)
 ```
 
 `schemes` is the only collection written to by the Knowledge Update System (PRD §17.6, §23) — every other collection only reads from it or references it by `schemeId`, keeping one consistent source of truth.
+
+---
+
+## 12. `sourceSnapshots` (internal, Knowledge Update System only)
+
+Not one of the 8 citizen-facing collections above — this is the pipeline's own change-detection memory, so a scheduled run can tell "this source hasn't changed since last time" from "worth re-extracting" without refetching and re-running every source every night. No other module reads it.
+
+| Field | Type | Notes |
+|---|---|---|
+| `_id` | ObjectId | |
+| `sourceUrl` | String | Unique — one snapshot per monitored source |
+| `schemeSlug` | String \| null | The scheme this source is expected to update, if known |
+| `contentHash` | String | SHA-256 of the last successfully processed content |
+| `lastFetchedAt` | Date | |
+| `lastAction` | String | `created` \| `updated` \| `flagged_for_review` \| `unchanged` \| `fetch_failed` |
+| `consecutiveFailures` | Number | Source health — resets to 0 on any successful fetch |
+| `lastSuccessAt` | Date \| null | |
+| `lastFetchMs` | Number \| null | |
+| `totalRuns` / `totalFailures` | Number | Together give a per-source success rate — `services/knowledge-update/sourceHealth.ts`, no dashboard, just numbers a reviewer can query |
+
+Index: `{ sourceUrl: 1 }` unique.
+
+---
+
+## 13. `schemeVersions` — "git for schemes"
+
+An immutable snapshot per write to a `schemes` document. `schemes` itself only ever holds the current state; this collection is the full history — who/what changed it, what changed, why, and (via `rollbackToVersion`) how to undo it.
+
+| Field | Type | Notes |
+|---|---|---|
+| `_id` | ObjectId | |
+| `schemeId` | ObjectId | ref `schemes` |
+| `versionNumber` | Number | 1, 2, 3... per scheme, never reused |
+| `snapshot` | Object | The full scheme document as it stood immediately after this write |
+| `changedFields` | [String] | Which top-level `schemes` fields actually differed in this write |
+| `changedBy` | String | `ai` (Knowledge Update pipeline) \| `manual` (a recorded correction) \| `rollback` |
+| `diffSummary` | String | Human-readable description of what changed |
+| `changeReason` | String | Why — grounded in the source text when it states one, otherwise an honest "no reason stated" note (never invented) |
+| `sourceRef` | String \| null | Null for a rollback — its source is a prior version, not a URL |
+| `createdAt` | Date | |
+
+Index: `{ schemeId: 1, versionNumber: -1 }` unique.
+
+## 14. `extractionCorrections` — the human feedback loop
+
+What a reviewer corrected an AI extraction to, per field. No admin UI writes this in v1 (`docs/rules.md` #28) — a reviewer runs `pnpm --filter backend record-correction` from the pending-review queue (`services/knowledge-update/reviewQueue.ts`). Exists so a future prompt-tuning or model-evaluation pass has real labelled data from day one.
+
+| Field | Type | Notes |
+|---|---|---|
+| `_id` | ObjectId | |
+| `logEntryId` | ObjectId | ref `knowledgeUpdateLog` |
+| `schemeId` | ObjectId | ref `schemes` |
+| `field` | String | Which field was corrected |
+| `aiValue` | Mixed | What the AI extraction had set |
+| `correctedValue` | Mixed | What the reviewer corrected it to |
+| `correctedBy` | String | |
+| `note` | String \| null | |
+| `correctedAt` | Date | |
+
+Index: `{ schemeId: 1 }`.

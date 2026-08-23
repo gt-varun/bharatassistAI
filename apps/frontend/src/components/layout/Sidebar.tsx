@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronsLeft,
   ChevronsRight,
+  X,
   type LucideIcon
 } from 'lucide-react';
 import { useAuth } from '../../auth/AuthContext';
@@ -102,7 +103,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
   const toggleGroup = (id: string) =>
     setOpenGroups((prev) => ({ ...prev, [id]: !prev[id] }));
 
-  const renderItem = (item: NavItem) => {
+  const renderItem = (item: NavItem, isCollapsed: boolean) => {
     const Icon = item.icon;
     const label = t(`nav.${item.labelKey}`);
     const active =
@@ -112,25 +113,38 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
       <li key={item.to}>
         <NavLink
           to={item.to}
-          title={collapsed ? label : undefined}
+          title={isCollapsed ? label : undefined}
           data-active={active || undefined}
           aria-current={active ? 'page' : undefined}
-          className={cn('rail-item', collapsed && 'justify-center px-0')}
+          className={cn('rail-item', isCollapsed && 'justify-center px-0')}
         >
           <Icon
             className={cn('h-[1.05rem] w-[1.05rem] shrink-0', active ? 'text-sanction' : 'text-ink-3')}
             strokeWidth={1.8}
           />
-          {!collapsed && <span className="truncate">{label}</span>}
+          {!isCollapsed && <span className="truncate">{label}</span>}
         </NavLink>
       </li>
     );
   };
 
-  const rail = (
-    <div className="flex h-full flex-col bg-surface">
+  /**
+   * `inDrawer` is the same rail, rendered as the mobile drawer: it gains a
+   * close control and safe-area padding, and never collapses. The
+   * navigation itself is shared rather than duplicated.
+   *
+   * The collapse preference is a desktop one and is stored globally, so it
+   * is explicitly ignored here — otherwise a citizen who once collapsed the
+   * rail on a laptop would open the drawer on their phone and find a strip
+   * of unlabelled icons.
+   */
+  const renderRail = (inDrawer: boolean) => {
+    const isCollapsed = collapsed && !inDrawer;
+
+    return (
+    <div className="flex h-full flex-col bg-surface pt-safe-t">
       {/* Identity block */}
-      <div className={cn('flex items-center gap-2.5 px-3 py-3.5', collapsed && 'justify-center px-2')}>
+      <div className={cn('flex items-center gap-2.5 px-3 py-3.5', isCollapsed && 'justify-center px-2')}>
         <button
           type="button"
           onClick={() => navigate('/')}
@@ -140,7 +154,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
           BA
         </button>
 
-        {!collapsed && (
+        {!isCollapsed && (
           <div className="min-w-0 flex-1">
             <p className="truncate font-display text-[0.9375rem] font-semibold leading-tight text-ink">
               {t('common.appName')}
@@ -149,7 +163,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
           </div>
         )}
 
-        {!collapsed && (
+        {!isCollapsed && !inDrawer && (
           <button
             type="button"
             onClick={() => setCollapsed(true)}
@@ -159,9 +173,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
             <ChevronsLeft className="h-4 w-4" />
           </button>
         )}
+
+        {/* The drawer needs a way out that is not "tap the dimmed area" —
+            that target is invisible to a screen reader and easy to miss. */}
+        {inDrawer && (
+          <button
+            type="button"
+            onClick={onCloseMobile}
+            aria-label={t('common.close')}
+            className="ml-auto shrink-0 rounded-md p-2 text-ink-3 transition-colors hover:bg-rule-soft hover:text-ink"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
       </div>
 
-      {collapsed && (
+      {isCollapsed && (
         <button
           type="button"
           onClick={() => setCollapsed(false)}
@@ -174,11 +201,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
 
       {/* Navigation */}
       <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 pb-4">
-        <ul className="space-y-0.5">{ROOT_ITEMS.map(renderItem)}</ul>
+        <ul className="space-y-0.5">{ROOT_ITEMS.map((item) => renderItem(item, isCollapsed))}</ul>
 
         {GROUPS.map((group) => (
           <div key={group.id} className="mt-5 first:mt-4">
-            {collapsed ? (
+            {isCollapsed ? (
               <div className="mx-auto mb-2 h-px w-6 bg-rule" role="presentation" />
             ) : (
               <button
@@ -197,8 +224,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
               </button>
             )}
 
-            {(collapsed || openGroups[group.id]) && (
-              <ul className="space-y-0.5">{group.items.map(renderItem)}</ul>
+            {(isCollapsed || openGroups[group.id]) && (
+              <ul className="space-y-0.5">
+                {group.items.map((item) => renderItem(item, isCollapsed))}
+              </ul>
             )}
           </div>
         ))}
@@ -206,12 +235,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
 
       {/* Account block */}
       {/* Language lives once, in the top bar. */}
-      <div className="hair-top p-3">
-        <div className={cn('flex items-center gap-2.5', collapsed && 'justify-center')}>
+      <div className={cn('hair-top p-3', inDrawer && 'pb-[calc(0.75rem+var(--sab))]')}>
+        <div className={cn('flex items-center gap-2.5', isCollapsed && 'justify-center')}>
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-indigo-tint font-mono text-[0.75rem] font-semibold text-indigo">
               {initials(user?.email || user?.phone)}
             </span>
-            {!collapsed && (
+            {!isCollapsed && (
               <>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[0.8125rem] font-medium text-ink">
@@ -235,7 +264,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
         </div>
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <>
@@ -246,7 +276,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
           collapsed ? 'w-[4.25rem]' : 'w-[15.5rem]'
         )}
       >
-        <div className="sticky top-0 h-screen">{rail}</div>
+        <div className="sticky top-0 h-screen">{renderRail(false)}</div>
       </aside>
 
       {/* Mobile drawer */}
@@ -265,12 +295,21 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
           )}
         />
         <div
+          role="dialog"
+          aria-modal={mobileOpen || undefined}
+          aria-label={t('nav.primary')}
           className={cn(
-            'absolute inset-y-0 left-0 w-[16rem] border-r border-rule shadow-pop transition-transform duration-200',
+            // Never wider than most of the screen: the page behind has to
+            // stay visible enough to read as "underneath", and on a 320px
+            // phone a 16rem drawer would otherwise cover almost everything.
+            'absolute inset-y-0 left-0 flex w-[17rem] max-w-[85%] flex-col border-r border-rule',
+            'shadow-pop transition-transform duration-200 will-change-transform',
             mobileOpen ? 'translate-x-0' : '-translate-x-full'
           )}
         >
-          {rail}
+          {/* The rail already scrolls its own nav list, so it is dropped in
+              whole rather than wrapped in a second scroller. */}
+          {renderRail(true)}
         </div>
       </div>
     </>

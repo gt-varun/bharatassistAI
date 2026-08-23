@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -15,6 +16,7 @@ import { segmentBySlug } from '../lib/taxonomy';
 const PAGE_SIZE = 10;
 
 export const CategorySchemeListPage: React.FC = () => {
+  const { t } = useTranslation();
   const { slug = '' } = useParams();
   const { isSaved, toggle } = useSavedSchemes();
   const [page, setPage] = useState(1);
@@ -47,30 +49,30 @@ export const CategorySchemeListPage: React.FC = () => {
         className="mb-6 inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
       >
         <ArrowLeft className="h-4 w-4" />
-        All categories
+        {t('landing.allCategories')}
       </Link>
 
       <PageHeader
         eyebrow={`${total} ${total === 1 ? 'scheme' : 'schemes'} in this category`}
-        title={segment?.label ?? slug}
-        description={segment?.blurb}
+        title={segment ? t(segment.labelKey) : slug}
+        description={segment ? t(segment.blurbKey) : undefined}
         actions={
           <Button variant="outline" size="sm" asChild>
-            <Link to={`/search?segment=${slug}`}>Search within this category</Link>
+            <Link to={`/search?segment=${slug}`}>{t('categoryList.searchWithin')}</Link>
           </Button>
         }
       />
 
       <div className="mt-8">
-        {isLoading && <LoadingState message="Loading this category" />}
+        {isLoading && <LoadingState message={t('categoryList.loading')} />}
 
         {!isLoading && isError && (
           <EmptyState
-            title="The register did not respond"
-            description="The connection to the scheme service failed. Try again in a moment."
+            title={t('search.failed')}
+            description={t('search.failedDesc')}
             action={
               <Button variant="outline" onClick={() => window.location.reload()}>
-                Try again
+                {t('common.tryAgain')}
               </Button>
             }
           />
@@ -78,11 +80,11 @@ export const CategorySchemeListPage: React.FC = () => {
 
         {!isLoading && !isError && data?.schemes.length === 0 && (
           <EmptyState
-            title="No schemes filed under this category yet"
-            description="The register is updated as new notifications are published. Search across all categories in the meantime."
+            title={t('categoryList.empty')}
+            description={t('categoryList.emptyDesc')}
             action={
               <Button variant="outline" asChild>
-                <Link to="/search">Search all schemes</Link>
+                <Link to="/search">{t('categoryList.searchAll')}</Link>
               </Button>
             }
           />
@@ -103,10 +105,10 @@ export const CategorySchemeListPage: React.FC = () => {
         )}
 
         {!isLoading && totalPages > 1 && (
-          <nav className="hair-top mt-6 flex items-center justify-between pt-4" aria-label="Pages">
+          <nav className="hair-top mt-6 flex items-center justify-between pt-4" aria-label={t('search.pagesAria')}>
             <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
               <ChevronLeft className="h-4 w-4" />
-              Previous
+              {t('common.previous')}
             </Button>
             <span className="register">
               Page {page} of {totalPages}
@@ -117,7 +119,7 @@ export const CategorySchemeListPage: React.FC = () => {
               disabled={page >= totalPages}
               onClick={() => setPage(page + 1)}
             >
-              Next
+              {t('common.next')}
               <ChevronRight className="h-4 w-4" />
             </Button>
           </nav>

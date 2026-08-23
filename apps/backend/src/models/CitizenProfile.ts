@@ -6,6 +6,7 @@ export interface CitizenProfileDocument extends Omit<CitizenProfile, '_id'>, Doc
 const CitizenProfileSchema = new Schema<CitizenProfileDocument>(
   {
     userId: { type: Schema.Types.ObjectId as any, ref: 'User', required: true, unique: true, index: true },
+    fullName: { type: String, default: null },
     state: { type: String, required: true },
     district: { type: String, default: null },
     age: { type: Number, default: null },
@@ -15,6 +16,7 @@ const CitizenProfileSchema = new Schema<CitizenProfileDocument>(
     educationLevel: { type: String, default: null },
     category: { type: String, default: null },
     disabilityStatus: { type: Boolean, default: null },
+    maritalStatus: { type: String, default: null },
     landOwnershipAcres: { type: Number, default: null },
     businessType: { type: String, default: null }
   },

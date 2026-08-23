@@ -40,7 +40,7 @@ export const CategoriesPage: React.FC = () => {
 
       {/* ---- By who you are ---- */}
       <section className="mt-10">
-        <h2 className="register mb-4">By who you are</h2>
+        <h2 className="register mb-4">{t('categories.byWho')}</h2>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {SEGMENTS.map((segment) => {
             const Icon = segment.icon;
@@ -57,7 +57,7 @@ export const CategoriesPage: React.FC = () => {
                   <span className="min-w-0">
                     <span className="flex items-baseline justify-between gap-2">
                       <span className="font-display text-[0.9375rem] font-semibold text-ink">
-                        {segment.label}
+                        {t(segment.labelKey)}
                       </span>
                       {isLoading ? (
                         <Skeleton className="h-3 w-14" />
@@ -68,7 +68,7 @@ export const CategoriesPage: React.FC = () => {
                       )}
                     </span>
                     <span className="mt-1 block text-[0.8125rem] leading-relaxed text-ink-2">
-                      {segment.blurb}
+                      {t(segment.blurbKey)}
                     </span>
                   </span>
                 </Link>
@@ -80,7 +80,7 @@ export const CategoriesPage: React.FC = () => {
 
       {/* ---- By what you receive ---- */}
       <section className="mt-12">
-        <h2 className="register mb-4">By what you receive</h2>
+        <h2 className="register mb-4">{t('categories.byBenefit')}</h2>
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {BENEFIT_TYPES.map((benefit) => {
             const Icon = benefit.icon;
@@ -96,9 +96,9 @@ export const CategoriesPage: React.FC = () => {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block font-display text-[0.9375rem] font-semibold text-ink">
-                      {benefit.label}
+                      {t(benefit.labelKey)}
                     </span>
-                    <span className="block text-[0.8125rem] text-ink-2">{benefit.blurb}</span>
+                    <span className="block text-[0.8125rem] text-ink-2">{t(benefit.blurbKey)}</span>
                   </span>
                   <span className="shrink-0 font-mono text-micro text-ink-4">
                     {isLoading ? '' : count ?? 0}
@@ -112,7 +112,7 @@ export const CategoriesPage: React.FC = () => {
 
       {/* ---- By government ---- */}
       <section className="mt-12">
-        <h2 className="register mb-4">By government</h2>
+        <h2 className="register mb-4">{t('categories.byGovernment')}</h2>
 
         <div className="grid gap-3 sm:grid-cols-2">
           <Link
@@ -122,13 +122,13 @@ export const CategoriesPage: React.FC = () => {
           >
             <span className="flex items-center gap-2 text-sanction">
               <Landmark className="h-4 w-4" strokeWidth={1.8} />
-              <span className="register-strong text-sanction">Central government</span>
+              <span className="register-strong text-sanction">{t('search.levelCentral')}</span>
             </span>
             <span className="mt-2 block font-display text-xl font-semibold text-ink">
               {isLoading ? '—' : plural(data?.levels?.central ?? 0)}
             </span>
             <span className="mt-1 block text-[0.875rem] text-ink-2">
-              Open to citizens across India, whichever state you live in.
+              {t('categories.centralBlurb')}
             </span>
           </Link>
 
@@ -139,13 +139,13 @@ export const CategoriesPage: React.FC = () => {
           >
             <span className="flex items-center gap-2 text-indigo">
               <MapPin className="h-4 w-4" strokeWidth={1.8} />
-              <span className="register-strong text-indigo">State government</span>
+              <span className="register-strong text-indigo">{t('search.levelState')}</span>
             </span>
             <span className="mt-2 block font-display text-xl font-semibold text-ink">
               {isLoading ? '—' : plural(data?.levels?.state ?? 0)}
             </span>
             <span className="mt-1 block text-[0.875rem] text-ink-2">
-              Issued by a state, and claimable only if you live there.
+              {t('categories.stateBlurb')}
             </span>
           </Link>
         </div>
@@ -156,7 +156,7 @@ export const CategoriesPage: React.FC = () => {
               <li key={state}>
                 <Link
                   to={`/search?state=${encodeURIComponent(state)}`}
-                  className="flex items-center gap-1.5 rounded border border-rule-strong bg-surface px-2.5 py-1 text-[0.8125rem] text-ink-2 transition-colors hover:border-indigo-edge hover:bg-indigo-tint hover:text-indigo"
+                  className="tap-target flex items-center gap-1.5 rounded border border-rule-strong bg-surface px-2.5 py-1 text-[0.8125rem] text-ink-2 transition-colors hover:border-indigo-edge hover:bg-indigo-tint hover:text-indigo"
                 >
                   {state}
                   <span className="font-mono text-micro text-ink-4">{count}</span>

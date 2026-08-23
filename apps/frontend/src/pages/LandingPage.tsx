@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -23,61 +24,23 @@ import { SEGMENTS, BENEFIT_TYPES } from '../lib/taxonomy';
 import { ALL_LANGUAGES } from '../i18n/config';
 import { formatDate } from '../lib/format';
 
-/** Real phrasings citizens use — the placeholder teaches the search. */
-const EXAMPLE_QUERIES = [
-  'I am a farmer in Karnataka with two acres',
-  'scholarship for a BSc student, family income under 2 lakh',
-  'loan for a woman starting a tailoring business',
-  'pension for my father, he is 68',
-  'help with buying a drip irrigation set'
+/**
+ * Real phrasings citizens use — the placeholder teaches the search. These are
+ * keys, not sentences: an example query that stays in English teaches nothing
+ * to someone reading the page in Tamil.
+ */
+const EXAMPLE_QUERY_KEYS = [
+  'landing.example1',
+  'landing.example2',
+  'landing.example3',
+  'landing.example4',
+  'landing.example5'
 ];
 
 /** The journey is a real sequence, so it is numbered. */
-const STEPS = [
-  {
-    title: 'Describe your situation',
-    body: 'Type it the way you would say it. No scheme names, no government vocabulary needed.'
-  },
-  {
-    title: 'See what you qualify for',
-    body: 'Answer a short set of plain questions and get a clear yes, partly, or no — with the reason.'
-  },
-  {
-    title: 'Collect your documents',
-    body: 'Get the exact list for your case, including where to obtain anything you are missing.'
-  },
-  {
-    title: 'Apply on the official portal',
-    body: 'We hand you over ready. The government portal remains the only place you file.'
-  }
-];
+const STEP_KEYS = ['step1', 'step2', 'step3', 'step4'];
 
-const FAQS = [
-  {
-    q: 'Do I need an account?',
-    a: 'Yes. Signing in with your mobile number opens the register and lets it remember your saved schemes, your document checklist and your deadlines between visits. There is no separate sign-up — the same number creates the account.'
-  },
-  {
-    q: 'Does BharatAssist AI apply on my behalf?',
-    a: 'Never. We take you as far as a complete document list and the correct official link. The government portal stays the only place an application is filed, and we never ask for the credentials to one.'
-  },
-  {
-    q: 'Where does the scheme information come from?',
-    a: 'Every record traces back to an official government notification. Each one carries the issuing department, the notification reference and the date it was last checked against that source.'
-  },
-  {
-    q: 'How current is it?',
-    a: 'Records are re-checked against their source on a rolling basis. Anything unchecked for more than 90 days is flagged in the list rather than quietly left to age, so you can see the age of what you are reading.'
-  },
-  {
-    q: 'What does it cost?',
-    a: 'Nothing. Government schemes are a public entitlement and finding them should not carry a fee, an agent or a middleman.'
-  },
-  {
-    q: 'What do you do with my mobile number?',
-    a: 'It attaches your saved schemes to you and nothing else. We do not sell it or use it for marketing, and you can export or delete everything you have stored from Settings at any time.'
-  }
-];
+const FAQ_KEYS = ['faq1', 'faq2', 'faq3', 'faq4', 'faq5', 'faq6'];
 
 function useTypedPlaceholder(phrases: string[]) {
   const [text, setText] = useState('');
@@ -121,11 +84,12 @@ function useTypedPlaceholder(phrases: string[]) {
 }
 
 export const LandingPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [quickMatchOpen, setQuickMatchOpen] = useState(false);
   const [focused, setFocused] = useState(false);
-  const typed = useTypedPlaceholder(EXAMPLE_QUERIES);
+  const typed = useTypedPlaceholder(EXAMPLE_QUERY_KEYS.map((k) => t(k)));
 
   const { data: recent, isLoading: recentLoading } = useQuery<Scheme[]>({
     queryKey: ['landing-recent'],
@@ -180,7 +144,7 @@ export const LandingPage: React.FC = () => {
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <a href="#main" className="skip-link">
-        Skip to content
+        {t('nav.skipToContent')}
       </a>
       <PublicHeader />
 
@@ -189,28 +153,27 @@ export const LandingPage: React.FC = () => {
         <section className="relative overflow-hidden">
           <div aria-hidden className="paper-grid paper-fade absolute inset-0 -z-10" />
 
-          <div className="mx-auto grid w-full max-w-6xl gap-12 px-4 pb-16 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-end lg:px-8">
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-[minmax(0,1fr)] gap-12 px-4 pb-16 pt-16 sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-end lg:px-8">
             <div className="stagger max-w-3xl">
               <p className="register-strong flex flex-wrap items-center gap-x-2 gap-y-1">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-sanction" />
-                Central and state government schemes
+                {t('landing.eyebrow')}
               </p>
 
               <h1 className="mt-5 text-balance font-display text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.03em] text-ink sm:text-[3.25rem]">
-                Tell us your situation.
+                {t('landing.titleLine1')}
                 <br />
-                <span className="text-sanction">We&apos;ll find the schemes you can claim.</span>
+                <span className="text-sanction">{t('landing.titleLine2')}</span>
               </h1>
 
               <p className="mt-5 max-w-xl text-pretty text-[1.0625rem] leading-relaxed text-ink-2">
-                Central and state benefits are scattered across hundreds of portals, written in
-                language most people cannot self-assess against. Search all of them here, in yours.
+                {t('landing.desc')}
               </p>
 
               {/* The hero object: one field, plain language. */}
               <form onSubmit={runSearch} className="mt-8" role="search">
                 <label htmlFor="hero-search" className="sr-only">
-                  Describe your situation to find schemes
+                  {t('landing.searchLabel')}
                 </label>
                 <div className="flex flex-col gap-2 rounded-lg border border-rule-strong bg-surface p-2 shadow-card transition-[border-color,box-shadow] focus-within:border-sanction focus-within:shadow-focus sm:flex-row sm:items-center">
                   <div className="relative flex min-w-0 flex-1 items-center">
@@ -222,7 +185,7 @@ export const LandingPage: React.FC = () => {
                       onFocus={() => setFocused(true)}
                       onBlur={() => setFocused(false)}
                       className="h-12 w-full bg-transparent pl-10 pr-3 text-[1rem] text-ink outline-none placeholder:text-ink-4"
-                      placeholder={focused || query ? 'Describe your situation' : ''}
+                      placeholder={focused || query ? t('landing.searchPlaceholder') : ''}
                       autoComplete="off"
                     />
                     {!focused && !query && (
@@ -236,31 +199,29 @@ export const LandingPage: React.FC = () => {
                     )}
                   </div>
                   <Button type="submit" size="lg" className="shrink-0">
-                    Find schemes
+                    {t('common.findSchemes')}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="mt-2 register">
-                  Sign in with your mobile number to open the register — it is free
-                </p>
+                <p className="mt-2 register">{t('landing.freeNote')}</p>
               </form>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <span className="register">Or start here</span>
+                <span className="register">{t('landing.orStartHere')}</span>
                 <Button variant="outline" size="sm" onClick={() => setQuickMatchOpen(true)}>
                   <ListChecks className="h-4 w-4 text-ink-3" />
-                  Answer 3 questions
+                  {t('landing.answer3')}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <a href="#who">
                     <LayoutGrid className="h-4 w-4 text-ink-3" />
-                    Browse by category
+                    {t('nav.categories')}
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <a href="#languages">
                     <MessagesSquare className="h-4 w-4 text-ink-3" />
-                    Ask in your language
+                    {t('assistant.eyebrow')}
                   </a>
                 </Button>
               </div>
@@ -268,12 +229,12 @@ export const LandingPage: React.FC = () => {
 
             {/* The register's own index card — live counts, not a stat banner. */}
             <aside className="animate-rise-in rounded-lg border border-rule bg-surface p-5 shadow-card">
-              <p className="register mb-3">What is on the register</p>
+              <p className="register mb-3">{t('landing.indexTitle')}</p>
               <dl className="divide-y divide-rule">
                 <div className="flex items-baseline justify-between gap-3 py-2.5">
                   <dt className="flex items-center gap-2 text-[0.875rem] text-ink-2">
                     <span aria-hidden className="h-3 w-[3px] rounded-full bg-central" />
-                    Central orders
+                    {t('landing.centralOrders')}
                   </dt>
                   <dd className="font-display text-[1.0625rem] font-semibold text-ink">
                     {counts?.levels?.central ?? '—'}
@@ -282,27 +243,29 @@ export const LandingPage: React.FC = () => {
                 <div className="flex items-baseline justify-between gap-3 py-2.5">
                   <dt className="flex items-center gap-2 text-[0.875rem] text-ink-2">
                     <span aria-hidden className="h-3 w-[3px] rounded-full bg-state" />
-                    State orders
+                    {t('landing.stateOrders')}
                   </dt>
                   <dd className="font-display text-[1.0625rem] font-semibold text-ink">
                     {counts?.levels?.state ?? '—'}
                   </dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-3 py-2.5">
-                  <dt className="text-[0.875rem] text-ink-2">States covered</dt>
+                  <dt className="text-[0.875rem] text-ink-2">{t('landing.statesCovered')}</dt>
                   <dd className="font-display text-[1.0625rem] font-semibold text-ink">
                     {totals.states || '—'}
                   </dd>
                 </div>
                 <div className="flex items-baseline justify-between gap-3 py-2.5">
-                  <dt className="text-[0.875rem] text-ink-2">Languages</dt>
+                  <dt className="text-[0.875rem] text-ink-2">{t('landing.navLanguages')}</dt>
                   <dd className="font-display text-[1.0625rem] font-semibold text-ink">
                     {ALL_LANGUAGES.length}
                   </dd>
                 </div>
               </dl>
               <p className="hair-top mt-1 pt-3 register">
-                {lastVerified ? `Last verified ${formatDate(lastVerified)}` : 'Awaiting connection'}
+                {lastVerified
+                  ? t('landing.lastVerified', { date: formatDate(lastVerified) })
+                  : t('landing.awaitingConnection')}
               </p>
             </aside>
           </div>
@@ -313,9 +276,9 @@ export const LandingPage: React.FC = () => {
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <div>
-                <p className="register mb-1.5">Browse by who you are</p>
+                <p className="register mb-1.5">{t('categories.eyebrow')}</p>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-                  Start from your situation
+                  {t('categories.title')}
                 </h2>
               </div>
               <button
@@ -323,7 +286,7 @@ export const LandingPage: React.FC = () => {
                 onClick={() => enter('/categories')}
                 className="text-[0.875rem] font-medium text-sanction underline-offset-4 hover:underline"
               >
-                All categories
+                {t('landing.allCategories')}
               </button>
             </div>
 
@@ -348,10 +311,10 @@ export const LandingPage: React.FC = () => {
                         )}
                       </span>
                       <span className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                        {segment.label}
+                        {t(segment.labelKey)}
                       </span>
                       <span className="mt-1 text-[0.8125rem] leading-relaxed text-ink-3">
-                        {segment.blurb}
+                        {t(segment.blurbKey)}
                       </span>
                     </button>
                   </li>
@@ -364,14 +327,12 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- What you actually receive --------------------- */}
         <section id="benefits" className="hair-top scroll-mt-16">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="register mb-1.5">What a scheme gives you</p>
+            <p className="register mb-1.5">{t('landing.benefitsEyebrow')}</p>
             <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-              Not every benefit is a cash transfer
+              {t('landing.benefitsTitle')}
             </h2>
             <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-ink-2">
-              A scheme might pay money into your account, or it might cut the price of a pump set,
-              write off a college fee, or open a training place. The register tells you which,
-              before you spend a day on the paperwork.
+              {t('landing.benefitsDesc')}
             </p>
 
             <ul className="mt-8 grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-5">
@@ -381,10 +342,10 @@ export const LandingPage: React.FC = () => {
                   <li key={benefit.slug} className="bg-surface p-5">
                     <Icon className="h-5 w-5 text-sanction" strokeWidth={1.6} />
                     <h3 className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                      {benefit.label}
+                      {t(benefit.labelKey)}
                     </h3>
                     <p className="mt-1 text-[0.8125rem] leading-relaxed text-ink-3">
-                      {benefit.blurb}
+                      {t(benefit.blurbKey)}
                     </p>
                   </li>
                 );
@@ -396,19 +357,27 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- The register, live ---------------------------- */}
         <section className="hair-top bg-surface">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
+            {/*
+                An explicit `minmax(0, 1fr)` even for the single-column phone
+                layout. Without a template the implicit track is `auto`,
+                whose minimum is its content's min-content — and a scheme
+                record contains a department name set in nowrap for
+                truncation. That one string then sets a ~530px floor for the
+                whole section, and the page bleeds off the side of a phone.
+                `minmax(0, …)` lets the track shrink so the truncation can
+                do its job.
+              */}
+              <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
               <div>
-                <p className="register mb-1.5">On the register now</p>
+                <p className="register mb-1.5">{t('landing.liveEyebrow')}</p>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-                  Every entry traces back to an official notification
+                  {t('landing.liveTitle')}
                 </h2>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                  Each record carries the department that issued it, the date it was last checked
-                  against the source, and the notification reference. Anything unchecked for more
-                  than 90 days is flagged in the list rather than quietly left to age.
+                  {t('landing.liveDesc')}
                 </p>
                 <Button variant="outline" size="sm" className="mt-5" onClick={() => enter('/search')}>
-                  Open the full register
+                  {t('landing.openFullRegister')}
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </div>
@@ -428,8 +397,7 @@ export const LandingPage: React.FC = () => {
 
                 {!recentLoading && !recent?.length && (
                   <p className="rounded-lg border border-dashed border-rule-strong p-6 text-[0.875rem] text-ink-2">
-                    The register is not reachable right now. Search will work again once the
-                    connection returns.
+                    {t('landing.registerUnreachable')}
                   </p>
                 )}
               </div>
@@ -440,21 +408,23 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- How it works: a real sequence ----------------- */}
         <section id="how" className="hair-top scroll-mt-16">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="register mb-1.5">From not knowing to ready to apply</p>
+            <p className="register mb-1.5">{t('landing.howEyebrow')}</p>
             <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-              Four steps, and we stop before the form
+              {t('landing.howTitle')}
             </h2>
 
             <ol className="mt-8 grid gap-px overflow-hidden rounded-lg border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
-              {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-surface p-5">
+              {STEP_KEYS.map((step, i) => (
+                <li key={step} className="bg-surface p-5">
                   <span className="font-mono text-[0.8125rem] font-medium text-sanction">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="mt-2 font-display text-[1rem] font-semibold text-ink">
-                    {step.title}
+                    {t(`landing.${step}Title`)}
                   </h3>
-                  <p className="mt-1.5 text-[0.875rem] leading-relaxed text-ink-2">{step.body}</p>
+                  <p className="mt-1.5 text-[0.875rem] leading-relaxed text-ink-2">
+                    {t(`landing.${step}Body`)}
+                  </p>
                 </li>
               ))}
             </ol>
@@ -464,31 +434,28 @@ export const LandingPage: React.FC = () => {
               <div className="bg-surface p-5">
                 <ShieldCheck className="h-5 w-5 text-sanction" strokeWidth={1.6} />
                 <h3 className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                  We never file for you
+                  {t('landing.limit1Title')}
                 </h3>
                 <p className="mt-1 text-[0.8125rem] leading-relaxed text-ink-3">
-                  No agent, no middleman, no fee. The official portal is the only place an
-                  application is submitted, and we never ask for your login to one.
+                  {t('landing.limit1Body')}
                 </p>
               </div>
               <div className="bg-surface p-5">
                 <FileText className="h-5 w-5 text-sanction" strokeWidth={1.6} />
                 <h3 className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                  Sourced, dated, checkable
+                  {t('landing.limit2Title')}
                 </h3>
                 <p className="mt-1 text-[0.8125rem] leading-relaxed text-ink-3">
-                  Every record links to the government notification it came from, so you can read
-                  the original order yourself.
+                  {t('landing.limit2Body')}
                 </p>
               </div>
               <div className="bg-surface p-5">
                 <LanguagesIcon className="h-5 w-5 text-sanction" strokeWidth={1.6} />
                 <h3 className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">
-                  In the language you think in
+                  {t('landing.limit3Title')}
                 </h3>
                 <p className="mt-1 text-[0.8125rem] leading-relaxed text-ink-3">
-                  Ask a question in {ALL_LANGUAGES.length} languages and get the answer back in the
-                  same one.
+                  {t('landing.limit3Body', { count: ALL_LANGUAGES.length })}
                 </p>
               </div>
             </div>
@@ -498,16 +465,14 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- Languages ------------------------------------- */}
         <section id="languages" className="hair-top scroll-mt-16 bg-surface">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-center">
+            <div className="grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:items-center">
               <div>
-                <p className="register mb-1.5">Read it in yours</p>
+                <p className="register mb-1.5">{t('landing.langEyebrow')}</p>
                 <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-                  {ALL_LANGUAGES.length} languages, not just English
+                  {t('landing.langTitle', { count: ALL_LANGUAGES.length })}
                 </h2>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-2">
-                  Eligibility rules are hard enough in your own language and close to unreadable in
-                  someone else&apos;s. Switch at any time from the selector in the corner — the
-                  whole interface follows, including the assistant.
+                  {t('landing.langDesc')}
                 </p>
               </div>
 
@@ -532,16 +497,20 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- Questions ------------------------------------- */}
         <section id="questions" className="hair-top scroll-mt-16">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <p className="register mb-1.5">Before you start</p>
+            <p className="register mb-1.5">{t('landing.faqEyebrow')}</p>
             <h2 className="font-display text-2xl font-semibold tracking-[-0.02em]">
-              Questions people ask first
+              {t('landing.faqTitle')}
             </h2>
 
             <dl className="mt-8 grid gap-x-10 gap-y-7 md:grid-cols-2">
-              {FAQS.map((faq) => (
-                <div key={faq.q} className="hair-top pt-5">
-                  <dt className="font-display text-[1rem] font-semibold text-ink">{faq.q}</dt>
-                  <dd className="mt-2 text-[0.875rem] leading-relaxed text-ink-2">{faq.a}</dd>
+              {FAQ_KEYS.map((faq) => (
+                <div key={faq} className="hair-top pt-5">
+                  <dt className="font-display text-[1rem] font-semibold text-ink">
+                    {t(`landing.${faq}Q`)}
+                  </dt>
+                  <dd className="mt-2 text-[0.875rem] leading-relaxed text-ink-2">
+                    {t(`landing.${faq}A`)}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -551,23 +520,22 @@ export const LandingPage: React.FC = () => {
         {/* ---------------- Closing prompt -------------------------------- */}
         <section className="hair-top">
           <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-6 rounded-lg border border-sanction-edge bg-sanction-tint p-8">
+            <div className="flex flex-wrap items-center justify-between gap-6 rounded-lg border border-sanction-edge bg-sanction-tint p-6 sm:p-8">
               <div className="max-w-lg">
                 <h2 className="font-display text-xl font-semibold text-sanction-deep">
-                  Two minutes is usually enough
+                  {t('landing.closingTitle')}
                 </h2>
                 <p className="mt-2 text-[0.9375rem] leading-relaxed text-sanction-deep/80">
-                  Most people find something they qualify for and did not know existed on their
-                  first search.
+                  {t('landing.closingDesc')}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <Button variant="outline" size="lg" onClick={() => setQuickMatchOpen(true)}>
-                  Answer 3 questions
+                  {t('landing.answer3')}
                 </Button>
                 <Button size="lg" asChild>
                   <Link to="/login">
-                    Sign in to begin
+                    {t('landing.signInToBegin')}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>

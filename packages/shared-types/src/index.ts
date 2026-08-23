@@ -70,6 +70,8 @@ export interface User {
   passwordHash: string | null;
   preferredLanguage: string;
   refreshTokenVersion: number;
+  /** Deadline reminders and scheme updates. Opt-out, not opt-in. */
+  notificationsEnabled?: boolean;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
@@ -77,6 +79,13 @@ export interface User {
 export interface CitizenProfile {
   _id?: string;
   userId: string;
+  /**
+   * What the citizen would like to be called. It takes no part in
+   * eligibility or scoring — it exists so the app can address someone by
+   * name rather than as an account — and like every field except `state`
+   * it is optional.
+   */
+  fullName?: string | null;
   state: string;
   district?: string | null;
   age?: number | null;
@@ -86,6 +95,7 @@ export interface CitizenProfile {
   educationLevel?: string | null;
   category?: string | null;
   disabilityStatus?: boolean | null;
+  maritalStatus?: string | null;
   landOwnershipAcres?: number | null;
   businessType?: string | null;
   updatedAt?: string | Date;
@@ -149,6 +159,57 @@ export interface KnowledgeUpdateLogEntry {
   diffSummary: string;
   reviewedBy: string | null;
   runAt: string | Date;
+  /**
+   * Optional, additive field. Grounded in the source text when it states one
+   * (e.g. a circular reference); otherwise an honest "no reason stated"
+   * note — never an invented explanation (docs/rules.md #16).
+   */
+  changeReason?: string;
+  /** How much this source is trusted a priori (docs/prd.md §17.6 — distinct from extraction quality). 0–100. */
+  sourceTrustScore?: number;
+  /** The weighted blend of extraction confidence and source trust that the publish decision actually gated on. 0–1. */
+  combinedScore?: number;
+}
+
+/**
+ * One immutable snapshot per write to a `schemes` document — "git for
+ * schemes". `schemes` itself always holds only the current state; the full
+ * history, the ability to answer "what changed and why", and rollback all
+ * live here instead.
+ */
+export interface SchemeVersion {
+  _id?: string;
+  schemeId: string;
+  /** 1, 2, 3... per scheme — the version this snapshot represents. */
+  versionNumber: number;
+  /** The full scheme document as it stood immediately after this write. */
+  snapshot: Record<string, any>;
+  /** Which top-level Scheme fields actually changed in this write. */
+  changedFields: string[];
+  changedBy: 'ai' | 'manual' | 'rollback';
+  diffSummary: string;
+  changeReason: string;
+  /** Null for a rollback — a rollback's source is a prior version, not a URL. */
+  sourceRef: string | null;
+  createdAt: string | Date;
+}
+
+/**
+ * The human-feedback loop: what the AI extracted vs. what a reviewer
+ * corrected it to, per field. Feeds two things this v1 doesn't build yet —
+ * prompt tuning and model evaluation — by making sure the raw material for
+ * both exists from day one, not retrofitted later.
+ */
+export interface ExtractionCorrection {
+  _id?: string;
+  logEntryId: string;
+  schemeId: string;
+  field: string;
+  aiValue: any;
+  correctedValue: any;
+  correctedBy: string;
+  note?: string;
+  correctedAt: string | Date;
 }
 
 export interface SchemeEmbedding {
@@ -157,6 +218,34 @@ export interface SchemeEmbedding {
   embedding: number[];
   textChunk: string;
   updatedAt: string | Date;
+}
+
+/**
+ * Internal bookkeeping for the Knowledge Update System (docs/prd.md §17.6).
+ * Not one of the 8 collections in docs/scheme-database.md — those are the
+ * citizen-facing/shared contract. This one exists purely so the monitor step
+ * can tell "unchanged since last run" from "worth re-extracting" without
+ * refetching and re-running every source on every scheduled run. Nothing
+ * outside services/knowledge-update reads it.
+ */
+export interface SourceSnapshot {
+  _id?: string;
+  sourceUrl: string;
+  /** The scheme this source is expected to update, if known ahead of time. */
+  schemeSlug: string | null;
+  contentHash: string;
+  lastFetchedAt: string | Date;
+  lastAction: 'created' | 'updated' | 'flagged_for_review' | 'unchanged' | 'fetch_failed';
+  /**
+   * Source health (optional, additive) — internal metrics, not a dashboard.
+   * Lets a run notice "this source has failed 6 times in a row" before it
+   * ever affects a citizen-facing answer.
+   */
+  consecutiveFailures?: number;
+  lastSuccessAt?: string | Date | null;
+  lastFetchMs?: number;
+  totalRuns?: number;
+  totalFailures?: number;
 }
 
 export interface ApiResponse<T = any> {

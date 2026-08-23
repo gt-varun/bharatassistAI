@@ -49,27 +49,46 @@ const resources = {
 };
 
 /**
- * Sentinel keys that stand in for "this locale is usable at all".
- *
- * They are spread across namespaces on purpose, so a file that was truncated
- * or only half-translated is caught. Keep them pointing at keys that really
- * exist — if every sentinel goes missing, every language is judged
- * incomplete and the selector below has nothing to offer.
+ * Every leaf string in a resource bundle, as dotted keys.
  */
-const REQUIRED_KEYS = ['common.appName', 'nav.home', 'search.title', 'login.title'];
-
-export const isLanguageComplete = (langCode: string): boolean => {
-  const resource = resources[langCode as keyof typeof resources]?.translation;
-  if (!resource) return false;
-  return REQUIRED_KEYS.every((key) => {
-    const parts = key.split('.');
-    let curr: any = resource;
-    for (const part of parts) {
-      curr = curr?.[part];
-    }
-    return typeof curr === 'string' && curr.trim().length > 0;
+function flattenKeys(obj: Record<string, any>, prefix = ''): string[] {
+  return Object.entries(obj).flatMap(([key, value]) => {
+    const dotted = prefix ? `${prefix}.${key}` : key;
+    if (typeof value === 'string') return value.trim().length > 0 ? [dotted] : [];
+    if (value && typeof value === 'object') return flattenKeys(value, dotted);
+    return [];
   });
+}
+
+const ENGLISH_KEYS = flattenKeys(en);
+
+/**
+ * Coverage of a locale against English, 0–1.
+ *
+ * §2.4 asks that a language not be offered until its string coverage is
+ * complete, and this is what enforces it. It compares every key rather than a
+ * handful of sentinels: a file missing two hundred strings used to pass the
+ * old sentinel check and then hand the citizen half an English screen.
+ */
+export const languageCoverage = (langCode: string): number => {
+  const resource = resources[langCode as keyof typeof resources]?.translation;
+  if (!resource) return 0;
+  if (ENGLISH_KEYS.length === 0) return 1;
+
+  const translated = new Set(flattenKeys(resource));
+  const present = ENGLISH_KEYS.filter((key) => translated.has(key)).length;
+  return present / ENGLISH_KEYS.length;
 };
+
+/**
+ * Plural forms are the one accepted gap: i18next resolves `key_one`/`key_other`
+ * per language, and a language with a single plural form legitimately carries
+ * fewer keys than English. So completeness is 99%, not exact parity.
+ */
+const COMPLETE_THRESHOLD = 0.99;
+
+export const isLanguageComplete = (langCode: string): boolean =>
+  languageCoverage(langCode) >= COMPLETE_THRESHOLD;
 
 export const getAvailableLanguages = (): LanguageMeta[] => {
   const complete = ALL_LANGUAGES.filter((lang) => isLanguageComplete(lang.code));

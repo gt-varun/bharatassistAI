@@ -11,7 +11,13 @@
     "lint": "eslint src/**/*.ts",
     "test": "vitest run",
     "seed": "tsx src/scripts/seed.ts",
-    "embed": "tsx src/scripts/embed.ts"
+    "sync-indexes": "tsx src/scripts/syncIndexes.ts",
+    "embed": "tsx src/scripts/embed.ts",
+    "knowledge-update": "tsx src/scripts/knowledgeUpdate.ts",
+    "rollback-scheme": "tsx src/scripts/rollbackScheme.ts",
+    "record-correction": "tsx src/scripts/recordCorrection.ts",
+    "translate:ui": "tsx src/scripts/translateLocales.ts",
+    "translate:schemes": "tsx src/scripts/translateSchemes.ts"
   },
   "dependencies": {
     "@bharatassist/shared-types": "workspace:*",
@@ -23,6 +29,7 @@
     "express-rate-limit": "^7.3.1",
     "jsonwebtoken": "9.0.2",
     "mongoose": "^8.5.2",
+    "pdf-parse": "^1.1.1",
     "pino": "^9.3.2",
     "pino-http": "^10.2.0",
     "zod": "^3.23.8"
@@ -33,6 +40,7 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "9.0.6",
     "@types/node": "^20.14.14",
+    "@types/pdf-parse": "^1.1.4",
     "@types/supertest": "^6.0.2",
     "pino-pretty": "^11.2.2",
     "supertest": "^7.0.0",

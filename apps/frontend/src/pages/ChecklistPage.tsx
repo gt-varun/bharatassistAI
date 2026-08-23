@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, ListChecks, Printer, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, ListChecks, Printer, Share2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/ui/button';
@@ -11,6 +11,8 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { LoadingState } from '../components/ui/LoadingState';
 import { useSavedSchemes } from '../hooks/useSavedSchemes';
 import { useSchemeRecords } from '../hooks/useSchemeRecords';
+import { isNative } from '../native/platform';
+import { printOrShare } from '../native/files';
 import { cn } from '../lib/utils';
 
 export interface ChecklistItemData {
@@ -158,6 +160,39 @@ export const ChecklistPage: React.FC = () => {
 
   const items = checklistData.items || [];
   const haveCount = items.filter((i) => i.status === 'have' || i.status === 'completed').length;
+
+  /**
+   * Take the list away with you.
+   *
+   * On the web that means the print dialog, as it always has. In the app
+   * `window.print()` is a no-op in the WebView, so the button would be a
+   * dead control — instead the same list goes to the share sheet as text,
+   * which reaches the places a phone actually has: a printing app, a
+   * message to whoever is helping with the paperwork, or a note.
+   */
+  const takeListAway = () => {
+    if (!isNative()) {
+      window.print();
+      return;
+    }
+
+    const lines = items.map((item) => {
+      const done = item.status === 'have' || item.status === 'completed';
+      const mark = done ? '[x]' : '[ ]';
+      const need = item.mandatory ? 'Required' : 'Optional';
+      return `${mark} ${item.label} — ${need}`;
+    });
+
+    void printOrShare({
+      title: checklistData.schemeName,
+      text: [
+        checklistData.schemeName,
+        `${haveCount} of ${items.length} documents ready`,
+        '',
+        ...lines
+      ].join('\n')
+    });
+  };
   const missingItems = items.filter((i) => i.status !== 'have' && i.status !== 'completed' && i.status !== 'not_applicable' && i.status !== 'not_required');
 
   return (
@@ -180,9 +215,13 @@ export const ChecklistPage: React.FC = () => {
         }
         actions={
           items.length > 0 && (
-            <Button variant="outline" size="sm" onClick={() => window.print()} className="no-print">
-              <Printer className="h-4 w-4 text-ink-3" />
-              Print this list
+            <Button variant="outline" size="sm" onClick={takeListAway} className="no-print">
+              {isNative() ? (
+                <Share2 className="h-4 w-4 text-ink-3" />
+              ) : (
+                <Printer className="h-4 w-4 text-ink-3" />
+              )}
+              {isNative() ? t('checklist.shareList') : t('checklist.print')}
             </Button>
           )
         }

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import {
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -35,6 +37,7 @@ const QUESTIONS = [
  * nothing stored.
  */
 export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpenChange }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [step, setStep] = useState(0);
@@ -74,7 +77,10 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
         if (!next) reset();
       }}
     >
-      <DialogContent className="max-w-xl">
+      {/* `sm:` so tailwind-merge replaces the base `sm:max-w-lg` rather than
+          leaving both — an unprefixed `max-w-xl` would lose to the
+          responsive variant at every width above 640px. */}
+      <DialogContent className="sm:max-w-xl">
         <DialogHeader>
           <p className="register">
             Question {step + 1} of {QUESTIONS.length}
@@ -96,11 +102,11 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
           ))}
         </div>
 
-        <div className="min-h-[11rem] py-1">
+        <DialogBody className="min-h-[11rem] py-1">
           {step === 0 && (
             <Select value={state} onValueChange={setState}>
               <SelectTrigger className="h-11">
-                <SelectValue placeholder="Choose your state" />
+                <SelectValue placeholder={t('profile.chooseState')} />
               </SelectTrigger>
               <SelectContent>
                 {STATES.map((s) => (
@@ -131,7 +137,7 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
                       )}
                     >
                       <Icon className="h-4 w-4 shrink-0" strokeWidth={1.7} />
-                      <span className="truncate">{s.label}</span>
+                      <span className="truncate">{t(s.labelKey)}</span>
                     </button>
                   </li>
                 );
@@ -156,20 +162,20 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
                           : 'border-rule-strong text-ink-2 hover:border-ink-4 hover:text-ink'
                       )}
                     >
-                      {band.label}
+                      {t(band.labelKey)}
                     </button>
                   </li>
                 );
               })}
             </ul>
           )}
-        </div>
+        </DialogBody>
 
         <div className="hair-top flex items-center justify-between gap-3 pt-4">
           {step > 0 ? (
             <Button variant="ghost" onClick={() => setStep(step - 1)}>
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t('common.back')}
             </Button>
           ) : (
             <span />
@@ -178,7 +184,7 @@ export const QuickMatchDialog: React.FC<QuickMatchDialogProps> = ({ open, onOpen
           <div className="flex items-center gap-2">
             {step === 2 && (
               <Button variant="ghost" onClick={finish}>
-                Skip
+                {t('common.skip')}
               </Button>
             )}
             <Button

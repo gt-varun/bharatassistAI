@@ -14,6 +14,13 @@ const KnowledgeUpdateLogSchema = new Schema<KnowledgeUpdateLogDocument>(
     sourceUrl: { type: String, required: true },
     extractionConfidence: { type: Number, required: true },
     diffSummary: { type: String, required: true },
+    // Optional, additive (see shared-types) — grounded in the source when it
+    // states one, otherwise an honest "no reason stated" note.
+    changeReason: { type: String, default: null },
+    // Trust score of the source itself vs. extraction confidence — see
+    // services/knowledge-update/sourceRegistry.ts and pipeline.ts.
+    sourceTrustScore: { type: Number, default: null },
+    combinedScore: { type: Number, default: null },
     reviewedBy: { type: String, default: null },
     runAt: { type: Date, required: true, default: Date.now }
   },

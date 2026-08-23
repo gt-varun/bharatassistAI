@@ -11,6 +11,6 @@ describe('Health Check Endpoint', () => {
     expect(response.body.success).toBe(true);
     expect(response.body.data.services).toBeDefined();
     expect(response.body.data.services.database).toBeDefined();
-    expect(response.body.data.services.geminiApi).toBeDefined();
+    expect(response.body.data.services.aiApi).toBeDefined();
   });
 });

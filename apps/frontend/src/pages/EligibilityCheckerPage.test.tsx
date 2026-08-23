@@ -229,13 +229,13 @@ describe('EligibilityCheckerPage Component Tests', () => {
 
       await waitFor(() => {
         expect(screen.getByText(/You do not currently qualify/i)).toBeDefined();
-        expect(screen.getByText('Recommended Alternative Schemes')).toBeDefined();
+        expect(screen.getByText(/Schemes you could claim instead|Recommended Alternative Schemes/i)).toBeDefined();
         expect(screen.getByText('National Merit Scholarship')).toBeDefined();
         expect(screen.getByText(/Supports higher annual household income limits/i)).toBeDefined();
       });
 
       // Click Re-check Answers to return to wizard
-      fireEvent.click(screen.getByRole('button', { name: /Re-check Answers/i }));
+      fireEvent.click(screen.getByRole('button', { name: /Re-check Answers|Check another scheme/i }));
 
       await waitFor(() => {
         expect(screen.getByText(/Question 1 of 1/i)).toBeDefined();

@@ -1,5 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
+// See src/server.ts for why this is a side-effect import, not
+// `import dotenv from 'dotenv'; dotenv.config();` ahead of other imports.
+import 'dotenv/config';
 
 import { connectDB, disconnectDB } from '../config/db.js';
 import { SchemeModel } from '../models/Scheme.js';

@@ -6,3 +6,23 @@ dist
 *.log
 coverage
 .DS_Store
+
+# --- Capacitor native projects -------------------------------------------
+# The android/ and ios/ project folders are committed (they hold real
+# configuration: permissions, icons, signing setup). Only their build
+# output and machine-local files are ignored.
+apps/frontend/android/.gradle
+apps/frontend/android/build
+apps/frontend/android/app/build
+apps/frontend/android/local.properties
+apps/frontend/android/.idea
+apps/frontend/android/app/src/main/assets/public
+apps/frontend/android/app/src/main/assets/capacitor.config.json
+apps/frontend/android/app/src/main/assets/capacitor.plugins.json
+apps/frontend/ios/App/Pods
+apps/frontend/ios/App/App/public
+apps/frontend/ios/App/App/capacitor.config.json
+apps/frontend/ios/App/App/config.xml
+apps/frontend/ios/DerivedData
+*.keystore
+!debug.keystore
