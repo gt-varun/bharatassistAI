@@ -278,7 +278,120 @@
     display: none !important;
   }
 
+  html,
   body {
-    background: #fff;
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Hide navigation, sidebar, top header, search, skip links */
+  aside,
+  header,
+  nav,
+  .skip-link,
+  [role="search"],
+  .no-print {
+    display: none !important;
+  }
+
+  /* Clean full-width container without margin constraints or artificial min-height */
+  main,
+  #main,
+  .page-body,
+  .min-h-screen {
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Clean headings & titles */
+  h1 {
+    font-size: 18pt !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.35rem !important;
+    color: #111827 !important;
+  }
+
+  h2 {
+    font-size: 13pt !important;
+    color: #111827 !important;
+  }
+
+  p {
+    color: #374151 !important;
+  }
+
+  /* Progress bar on paper */
+  .bg-rule {
+    background-color: #e5e7eb !important;
+    border: 1px solid #d1d5db !important;
+  }
+
+  .bg-sanction {
+    background-color: #0d5f44 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Document list styling & page break prevention */
+  ul {
+    border-color: #d1d5db !important;
+  }
+
+  li {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-color: #e5e7eb !important;
+  }
+
+  /* Checkboxes on paper */
+  [role="checkbox"] {
+    border: 1.5pt solid #374151 !important;
+    background-color: #ffffff !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  [role="checkbox"][data-state="checked"] {
+    background-color: #0d5f44 !important;
+    border-color: #0d5f44 !important;
+  }
+
+  /* Status badges on paper */
+  .register-strong {
+    color: #374151 !important;
+    font-weight: 600 !important;
+  }
+
+  .text-seal {
+    color: #991b1b !important;
+  }
+
+  /* Document instruction notes */
+  .text-ink-2 {
+    color: #4b5563 !important;
+  }
+
+  /* Summary card */
+  .border-sanction-edge {
+    border-color: #0d5f44 !important;
+    background-color: #f0fdf4 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Remove extraneous web shadows and transforms */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
   }
 }

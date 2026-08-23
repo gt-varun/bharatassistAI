@@ -164,7 +164,7 @@ export const ChecklistPage: React.FC = () => {
     <PageBody>
       <Link
         to={`/schemes/${slug}`}
-        className="mb-6 inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
+        className="no-print mb-6 inline-flex items-center gap-1.5 text-[0.875rem] text-ink-2 hover:text-ink"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to {checklistData.schemeName}
@@ -284,7 +284,7 @@ export const ChecklistPage: React.FC = () => {
               <p className="mt-1 text-[0.875rem] text-sanction-deep/80">
                 You can now proceed to apply on the official government portal.
               </p>
-              <Button className="mt-4" asChild>
+              <Button className="no-print mt-4" asChild>
                 <Link to={`/schemes/${slug}`}>{t('checklist.backToScheme')}</Link>
               </Button>
             </div>
