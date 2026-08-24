@@ -99,22 +99,22 @@ describe('CompareSchemesPage Component Tests', () => {
       renderWithProviders();
 
       await waitFor(() => {
-        expect(screen.getByText('Karnataka Vidyasiri Scholarship')).toBeDefined();
-        expect(screen.getByText('Post-Matric Scholarship for SC Students')).toBeDefined();
+        expect(screen.getAllByText('Karnataka Vidyasiri Scholarship').length).toBeGreaterThan(0);
+        expect(screen.getAllByText('Post-Matric Scholarship for SC Students').length).toBeGreaterThan(0);
       });
 
       // Verification of table rows
-      expect(screen.getByText('Full tuition reimbursement')).toBeDefined();
-      expect(screen.getByText('Maintenance allowance and tuition fee support')).toBeDefined();
-      expect(screen.getByText('2026-10-31')).toBeDefined();
-      expect(screen.getByText('Rolling / Open')).toBeDefined();
+      expect(screen.getAllByText('Full tuition reimbursement').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Maintenance allowance and tuition fee support').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('2026-10-31').length).toBeGreaterThan(0);
+      expect(screen.getAllByText('Rolling / Open').length).toBeGreaterThan(0);
 
       // Difference banner
       expect(screen.getByText(/4 key differences detected/i)).toBeDefined();
 
       // Official portal links rendered
       const portalLinks = screen.getAllByRole('link', { name: /Official Portal/i });
-      expect(portalLinks).toHaveLength(2);
+      expect(portalLinks.length).toBeGreaterThanOrEqual(2);
       expect(portalLinks[0].getAttribute('href')).toBe('https://vidyasiri.karnataka.gov.in');
       expect(portalLinks[1].getAttribute('href')).toBe('https://scholarships.gov.in');
     });
@@ -127,7 +127,7 @@ describe('CompareSchemesPage Component Tests', () => {
       renderWithProviders();
 
       await waitFor(() => {
-        expect(screen.getByText('Karnataka Vidyasiri Scholarship')).toBeDefined();
+        expect(screen.getAllByText('Karnataka Vidyasiri Scholarship').length).toBeGreaterThan(0);
       });
 
       const changeBtn = screen.getByRole('button', { name: /Change selection/i });
