@@ -62,6 +62,7 @@ UserSchema.set('toJSON', {
     delete ret.passwordHash;
     delete ret.passwordResetTokenHash;
     delete ret.passwordResetExpiresAt;
+    delete ret.refreshTokenVersion;
     return ret;
   }
 });

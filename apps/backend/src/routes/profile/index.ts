@@ -15,7 +15,7 @@ const router = Router();
 /** Fields a citizen may set on themselves. Anything else in the body is dropped. */
 const PROFILE_FIELDS = [
   'fullName',
-  'state',
+  'currentState',
   'district',
   'age',
   'gender',
@@ -36,13 +36,26 @@ const settingsSchema = z.object({
   })
 });
 
+/**
+ * Safely format a profile document to handle legacy `state` fields without exposing them.
+ */
+function formatProfile(doc: any) {
+  if (!doc) return null;
+  const profile = doc.toObject ? doc.toObject() : { ...doc };
+  if (!profile.currentState && profile.state) {
+    profile.currentState = profile.state;
+  }
+  delete profile.state;
+  return profile;
+}
+
 router.get('/', authenticate, async (req: AuthRequest, res, next) => {
   try {
-    const profile = await CitizenProfileModel.findOne({ userId: req.user?.userId });
-    if (!profile) {
+    const profileDoc = await CitizenProfileModel.findOne({ userId: req.user?.userId });
+    if (!profileDoc) {
       return sendError(res, 'Profile not found', 404, 'NOT_FOUND');
     }
-    return sendSuccess(res, profile);
+    return sendSuccess(res, formatProfile(profileDoc));
   } catch (error) {
     next(error);
   }
@@ -57,12 +70,12 @@ router.put('/', authenticate, async (req: AuthRequest, res, next) => {
       if (field in req.body) update[field] = req.body[field];
     }
 
-    const profile = await CitizenProfileModel.findOneAndUpdate(
+    const profileDoc = await CitizenProfileModel.findOneAndUpdate(
       { userId: req.user?.userId },
       { ...update, userId: req.user?.userId },
       { new: true, upsert: true }
     );
-    return sendSuccess(res, profile);
+    return sendSuccess(res, formatProfile(profileDoc));
   } catch (error) {
     next(error);
   }
@@ -123,7 +136,7 @@ router.get('/export', authenticate, async (req: AuthRequest, res, next) => {
     return sendSuccess(res, {
       exportedAt: new Date().toISOString(),
       account: user,
-      profile,
+      profile: formatProfile(profile),
       savedSchemes: saved,
       eligibilityResults: eligibility,
       documentChecklists: checklists,

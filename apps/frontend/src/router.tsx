@@ -16,7 +16,7 @@ import { AssistantPage } from './pages/AssistantPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { SettingsPage } from './pages/SettingsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { OnboardingGate, OnboardingPage } from './onboarding';
+import { OnboardingGate, OnboardingPage, OnboardingChoicePage, AiOnboardingPlaceholder } from './onboarding';
 
 export const router = createBrowserRouter([
   // Public surfaces carry their own header and footer.
@@ -33,7 +33,23 @@ export const router = createBrowserRouter([
     path: '/welcome',
     element: (
       <RequireAuth>
+        <OnboardingChoicePage />
+      </RequireAuth>
+    )
+  },
+  {
+    path: '/welcome/manual',
+    element: (
+      <RequireAuth>
         <OnboardingPage />
+      </RequireAuth>
+    )
+  },
+  {
+    path: '/welcome/ai',
+    element: (
+      <RequireAuth>
+        <AiOnboardingPlaceholder />
       </RequireAuth>
     )
   },

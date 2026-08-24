@@ -36,7 +36,7 @@ const QUICK_PATHS = [
 
 export const DashboardPage: React.FC = () => {
   const { t } = useTranslation();
-  const { slugs, isSaved, toggle } = useSavedSchemes();
+  const { slugs, isSaved, toggle, isInitializing } = useSavedSchemes();
   const { schemes: savedSchemes, isLoading: savedLoading } = useSchemeRecords(slugs.slice(0, 3));
   const { data: profile } = useCitizenProfile();
 
@@ -229,15 +229,19 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {slugs.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-rule-strong bg-surface p-6">
-            <p className="text-[0.9375rem] text-ink-2">{t('dashboard.savedEmpty')}</p>
-            <Button variant="outline" size="sm" className="mt-4" asChild>
-              <Link to="/search">
-                {t('common.findSchemes')}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          !isInitializing ? (
+            <div className="rounded-lg border border-dashed border-rule-strong bg-surface p-6">
+              <p className="text-[0.9375rem] text-ink-2">{t('dashboard.savedEmpty')}</p>
+              <Button variant="outline" size="sm" className="mt-4" asChild>
+                <Link to="/search">
+                  {t('common.findSchemes')}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          ) : (
+            <Skeleton className="h-28 w-full" />
+          )
         ) : savedLoading ? (
           <Skeleton className="h-28 w-full" />
         ) : (

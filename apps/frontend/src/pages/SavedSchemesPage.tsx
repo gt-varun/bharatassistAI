@@ -14,7 +14,7 @@ import { useAuth } from '../auth/AuthContext';
 export const SavedSchemesPage: React.FC = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
-  const { slugs, isSaved, toggle, clear } = useSavedSchemes();
+  const { slugs, isSaved, toggle, clear, isInitializing } = useSavedSchemes();
   const { schemes, isLoading } = useSchemeRecords(slugs);
 
   return (
@@ -45,7 +45,7 @@ export const SavedSchemesPage: React.FC = () => {
       <div className="mt-8">
         {isLoading && slugs.length > 0 && <LoadingState message="Loading your saved schemes" rows={2} />}
 
-        {slugs.length === 0 && (
+        {slugs.length === 0 && !isInitializing && (
           <EmptyState
             icon={Bookmark}
             title="Nothing saved yet"
