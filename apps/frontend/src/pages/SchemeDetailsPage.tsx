@@ -458,9 +458,9 @@ export const SchemeDetailsPage: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-2">
               <Button variant="outline" size="sm" asChild>
-                <Link to={`/search?segment=${scheme.targetSegments?.[0] ?? ''}`}>
+                <Link to={`/compare?schemes=${scheme.slug}`}>
                   <GitCompare className="h-4 w-4 text-ink-3" />
-                  {t('schemeDetails.similar')}
+                  {t('schemeDetails.addToCompare')}
                 </Link>
               </Button>
               <Button variant="outline" size="sm" asChild>

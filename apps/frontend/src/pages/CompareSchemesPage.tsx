@@ -169,6 +169,11 @@ export const CompareSchemesPage: React.FC = () => {
     });
   };
 
+  const clearSelection = () => {
+    setSearchParams({});
+    setSelectedIds([]);
+  };
+
   // 1. Selector Screen if < 2 schemes selected
   if (selectedIds.length < 2) {
     return (
@@ -259,7 +264,7 @@ export const CompareSchemesPage: React.FC = () => {
           title={t('compare.failed')}
           description={error?.message || 'Verification failed for requested scheme IDs.'}
           action={
-            <Button variant="outline" onClick={() => setSelectedIds([])}>
+            <Button variant="outline" onClick={clearSelection}>
               {t('compare.clearSelection')}
             </Button>
           }
@@ -280,7 +285,7 @@ export const CompareSchemesPage: React.FC = () => {
           <ArrowLeft className="h-4 w-4" />
           {t('compare.backToSaved')}
         </Link>
-        <Button variant="outline" size="sm" onClick={() => setSelectedIds([])}>
+        <Button variant="outline" size="sm" onClick={clearSelection}>
           {t('compare.changeSelection')}
         </Button>
       </div>

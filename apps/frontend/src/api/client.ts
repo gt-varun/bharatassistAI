@@ -9,23 +9,32 @@ export const apiClient = axios.create({
   }
 });
 
-let accessToken: string | null = localStorage.getItem('access_token');
-let refreshToken: string | null = localStorage.getItem('refresh_token');
+const getStorage = (): Storage | null => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    return window.localStorage;
+  }
+  return null;
+};
+
+let accessToken: string | null = getStorage()?.getItem('access_token') ?? null;
+let refreshToken: string | null = getStorage()?.getItem('refresh_token') ?? null;
 
 export const hasAccessToken = () => Boolean(accessToken);
 
 export const setAuthTokens = (access: string, refresh: string) => {
   accessToken = access;
   refreshToken = refresh;
-  localStorage.setItem('access_token', access);
-  localStorage.setItem('refresh_token', refresh);
+  const storage = getStorage();
+  storage?.setItem('access_token', access);
+  storage?.setItem('refresh_token', refresh);
 };
 
 export const clearAuthTokens = () => {
   accessToken = null;
   refreshToken = null;
-  localStorage.removeItem('access_token');
-  localStorage.removeItem('refresh_token');
+  const storage = getStorage();
+  storage?.removeItem('access_token');
+  storage?.removeItem('refresh_token');
 };
 
 // Automatic Bearer Token Attachment, plus the reader's language on every
@@ -36,7 +45,7 @@ apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  const lang = localStorage.getItem('bharatassist_language');
+  const lang = getStorage()?.getItem('bharatassist_language');
   if (lang && config.headers) {
     config.headers['Accept-Language'] = lang;
   }
@@ -63,8 +72,10 @@ apiClient.interceptors.response.use(
         // The application is behind sign-in, so a dead session has to end at
         // the door. RequireAuth picks this up and redirects.
         clearAuthTokens();
-        localStorage.removeItem('bharatassist_user');
-        window.dispatchEvent(new Event('bharatassist:signed-out'));
+        getStorage()?.removeItem('bharatassist_user');
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new Event('bharatassist:signed-out'));
+        }
       }
     }
     return Promise.reject(error);
