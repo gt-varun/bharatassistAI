@@ -94,19 +94,12 @@ describe('SchemeDetailsPage Component Tests', () => {
 
     await waitFor(() => {
       expect(screen.getByText('Karnataka Vidyasiri Scholarship')).toBeDefined();
+      expect(screen.getAllByText('Department of Collegiate Education').length).toBeGreaterThan(0);
+      expect(screen.getByText('Full tuition fee reimbursement')).toBeDefined();
+      expect(screen.getAllByText(/Check my eligibility/i).length).toBeGreaterThan(0);
+      expect(screen.getByText(/Save this scheme/i)).toBeDefined();
+      expect(screen.getByText(/Apply on the official portal/i)).toBeDefined();
     });
-
-    expect(screen.getAllByText('Department of Collegiate Education').length).toBeGreaterThan(0);
-    expect(screen.getByText('Full tuition fee reimbursement')).toBeDefined();
-
-    // Check Eligibility CTA
-    expect(screen.getAllByText(/Check my eligibility/i).length).toBeGreaterThan(0);
-
-    // Save scheme CTA
-    expect(screen.getByText(/Save this scheme/i)).toBeDefined();
-
-    // Verified official portal link
-    expect(screen.getByText(/Apply on the official portal/i)).toBeDefined();
   });
 
   it('renders Overview tab content and allows switching tab panels', async () => {

@@ -46,9 +46,15 @@ export function useLiveTranslation(sources: string[], { context, enabled = true 
   const resolve = (list: string[]) =>
     list.map((text) => (text ? (cache.get(cacheKey(language, text)) ?? text) : text));
 
+  const [prevSignature, setPrevSignature] = useState(signature);
   const [translated, setTranslated] = useState<string[]>(() => resolve(sources));
   const [isTranslating, setIsTranslating] = useState(false);
   const mounted = useRef(true);
+
+  if (prevSignature !== signature) {
+    setPrevSignature(signature);
+    setTranslated(resolve(sources));
+  }
 
   useEffect(() => {
     mounted.current = true;
