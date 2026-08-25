@@ -207,11 +207,12 @@ export async function searchSchemes(params: SearchParams): Promise<SearchResult>
   if (params.userId) {
     const profile = await CitizenProfileModel.findOne({ userId: params.userId }).lean();
     if (profile) {
+      const userState = (profile as any).currentState || profile.state;
       rankedItems = rankedItems.sort((a, b) => {
         let scoreA = 0;
         let scoreB = 0;
-        if (profile.state && a.state === profile.state) scoreA += 5;
-        if (profile.state && b.state === profile.state) scoreB += 5;
+        if (userState && a.state === userState) scoreA += 5;
+        if (userState && b.state === userState) scoreB += 5;
         if (profile.occupationCategory && a.targetSegments?.includes(profile.occupationCategory)) scoreA += 5;
         if (profile.occupationCategory && b.targetSegments?.includes(profile.occupationCategory)) scoreB += 5;
         return scoreB - scoreA;

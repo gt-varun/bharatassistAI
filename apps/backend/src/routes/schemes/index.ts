@@ -6,6 +6,7 @@ import {
   SearchParams
 } from '../../services/ai/retrievalService.js';
 import { sendSuccess, sendError } from '../../utils/response.js';
+import { optionalAuth, AuthRequest } from '../../middlewares/auth.js';
 
 const router = Router();
 
@@ -22,7 +23,7 @@ function readLang(req: Request): string | undefined {
  * GET /api/schemes/search
  * Keyword + natural-language + structured filter search
  */
-router.get('/search', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/search', optionalAuth, async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const params: SearchParams = {
       query: req.query.q as string,
@@ -35,7 +36,7 @@ router.get('/search', async (req: Request, res: Response, next: NextFunction) =>
       status: req.query.status as any,
       page: req.query.page ? parseInt(req.query.page as string, 10) : 1,
       limit: req.query.limit ? parseInt(req.query.limit as string, 10) : 10,
-      userId: (req as any).user?.id,
+      userId: req.user?.userId,
       lang: readLang(req)
     };
 
