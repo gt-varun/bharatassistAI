@@ -1,13 +1,16 @@
 import React from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Bot, FileText, ArrowRight } from 'lucide-react';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
+import { Button } from '../components/ui/button';
 import { useCitizenProfile } from '../hooks/useCitizenProfile';
+import { markOnboardingSkipped } from './useOnboarding';
 
 export const OnboardingChoicePage: React.FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const { data: profile, isLoading } = useCitizenProfile();
 
   // If they somehow land here but already have a profile, bounce them to the dashboard.
@@ -16,6 +19,11 @@ export const OnboardingChoicePage: React.FC = () => {
   }
 
   const destination = (location.state as { from?: string } | null)?.from;
+
+  const handleSkip = () => {
+    markOnboardingSkipped();
+    navigate(destination || '/dashboard');
+  };
 
   return (
     <PageBody className="max-w-3xl">
@@ -66,6 +74,17 @@ export const OnboardingChoicePage: React.FC = () => {
             <ArrowRight className="h-4 w-4" />
           </div>
         </Link>
+      </div>
+
+      <div className="mt-8 flex justify-center">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-[0.875rem] text-ink-3 hover:text-ink hover:bg-rule-soft"
+          onClick={handleSkip}
+        >
+          {t('onboarding.skipAll')}
+        </Button>
       </div>
     </PageBody>
   );

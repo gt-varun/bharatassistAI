@@ -87,6 +87,8 @@ export interface CitizenProfile {
    */
   fullName?: string | null;
   currentState: string;
+  /** Backward-compatible alias for currentState */
+  state?: string;
   district?: string | null;
   age?: number | null;
   gender?: string | null;

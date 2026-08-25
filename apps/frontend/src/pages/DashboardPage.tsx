@@ -34,6 +34,20 @@ const QUICK_PATHS = [
   { to: '/assistant', icon: MessagesSquare, key: 'assistant' }
 ];
 
+const OPTIONAL_PROFILE_FIELDS = [
+  'district',
+  'age',
+  'gender',
+  'occupationCategory',
+  'incomeBand',
+  'educationLevel',
+  'category',
+  'disabilityStatus',
+  'maritalStatus',
+  'landOwnershipAcres',
+  'businessType'
+] as const;
+
 export const DashboardPage: React.FC = () => {
   const { t } = useTranslation();
   const { slugs, isSaved, toggle, isInitializing } = useSavedSchemes();
@@ -78,6 +92,15 @@ export const DashboardPage: React.FC = () => {
       .slice(0, 3);
   }, [savedSchemes, recent]);
 
+  const completeness = useMemo(() => {
+    if (!profile) return 0;
+    const filled = OPTIONAL_PROFILE_FIELDS.filter((f) => {
+      const value = (profile as any)[f];
+      return value !== undefined && value !== null && value !== '';
+    }).length;
+    return Math.round(((filled + (profile.currentState ? 1 : 0)) / (OPTIONAL_PROFILE_FIELDS.length + 1)) * 100);
+  }, [profile]);
+
   return (
     <PageBody>
       <PageHeader
@@ -91,6 +114,39 @@ export const DashboardPage: React.FC = () => {
         }
         description={t('dashboard.desc')}
       />
+
+      {/* Profile Completeness Nudge */}
+      {profile && completeness < 100 && (
+        <section className="mt-6 rounded-xl border border-rule bg-surface p-4 sm:p-5 shadow-card">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="font-display text-[0.9375rem] font-semibold text-ink">
+                  Profile Completeness
+                </span>
+                <span className="rounded-full bg-sanction/10 px-2 py-0.5 text-[0.75rem] font-bold text-sanction">
+                  {completeness}%
+                </span>
+              </div>
+              <p className="mt-1 text-[0.8125rem] text-ink-2">
+                Add more details to find all government schemes tailored for you.
+              </p>
+            </div>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/profile">
+                Complete profile
+                <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+              </Link>
+            </Button>
+          </div>
+          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-rule">
+            <div
+              className="h-full bg-sanction transition-all duration-300"
+              style={{ width: `${completeness}%` }}
+            />
+          </div>
+        </section>
+      )}
 
       {/*
         Three ways in.

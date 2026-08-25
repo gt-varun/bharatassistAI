@@ -36,9 +36,11 @@ function makeScheme(overrides: Partial<Scheme> = {}): Scheme {
 }
 
 function makeProfile(overrides: Partial<CitizenProfile> = {}): CitizenProfile {
+  const stateVal = overrides.currentState ?? overrides.state ?? 'Karnataka';
   return {
     userId: 'user-1',
-    state: 'Karnataka',
+    currentState: stateVal,
+    state: stateVal,
     ...overrides
   };
 }
