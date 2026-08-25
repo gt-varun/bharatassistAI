@@ -70,3 +70,34 @@ export const authenticate = async (
     sendError(res, 'Invalid or expired token', 401, 'UNAUTHORIZED');
   }
 };
+
+/**
+ * Optional authentication middleware:
+ * Populates `req.user` if a valid Bearer token is provided.
+ * Gracefully falls back to guest session if token is missing, expired, or invalid.
+ */
+export const optionalAuth = async (
+  req: AuthRequest,
+  _res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1];
+    try {
+      const payload = verifyAccessToken(token);
+      const user = await UserModel.findById(payload.userId);
+      if (user) {
+        req.user = {
+          userId: user._id.toString(),
+          phone: user.phone,
+          email: user.email,
+          preferredLanguage: user.preferredLanguage
+        };
+      }
+    } catch {
+      req.user = undefined;
+    }
+  }
+  next();
+};
