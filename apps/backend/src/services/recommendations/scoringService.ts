@@ -29,12 +29,13 @@ function ruleCoversState(rules: Scheme['eligibilityRules'] | undefined, state: s
 export function passesHardFilters(scheme: Scheme, profile: CitizenProfile): boolean {
   if (scheme.status === 'closed') return false;
 
-  if (profile.state) {
+  const citizenState = profile.currentState ?? profile.state;
+  if (citizenState) {
     const stateDeclaredMatch =
       scheme.level === 'central' ||
       !scheme.state ||
-      scheme.state.toLowerCase() === profile.state.toLowerCase();
-    const rulesAllow = ruleCoversState(scheme.eligibilityRules, profile.state);
+      scheme.state.toLowerCase() === citizenState.toLowerCase();
+    const rulesAllow = ruleCoversState(scheme.eligibilityRules, citizenState);
     if (!stateDeclaredMatch && !rulesAllow) return false;
   }
 
@@ -94,13 +95,14 @@ export function scoreScheme(
 ): { score: number; matchedCriteria: string[] } {
   let score = 0;
   const matchedCriteria: string[] = [];
+  const citizenState = profile.currentState ?? profile.state;
 
   if (profile.occupationCategory && scheme.targetSegments?.includes(profile.occupationCategory)) {
     score += 10;
     matchedCriteria.push(`Matches your occupation category (${profile.occupationCategory})`);
   }
 
-  if (profile.state && scheme.state && scheme.state.toLowerCase() === profile.state.toLowerCase()) {
+  if (citizenState && scheme.state && scheme.state.toLowerCase() === citizenState.toLowerCase()) {
     score += 6;
     matchedCriteria.push(`State scheme for ${scheme.state}`);
   } else if (scheme.level === 'central') {

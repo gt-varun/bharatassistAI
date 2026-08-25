@@ -174,6 +174,10 @@ export function evaluateEligibility(
   let hasExplicitFailure = false;
   let hasMissingFields = false;
 
+  if (!input.state && input.currentState) {
+    input = { ...input, state: input.currentState };
+  }
+
   if (!rules || Object.keys(rules).length === 0) {
     return {
       status: 'eligible',

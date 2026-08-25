@@ -102,7 +102,7 @@ export function generateEligibilityQuestions(
       (s) => s.toLowerCase() === 'all' || s.toLowerCase() === 'national' || s.toLowerCase() === 'india'
     );
     if (!isAll) {
-      const value = profile?.state ?? null;
+      const value = profile?.currentState ?? profile?.state ?? null;
       questions.push({
         id: 'q_state',
         field: 'state',

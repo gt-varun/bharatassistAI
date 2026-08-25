@@ -103,7 +103,7 @@ export function generateApplicationGuidance(
 
     if (profile) {
       if (nameLower.includes('name')) prefilledValue = profile.userId ? undefined : undefined;
-      if (nameLower.includes('state')) prefilledValue = profile.state;
+      if (nameLower.includes('state')) prefilledValue = profile.currentState ?? profile.state;
       if (nameLower.includes('district')) prefilledValue = profile.district;
       if (nameLower.includes('age')) prefilledValue = profile.age;
       if (nameLower.includes('gender')) prefilledValue = profile.gender;

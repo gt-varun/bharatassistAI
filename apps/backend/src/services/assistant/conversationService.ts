@@ -98,7 +98,7 @@ function formatSchemeForContext(scheme: Scheme): string {
 
 type ProfileContextFields = Pick<
   CitizenProfile,
-  'state' | 'age' | 'gender' | 'occupationCategory' | 'incomeBand' | 'category' | 'disabilityStatus'
+  'currentState' | 'state' | 'age' | 'gender' | 'occupationCategory' | 'incomeBand' | 'category' | 'disabilityStatus'
 >;
 
 /**
@@ -110,7 +110,8 @@ type ProfileContextFields = Pick<
 export function buildProfileContext(profile: Partial<ProfileContextFields> | null | undefined): string | null {
   if (!profile) return null;
   const parts: string[] = [];
-  if (profile.state) parts.push(`state: ${profile.state}`);
+  const citizenState = profile.currentState ?? profile.state;
+  if (citizenState) parts.push(`state: ${citizenState}`);
   if (profile.occupationCategory) parts.push(`occupation: ${profile.occupationCategory}`);
   if (typeof profile.age === 'number') parts.push(`age: ${profile.age}`);
   if (profile.gender) parts.push(`gender: ${profile.gender}`);

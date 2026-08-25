@@ -105,6 +105,9 @@ export async function findAlternativeSchemes(
   _evaluationResult?: RuleEngineOutput,
   customCandidatePool?: Scheme[]
 ): Promise<AlternativeSchemeRecommendation[]> {
+  if (!profile.state && profile.currentState) {
+    profile = { ...profile, state: profile.currentState };
+  }
   const failedId = String(failedScheme._id || '');
   const failedSlug = failedScheme.slug;
 

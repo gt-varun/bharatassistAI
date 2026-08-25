@@ -109,13 +109,11 @@ screen (§2.4).
 
 | Language | Status |
 |---|---|
-| English, Hindi, Kannada, Tamil, Telugu, Malayalam, Marathi | Complete, hand-written, offered in the selector |
-| Gujarati, Bengali, Punjabi, Urdu | 217/505 keys — **awaiting a translation run**, hidden from the selector |
+| English, Hindi, Kannada, Tamil, Telugu, Malayalam, Marathi, Gujarati, Bengali, Punjabi, Urdu | Complete (584/584 keys), offered in the selector |
 
-The four pending languages are listed in `PENDING_TRANSLATION` in
-`apps/frontend/src/i18n/config.test.ts`. Once `pnpm translate` has filled one
-and it has been reviewed, remove its code from that list — that is what puts it
-under the parity guard and makes it selectable.
+`PENDING_TRANSLATION` in `apps/frontend/src/i18n/config.test.ts` is now empty
+— all 11 languages have reached full parity and passed review, so all are
+under the parity guard and selectable.
 
 ---
 

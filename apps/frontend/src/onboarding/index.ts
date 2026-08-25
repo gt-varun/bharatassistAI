@@ -2,7 +2,6 @@ export { OnboardingPage } from './OnboardingPage';
 export { OnboardingGate } from './OnboardingGate';
 export { OnboardingChoicePage } from './OnboardingChoicePage';
 export { AiOnboardingPage } from './AiOnboardingPage';
-export { AiOnboardingPlaceholder } from './AiOnboardingPlaceholder';
 export {
   useOnboarding,
   markOnboardingSkipped,
