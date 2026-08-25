@@ -9,6 +9,7 @@ import {
   Search,
   type LucideIcon
 } from 'lucide-react';
+import { useUpcomingDeadlines } from '../../hooks/useUpcomingDeadlines';
 import { cn } from '../../lib/utils';
 
 interface TabItem {
@@ -57,6 +58,7 @@ interface MobileTabBarProps {
 export const MobileTabBar: React.FC<MobileTabBarProps> = ({ onOpenMore, moreOpen }) => {
   const { t } = useTranslation();
   const location = useLocation();
+  const { count: deadlineCount } = useUpcomingDeadlines();
 
   const isActive = (tab: TabItem) => {
     if (moreOpen) return false;
@@ -83,6 +85,7 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({ onOpenMore, moreOpen
         {TABS.map((tab) => {
           const Icon = tab.icon;
           const active = isActive(tab);
+          const badgeCount = tab.to === '/saved' ? deadlineCount : 0;
           return (
             <li key={tab.to} className="min-w-0">
               <NavLink
@@ -90,11 +93,26 @@ export const MobileTabBar: React.FC<MobileTabBarProps> = ({ onOpenMore, moreOpen
                 aria-current={active ? 'page' : undefined}
                 className={itemClass(active)}
               >
-                <Icon
-                  className="h-[1.3rem] w-[1.3rem] shrink-0"
-                  strokeWidth={active ? 2.1 : 1.7}
-                />
-                <span className="w-full truncate text-center">{t(tab.labelKey)}</span>
+                <span className="relative">
+                  <Icon
+                    className="h-[1.3rem] w-[1.3rem] shrink-0"
+                    strokeWidth={active ? 2.1 : 1.7}
+                  />
+                  {badgeCount > 0 && (
+                    <span
+                      className="absolute -right-1.5 -top-1 grid h-3.5 w-3.5 place-items-center rounded-full bg-seal text-[0.5625rem] font-semibold leading-none text-white"
+                      aria-hidden
+                    >
+                      {badgeCount > 9 ? '9+' : badgeCount}
+                    </span>
+                  )}
+                </span>
+                <span className="w-full truncate text-center">
+                  {t(tab.labelKey)}
+                  {badgeCount > 0 && (
+                    <span className="sr-only"> — {t('saved.closingSoon', { count: badgeCount })}</span>
+                  )}
+                </span>
               </NavLink>
             </li>
           );

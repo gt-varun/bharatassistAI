@@ -18,6 +18,7 @@ import {
   type LucideIcon
 } from 'lucide-react';
 import { useAuth } from '../../auth/AuthContext';
+import { useUpcomingDeadlines } from '../../hooks/useUpcomingDeadlines';
 import { initials, maskPhone } from '../../lib/format';
 import { cn } from '../../lib/utils';
 
@@ -78,6 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { count: deadlineCount } = useUpcomingDeadlines();
 
   const [collapsed, setCollapsed] = useState(
     () => localStorage.getItem(COLLAPSE_KEY) === 'true'
@@ -108,21 +110,47 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, onCloseMobile }) =
     const label = t(`nav.${item.labelKey}`);
     const active =
       location.pathname === item.to || location.pathname.startsWith(`${item.to}/`);
+    // Only the saved-schemes destination carries a deadline count — it is
+    // the one place PRD §11.9's "reminders for approaching deadlines" has
+    // anywhere to surface without an email/push channel.
+    const badgeCount = item.to === '/saved' ? deadlineCount : 0;
+
+    const badgeLabel = badgeCount > 0 ? t('saved.closingSoon', { count: badgeCount }) : undefined;
 
     return (
       <li key={item.to}>
         <NavLink
           to={item.to}
-          title={isCollapsed ? label : undefined}
+          title={isCollapsed ? [label, badgeLabel].filter(Boolean).join(' — ') : undefined}
           data-active={active || undefined}
           aria-current={active ? 'page' : undefined}
           className={cn('rail-item', isCollapsed && 'justify-center px-0')}
         >
-          <Icon
-            className={cn('h-[1.05rem] w-[1.05rem] shrink-0', active ? 'text-sanction' : 'text-ink-3')}
-            strokeWidth={1.8}
-          />
-          {!isCollapsed && <span className="truncate">{label}</span>}
+          <span className="relative shrink-0">
+            <Icon
+              className={cn('h-[1.05rem] w-[1.05rem]', active ? 'text-sanction' : 'text-ink-3')}
+              strokeWidth={1.8}
+            />
+            {badgeCount > 0 && (
+              <span
+                className="absolute -right-1.5 -top-1.5 grid h-3.5 w-3.5 place-items-center rounded-full bg-seal text-[0.5625rem] font-semibold leading-none text-white"
+                aria-hidden
+              >
+                {badgeCount > 9 ? '9+' : badgeCount}
+              </span>
+            )}
+          </span>
+          {!isCollapsed && (
+            <span className="flex min-w-0 flex-1 items-center justify-between gap-2">
+              <span className="truncate">{label}</span>
+              {badgeCount > 0 && (
+                <span className="rounded-full bg-seal-tint px-1.5 py-0.5 text-micro font-semibold text-seal">
+                  {badgeCount}
+                  <span className="sr-only"> — {badgeLabel}</span>
+                </span>
+              )}
+            </span>
+          )}
         </NavLink>
       </li>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Search } from 'lucide-react';
@@ -20,6 +20,14 @@ import { registerBackInterceptor } from '../../native/backButton';
  * rail already provided. The routes, the guards and the page components
  * are identical; only the furniture changes.
  */
+function PageLoading() {
+  return (
+    <div className="flex h-full min-h-[40vh] items-center justify-center" role="status" aria-label="Loading page">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-muted border-t-primary" />
+    </div>
+  );
+}
+
 export const AppShell: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -141,7 +149,9 @@ export const AppShell: React.FC = () => {
           sits permanently underneath the navigation.
         */}
         <main id="main" className="flex-1 pb-mobile-chrome">
-          <Outlet />
+          <Suspense fallback={<PageLoading />}>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
 

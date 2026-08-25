@@ -35,15 +35,15 @@ describe('OnboardingChoicePage Component Tests', () => {
     );
   };
 
-  it('renders both AI-assisted setup and manual setup cards', async () => {
+  it('renders both speak-to-register and manual setup cards', async () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.getByText(/AI-assisted setup/i)).toBeDefined();
+      expect(screen.getByText(/Register by speaking/i)).toBeDefined();
       expect(screen.getByText(/Manual setup/i)).toBeDefined();
     });
 
-    expect(screen.getByRole('link', { name: /AI-assisted setup/i }).getAttribute('href')).toBe('/welcome/ai');
+    expect(screen.getByRole('link', { name: /Register by speaking/i }).getAttribute('href')).toBe('/welcome/ai');
     expect(screen.getByRole('link', { name: /Manual setup/i }).getAttribute('href')).toBe('/welcome/manual');
   });
 

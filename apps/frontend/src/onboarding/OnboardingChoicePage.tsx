@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Bot, FileText, ArrowRight } from 'lucide-react';
+import { Mic, FileText, ArrowRight } from 'lucide-react';
 import { PageBody, PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/ui/button';
 import { useCitizenProfile } from '../hooks/useCitizenProfile';
@@ -40,7 +40,7 @@ export const OnboardingChoicePage: React.FC = () => {
           className="group flex flex-col items-start rounded-xl border border-rule bg-surface p-6 transition-all duration-200 hover:border-sanction-edge hover:shadow-card hover:-translate-y-px"
         >
           <div className="mb-4 rounded-lg bg-sanction/10 p-3 text-sanction">
-            <Bot className="h-6 w-6" />
+            <Mic className="h-6 w-6" />
           </div>
           <h3 className="font-display text-[1.125rem] font-semibold text-ink group-hover:text-sanction transition-colors">
             {t('onboarding.aiTitle')}
