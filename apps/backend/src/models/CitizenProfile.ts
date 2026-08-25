@@ -7,7 +7,7 @@ const CitizenProfileSchema = new Schema<CitizenProfileDocument>(
   {
     userId: { type: Schema.Types.ObjectId as any, ref: 'User', required: true, unique: true, index: true },
     fullName: { type: String, default: null },
-    state: { type: String, required: true },
+    currentState: { type: String, required: true },
     district: { type: String, default: null },
     age: { type: Number, default: null },
     gender: { type: String, default: null },

@@ -78,7 +78,7 @@ export const ONBOARDING_STEPS: OnboardingStep[] = [
   {
     id: 'state',
     kind: 'searchChoice',
-    field: 'state',
+    field: 'currentState',
     questionKey: 'onboarding.stateQuestion',
     noteKey: 'onboarding.stateWhy',
     required: true,

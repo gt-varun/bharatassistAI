@@ -82,11 +82,13 @@ export interface CitizenProfile {
   /**
    * What the citizen would like to be called. It takes no part in
    * eligibility or scoring — it exists so the app can address someone by
-   * name rather than as an account — and like every field except `state`
+   * name rather than as an account — and like every field except `currentState`
    * it is optional.
    */
   fullName?: string | null;
-  state: string;
+  currentState: string;
+  /** Backward-compatible alias for currentState */
+  state?: string;
   district?: string | null;
   age?: number | null;
   gender?: string | null;

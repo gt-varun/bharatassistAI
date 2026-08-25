@@ -19,7 +19,7 @@ const getStorage = (): Storage | null => {
 let accessToken: string | null = getStorage()?.getItem('access_token') ?? null;
 let refreshToken: string | null = getStorage()?.getItem('refresh_token') ?? null;
 
-export const hasAccessToken = () => Boolean(accessToken);
+export const hasAccessToken = () => Boolean(accessToken || getStorage()?.getItem('access_token'));
 
 export const setAuthTokens = (access: string, refresh: string) => {
   accessToken = access;
@@ -41,8 +41,9 @@ export const clearAuthTokens = () => {
 // request — scheme records carry verified translations, and the API returns
 // them in whichever language the interface is currently in.
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  if (accessToken && config.headers) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  const token = accessToken || getStorage()?.getItem('access_token');
+  if (token && config.headers) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
   const lang = getStorage()?.getItem('bharatassist_language');

@@ -78,7 +78,7 @@ export const ProfilePage: React.FC = () => {
       const value = draft[f];
       return value !== undefined && value !== null && value !== '';
     }).length;
-    return Math.round(((filled + (draft.state ? 1 : 0)) / (OPTIONAL_FIELDS.length + 1)) * 100);
+    return Math.round(((filled + (draft.currentState ? 1 : 0)) / (OPTIONAL_FIELDS.length + 1)) * 100);
   }, [draft]);
 
   const set = <K extends keyof CitizenProfile>(key: K, value: CitizenProfile[K]) =>
@@ -141,7 +141,7 @@ export const ProfilePage: React.FC = () => {
 
           <div className="space-y-1.5">
             <Label htmlFor="profile-state">{t('profile.state')}</Label>
-            <Select value={draft.state ?? ''} onValueChange={(v) => set('state', v)}>
+            <Select value={draft.currentState ?? ''} onValueChange={(v) => set('currentState', v)}>
               <SelectTrigger id="profile-state" className="h-11">
                 <SelectValue placeholder={t('profile.chooseState')} />
               </SelectTrigger>
@@ -316,7 +316,7 @@ export const ProfilePage: React.FC = () => {
         </details>
 
         <div className="flex items-center gap-3">
-          <Button type="submit" disabled={save.isPending || !draft.state}>
+          <Button type="submit" disabled={save.isPending || !draft.currentState}>
             {save.isPending ? t('profile.saving') : t('profile.saveDetails')}
           </Button>
           {saved && <span className="text-[0.875rem] text-sanction">{t('common.saved')}</span>}

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type { CitizenProfile } from '@bharatassist/shared-types';
 import { apiClient } from '../api/client';
-import { useAuth } from '../auth/AuthContext';
+import { useOptionalAuth } from '../auth/AuthContext';
 
 /** The one cache key for the signed-in citizen's profile. */
 export const PROFILE_QUERY_KEY = ['profile'] as const;
@@ -17,7 +17,8 @@ export const PROFILE_QUERY_KEY = ['profile'] as const;
  * whichever mounted first the final say.
  */
 export function useCitizenProfile() {
-  const { isAuthenticated } = useAuth();
+  const auth = useOptionalAuth();
+  const isAuthenticated = Boolean(auth?.isAuthenticated);
 
   return useQuery<CitizenProfile | null>({
     queryKey: PROFILE_QUERY_KEY,
