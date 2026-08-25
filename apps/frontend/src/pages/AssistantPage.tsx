@@ -108,7 +108,9 @@ export const AssistantPage: React.FC = () => {
   }, [recentConversations]);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    if (typeof endRef.current?.scrollIntoView === 'function') {
+      endRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   }, [messages, pending]);
 
   const send = async (text: string) => {

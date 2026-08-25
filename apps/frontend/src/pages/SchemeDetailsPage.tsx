@@ -11,7 +11,8 @@ import {
   CalendarClock,
   ExternalLink,
   GitCompare,
-  ListChecks,
+  Globe,
+  HelpCircle,
   ShieldAlert,
   Sparkles
 } from 'lucide-react';
@@ -65,6 +66,15 @@ export const SchemeDetailsPage: React.FC = () => {
     queryFn: async () => {
       const res = await apiClient.get(`/guidance/${idOrSlug}`);
       return res.data?.data;
+    },
+    enabled: Boolean(scheme)
+  });
+
+  const { data: similarSchemes } = useQuery<Scheme[]>({
+    queryKey: ['recommendations-similar', idOrSlug],
+    queryFn: async () => {
+      const res = await apiClient.get(`/recommendations/similar/${idOrSlug}`);
+      return res.data?.data?.schemes ?? [];
     },
     enabled: Boolean(scheme)
   });
@@ -424,6 +434,62 @@ export const SchemeDetailsPage: React.FC = () => {
               )}
             </TabsContent>
           </Tabs>
+
+          {/* More like this — Similar Schemes (Person 3) */}
+          {similarSchemes && similarSchemes.length > 0 && (
+            <section className="mt-12">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-sanction" />
+                <h3 className="font-display text-[1.125rem] font-bold text-ink">
+                  {t('schemeDetails.similarHeading') || 'More schemes like this'}
+                </h3>
+              </div>
+              <p className="mt-1 text-[0.875rem] text-ink-2">
+                {t('schemeDetails.similarDesc') || 'Other schemes with related benefits, target groups, or eligibility criteria.'}
+              </p>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {similarSchemes.map((sim) => (
+                  <div
+                    key={sim.slug}
+                    className="flex flex-col justify-between rounded-xl border border-rule bg-surface p-4 transition-all duration-150 hover:border-sanction hover:shadow-card"
+                  >
+                    <div>
+                      <div className="flex items-center gap-1.5 text-micro text-ink-3">
+                        <span className="font-semibold uppercase tracking-wider text-sanction">
+                          {sim.level === 'central' ? 'Central' : sim.state || 'State'}
+                        </span>
+                        <span>•</span>
+                        <span>{sim.benefitType}</span>
+                      </div>
+                      <h4 className="mt-1 font-display text-[0.9375rem] font-bold leading-snug text-ink">
+                        <Link
+                          to={`/schemes/${sim.slug}`}
+                          className="hover:text-sanction underline-offset-4 hover:underline"
+                        >
+                          {sim.name}
+                        </Link>
+                      </h4>
+                      <p className="mt-1.5 line-clamp-2 text-[0.8125rem] leading-relaxed text-ink-2">
+                        {sim.benefitSummary || sim.shortDescription}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 flex items-center gap-2 border-t border-rule pt-3">
+                      <Button variant="outline" size="sm" className="h-8 flex-1 text-xs" asChild>
+                        <Link to={`/eligibility?scheme=${sim.slug}`}>
+                          {t('schemeDetails.checkEligibility')}
+                        </Link>
+                      </Button>
+                      <Button variant="ghost" size="sm" className="h-8 text-xs text-ink-2" asChild>
+                        <Link to={`/schemes/${sim.slug}`}>View</Link>
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
 
         {/* ------------------------- Actions rail ------------------------ */}

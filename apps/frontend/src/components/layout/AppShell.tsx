@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import { Sidebar } from './Sidebar';
 import { MobileTabBar } from './MobileTabBar';
 import { LanguageSelector } from '../ui/LanguageSelector';
+import { AssistantWidget } from '../assistant/AssistantWidget';
 import { registerBackInterceptor } from '../../native/backButton';
 
 /**
@@ -145,6 +146,7 @@ export const AppShell: React.FC = () => {
       </div>
 
       <MobileTabBar onOpenMore={() => setMobileOpen(true)} moreOpen={mobileOpen} />
+      <AssistantWidget />
     </div>
   );
 };

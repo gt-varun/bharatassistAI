@@ -204,7 +204,13 @@
     "opener4": "ਸਬਸਿਡੀ ਅਤੇ ਸਿੱਧਾ ਲਾਭ ਹਸਤਾਂਤਰਣ ਵਿਚਕਾਰ ਕੀ ਅੰਤਰ ਹੈ?",
     "drawnFrom": "ਖਿੱਚਿਆ ਗਿਆ",
     "checking": "ਰਜਿਸਟਰ ਦੀ ਜਾਂਚ ਕਰਨਾ",
-    "askQuestion": "ਇੱਕ ਸਵਾਲ ਪੁੱਛੋ"
+    "askQuestion": "ਇੱਕ ਸਵਾਲ ਪੁੱਛੋ",
+    "floatingButton": "ਭਾਰਤਅਸਿਸਟ AI ਨੂੰ ਪੁੱਛੋ",
+    "floatingTitle": "ਭਾਰਤਅਸਿਸਟ AI ਸਹਾਇਕ",
+    "floatingDesc": "ਸਰਕਾਰੀ ਸਕੀਮਾਂ, ਯੋਗਤਾ ਅਤੇ ਲਾਭਾਂ ਬਾਰੇ ਕੁਝ ਵੀ ਪੁੱਛੋ।",
+    "openFullPage": "ਪੂਰਾ ਪੰਨਾ ਖੋਲ੍ਹੋ",
+    "closeWidget": "ਸਹਾਇਕ ਬੰਦ ਕਰੋ",
+    "noMatch": "ਕੋਈ ਪ੍ਰਮਾਣਿਤ ਸਰਕਾਰੀ ਸਕੀਮ ਨਹੀਂ ਮਿਲੀ"
   },
   "profile": {
     "eyebrow": "ਖਾਤਾ",
@@ -351,7 +357,9 @@
     "noWalkthrough": "[schemeDetails] ਫੀਲਡ-ਦੁਆਰਾ-ਫੀਲਡ ਗਾਈਡ ਤਿਆਰ ਨਹੀਂ",
     "similar": "[schemeDetails] ਸਮਾਨ",
     "whereFrom": "[schemeDetails] ਇਹ ਰਿਕਾਰਡ ਕਿੱਥੋਂ ਆਉਂਦਾ ਹੈ",
-    "tellAssistant": "[schemeDetails] ਸਹਾਇਕ ਨੂੰ ਦੱਸੋ"
+    "tellAssistant": "[schemeDetails] ਸਹਾਇਕ ਨੂੰ ਦੱਸੋ",
+    "similarHeading": "ਇਸ ਵਰਗੀਆਂ ਹੋਰ ਸਰਕਾਰੀ ਸਕੀਮਾਂ",
+    "similarDesc": "ਸੰਬੰਧਿਤ ਲਾਭਾਂ ਜਾਂ ਯੋਗਤਾ ਦੇ ਮਾਪਦੰਡਾਂ ਵਾਲੀਆਂ ਹੋਰ ਸਕੀਮਾਂ।"
   },
   "eligibility": {
     "questions": {
@@ -596,7 +604,28 @@
     "manualTitle": "ਮੈਨੂਅਲ ਸੈੱਟਅੱਪ",
     "manualDesc": "ਆਪਣੇ ਵੇਰਵਿਆਂ ਨਾਲ ਇੱਕ ਰਵਾਇਤੀ ਫਾਰਮ ਭਰੋ।",
     "manualSelect": "ਮੈਨੂਅਲ ਤੌਰ 'ਤੇ ਫਾਰਮ ਭਰੋ",
-    "aiPlaceholder": "AI-ਅਸਿਸਟਿਡ ਆਨਬੋਰਡਿੰਗ Person 3 ਦੀ ਮਲਕੀਅਤ ਹੈ।"
+    "aiPlaceholder": "AI-ਅਸਿਸਟਿਡ ਆਨਬੋਰਡਿੰਗ Person 3 ਦੀ ਮਲਕੀਅਤ ਹੈ।",
+    "aiSubtitle": "ਬੋਲ ਕੇ, ਵਿਕਲਪ ਚੁਣ ਕੇ ਜਾਂ ਟਾਈਪ ਕਰਕੇ ਜਵਾਬ ਦਿਓ।",
+    "aiUnderstoodPrompt": "ਅਸੀਂ {{field}} ਨੂੰ {{value}} ਸਮਝਿਆ ਹੈ। ਕੀ ਇਹ ਸਹੀ ਹੈ?",
+    "confirmYes": "ਹਾਂ, ਸਹੀ ਹੈ",
+    "confirmChange": "ਬਦਲੋ",
+    "needHelp": "ਮਦਦ ਚਾਹੀਦੀ ਹੈ?",
+    "helpTitle": "ਮਦਦ ਅਤੇ ਸਹਾਇਤਾ",
+    "helpDesc": "ਜੇ ਤੁਹਾਨੂੰ ਕੋਈ ਮੁਸ਼ਕਲ ਹੈ ਤਾਂ ਨਜ਼ਦੀਕੀ ਸਹਾਇਤਾ ਕੇਂਦਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ:",
+    "cscOption": "ਨਜ਼ਦੀਕੀ ਕਾਮਨ ਸਰਵਿਸ ਸੈਂਟਰ (CSC / ਸੇਵਾ ਕੇਂਦਰ)",
+    "volunteerOption": "ਪਿੰਡ ਵਾਲੰਟੀਅਰ / ਗ੍ਰਾਮ ਪੰਚਾਇਤ",
+    "helplineOption": "ਰਾਸ਼ਟਰੀ ਹੈਲਪਲਾਈਨ: 1800-111-555",
+    "familyOption": "ਪਰਿਵਾਰਕ ਮੈਂਬਰ / ਮਦਦਗਾਰ",
+    "closeHelp": "ਗੱਲਬਾਤ ਤੇ ਵਾਪਸ ਜਾਓ",
+    "summaryTitle": "ਜੋ ਅਸੀਂ ਸਮਝਿਆ ਹੈ ਉਹ ਇੱਥੇ ਹੈ",
+    "summaryDesc": "ਸੇਵ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਆਪਣੇ ਵੇਰਵਿਆਂ ਦੀ ਜਾਂਚ ਕਰੋ।",
+    "saveAndShow": "ਪੁਸ਼ਟੀ ਕਰੋ ਅਤੇ ਸਕੀਮਾਂ ਲੱਭੋ",
+    "editField": "ਸੋਧੋ",
+    "rephraseSimpler": "ਸਰਲ ਸ਼ਬਦਾਂ ਵਿੱਚ ਸਮਝਾਓ",
+    "listenQuestion": "ਸੁਣੋ",
+    "birthYearHint": "ਤੁਸੀਂ ਆਪਣੀ ਉਮਰ (ਜਿਵੇਂ 35) ਜਾਂ ਜਨਮ ਸਾਲ (ਜਿਵੇਂ 1989) ਦੱਸ ਸਕਦੇ ਹੋ",
+    "autoSpeak": "ਆਪਣੇ ਆਪ ਪੜ੍ਹ ਕੇ ਸੁਣਾਓ",
+    "stateSearchPlaceholder": "ਆਪਣਾ ਰਾਜ ਖੋਜੋ..."
   },
   "gender": {
     "female": "ਔਰਤ",

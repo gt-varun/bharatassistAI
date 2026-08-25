@@ -204,7 +204,13 @@
     "opener4": "سبسڈی اور ڈائریکٹ بنیفٹ ٹرانسفر کے درمیان کیا فرق ہے؟",
     "drawnFrom": "مندرجہ ذیل سے",
     "checking": "رجسٹر کی جانچ کر رہے ہیں",
-    "askQuestion": "ایک سوال پوچھیں"
+    "askQuestion": "ایک سوال پوچھیں",
+    "floatingButton": "بھارت اسسٹ AI سے پوچھیں",
+    "floatingTitle": "بھارت اسسٹ AI معاون",
+    "floatingDesc": "سرکاری اسکیموں، اہلیت اور فوائد کے بارے میں کچھ بھی پوچھیں۔",
+    "openFullPage": "مکمل صفحہ کھولیں",
+    "closeWidget": "معاون بند کریں",
+    "noMatch": "کوئی تصدیق شدہ سرکاری اسکیم نہیں ملی"
   },
   "profile": {
     "eyebrow": "اکاؤنٹ",
@@ -351,7 +357,9 @@
     "noWalkthrough": "[schemeDetails] فیلڈ بہ فیلڈ گائیڈ ابھی تیار نہیں",
     "similar": "[schemeDetails] مماثل",
     "whereFrom": "[schemeDetails] یہ ریکارڈ کہاں سے آیا",
-    "tellAssistant": "[schemeDetails] اسسٹنٹ کو بتائیں"
+    "tellAssistant": "[schemeDetails] اسسٹنٹ کو بتائیں",
+    "similarHeading": "اس جیسی دیگر سرکاری اسکیمیں",
+    "similarDesc": "متعلقہ فوائد یا اہلیت کے معیار والی دیگر اسکیمیں۔"
   },
   "eligibility": {
     "questions": {
@@ -596,7 +604,28 @@
     "manualTitle": "دستی سیٹ اپ",
     "manualDesc": "اپنی تفصیلات کے ساتھ ایک روایتی فارم پُر کریں۔",
     "manualSelect": "دستی طور پر فارم پُر کریں",
-    "aiPlaceholder": "AI کی مدد سے آن بورڈنگ Person 3 کی ملکیت ہے۔"
+    "aiPlaceholder": "AI کی مدد سے آن بورڈنگ Person 3 کی ملکیت ہے۔",
+    "aiSubtitle": "بول کر، اختیارات منتخب کر کے یا ٹائپ کر کے جواب دیں۔",
+    "aiUnderstoodPrompt": "ہم نے {{field}} کو {{value}} سمجھا ہے۔ کیا یہ درست ہے؟",
+    "confirmYes": "ہاں، درست ہے",
+    "confirmChange": "تبدیل کریں",
+    "needHelp": "مدد چاہیے؟",
+    "helpTitle": "مدد اور معاونت",
+    "helpDesc": "اگر آپ کو کوئی دشواری ہو تو قریبی مرکز سے رابطہ کریں:",
+    "cscOption": "قریبی کامن سروس سینٹر (CSC / خدمت مرکز)",
+    "volunteerOption": "گاؤں کا رضاکار / گرام پنچایت",
+    "helplineOption": "قومی ہیلپ لائن: 1800-111-555",
+    "familyOption": "خاندان کا رکن / مددگار",
+    "closeHelp": "گفتگو پر واپس جائیں",
+    "summaryTitle": "ہم نے جو تفصیلات سمجھی ہیں وہ یہاں ہیں",
+    "summaryDesc": "محفوظ کرنے سے پہلے اپنی تفصیلات کی تصدیق کریں۔",
+    "saveAndShow": "تصدیق کریں اور اسکیمیں تلاش کریں",
+    "editField": "ترمیم کریں",
+    "rephraseSimpler": "آسان الفاظ میں سمجھائیں",
+    "listenQuestion": "سنیں",
+    "birthYearHint": "آپ اپنی عمر (مثلاً 35) یا پیدائش کا سال (مثلاً 1989) بتا سکتے ہیں",
+    "autoSpeak": "خود بخود پڑھ کر سنائیں",
+    "stateSearchPlaceholder": "اپنی ریاست تلاش کریں..."
   },
   "gender": {
     "female": "خاتون",
