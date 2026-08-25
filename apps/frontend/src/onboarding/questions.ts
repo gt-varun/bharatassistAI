@@ -192,3 +192,33 @@ export function parseSpokenNumber(spoken: string): number | null {
   const value = Number(digits[0]);
   return Number.isFinite(value) ? value : null;
 }
+
+/**
+ * Smart age extractor: parses direct age (e.g. "32") or derives from birth year (e.g. "1990" → 36 in 2026).
+ */
+export function parseSpokenAgeOrBirthYear(spoken: string): { age: number; derivedFromYear?: number } | null {
+  const num = parseSpokenNumber(spoken);
+  if (num === null) return null;
+
+  // 4-digit number between 1920 and current year is likely a birth year
+  const currentYear = new Date().getFullYear();
+  if (num >= 1920 && num <= currentYear) {
+    const derivedAge = currentYear - num;
+    return { age: derivedAge, derivedFromYear: num };
+  }
+
+  // Realistic age bounds
+  if (num >= 0 && num <= 120) {
+    return { age: num };
+  }
+
+  return null;
+}
+
+/**
+ * Match a spoken state against the official 36 Indian States and Union Territories.
+ */
+export function matchSpokenState(spoken: string): string | null {
+  const choices = STATES.map((s) => ({ value: s, label: s }));
+  return matchSpokenChoice(spoken, choices, {});
+}

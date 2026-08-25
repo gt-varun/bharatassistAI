@@ -204,7 +204,13 @@
     "opener4": "સબસિડી અને સીધી લાભ હસ્તાંતરણ વચ્ચેનો તફાવત શું છે?",
     "drawnFrom": "આમાંથી લીધેલું",
     "checking": "નોંધણીની તપાસ",
-    "askQuestion": "એક પ્રશ્ન પૂછો"
+    "askQuestion": "એક પ્રશ્ન પૂછો",
+    "floatingButton": "ભારતઅસિસ્ટ AI ને પૂછો",
+    "floatingTitle": "ભારતઅસિસ્ટ AI સહાયક",
+    "floatingDesc": "સરકારી યોજનાઓ, પાત્રતા અને લાભો વિશે કંઈપણ પૂછો.",
+    "openFullPage": "આખું પૃષ્ઠ ખોલો",
+    "closeWidget": "સહાયક બંધ કરો",
+    "noMatch": "કોઈ ચકાસાયેલ સરકારી યોજના મળી નથી"
   },
   "profile": {
     "eyebrow": "ખાતું",
@@ -351,7 +357,9 @@
     "noWalkthrough": "[schemeDetails] ફીલ્ડ-દ્વારા-ફીલ્ડ માર્ગદર્શિકા તૈયાર નથી",
     "similar": "[schemeDetails] સમાન",
     "whereFrom": "[schemeDetails] આ રેકોર્ડ કયાંથી આવે છે",
-    "tellAssistant": "[schemeDetails] સહાયકને જણાવો"
+    "tellAssistant": "[schemeDetails] સહાયકને જણાવો",
+    "similarHeading": "આના જેવી અન્ય સરકારી યોજનાઓ",
+    "similarDesc": "સંબંધિત લાભો અથવા પાત્રતાના માપદંડો ધરાવતી અન્ય યોજનાઓ."
   },
   "eligibility": {
     "questions": {
@@ -596,7 +604,28 @@
     "manualTitle": "મેન્યુઅલ સેટઅપ",
     "manualDesc": "તમારી વિગતો સાથે પરંપરાગત ફોર્મ ભરો.",
     "manualSelect": "મેન્યુઅલી ફોર્મ ભરો",
-    "aiPlaceholder": "AI-આસિસ્ટેડ ઓનબોર્ડિંગ Person 3 ની માલિકીનું છે."
+    "aiPlaceholder": "AI-આસિસ્ટેડ ઓનબોર્ડિંગ Person 3 ની માલિકીનું છે.",
+    "aiSubtitle": "બોલીને, વિકલ્પો પસંદ કરીને અથવા ટાઈપ કરીને જવાબ આપો.",
+    "aiUnderstoodPrompt": "અમે {{field}} ને {{value}} તરીકે સમજ્યા છીએ. શું આ સાચું છે?",
+    "confirmYes": "હા, સાચું છે",
+    "confirmChange": "બદલો",
+    "needHelp": "મદદ જોઈએ છે?",
+    "helpTitle": "સહાય અને સમર્થન",
+    "helpDesc": "જો તમને કોઈ મુશ્કેલી હોય તો નજીકના સહાય કેન્દ્રનો સંપર્ક કરો:",
+    "cscOption": "નજીકનું જન સેવા કેન્દ્ર (CSC / ઈ-ગ્રામ કેન્દ્ર)",
+    "volunteerOption": "ગ્રામ સેવક / ગ્રામ પંચાયત",
+    "helplineOption": "રાષ્ટ્રીય હેલ્પલાઇન: 1800-111-555",
+    "familyOption": "કુટુંબના સભ્ય / મદદનીશ",
+    "closeHelp": "વાતચીત પર પાછા જાઓ",
+    "summaryTitle": "અમે સમજેલી માહિતી અહીં છે",
+    "summaryDesc": "સેવ કરતા પહેલા તમારી વિગતો ચકાસો.",
+    "saveAndShow": "પુષ્ટિ કરો અને યોજનાઓ શોધો",
+    "editField": "ફેરફાર કરો",
+    "rephraseSimpler": "સરળ રીતે સમજાવો",
+    "listenQuestion": "સાંભળો",
+    "birthYearHint": "તમે તમારી ઉંમર (દા.ત. 35) અથવા જન્મ વર્ષ (દા.ત. 1989) કહી શકો છો",
+    "autoSpeak": "આપમેળે વાંચી સંભળાવો",
+    "stateSearchPlaceholder": "તમારું રાજ્ય શોધો..."
   },
   "gender": {
     "female": "મહિલા",

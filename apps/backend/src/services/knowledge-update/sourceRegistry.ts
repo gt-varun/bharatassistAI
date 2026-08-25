@@ -58,6 +58,31 @@ export const KNOWLEDGE_UPDATE_SOURCES: SourceConfig[] = [
     trustScore: 88,
     note: 'One notification page covers both NSAP pension sub-schemes — the extractor must disambiguate. Scored slightly below a single-scheme portal for that ambiguity risk.'
   },
+  // Karnataka official portals (PRD v2 §7 expansion)
+  {
+    url: 'https://ssp.postmatric.karnataka.gov.in',
+    schemeSlugs: ['karnataka-vidyasiri-scholarship'],
+    trustScore: 95,
+    note: 'Karnataka State Scholarship Portal (SSP) for post-matric fee and hostel allowances.'
+  },
+  {
+    url: 'https://sevasindhugs.karnataka.gov.in',
+    schemeSlugs: ['karnataka-gruha-lakshmi', 'karnataka-yuva-nidhi'],
+    trustScore: 95,
+    note: 'Karnataka Seva Sindhu Guarantee Schemes portal — Gruha Lakshmi and Yuva Nidhi.'
+  },
+  {
+    url: 'https://fruitsetraining.karnataka.gov.in',
+    schemeSlugs: ['karnataka-raitha-siri'],
+    trustScore: 93,
+    note: 'Karnataka Farmer Registration and Unified Beneficiary Information System (FRUITS).'
+  },
+  {
+    url: 'https://ahara.kar.nic.in',
+    schemeSlugs: ['karnataka-anna-bhagya'],
+    trustScore: 94,
+    note: 'Karnataka Food, Civil Supplies & Consumer Affairs Department.'
+  },
   {
     url: 'https://www.standupmitra.in',
     schemeSlugs: ['stand-up-india'],
